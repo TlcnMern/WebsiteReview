@@ -1,4 +1,5 @@
 import axios from 'axios';
+import cookie from 'react-cookies';
 import {API_URL, CLIENT_ROOT_URL} from './index';
 import { returnErrors } from './errorActions';
 
@@ -10,29 +11,21 @@ import {
     USER_LOADING
 } from './type';
 
-
   
-// Login User
-export const login = ({ email, password }) => dispatch => {
-  // Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
 
-  // Request body
-  const body = JSON.stringify({ email, password });
+export function login({ email, password }) {
+  return function (dispatch) {
+    axios.post(`${API_URL}/auth/signin`, { email, password })
+    .then((response) => {
+      cookie.save('token', response.data.token, { path: '/' }); // path: / để có thể truy cập cookie trên tất cả các trang
+      cookie.save('user', response.data.user, { path: '/' });
 
-  axios
-    .post(`${API_URL}/auth/signin`, body, config)
-    .then(res =>
-      dispatch({
+      dispatch({         
         type: LOGIN_SUCCESS,
-        payload: res.data
-      }),
-      // window.location.href = `${CLIENT_ROOT_URL}`
-    )
+        payload: response.data 
+      });
+      window.location.href = `${CLIENT_ROOT_URL}`
+    })
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
@@ -41,4 +34,5 @@ export const login = ({ email, password }) => dispatch => {
         type: LOGIN_FAIL
       });
     });
-};
+  };
+}

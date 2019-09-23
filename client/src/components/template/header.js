@@ -6,41 +6,38 @@ import {logout} from '../../action/userAction'
 
 
 class HeaderTemplate extends Component {
-  renderLinks() {
-    const {token}=this.props.auth;
-    if(!token){
-      return [
-        // Unauthenticated navigation
-        <li style={{marginRight:"10px"}} className="nav-item active" key={1}>
-          <Link to="/">Home</Link>
-        </li>,
+  renderLinkGuest(){
+    return [
+      // Unauthenticated navigation
+      <li style={{marginRight:"10px"}} className="nav-item active" key={1}>
+        <Link to="/">Home</Link>
+      </li>,
 
-        <li style={{marginRight:"10px"}} className="nav-item active" key={2}>
-          <Link to="Login">Login</Link>
-        </li>,
+      <li style={{marginRight:"10px"}} className="nav-item active" key={2}>
+        <Link to="Login">Login</Link>
+      </li>,
 
-        <li className="nav-item active" key={3}>
-            <Link to="Register">Register</Link>
-        </li>
-      ];
-    }
-    else{
-      return [
-        <li style={{marginRight:"10px"}} className="nav-item active" key={1}>
-          <Link to="/">Home</Link>
-        </li>,
-        <li style={{marginRight:"10px"}} className="nav-item active" key={1}>
-          <Link to="profile">My profile</Link>
-        </li>,
-        <li className="nav-item active" key={1}>       
-          <Link onClick={this.props.logout}>Logout</Link>
-        </li>
-
-      ]
-    }
+      <li className="nav-item active" key={3}>
+          <Link to="Register">Register</Link>
+      </li>
+    ];
   }
+  renderLinkUser(){
+    return [
+      <li style={{marginRight:"10px"}} className="nav-item active" key={1}>
+        <Link to="/">Home</Link>
+      </li>,
+      <li style={{marginRight:"10px"}} className="nav-item active" key={1}>
+        <Link to="profile">My profile</Link>
+      </li>,
+      <li className="nav-item active" key={1}>       
+        <Link onClick={this.props.logout}>Logout</Link>
+      </li>
 
+    ];
+  }
   render() {
+    const {isAuthenticated}=this.props.auth;
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -54,7 +51,7 @@ class HeaderTemplate extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-            {this.renderLinks()}
+            {isAuthenticated ? this.renderLinkUser() :this.renderLinkGuest()}
             </ul>
           </div>
         </nav>

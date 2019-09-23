@@ -58,7 +58,7 @@ class Login extends Component {
           </form>
 
           <div id="formFooter">
-            <button className="underlineHover">Forgot Password?</button>
+            <a className="underlineHover">Forgot Password?</a>
           </div>
 
         </div>

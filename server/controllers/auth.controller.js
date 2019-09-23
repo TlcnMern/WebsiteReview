@@ -21,11 +21,7 @@ const signin = (req, res) => {
     const token = jwt.sign({
       _id: user._id
     }, config.jwtSecret);
-
-    res.cookie("t", token, {
-      expire: new Date() + 9999
-    });
-
+    
     return res.json({
       token,
       user: {_id: user._id, name: user.name, email: user.email}
