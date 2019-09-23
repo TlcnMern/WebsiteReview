@@ -1,16 +1,14 @@
-import {} from '../action/type';
-import {}from '../action';
+import {FETCH_USER,ERROR_RESPONSE} from '../action/type';
 
-const initialState={
-    profile:{},
-    message:"",
-    err:""
-}
+const INITIAL_STATE = { profile: {}, message: '', error: '' };
 
+export default function (state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case FETCH_USER:
+      return { ...state, profile: action.payload };
+    case ERROR_RESPONSE:
+      return { ...state, error: action.payload };
+  }
 
-export default function(state=initialState, action){
-    switch (action){
-        case fetch:
-            
-    }
+  return state;
 }

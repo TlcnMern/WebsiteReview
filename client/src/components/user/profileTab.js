@@ -1,6 +1,7 @@
 import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+import ViewProfile from './ViewProfile';
 
 export default class PofileTab extends React.Component {
   constructor(props) {
@@ -49,32 +50,7 @@ export default class PofileTab extends React.Component {
           </TabPane>
           <TabPane tabId="2">
             <Row>
-               <div >
-                <div class="row">
-                    <div class="col-md-5">
-                        <label>Email</label>
-                    </div>
-                    <div class="col-md-5">
-                        <p>huyhoangvo1001@gmail.com</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <label>Số điện thoại</label>
-                    </div>
-                    <div class="col-md-6">
-                        <p>12345678</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <label>Ngày sinh</label>
-                    </div>
-                    <div class="col-md-6">
-                        <p>20/11/1998</p>
-                    </div>
-                </div>
-            </div>
+              <ViewProfile/>
             </Row>
           </TabPane>
         </TabContent>

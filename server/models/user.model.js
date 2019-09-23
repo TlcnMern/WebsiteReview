@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    default: 'name'
+    default: 'nam'
   },
   salt: String,
   hashed_password:{

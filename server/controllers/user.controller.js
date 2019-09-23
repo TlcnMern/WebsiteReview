@@ -17,14 +17,6 @@ const register = (req, res) => {
 
 const getInfoUser=(req, res)=>{
   const userId = req.params.userId;
-  if(userId==null)
-    res.status(200).json({
-      message: "oe!"
-    })
-
-  if (req.user._id.toString() !== userId) { 
-    return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); 
-  }
   User.findById(userId, (err, user) => {
     if (err) {
       return res.status(400).json({

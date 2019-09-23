@@ -44,7 +44,8 @@ import cookie from 'react-cookies';
       case LOGIN_FAIL:
       case LOGOUT_SUCCESS:
       case REGISTER_FAIL:
-        cookie.remove('token', { path: '/' })
+        cookie.remove('token', { path: '/' });
+        cookie.remove('user',{path:'/'});
         return {
           ...state,
           token: null,
