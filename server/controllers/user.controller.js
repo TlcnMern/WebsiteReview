@@ -23,7 +23,8 @@ const getInfoUser=(req, res)=>{
         error: errorHandler.getErrorMessage(err)//No user could be found for this ID
       })
     }
-    return res.status(200).json({ user});
+    const userInfo={_id: user._id, name: user.name, email: user.email,gender:user.gender,created:user.created};
+    return res.status(200).json({userInfo});
   });
 }
 

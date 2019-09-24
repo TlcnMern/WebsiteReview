@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import "../../public/stylesheets/partials/profile.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import PofileTab from './profileTab';
+import logo from '../../public/images/logo512.png'
 
 class profile extends Component{
     render(){
@@ -41,55 +42,44 @@ class profile extends Component{
                                                 <h1>Huy Hoàng</h1>
                                                 <h5>Developer</h5>
                                             </div>
-                                            <div class="col-md-4 col-sm-6 col-xs-6 profile-header-section1 text-right pull-rigth">
-                                                <a href="/search" class="btn btn-primary btn-block">Seguir buscando</a>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <ul class="nav nav-tabs" role="tablist">
-                                                    {/* <li class="nav-item">
-                                                        <a class="nav-link active" href="#profile" role="tab" data-toggle="tab"><i class="fas fa-user-circle"></i>Bài viết</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <Link to="Info" class="nav-link" role="tab" data-toggle="tab"><i class="fas fa-info-circle"></i>Giới thiệu</Link>
-                                                    </li>                                                 */}
                                                     <PofileTab /> 
                                                 </ul>
                                                 <div class="tab-content">
                                                     <div role="tabpanel" class="tab-pane fade show active" id="buzz">
                                                     </div>
-                                                    
                                                 </div>
                                             </div>
-                                        <div class="col-md-4 img-main-rightPart">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="row image-right-part">
-                                                        <div class="col-md-6 pull-left image-right-detail">
-                                                            <h6>PUBLICIDAD</h6>
+                                            <div class="col-md-4 img-main-rightPart">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row image-right-part">
+                                                            <div class="col-md-6 pull-left image-right-detail">
+                                                                <h6>TRÙM CÀ KHỊA</h6>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <a href="http://camaradecomerciozn.com/">
+                                                    
                                                     <div class="col-md-12 image-right">
-                                                        <img src="http://pluspng.com/img-png/bootstrap-png-bootstrap-512.png"/>
+                                                        <img src={logo}/>
                                                     </div>
-                                                </a>
-                                                <div class="col-md-12 image-right-detail-section2">
+                                                    
+                                                    <div class="col-md-12 image-right-detail-section2">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
         </body>
         );
     }

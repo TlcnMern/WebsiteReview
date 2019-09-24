@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {logout} from '../../action/userAction'
 
-
 class HeaderTemplate extends Component {
   renderLinkGuest(){
     return [
@@ -18,7 +17,7 @@ class HeaderTemplate extends Component {
       </li>,
 
       <li className="nav-item active" key={3}>
-          <Link to="Register">Register</Link>
+          <Link to="register">Register</Link>
       </li>
     ];
   }

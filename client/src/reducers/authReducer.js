@@ -8,8 +8,6 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL
   } from '../action/type';
-import cookie from 'react-cookies';
-
 
   const initialState = {
     isAuthenticated: null,
@@ -44,8 +42,7 @@ import cookie from 'react-cookies';
       case LOGIN_FAIL:
       case LOGOUT_SUCCESS:
       case REGISTER_FAIL:
-        cookie.remove('token', { path: '/' });
-        cookie.remove('user',{path:'/'});
+        sessionStorage.removeItem('jwt')
         return {
           ...state,
           token: null,

@@ -8,7 +8,7 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, profile: action.payload };
     case ERROR_RESPONSE:
       return { ...state, error: action.payload };
+    default:
+        return state;
   }
-
-  return state;
 }

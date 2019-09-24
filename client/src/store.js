@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import cookie from 'react-cookies';
 import rootReducer from './reducers';
+import {auth} from './action/helper';
 
 import {
   LOGIN_SUCCESS
@@ -19,9 +19,11 @@ const store = createStore(
 );
 
 
-const token = cookie.load('token');
+const jwt=auth.isAuthenticated();
 
-if (token) {
+
+//tức nếu còn jwt thì thằng isAuthenticated vẫn luôn đúng
+if (jwt) {
   // Update application state. User has token and is probably authenticated
   store.dispatch({ type: LOGIN_SUCCESS });
 }

@@ -15,7 +15,7 @@ class MainRouter extends Component {
           <Route exact path="/" component={Home}/>
           <Route exact path="/login" component={login}/>
           <Route exact path="/register" component={Register}/>
-          <Route exact path="/profile" component={profile}/>
+          <Route path="/profile" component={profile}/>
         </Switch>
       </BrowserRouter>
     </div>)

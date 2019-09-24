@@ -1,40 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import cookie from 'react-cookies';
 import {fetch} from '../../action/userAction';
-
+import {auth} from '../../action/helper';
+import {Redirect} from 'react-router-dom';
 
 class ViewProfie extends Component{
 
     componentWillMount(){
-        const user=cookie.load('user');
-        console.log(user._id);
-        this.props.fetch(user._id);
-
+        if(this.props.authenticate)
+            this.props.fetch(auth.isAuthenticated().user._id);
     }
 
     render() {
+        if(!this.props.authenticate)
+            return <Redirect to='/Login'/>;
         return(
             <div >
                 <div class="row">
                     <div class="col-md-5">
-                        <label>Email</label>
+                        <label>Họ tên</label>
                     </div>
                     <div class="col-md-5">
-                        <p>{this.props.profile.email}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <label>Tên</label>
-                    </div>
-                    <div class="col-md-6">
                         <p>{this.props.profile.name}</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
-                        <label>Ngày tạo</label>
+                        <label>Email</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{this.props.profile.email}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label>Giới tính</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{this.props.profile.gender}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label>Ngày tham gia review</label>
                     </div>
                     <div class="col-md-6">
                         <p>{this.props.profile.created}</p>
@@ -47,6 +55,7 @@ class ViewProfie extends Component{
 
 function mapStateToProp(state){
     return{
+        authenticate:state.auth.isAuthenticated,
         profile: state.user.profile//thằng user này là ở trong index của reducer đó
     }
 }

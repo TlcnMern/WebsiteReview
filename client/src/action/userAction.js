@@ -1,10 +1,9 @@
 import axios from 'axios';
-import {API_URL, CLIENT_ROOT_URL} from './index';
+import {API_URL, auth} from './helper';
 import { returnErrors } from './errorActions';
-import cookie from 'react-cookies';
 
 import {
-    USER_LOADED,    AUTH_ERROR,    LOGIN_SUCCESS,    LOGIN_FAIL,    LOGOUT_SUCCESS,    REGISTER_SUCCESS,
+    LOGOUT_SUCCESS,    REGISTER_SUCCESS,
     REGISTER_FAIL,
     FETCH_USER,ERROR_RESPONSE
 } from './type';
@@ -41,18 +40,17 @@ export const logout = () => {
   };
 };
 
-
+//get info user
 export const fetch=(uid)=>{
   const config={
-      Authorization:cookie.load('token')
+      Authorization:auth.isAuthenticated()
   };
-  console.log(uid);
   return function (dispatch) {
     axios.get(`${API_URL}/users/${uid}`,config)
     .then((response) => {
       dispatch({
         type: FETCH_USER,
-        payload: response.data.user,
+        payload: response.data.userInfo,
       });
     })
     .catch(err => {
