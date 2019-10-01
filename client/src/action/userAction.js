@@ -3,10 +3,9 @@ import {API_URL, auth} from './helper';
 import { returnErrors } from './errorActions';
 
 import {
-    LOGOUT_SUCCESS,    REGISTER_SUCCESS,
+    REGISTER_SUCCESS,
     REGISTER_FAIL,
-    FETCH_USER,ERROR_RESPONSE
-} from './type';
+    FETCH_USER,ERROR_RESPONSE} from './type';
 
 
 export const RegisterAction =({name,email,password})=>dispatch=>{
@@ -32,12 +31,6 @@ export const RegisterAction =({name,email,password})=>dispatch=>{
         type: REGISTER_FAIL
       });
     });
-};
-
-export const logout = () => {
-  return {
-    type: LOGOUT_SUCCESS
-  };
 };
 
 //get info user

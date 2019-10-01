@@ -11,7 +11,6 @@ class ViewPost extends Component{
 
 
     arrayBufferToBase64(buffer) {
-        console.log(buffer.data.data);
         var binary = '';
         var bytes = [].slice.call(new Uint8Array(buffer.data.data));
         bytes.forEach((b) => binary += String.fromCharCode(b));

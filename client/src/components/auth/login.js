@@ -7,6 +7,8 @@ import { clearErrors } from '../../action/errorActions';
 import "../../public/stylesheets/partials/login.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../../public/images/logo192.png";
+import {Redirect} from 'react-router-dom';
+import {auth} from '../../action/helper';
 
 
 class Login extends Component {
@@ -33,16 +35,33 @@ class Login extends Component {
     };
     // Attempt to login
     this.props.login(user);
-
   };
 
+  renderAlert() {
+    if (this.props.error.msg.error) 
+      return (
+        <div>
+          <span style={{color:'red'}}>{this.props.error.msg.error}</span>
+        </div>);
+  }
 
-  //lưu những thay đổi nơi input vào state
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
   
+  
   render() {
+    const {from} = this.props.location.state || {
+      from: {
+        pathname: '/'
+      }
+    };
+    if (this.props.isAuthenticated) {
+      return (<Redirect to={from}/>);
+    }
+
+
+
     return (
 
       <div className="wrapper fadeInDown">
@@ -56,7 +75,7 @@ class Login extends Component {
             <input type="text" id="password" className="fadeIn third" name="password" placeholder="password" onChange={this.onChange} />
             <input type="submit" className="fadeIn fourth" value="Log In"/>
           </form>
-
+          {this.renderAlert()}
           <div id="formFooter">
             <span className="underlineHover">Forgot Password?</span>
           </div>

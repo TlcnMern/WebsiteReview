@@ -8,19 +8,16 @@ import {
 
   const initialState = {
     isAuthenticated: null,
-    isLoading: false,
   };
   
   export default function(state = initialState, action) {
     switch (action.type) {
       case LOGIN_SUCCESS:
       case REGISTER_SUCCESS:
-        // localStorage.setItem('token', action.payload.token);
         return {
           ...state,
           isAuthenticated:true,
           ...action.payload,
-          isLoading: false
         };
       case LOGIN_FAIL:
       case LOGOUT_SUCCESS:
@@ -30,7 +27,6 @@ import {
           ...state,
           token: null,
           isAuthenticated: false,
-          isLoading: false
         };
       default:
         return state;

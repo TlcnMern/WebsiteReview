@@ -6,6 +6,7 @@ import Register from './components/user/register';
 import profile from './components/user/profile';
 import post from './components/post/NewPost';
 import NewFeeds from './components/post/NewFeeds';
+import PrivateRoute from './components/auth/PrivateRoute';
 
 class MainRouter extends Component {
   render() {
@@ -16,8 +17,8 @@ class MainRouter extends Component {
           <Route exact path="/" component={NewFeeds}/>
           <Route exact path="/login" component={login}/>
           <Route exact path="/register" component={Register}/>
-          <Route path="/profile" component={profile}/>
-          <Route path="/NewPost" component={post}/>
+          <PrivateRoute path="/profile" component={profile}/>
+          <PrivateRoute path="/NewPost" component={post}/>
         </Switch>
       </BrowserRouter>
     </div>)

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {fetch} from '../../action/userAction';
 import {auth} from '../../action/helper';
-import {Redirect} from 'react-router-dom';
 
 class ViewProfie extends Component{
 
@@ -12,8 +11,8 @@ class ViewProfie extends Component{
     }
 
     render() {
-        if(!this.props.authenticate)
-            return <Redirect to='/Login'/>;
+        // if(!this.props.authenticate)
+        //     return <Redirect to='/Login'/>;
         return(
             <div >
                 <div class="row">
