@@ -8,7 +8,6 @@ import "../../public/stylesheets/partials/login.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../../public/images/logo192.png";
 import {Redirect} from 'react-router-dom';
-import {auth} from '../../action/helper';
 
 
 class Login extends Component {

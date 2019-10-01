@@ -5,7 +5,7 @@ class PostList extends Component{
     render(){
         return(
             <div>
-                <h3>Bài viết mới</h3>
+                <h3>NEW FEEDS</h3>
                 {this.props.posts.map((item, i) => {
                     return <ViewPost post={item} key={i}/>
                 })

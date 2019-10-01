@@ -55,7 +55,7 @@ class ViewProfie extends Component{
 function mapStateToProp(state){
     return{
         authenticate:state.auth.isAuthenticated,
-        profile: state.user.profile//thằng user này là ở trong index của reducer đó
+        profile: state.user.profile
     }
 }
 

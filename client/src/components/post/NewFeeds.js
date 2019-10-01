@@ -2,27 +2,33 @@ import React,{Component} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import PostList from './PostList';
 import {GetNewFeeds} from '../../action/postAction';
-import {connect} from 'react-redux';
 
 class NewFeeds extends Component{
 
+    state={
+        postList:[]
+    }
     componentDidMount(){
-        this.props.GetNewFeeds();
+        GetNewFeeds().then((data)=>{
+            if(data.err)
+                console.log(data.err);
+            else
+                this.setState({postList:data})
+        });
     }
 
     render(){
         return(
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <PostList posts={this.props.listPost}/>
-                    <ul class="pager">
-                        <li class="previous"><a href="#">&larr; Previous</a></li>
-                        <li class="next"><a href="#">Next &rarr;</a></li>
+        <div className="container">
+            <div className="row">
+                <div className="col-md-8">
+                    <PostList posts={this.state.postList}/>
+                    <ul>
+                        <li><a href="#">&larr; Previous</a></li>
+                        <li><a href="#">Next &rarr;</a></li>
                     </ul>
-    
                 </div>
-                <div class="col-md-4">
+                <div className="col-md-4">
 
                 </div>
             </div>
@@ -31,10 +37,5 @@ class NewFeeds extends Component{
     }
 }
 
-function mapStateToProp(state){
-    return{
-        listPost: state.post.listPost
-    }
-}
 
-export default connect(mapStateToProp,{GetNewFeeds})(NewFeeds);
+export default NewFeeds;

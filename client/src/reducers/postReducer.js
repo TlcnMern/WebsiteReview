@@ -1,24 +1,21 @@
-import {CREATE_NEWPOST, GET_POSTLIST, GET_PHOTO}  from '../action/type';
+import {GET_POSTLIST, GET_PHOTO, COMMENT_SUCCESS}  from '../action/type';
 
 
-const INITIAL_STATE={infoPost:{},message:'',err:'',listPost:[],photo:''};
+const INITIAL_STATE={
+    infoPost:{},
+    message:'',
+    isComment:false,
+    err:'',
+    listPost:[],
+    photoData:''
+};
 
 export default function(state=INITIAL_STATE,action){
     switch(action.type){
-        case CREATE_NEWPOST:
-            return{
-                ...state,
-                message:'success'
-            }
-        case GET_POSTLIST:
-            return{
-                ...state,
-                listPost:action.payload
-            }
         case GET_PHOTO:
                 return{
                     ...state,
-                    photo:action.payload
+                    photoData:action.payload
                 }
         default: return state;
     }

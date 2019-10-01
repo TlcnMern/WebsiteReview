@@ -39,7 +39,6 @@ const getNewFeeds=(req,res,next)=>{
           error: errorHandler.getErrorMessage(err)
         })
       }
-      console.log(posts);
       res.json(posts);
     })
 }
@@ -61,9 +60,27 @@ const postByID = (req, res, next, id) => {
   })
 }
 
+const addComment=(req,res,next)=>{
+  let commentD ={};
+  commentD.content = req.body.comment;
+  commentD.postedBy = req.body.userId;
+  Post.findByIdAndUpdate(req.body.postId, {$push: {comments: commentD}}, {new: true})
+  .populate('comments.postedBy', '_id name')
+  .populate('postedBy', '_id name')
+  .exec((err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(result);
+  })
+}
+
 module.exports={
     create:create,
     getNewFeeds:getNewFeeds,
     photo:photo,
-    postByID:postByID
+    postByID:postByID,
+    addComment:addComment
 }

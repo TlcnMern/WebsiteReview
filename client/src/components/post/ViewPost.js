@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {getPhoto,geatPhoto} from '../../action/postAction';
+import {getPhoto} from '../../action/postAction';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 
 class ViewPost extends Component{
@@ -18,10 +19,7 @@ class ViewPost extends Component{
     };
 
     componentDidMount(){
-        this.props.getPhoto(this.props.post._id);
-
-
-
+        // this.props.getPhoto(this.props.post._id);
         var base64Flag = 'data:image/jpeg;base64,';
         var imageStr =
             this.arrayBufferToBase64(this.props.post.photo);
@@ -33,7 +31,14 @@ class ViewPost extends Component{
     render(){
         return(
             <article>
-                <h3><a href="singlepost.html">Tên bài viết</a></h3>
+                <h4>
+                    <Link to={
+                        {pathname: '/DetailPost',
+                        state: { post: this.props.post  }}
+                    }>
+                        {this.props.post.title}
+                    </Link>
+                </h4>
 
                 <div class="row">
                     <div class="col-sm-6 col-md-6">
@@ -55,9 +60,7 @@ class ViewPost extends Component{
 
                 <br />
 
-                <p class="lead">{this.props.post.content}</p>
-
-                <p>Chia nội dung tiếp theo</p>
+                <p class="lead">{this.props.post.contentSummary}</p>
 
                 <p class="text-right">
                     <a href="singlepost.html">
@@ -77,4 +80,4 @@ function mapToStateProps(state){
     }
 }
 
-export default connect(mapToStateProps,{getPhoto}) (ViewPost);
+export default connect(mapToStateProps,{getPhoto})(ViewPost);

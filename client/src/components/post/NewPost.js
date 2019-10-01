@@ -1,12 +1,13 @@
 import React,{Component} from 'react';
 import '../../public/stylesheets/partials/post.css';
 import {auth} from '../../action/helper';
-import {connect} from 'react-redux';
+import "bootstrap/dist/css/bootstrap.min.css";
 import {newPost} from '../../action/postAction';
 
 class NewPost extends Component{
     state={
-        user:{}
+        user:{},
+        render:false
     }
     handleChange= name => event => {
         const value = name === 'photo'
@@ -16,16 +17,15 @@ class NewPost extends Component{
     }
 
     componentDidMount(){
-
         this.postData = new FormData()
-    }
+    };
 
     onSubmitPost= e => {
         e.preventDefault();
         const jwt=auth.isAuthenticated();
         const userID=jwt.user._id;
-        
-        this.props.newPost(userID,{
+    
+        newPost(userID,{
             t:jwt.token
         },this.postData)
     }
@@ -41,7 +41,15 @@ class NewPost extends Component{
                     <form onSubmit={this.onSubmitPost}>
                     
                         <div class="form-group">
-                            <label for="content">Nội dung</label>
+                            <label for="title">Tiêu đề</label>
+                            <input rows="5" class="form-control" name="title" onChange={this.handleChange('title')}></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="contentSummary">Nội dung tóm tắt</label>
+                            <textarea rows="5" class="form-control" name="contentSummary" onChange={this.handleChange('contentSummary')}></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Nội dung </label>
                             <textarea rows="5" class="form-control" name="content" onChange={this.handleChange('content')}></textarea>
                         </div>
                         <div class="form-group">
@@ -51,9 +59,6 @@ class NewPost extends Component{
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">
                                 Create
-                            </button>
-                            <button class="btn btn-default">
-                                Cancel
                             </button>
                         </div>
                         
@@ -65,10 +70,5 @@ class NewPost extends Component{
     }
 }
 
-const mapStateToProps=state=>({
-    isAuthenticated:state.auth.isAuthenticated
-})
 
-export default connect(mapStateToProps,{
-    newPost
-})(NewPost) ;
+export default NewPost ;
