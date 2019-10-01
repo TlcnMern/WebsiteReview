@@ -2,8 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,6 +16,8 @@
     "crypto-js": "^3.1.9-1",
     "express": "^4.17.1",
     "express-jwt": "^5.3.1",
-    "mongoose": "^5.7.1"
+    "formidable": "^1.2.1",
+    "mongoose": "^5.7.1",
+    "nodemon": "^1.19.2"
   }
 }

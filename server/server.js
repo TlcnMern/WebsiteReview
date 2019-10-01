@@ -8,6 +8,7 @@ const config=require('./config/config');
 
 const userRoutes=require('./routes/user.routes');
 const authRouters=require('./routes/auth.routes');
+const postRouters=require('./routes/post.routes');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -15,7 +16,7 @@ app.use(bodyParser.json());
 // mount routes
 app.use('/', userRoutes);
 app.use('/auth',authRouters);
-
+app.use('/post',postRouters);
 const db=config.mongoUri;
 mongoose.connect(db, { useNewUrlParser: true });
 const connection = mongoose.connection;

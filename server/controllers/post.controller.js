@@ -1,23 +1,22 @@
 const Post=require('../models/post.model');
-const _=require('lodash');
 const errorHandler =require('../helpers/dbErrorHandler');
 const formidable=require('formidable');
 const fs=require('fs');
 
 const create = (req, res, next) => {
-  let form = new formidable.IncomingForm()
-  form.keepExtensions = true
+  let form = new formidable.IncomingForm();
+  form.keepExtensions = true;
   form.parse(req, (err, fields, files) => {
     if (err) {
       return res.status(400).json({
         error: "Image could not be uploaded"
       })
     }
-    let post = new Post(fields)
-    post.postedBy= req.profile
+    let post = new Post(fields);
+    post.postedBy= req.profile;
     if(files.photo){
-      post.photo.data = fs.readFileSync(files.photo.path)
-      post.photo.contentType = files.photo.type
+      post.photo.data = fs.readFileSync(files.photo.path);//Buffer(fs.readFileSync(req.file.path), 'base64');
+      post.photo.contentType = files.photo.type;//lấy định dạng ảnh
     }
     post.save((err, result) => {
       if (err) {
@@ -25,10 +24,31 @@ const create = (req, res, next) => {
           error: errorHandler.getErrorMessage(err)
         })
       }
-      res.json(result)
+      res.json(result);
     })
   })
 }
+
+const getNewFeeds=(req,res,next)=>{
+    Post.find({})
+    .populate('postedBy', '_id name')
+    .sort('-created')
+    .exec((err, posts) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      console.log(posts);
+      res.json(posts);
+    })
+}
+
+const photo = (req, res, next) => {
+  res.set("Content-Type", req.post.photo.contentType);
+  return res.json(req.post.photo);
+}
+
 
 const postByID = (req, res, next, id) => {
   Post.findById(id).populate('postedBy', '_id name').exec((err, post) => {
@@ -41,132 +61,9 @@ const postByID = (req, res, next, id) => {
   })
 }
 
-const listByUser = (req, res) => {
-  Post.find({postedBy: req.profile._id})
-  .populate('comments', 'text created')
-  .populate('comments.postedBy', '_id name')
-  .populate('postedBy', '_id name')
-  .sort('-created')
-  .exec((err, posts) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(posts)
-  })
-}
-
-const listNewsFeed = (req, res) => {
-  let following = req.profile.following
-  following.push(req.profile._id)
-  Post.find({postedBy: { $in : req.profile.following } })
-  .populate('comments', 'text created')
-  .populate('comments.postedBy', '_id name')
-  .populate('postedBy', '_id name')
-  .sort('-created')
-  .exec((err, posts) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(posts)
-  })
-}
-
-const remove = (req, res) => {
-  let post = req.post
-    post.remove((err, deletedPost) => {
-      if (err) {
-        return res.status(400).json({
-          error: errorHandler.getErrorMessage(err)
-        })
-      }
-      res.json(deletedPost)
-    })
-}
-
-const photo = (req, res, next) => {
-    res.set("Content-Type", req.post.photo.contentType)
-    return res.send(req.post.photo.data)
-}
-
-const like = (req, res) => {
-  Post.findByIdAndUpdate(req.body.postId, {$push: {likes: req.body.userId}}, {new: true})
-  .exec((err, result) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(result)
-  })
-}
-
-const unlike = (req, res) => {
-  Post.findByIdAndUpdate(req.body.postId, {$pull: {likes: req.body.userId}}, {new: true})
-  .exec((err, result) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(result)
-  })
-}
-
-
-const comment = (req, res) => {
-  let comment = req.body.comment
-  comment.postedBy = req.body.userId
-  Post.findByIdAndUpdate(req.body.postId, {$push: {comments: comment}}, {new: true})
-  .populate('comments.postedBy', '_id name')
-  .populate('postedBy', '_id name')
-  .exec((err, result) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(result)
-  })
-}
-const uncomment = (req, res) => {
-  let comment = req.body.comment
-  Post.findByIdAndUpdate(req.body.postId, {$pull: {comments: {_id: comment._id}}}, {new: true})
-  .populate('comments.postedBy', '_id name')
-  .populate('postedBy', '_id name')
-  .exec((err, result) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(result)
-  })
-}
-
-const isPoster = (req, res, next) => {
-  let isPoster = req.post && req.auth && req.post.postedBy._id == req.auth._id
-  if(!isPoster){
-    return res.status('403').json({
-      error: "User is not authorized"
-    })
-  }
-  next()
-}
-
 module.exports={
-    listByUser:listByUser,
-    listNewsFeed:listNewsFeed,
     create:create,
-    postByID:postByID,
-    remove:remove,
+    getNewFeeds:getNewFeeds,
     photo:photo,
-    like:like,
-    unlike:unlike,
-    comment:comment,
-    uncomment:uncomment,
-    isPoster:isPoster
+    postByID:postByID
 }

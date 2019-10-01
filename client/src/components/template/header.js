@@ -8,29 +8,37 @@ class HeaderTemplate extends Component {
   renderLinkGuest(){
     return [
       // Unauthenticated navigation
-      <li style={{marginRight:"10px"}} className="nav-item active" key={1}>
+      <li style={{marginRight:"10px"}}  key={1}>
         <Link to="/">Home</Link>
       </li>,
 
-      <li style={{marginRight:"10px"}} className="nav-item active" key={2}>
+      <li style={{marginRight:"10px"}}  key={2}>
         <Link to="Login">Login</Link>
       </li>,
 
-      <li className="nav-item active" key={3}>
+      <li style={{marginRight:"10px"}}  key={3}>
           <Link to="register">Register</Link>
+      </li>,
+      <li  key={3}>
+        <Link to="NewPost">post</Link>
       </li>
+
+
     ];
   }
   renderLinkUser(){
     return [
-      <li style={{marginRight:"10px"}} className="nav-item active" key={1}>
+      <li style={{marginRight:"10px"}}  key={1}>
         <Link to="/">Home</Link>
       </li>,
-      <li style={{marginRight:"10px"}} className="nav-item active" key={1}>
+      <li style={{marginRight:"10px"}}  key={1}>
         <Link to="profile">My profile</Link>
       </li>,
-      <li className="nav-item active" key={1}>       
+      <li style={{marginRight:"10px"}}  key={1}>       
         <Link onClick={this.props.logout}>Logout</Link>
+      </li>,
+      <li  key={3}>
+        <Link to="NewPost">post</Link>
       </li>
 
     ];

@@ -2,7 +2,8 @@ import React,{Component} from 'react';
 import "../../public/stylesheets/partials/profile.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import PofileTab from './profileTab';
-import logo from '../../public/images/logo512.png'
+import logo from '../../public/images/logo512.png';
+import {auth} from '../../action/helper';
 
 class profile extends Component{
     render(){
@@ -17,7 +18,7 @@ class profile extends Component{
                             <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
                                 <div class="row ">
                                     <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
-                                        <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle"/>
+                                        <img src={'localhost:4000/users/photo/'+auth.isAuthenticated().user._id} class="rounded-circle"/>
                                     </div>
 
                                     <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">
@@ -85,7 +86,9 @@ class profile extends Component{
     }
 }
 
-export default profile
+
+export default profile;
+
 
 
 

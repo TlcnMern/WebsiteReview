@@ -1,8 +1,14 @@
 const express=require('express');
-const userCtrl=require('../controllers/user.controller');
+const controllerUser=require('../controllers/user.controller');
 const router = express.Router()
 
-router.route('/users').post(userCtrl.register);
-router.route('/users/:userId').get(userCtrl.getInfoUser);
+
+
+router.param('userID', controllerUser.UserById);
+router.route('/users').post(controllerUser.register);
+router.route('/users/:userID').get(controllerUser.getInfoUser);
+router.route('/users/photo/:userID').get(controllerUser.photo,controllerUser.defaultPhoto);
+
+
 
 module.exports=router;
