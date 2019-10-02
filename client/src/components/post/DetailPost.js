@@ -29,7 +29,10 @@ class DetailPost extends Component{
     }
 
     render(){
-        const { post } = this.props.location.state;
+        var  post ={};
+        if(this.props.location.state.post){
+             post  = this.props.location.state.post;
+        }
         return(
         <div class="container">
             <div class="row">

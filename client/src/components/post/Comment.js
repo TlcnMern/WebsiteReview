@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import {auth} from '../../action/helper';
 import {addComment} from '../../action/postAction';
+import {connect} from 'react-redux';
 
 class Comment extends Component{
     state = {
@@ -9,10 +10,16 @@ class Comment extends Component{
         comments:[]
     };
     componentWillMount(){
-        this.setState({comments:this.props.post.comments})
+        var listComment =this.sortComment(this.props.post.comments);
+        this.setState({comments:listComment})
     }
     handleChange= name => event => {
         this.setState({[name]: event.target.value});
+    }
+    sortComment(comments){
+        return comments.sort(function(a,b){
+            return new Date(b.created)-new Date(a.created);
+        });
     }
     onSubmitComment= e => {
         e.preventDefault();
@@ -25,16 +32,16 @@ class Comment extends Component{
             if(data.err)
                 console.log(data.err)
             else{
-                this.setState({comments:data.comments});
+                var listComment =this.sortComment(data.comments);
+                this.setState({comments:listComment});
             }
         })
     }
 
-    render(){
-        const jwt=auth.isAuthenticated();
-        const user=jwt.user;
-        return(
-            <div>
+
+    renderCreateComment(){
+        if(this.props.isAuthenticated)
+            return(
                 <div>
                     <h4>Leave a comment</h4>
                     <form onSubmit={this.onSubmitComment} role="form">
@@ -45,16 +52,26 @@ class Comment extends Component{
                         <div className="col-md-12 form-group text-right">
                             <button type="submit" className="btn btn-primary" >Submit</button>
                         </div>
-                    </form>					
+                    </form>		
+                    <hr />			
                 </div>
-                <hr />
+                    
+            );
+    }
+
+
+    render(){
+        return(
+            <div>
+                {this.renderCreateComment()}
+
                 { this.state.comments.map((item, i) => {
                     return(
-                    // >
+                    
                     <ul id="comments" >
                         <li>
                             <div>
-                                <h6>{user.name}</h6>
+                                <h6>{item.postedBy.name}</h6>
                                 <p>{item.created}</p>
                             </div>
                             <p>
@@ -70,4 +87,11 @@ class Comment extends Component{
         );
     }
 }
-export default Comment;
+
+function mapToStateProps(state){
+    return{
+        isAuthenticated: state.auth.isAuthenticated
+    }
+}
+
+export default connect(mapToStateProps) (Comment);

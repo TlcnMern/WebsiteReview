@@ -32,6 +32,7 @@ const create = (req, res, next) => {
 const getNewFeeds=(req,res,next)=>{
     Post.find({})
     .populate('postedBy', '_id name')
+    .populate('comments.postedBy', '_id name')
     .sort('-created')
     .exec((err, posts) => {
       if (err) {
