@@ -17,7 +17,7 @@ class HeaderTemplate extends Component {
       </li>,
 
       <li style={{marginRight:"10px"}}  key={3}>
-          <Link to="register">Register</Link>
+          <Link to="Register">Register</Link>
       </li>,
       <li  key={3}>
         <Link to="NewPost">post</Link>
@@ -32,7 +32,7 @@ class HeaderTemplate extends Component {
         <Link to="/">Home</Link>
       </li>,
       <li style={{marginRight:"10px"}}  key={1}>
-        <Link to="profile">My profile</Link>
+        <Link to="Profile">My profile</Link>
       </li>,
       <li style={{marginRight:"10px"}}  key={1}>       
         <Link onClick={this.props.logout}>Logout</Link>

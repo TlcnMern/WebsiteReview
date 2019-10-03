@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_URL, auth} from './helper';
+import {API_URL} from './helper';
 import { returnErrors } from './errorActions';
 
 import {
@@ -34,9 +34,11 @@ export const RegisterAction =({name,email,password})=>dispatch=>{
 };
 
 //get info user
-export const fetch=(uid)=>{
+export const fetch=(uid,credentials)=>{
   const config={
-      Authorization:auth.isAuthenticated()
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + credentials.t
   };
   return function (dispatch) {
     axios.get(`${API_URL}/users/${uid}`,config)
@@ -53,3 +55,21 @@ export const fetch=(uid)=>{
     });
   }
 };
+
+//update info user
+export const update = (userID, credentials, user) => {
+  const config={
+    headers:{
+        'Accept': 'application/json',
+        'Authorization':'bearer '+credentials.t
+    }
+  }
+  const body=user;
+  return axios.put(`${API_URL}/users/editProfile/`+userID,body,config)
+  .then(res=>{
+      return true;
+  })
+  .catch(err=>{
+      return err;
+  });
+}

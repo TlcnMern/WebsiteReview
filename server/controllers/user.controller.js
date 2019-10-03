@@ -1,5 +1,9 @@
 const User=require('../models/user.model');
 const errorHandler=require('../helpers/dbErrorHandler');
+const formidable=require('formidable');
+const fs=require('fs');
+var _ = require('lodash');
+
 
 const register = (req, res) => {
   const user = new User(req.body)
@@ -59,12 +63,44 @@ const defaultPhoto = (req, res) => {
   return res.sendFile(process.cwd()+profileImage);
 }
 
+const update = (req, res, next) => {
+  let form = new formidable.IncomingForm();
+  form.keepExtensions = true;
+  form.parse(req, (err, fields, files) => {
+    console.log('vô2');
+    if (err) {
+      console.log('lỗi r');
+      return res.status(400).json({
+        error: "Photo could not be uploaded"
+      });
+    }
+    let user = req.profile;
 
+    user = _.extend(user, fields);
+    user.updated = Date.now();
+    if(files.photo){
+      user.photo.data = fs.readFileSync(files.photo.path);
+      user.photo.contentType = files.photo.type;
+    }
+    user.save((err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        });
+      }
+      user.hashed_password = undefined;
+      user.salt = undefined;
+      console.log(user);
+      res.json(user);
+    })
+  })
+}
 
 module.exports = {
   register: register,
   getInfoUser:getInfoUser,
   UserById: UserById,
   photo: photo,
-  defaultPhoto:defaultPhoto
+  defaultPhoto:defaultPhoto,
+  update:update
 }

@@ -35,14 +35,21 @@ class ViewPost extends Component{
                     <Link to={
                         {pathname: '/DetailPost',
                         state: { post: this.props.post  }}
-                    }>
+                        }>
                         {this.props.post.title}
                     </Link>
                 </h4>
 
                 <div class="row">
                     <div class="col-sm-6 col-md-6">
-                        <span class="glyphicon glyphicon-folder-open"></span> &nbsp;<a href="#">Người đăng: {this.props.post.postedBy.name}		 </a>
+                        <span class="glyphicon glyphicon-folder-open"></span> &nbsp;
+                        <Link to={
+                            {pathname: '/Profile',
+                            state: { userID: this.props.post.postedBy._id  }}
+                            }>
+                            Người đăng:
+                            {this.props.post.postedBy.name}
+                        </Link>
                         &nbsp;&nbsp;<span class="glyphicon glyphicon-bookmark"></span> <a href="#">Chủ đề</a>: <a href="#">Fire</a>, <a href="#">Mars</a>
                     </div>
                     <div class="col-sm-6 col-md-6">

@@ -71,7 +71,7 @@ class Login extends Component {
 
           <form onSubmit= {this.onSubmit}>
             <input type="text" id="login" className="fadeIn second" name="email" placeholder="email" onChange={this.onChange} />
-            <input type="text" id="password" className="fadeIn third" name="password" placeholder="password" onChange={this.onChange} />
+            <input type="password" id="password" className="fadeIn third" name="password" placeholder="password" onChange={this.onChange} /><br />
             <input type="submit" className="fadeIn fourth" value="Log In"/>
           </form>
           {this.renderAlert()}

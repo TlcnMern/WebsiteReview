@@ -16,9 +16,9 @@ class MainRouter extends Component {
         <HeaderTemplate />
         <Switch>
           <Route exact path="/" component={NewFeeds}/>
-          <Route exact path="/login" component={login}/>
-          <Route exact path="/register" component={Register}/>
-          <PrivateRoute path="/profile" component={profile}/>
+          <Route exact path="/Login" component={login}/>
+          <Route exact path="/Register" component={Register}/>
+          <PrivateRoute path="/Profile" component={profile}/>
           <PrivateRoute path="/NewPost" component={post}/>
           <Route path="/DetailPost" component={DetailPost}/>
         </Switch>

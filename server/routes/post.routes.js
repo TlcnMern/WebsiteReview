@@ -9,7 +9,7 @@ router.route('/new/:userID').post(controllerAuth.requireSignin, controllerPost.c
 router.route('/NewFeeds').get(controllerPost.getNewFeeds);
 router.route('/photo/:postID').get(controllerPost.photo);
 
-router.route('/addComment').put(controllerPost.addComment);
+router.route('/addComment').put(controllerAuth.requireSignin,controllerPost.addComment);
 
 
 router.param('userID', controllerUser.UserById);

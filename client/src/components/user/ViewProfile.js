@@ -7,12 +7,10 @@ class ViewProfie extends Component{
 
     componentWillMount(){
         if(this.props.authenticate)
-            this.props.fetch(auth.isAuthenticated().user._id);
+            this.props.fetch(auth.isAuthenticated().user._id,auth.isAuthenticated().token);
     }
 
     render() {
-        // if(!this.props.authenticate)
-        //     return <Redirect to='/Login'/>;
         return(
             <div >
                 <div class="row">

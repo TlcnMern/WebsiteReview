@@ -2,6 +2,8 @@ import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import ViewProfile from './ViewProfile';
+import EditProfile from './EditProfile';
+
 
 export default class PofileTab extends React.Component {
   constructor(props) {
@@ -9,8 +11,12 @@ export default class PofileTab extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: '1'
+      activeTab: '1',
+      renderEdit:false
     };
+
+    this.onClickEdit=this.onClickEdit.bind(this);
+    this.onChangeRenderEdit=this.onChangeRenderEdit.bind(this);
   }
 
   toggle(tab) {
@@ -19,6 +25,25 @@ export default class PofileTab extends React.Component {
         activeTab: tab
       });
     }
+  }
+  onClickEdit(){
+    this.setState({renderEdit:true});
+  };
+  onChangeRenderEdit(){
+    console.log('render');
+    this.setState({renderEdit:false});
+  };
+
+  renderViewOrEdit(){
+    if(this.state.renderEdit)
+      return <EditProfile onChangeRenderEdit={this.onChangeRenderEdit} /> ;
+    else 
+    return (
+      <div>
+          <ViewProfile />
+          <button onClick={this.onClickEdit} >Chỉnh Sửa</button>
+      </div>
+    );
   }
   render() {
     return (
@@ -49,9 +74,7 @@ export default class PofileTab extends React.Component {
             </Row>
           </TabPane>
           <TabPane tabId="2">
-            <Row>
-              <ViewProfile/>
-            </Row>
+            {this.renderViewOrEdit()}     
           </TabPane>
         </TabContent>
       </div>
