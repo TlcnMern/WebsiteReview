@@ -58,7 +58,7 @@ export const addComment = (userId, credentials, postId, comment) =>{
     }
     const  body= JSON.stringify({userId:userId, postId: postId, comment: comment});
 
-    return axios.put(`${API_URL}/post/addComment/`,body,config)
+    return axios.put(`${API_URL}/post/addComment`,body,config)
         .then(res=>{
             return res.data;
             }

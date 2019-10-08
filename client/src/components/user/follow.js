@@ -1,37 +1,45 @@
-import React,{Component} from 'react';
-import "../../public/stylesheets/partials/profile.css"
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import { auth } from '../../action/helper';
+import {follow,unFollow} from '../../action/userAction';
 
-class follow extends Component{
+class Follow extends Component{
+    constructor(){
+        super();
+        this.clickFollowButton=this.clickFollowButton.bind(this);
+        this.cliclUnFollowButton=this.cliclUnFollowButton.bind(this);
+    }
+
+    clickFollowButton(){
+        if(!this.props.isAuthenticated){
+            window.location.href="http://localhost:3000/Login";
+        }
+        const jwt = auth.isAuthenticated()
+        this.props.follow(jwt.user._id,{t:jwt.token},this.props.followID)
+      }
+    cliclUnFollowButton(){
+        const jwt = auth.isAuthenticated()
+        this.props.unFollow(jwt.user._id,{t:jwt.token},this.props.followID)
+    }
+
     render(){
         return(
-            <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
-                <div class="row ">
-                    <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
-                        <img src={'localhost:4000/users/photo/'} class="rounded-circle"/>
-                    </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">              
 
-                    <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">
-                                                                
-                        <button id="btn-contact" data-toggle="modal" data-target="#contact" class="btn btn-success btn-block follow">Người theo dõi</button> 
-                        <button class="btn btn-warning btn-block">Đang theo dõi</button>                        
-                    </div>
-                    <div class="row user-detail-row">
-                        <div class="col-md-12 col-sm-12 user-detail-section2 pull-left">
-                            <div class="border"></div>
-                            <p>Người theo dõi</p>
-                            <span>320</span>
-                        </div>                           
-                    </div>
-                </div>
-            </div>           
+            { !this.props.isFollow
+                ? (<button id="btn-contact" data-toggle="modal" onClick={this.clickFollowButton} data-target="#contact" class="btn btn-success btn-block follow">Theo dõi</button> )
+                : (<button id="btn-contact" data-toggle="modal" onClick={this.cliclUnFollowButton} data-target="#contact" class="btn btn-success btn-block follow">Bỏ theo dõi</button> )
+            }               
+            </div>             
         );
     }
 }
 
+function mapToStateProps(state){
+    return{
+        isAuthenticated:state.auth.isAuthenticated,
+        isFollow: state.user.isFollow
+    }
+}
 
-export default follow;
-
-
-
-
+export default connect(mapToStateProps,{follow,unFollow})(Follow)

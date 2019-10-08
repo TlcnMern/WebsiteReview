@@ -5,7 +5,7 @@ import "../../public/stylesheets/partials/editProfie.css";
 import {update} from '../../action/userAction';
 import {auth} from '../../action/helper';
 
-class ViewProfie extends Component{
+class EditProfile extends Component{
 
     constructor(props){
         super(props);
@@ -83,4 +83,4 @@ function mapStateToProp(state){
     }
 }
 
-export default connect(mapStateToProp)(ViewProfie);
+export default connect(mapStateToProp)(EditProfile);

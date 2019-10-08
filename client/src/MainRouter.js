@@ -8,6 +8,7 @@ import post from './components/post/NewPost';
 import NewFeeds from './components/post/NewFeeds';
 import PrivateRoute from './components/auth/PrivateRoute';
 import DetailPost from './components/post/DetailPost';
+import GuestViewProfile from './components/guest/GuestViewProfile';
 
 class MainRouter extends Component {
   render() {
@@ -21,6 +22,7 @@ class MainRouter extends Component {
           <PrivateRoute path="/Profile" component={profile}/>
           <PrivateRoute path="/NewPost" component={post}/>
           <Route path="/DetailPost" component={DetailPost}/>
+          <Route path="/GuestViewProfile" component={GuestViewProfile}/>
         </Switch>
       </BrowserRouter>
     </div>)

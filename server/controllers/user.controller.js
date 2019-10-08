@@ -39,7 +39,6 @@ const UserById=(req,res,next,userID)=>{
       .populate('follower','_id name')
       .exec((err,user)=>{
         if(err || !user){
-          console.log('dm lỗi')
           return res.status('200').json({
             err:'User not found'
           });
@@ -67,9 +66,7 @@ const update = (req, res, next) => {
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
   form.parse(req, (err, fields, files) => {
-    console.log('vô2');
     if (err) {
-      console.log('lỗi r');
       return res.status(400).json({
         error: "Photo could not be uploaded"
       });
@@ -90,9 +87,74 @@ const update = (req, res, next) => {
       }
       user.hashed_password = undefined;
       user.salt = undefined;
-      console.log(user);
       res.json(user);
     })
+  })
+}
+
+const checkFollow= (req, res) => {
+  const userIDFollow=req.body.userIDFollow;
+  const match = req.profile.following.find((following)=> {
+    return following._id == userIDFollow
+  });
+  res.json(match);
+}
+
+
+//người mình theo dõi
+const addFollowing = (req, res, next) => {
+  User.findByIdAndUpdate(req.body.userId, {$push: {following: req.body.followId}}, (err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      });
+    }
+    next();
+  })
+}
+
+
+//người theo dõi mình
+const addFollower = (req, res) => {
+  User.findByIdAndUpdate(req.body.followId, {$push: {followers: req.body.userId}}, {new: true})
+  .populate('following', '_id name')
+  .populate('followers', '_id name')
+  .exec((err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      });
+    }
+    result.hashed_password = undefined;
+    result.salt = undefined;
+    res.json(result);
+  })
+}
+
+
+const removeFollowing = (req, res, next) => {
+  User.findByIdAndUpdate(req.body.userID, {$pull: {following: req.body.unFollowId}}, (err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      });
+    }
+    next();
+  })
+}
+const removeFollower = (req, res) => {
+  User.findByIdAndUpdate(req.body.unFollowId, {$pull: {followers: req.body.userID}}, {new: true})
+  .populate('following', '_id name')
+  .populate('followers', '_id name')
+  .exec((err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    result.hashed_password = undefined
+    result.salt = undefined
+    res.json(result)
   })
 }
 
@@ -102,5 +164,10 @@ module.exports = {
   UserById: UserById,
   photo: photo,
   defaultPhoto:defaultPhoto,
-  update:update
+  update:update,
+  checkFollow:checkFollow,
+  addFollowing:addFollowing,
+  addFollower:addFollower,
+  removeFollowing:removeFollowing,
+  removeFollower:removeFollower
 }

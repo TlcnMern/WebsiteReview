@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_URL,auth} from './helper';
+import {CLIENT_ROOT_URL,API_URL,auth} from './helper';
 import { returnErrors } from './errorActions';
 
 import {
@@ -9,6 +9,8 @@ import {
   
 
 export function login({ email, password }) {
+
+  
   return function (dispatch) {
     axios.post(`${API_URL}/auth/signin`, { email, password })
     .then((response) => {
@@ -39,5 +41,6 @@ export const logout=() =>dispatch=>{
   dispatch({
     type: CLEAR_ERRORS
   });
+  window.location.href = `${CLIENT_ROOT_URL}`;
 
 };

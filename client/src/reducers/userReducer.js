@@ -1,6 +1,6 @@
-import {FETCH_USER,ERROR_RESPONSE} from '../action/type';
+import {FETCH_USER,ERROR_RESPONSE, FOLLOW, FOLLOWED} from '../action/type';
 
-const INITIAL_STATE = { profile: {}, message: '', error: '' };
+const INITIAL_STATE = { profile: {}, message: '', error: '',isFollow:false};
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -8,6 +8,10 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, profile: action.payload };
     case ERROR_RESPONSE:
       return { ...state, error: action.payload };
+    case FOLLOW:
+      return { ...state, error: action.payload,isFollow:true };
+    case FOLLOWED:
+      return { ...state, error: action.payload,isFollow:false };
     default:
         return state;
   }

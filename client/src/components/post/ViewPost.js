@@ -44,7 +44,7 @@ class ViewPost extends Component{
                     <div class="col-sm-6 col-md-6">
                         <span class="glyphicon glyphicon-folder-open"></span> &nbsp;
                         <Link to={
-                            {pathname: '/Profile',
+                            {pathname: '/GuestViewProfile',
                             state: { userID: this.props.post.postedBy._id  }}
                             }>
                             Người đăng:

@@ -14,3 +14,6 @@ export const ERROR_RESPONSE='ERROR_RESPONSE';
 export const GET_POSTLIST='GET_POSTLIST';
 export const GET_PHOTO='GET_PHOTO';
 export const COMMENT_SUCCESS='COMMENT_SUCCESS';
+
+export const FOLLOW='FOLLOW';
+export const FOLLOWED='FOLLOWED';

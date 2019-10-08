@@ -18,6 +18,7 @@ class NewFeeds extends Component{
     }
 
     render(){
+        console.log(this.state.postList)
         return(
         <div className="container">
             <div className="row">

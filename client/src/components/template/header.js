@@ -44,7 +44,6 @@ class HeaderTemplate extends Component {
     ];
   }
   render() {
-    const {isAuthenticated}=this.props.auth;
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -57,9 +56,44 @@ class HeaderTemplate extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-            {isAuthenticated ? this.renderLinkUser() :this.renderLinkGuest()}
-            </ul>
+            {
+              !this.props.auth.isAuthenticated && (
+                <ul className="navbar-nav">
+                  <li style={{marginRight:"10px"}}  key={1}>
+                  <Link to="/">Home</Link>
+                  </li>
+            
+                  <li style={{marginRight:"10px"}}  key={2}>
+                    <Link to="Login">Login</Link>
+                  </li>
+            
+                  <li style={{marginRight:"10px"}}  key={3}>
+                      <Link to="Register">Register</Link>
+                  </li>
+                  <li  key={3}>
+                    <Link to="NewPost">post</Link>
+                  </li>
+                </ul>
+              )
+            }
+            {
+              this.props.auth.isAuthenticated && (
+                <ul className="navbar-nav">
+                  <li style={{marginRight:"10px"}}  key={1}>
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li style={{marginRight:"10px"}}  key={1}>
+                    <Link to="Profile">My profile</Link>
+                  </li>
+                  <li style={{marginRight:"10px"}}  key={1}>       
+                    <Link onClick={this.props.logout}>Logout</Link>
+                  </li>
+                  <li  key={3}>
+                    <Link to="NewPost">post</Link>
+                  </li>
+                </ul>
+              )
+            }
           </div>
         </nav>
       </div>
