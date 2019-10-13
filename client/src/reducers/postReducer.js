@@ -1,4 +1,4 @@
-import {GET_POSTLIST, GET_PHOTO, COMMENT_SUCCESS}  from '../action/type';
+import { GET_PHOTO}  from '../action/type';
 
 
 const INITIAL_STATE={
@@ -7,7 +7,7 @@ const INITIAL_STATE={
     isComment:false,
     err:'',
     listPost:[],
-    photoData:''
+    photoData:{}
 };
 
 export default function(state=INITIAL_STATE,action){

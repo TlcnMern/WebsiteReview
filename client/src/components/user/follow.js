@@ -24,11 +24,11 @@ class Follow extends Component{
 
     render(){
         return(
-            <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">              
+            <div className="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">              
 
             { !this.props.isFollow
-                ? (<button id="btn-contact" data-toggle="modal" onClick={this.clickFollowButton} data-target="#contact" class="btn btn-success btn-block follow">Theo dõi</button> )
-                : (<button id="btn-contact" data-toggle="modal" onClick={this.cliclUnFollowButton} data-target="#contact" class="btn btn-success btn-block follow">Bỏ theo dõi</button> )
+                ? (<button id="btn-contact" data-toggle="modal" onClick={this.clickFollowButton} data-target="#contact" className="btn btn-success btn-block follow">Theo dõi</button> )
+                : (<button id="btn-contact" data-toggle="modal" onClick={this.cliclUnFollowButton} data-target="#contact" className="btn btn-success btn-block follow">Bỏ theo dõi</button> )
             }               
             </div>             
         );

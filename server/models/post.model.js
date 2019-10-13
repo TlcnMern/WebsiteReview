@@ -4,6 +4,15 @@ const PostSchema = new mongoose.Schema({
     type:String,
     required:'Title is required'
   },
+  theme:{
+    type: String,
+    required:'theme is required'
+  },
+  productReview:{
+    type: String,
+    required: 'productReview is require'
+  },
+
   contentSummary:{
     type:String,
     required:'content summary is require'
@@ -23,6 +32,11 @@ const PostSchema = new mongoose.Schema({
     content: String,
     created: { type: Date, default: Date.now },
     postedBy: { type: mongoose.Schema.ObjectId, ref: 'User'}
+  }],
+  ratings:[{
+    point:Number,
+    created:{type:Date,default:Date.now},
+    postedBy:{type:mongoose.Schema.ObjectId, ref: 'User'}
   }],
   postedBy: {type: mongoose.Schema.ObjectId, ref: 'User'},
   created: {

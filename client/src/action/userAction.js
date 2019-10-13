@@ -8,14 +8,14 @@ import {
     FETCH_USER,ERROR_RESPONSE,FOLLOW,FOLLOWED} from './type';
 
 
-export const RegisterAction =({name,email,password})=>dispatch=>{
+export const RegisterAction =(user)=>dispatch=>{
     // Headers
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   };
-  const body=JSON.stringify({name,email,password});
+  const body=JSON.stringify(user);
   axios 
     .post(`${API_URL}/users`,body,config)
     .then(res=>

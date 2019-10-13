@@ -12,6 +12,8 @@ class Register extends Component{
         email:'',
         password:'',
         confirmPassword:'',
+        gender:'',
+        birthday:Date,
         flag:false
     }
 
@@ -21,15 +23,14 @@ class Register extends Component{
     
     onSubmitRegister=e=>{
         e.preventDefault();
-        const{name,email,password}=this.state;
+        const{name,email,password,gender,birthday}=this.state;
         const user={
             name,
             email,
-            password
-        }
-        if(this.state.password!==this.state.confirmPassword){
-            this.setState({flag:true});
-        }
+            password,
+            gender,
+            birthday
+        };
         this.props.RegisterAction(user);
     }
     componentDidUpdate(){
@@ -44,24 +45,6 @@ class Register extends Component{
         this.props.clearErrors();
     };
 
-    renderAlert(){
-        const {message} =this.props;
-        if( this.props.error.msg.error){
-            return(
-                <div class="alert alert-success">
-                    <p>{this.props.error.msg.error}</p>
-                </div>
-            );
-        }
-        if( message){
-            return(
-                <div class="alert alert-success">
-                    <p>{message}</p>
-                </div>
-            );
-        }
-    }
-
     render(){
         return(
 
@@ -71,15 +54,17 @@ class Register extends Component{
                         <img src={logo} id="icon" alt="User Icon" />
                     </div>
                     <form className="form-horizontal" method="post" onSubmit={this.onSubmitRegister}>
-                        <input type="text" id="login" className="fadeIn second" name="name" placeholder="Enter your Name" onChange={this.handleChange} />
-                        <input type="text" id="login" className="fadeIn second" name="email" placeholder="Enter your Email" onChange={this.handleChange}/>
-                        <input type="text" id="login" className="fadeIn second" name="password" placeholder="password"onChange={this.handleChange} />
-                        <input type="text" id="login" className="fadeIn second" name="confirmPassword" placeholder="Confirm your Password"onChange={this.handleChange} />
+                        <input type="text" className="fadeIn second" name="name" placeholder="Enter your Name" onChange={this.handleChange} required/>
+                        <input type="text" className="fadeIn second" name="email" placeholder="Enter your Email" onChange={this.handleChange} required/>
+                        <input type="datetime-local" className="birthday" name="birthday" onChange={this.handleChange} required/>
+                        <select onChange={this.handleChange} name="gender" className="gender" >
+                            <option  value="Nam">Nam</option>
+                            <option selected value="Nữ">Nữ</option>
+                        </select>
+                        <input type="password" className="fadeIn second" name="password" placeholder="password"onChange={this.handleChange} required/>
+                        <input type="password" className="fadeIn second" name="confirmPassword" placeholder="Confirm your Password" onChange={this.handleChange} required/>
                         <input type="submit" className="fadeIn fourth" value="Register"/>
                     </form>
-                    {   
-                        this.renderAlert()
-                    }
                 </div>
             </div>);
     }

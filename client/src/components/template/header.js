@@ -6,42 +6,44 @@ import {logout} from '../../action/authAction'
 
 class HeaderTemplate extends Component {
   renderLinkGuest(){
-    return [
-      // Unauthenticated navigation
-      <li style={{marginRight:"10px"}}  key={1}>
-        <Link to="/">Home</Link>
-      </li>,
+    // Unauthenticated navigation
+    return (
+      <ul className="navbar-nav">
 
-      <li style={{marginRight:"10px"}}  key={2}>
-        <Link to="Login">Login</Link>
-      </li>,
+        <li style={{marginRight:"10px"}}  key={1}>
+          <Link to="/">Home</Link>
+        </li>
 
-      <li style={{marginRight:"10px"}}  key={3}>
-          <Link to="Register">Register</Link>
-      </li>,
-      <li  key={3}>
-        <Link to="NewPost">post</Link>
-      </li>
+        <li style={{marginRight:"10px"}}  key={2}>
+          <Link to="Login">Login</Link>
+        </li>
 
+        <li style={{marginRight:"10px"}}  key={3}>
+            <Link to="Register">Register</Link>
+        </li>
+        <li  key={4}>
+          <Link to="NewPost">post</Link>
+        </li>
+      </ul>
 
-    ];
+    );
   }
   renderLinkUser(){
-    return [
-      <li style={{marginRight:"10px"}}  key={1}>
-        <Link to="/">Home</Link>
-      </li>,
-      <li style={{marginRight:"10px"}}  key={1}>
-        <Link to="Profile">My profile</Link>
-      </li>,
-      <li style={{marginRight:"10px"}}  key={1}>       
-        <Link onClick={this.props.logout}>Logout</Link>
-      </li>,
-      <li  key={3}>
-        <Link to="NewPost">post</Link>
-      </li>
-
-    ];
+    return (
+      <ul className="navbar-nav">
+        <li  style={{marginRight:"10px"}}  key={1}>
+          <Link to="/">Home</Link>
+        </li>
+        <li style={{marginRight:"10px"}}  key={2}>
+          <Link to="Profile">My profile</Link>
+        </li>
+        <li style={{marginRight:"10px"}}  key={3}>       
+          <Link to="/" onClick={this.props.logout}>Logout</Link>
+        </li>
+        <li  key={4}>
+          <Link to="NewPost">post</Link>
+        </li>
+      </ul>);
   }
   render() {
     return (
@@ -58,40 +60,12 @@ class HeaderTemplate extends Component {
           <div className="collapse navbar-collapse" id="navbarNav">
             {
               !this.props.auth.isAuthenticated && (
-                <ul className="navbar-nav">
-                  <li style={{marginRight:"10px"}}  key={1}>
-                  <Link to="/">Home</Link>
-                  </li>
-            
-                  <li style={{marginRight:"10px"}}  key={2}>
-                    <Link to="Login">Login</Link>
-                  </li>
-            
-                  <li style={{marginRight:"10px"}}  key={3}>
-                      <Link to="Register">Register</Link>
-                  </li>
-                  <li  key={3}>
-                    <Link to="NewPost">post</Link>
-                  </li>
-                </ul>
+                this.renderLinkGuest()
               )
             }
             {
               this.props.auth.isAuthenticated && (
-                <ul className="navbar-nav">
-                  <li style={{marginRight:"10px"}}  key={1}>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li style={{marginRight:"10px"}}  key={1}>
-                    <Link to="Profile">My profile</Link>
-                  </li>
-                  <li style={{marginRight:"10px"}}  key={1}>       
-                    <Link onClick={this.props.logout}>Logout</Link>
-                  </li>
-                  <li  key={3}>
-                    <Link to="NewPost">post</Link>
-                  </li>
-                </ul>
+                this.renderLinkUser()
               )
             }
           </div>

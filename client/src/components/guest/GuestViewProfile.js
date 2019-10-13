@@ -48,18 +48,18 @@ class profile extends Component{
             }
 
         return(
-            <body>
+            <div>
                 <div className="container main-secction">
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12 image-section">
-                            <img src="https://png.pngtree.com/thumb_back/fw800/back_pic/00/08/57/41562ad4a92b16a.jpg"/>
+                            <img src="https://png.pngtree.com/thumb_back/fw800/back_pic/00/08/57/41562ad4a92b16a.jpg"  aria-hidden alt="Picture of me taking a photo of an image"/>
                         </div>
                         <div className="row user-left-part">
 
                             <div className="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
                                 <div className="row ">
                                     <div className="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
-                                        <img src={'localhost:4000/users/photo/'} className="rounded-circle"/>
+                                        <img src={logo}  aria-hidden alt="Picture of me taking a photo of an image" className="rounded-circle"/>
                                     </div>
                                     <Follow followID={this.state.userID}/>
                                 </div>
@@ -97,7 +97,7 @@ class profile extends Component{
                                                     </div>
                                                     
                                                     <div className="col-md-12 image-right">
-                                                        <img src={logo}/>
+                                                        <img src={logo}  aria-hidden alt="Picture of me taking a photo of an image"/>
                                                     </div>
                                                     
                                                     <div className="col-md-12 image-right-detail-section2">
@@ -111,7 +111,7 @@ class profile extends Component{
                         </div>
                     </div>
                 </div>
-        </body>
+        </div>
         );
     }
 }

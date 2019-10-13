@@ -44,9 +44,9 @@ class Comment extends Component{
             return(
                 <div>
                     <h4>Leave a comment</h4>
-                    <form onSubmit={this.onSubmitComment} role="form">
+                    <form onSubmit={this.onSubmitComment}>
                         <div className="col-md-12 form-group">
-                            <label for="email">Comment</label>
+                            <label htmlFor="email">Comment</label>
                             <textarea className="form-control" id="comment" placeholder="Comment" onChange={this.handleChange('content')}></textarea>
                         </div>
                         <div className="col-md-12 form-group text-right">
@@ -65,7 +65,8 @@ class Comment extends Component{
             <div>
                 {this.renderCreateComment()}
 
-                { this.state.comments.map((item, i) => {
+                {
+                    this.state.comments.length>0? this.state.comments.map((item, i) => {
                     return(
                     
                     <ul id="comments" >
@@ -79,7 +80,7 @@ class Comment extends Component{
                             </p>
                         </li>
                     </ul>);
-                    })
+                    }): <p>Không có comment nào cả</p>
                 }
 
                

@@ -47,27 +47,27 @@ class EditProfile extends Component{
     render() {
         return(
             <div >
-                <div class="row">
-                    <div class="col-md-5">
+                <div className="row">
+                    <div className="col-md-5">
                         <label>Họ tên</label>
                     </div>
-                    <div class="col-md-8">
+                    <div className="col-md-8">
                         <input className='testEdit' name="name" value={this.state.name} onChange={this.onTodoChange}/>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
+                <div className="row">
+                    <div className="col-md-3">
                         <label>Email</label>
                     </div>
-                    <div class="col-md-12">
+                    <div className="col-md-12">
                         <input className='testEdit' name="email" value={this.state.email} onChange={this.onTodoChange}/>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-5">
+                <div className="row">
+                    <div className="col-md-5">
                         <label>Giới tính</label>
                     </div>
-                    <div class="col-md-8">
+                    <div className="col-md-8">
                         <input className='testEdit' name="gender" value={this.state.gender} onChange={this.onTodoChange}/>
                     </div>
                 </div>

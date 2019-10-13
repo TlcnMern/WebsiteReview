@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {CLIENT_ROOT_URL,API_URL,auth} from './helper';
+import {API_URL,auth} from './helper';
 import { returnErrors } from './errorActions';
 
 import {
@@ -41,6 +41,5 @@ export const logout=() =>dispatch=>{
   dispatch({
     type: CLEAR_ERRORS
   });
-  window.location.href = `${CLIENT_ROOT_URL}`;
-
+  // window.location.href = `${CLIENT_ROOT_URL}`;
 };

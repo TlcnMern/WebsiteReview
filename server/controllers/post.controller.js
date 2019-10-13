@@ -25,12 +25,13 @@ const create = (req, res, next) => {
         })
       }
       res.json(result);
+
     })
   })
 }
 
 const getNewFeeds=(req,res,next)=>{
-    Post.find({})
+    Post.find({},{title:1,theme:1,content:1,contentSummary:1,productReview:1,link:1,created:1})
     .populate('postedBy', '_id name')
     .populate('comments.postedBy', '_id name')
     .sort('-created')
@@ -78,10 +79,48 @@ const addComment=(req,res,next)=>{
   })
 }
 
+
+//update rating in the post
+const addRating=(req,res,next)=>{
+  let rating ={};
+  rating.point = req.body.point;
+  rating.postedBy = req.body.userId;
+  Post.findByIdAndUpdate(req.body.postId, {$push: {ratings: rating}}, {new: true})
+  .populate('ratings.postedBy', '_id name')
+  .populate('postedBy', '_id name')
+  .exec((err, result) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(result);
+  })
+}
+//check user used to evaluation for post ? show rating : set rating 0
+
+const checkRatingAndShow=(req,res)=>{
+  const userId = req.body.userId;
+  const postId = req.body.postId;
+  Post.find({_id:postId },
+    {ratings: { $elemMatch: { postedBy:userId } }}
+  )
+  .populate('ratings.postedBy', '_id point')
+  .exec((err, result) => {
+    if (err || !result)
+      return res.status('400').json({
+        error: "Post not found"
+      })
+    res.json(result[0].ratings);
+  })
+}
+
 module.exports={
     create:create,
     getNewFeeds:getNewFeeds,
     photo:photo,
     postByID:postByID,
-    addComment:addComment
+    addComment:addComment,
+    addRating:addRating,
+    checkRatingAndShow:checkRatingAndShow
 }

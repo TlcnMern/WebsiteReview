@@ -1,30 +1,64 @@
 import React, {Component} from 'react';
 import {getPhoto} from '../../action/postAction';
-import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import Comment from './Comment';
+import Rating from './Rating';
+import {auth} from '../../action/helper';
+import {checkRatingAndShow} from '../../action/postAction';
+import {connect} from 'react-redux';
 
 class DetailPost extends Component{
 
     state={
-        img:''
+        img:'',
+        pointRating:null
     }
-
 
     arrayBufferToBase64(buffer) {
         var binary = '';
-        var bytes = [].slice.call(new Uint8Array(buffer.data.data));
+        var bytes = [].slice.call(new Uint8Array(buffer));
         bytes.forEach((b) => binary += String.fromCharCode(b));
         return window.btoa(binary);
     };
 
+    componentWillMount(){
+
+        if(this.props.isAuthenticated){
+            const { post } = this.props.location.state
+            this.checkRating(post._id);
+        }
+    }
+    checkRating=(postId)=>{
+        const jwt=auth.isAuthenticated();
+        const userID=jwt.user._id;
+        
+        checkRatingAndShow(userID,{
+            t:jwt.token
+        },postId).then((data)=>{
+            if(data.error){
+                console.log(data);
+                return;
+            }
+            else{
+                if(data.length===0){//nếu chưa đánh giá
+                    return;
+                }
+                this.setState({pointRating:data[0].point});
+                return data[0].point;
+            }
+        })
+    }
+
     componentDidMount(){
+
         const { post } = this.props.location.state
-        this.props.getPhoto(post._id);
-        var base64Flag = 'data:image/jpeg;base64,';
-        var imageStr =
-            this.arrayBufferToBase64(post.photo);
-        this.setState({
-            img: base64Flag + imageStr
+        getPhoto(post._id).then(data=>{
+            var base64Flag = 'data:image/jpeg;base64,';
+            var imageStr =
+                this.arrayBufferToBase64(data.data.data);
+            this.setState({
+                img: base64Flag + imageStr
+            })
         })
     }
 
@@ -34,41 +68,64 @@ class DetailPost extends Component{
              post  = this.props.location.state.post;
         }
         return(
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
+           
+        <div className="container">
+            <div className="row">
+                <div className="col-md-8">
                     <article>
-                        <h4><a href="singlepost.html">{post.title}</a></h4>
+                        <h4><span>{post.title}</span></h4>
 
-                        <div class="row">
-                            <div class="col-sm-6 col-md-6">
-                                <span class="glyphicon glyphicon-folder-open"></span> &nbsp;<a href="#">Người đăng: {post.postedBy.name}		 </a>
-                                &nbsp;&nbsp;<span class="glyphicon glyphicon-bookmark"></span> <a href="#">Chủ đề</a>: <a href="#">Fire</a>, <a href="#">Mars</a>
+                        <div className="row">
+                            <div className="col-sm-6 col-md-6">
+                            Người đăng: 
+                                <Link to={
+                                    {pathname: '/GuestViewProfile',
+                                    state: { userID: post.postedBy._id  }}
+                                    }>
+                                    
+                                    {post.postedBy.name}
+                                </Link>
+                                <br/> <span>Sản phẩm review: {post.productReview}</span>
+                                <br/> <span>Chủ đề: {post.theme}</span>
+
                             </div>
-                            <div class="col-sm-6 col-md-6">
-                                <span class="glyphicon glyphicon-pencil"></span> <a href="singlepost.html#comments">20 Comments</a>			          		
-                                &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> {post.created}		          		
+                            <div className="col-sm-6 col-md-6">
+                                <span className="glyphicon glyphicon-pencil"></span> <a href="singlepost.html#comments">20 Comments</a>			          		
+                                &nbsp;&nbsp;<span className="glyphicon glyphicon-time"></span> {post.created}		          		
                             </div>
                         </div>
 
                         <hr/>
-                        <div class="row">
-                            <div class="col-sm-6 col-md-6">
-                                <img  src={this.state.img} style={{width:'700px',height:'300px'}} class="img-responsive"/>
+                        <div className="row">
+                            <div className="col-sm-6 col-md-6">
+                                <img src={this.state.img} style={{width:'700px',height:'300px'}} aria-hidden alt="Picture of me taking a photo of an image" className="img-responsive"/>
                             </div>
                         </div>
 
                         <br />
 
-                        <p class="lead">{post.content}</p>
+                        <p className="lead">{post.content}</p><br/>
+                        <a href={post.link}>{post.link}</a>
 
                         <hr/>
                     </article>
                     <Comment post={post}/>  
                 </div>
-                <div class="col-md-4">
+                <div className="col-md-4">
+                <p>Điểm đánh giá bài viết</p>
+                    <Rating rating={3} disabled={true} />
+                {this.props.isAuthenticated &&
+                    (
+                        <div>
+                            <p>Bạn đánh giá bài viết như thế nào ?</p>
+                            <Rating rating={this.state.pointRating}  idPost={post._id}/>
+                        </div>
+                    )
+                }
+                    
 
                 </div>
+
             </div>
         </div>
 
@@ -77,10 +134,11 @@ class DetailPost extends Component{
         );
     }
 }
-function mapToStateProps(state){
+function mapToStateToProps(state){
     return{
-        photo:state.post.photo
+        isAuthenticated:state.auth.isAuthenticated
     }
 }
 
-export default connect(mapToStateProps,{getPhoto}) (DetailPost);
+
+export default connect(mapToStateToProps)(DetailPost) ;

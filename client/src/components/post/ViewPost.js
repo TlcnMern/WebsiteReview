@@ -13,19 +13,21 @@ class ViewPost extends Component{
 
     arrayBufferToBase64(buffer) {
         var binary = '';
-        var bytes = [].slice.call(new Uint8Array(buffer.data.data));
+        var bytes = [].slice.call(new Uint8Array(buffer));
         bytes.forEach((b) => binary += String.fromCharCode(b));
         return window.btoa(binary);
     };
 
     componentDidMount(){
-        // this.props.getPhoto(this.props.post._id);
-        var base64Flag = 'data:image/jpeg;base64,';
-        var imageStr =
-            this.arrayBufferToBase64(this.props.post.photo);
-        this.setState({
-            img: base64Flag + imageStr
+        getPhoto(this.props.post._id).then(data=>{
+            var base64Flag = 'data:image/jpeg;base64,';
+            var imageStr =
+                this.arrayBufferToBase64(data.data.data);
+            this.setState({
+                img: base64Flag + imageStr
+            })
         })
+        
     }
 
     render(){
@@ -40,36 +42,36 @@ class ViewPost extends Component{
                     </Link>
                 </h4>
 
-                <div class="row">
-                    <div class="col-sm-6 col-md-6">
-                        <span class="glyphicon glyphicon-folder-open"></span> &nbsp;
+                <div className="row">
+                    <div className="col-sm-6 col-md-6">
+                        Người đăng: 
                         <Link to={
                             {pathname: '/GuestViewProfile',
                             state: { userID: this.props.post.postedBy._id  }}
                             }>
-                            Người đăng:
+                            
                             {this.props.post.postedBy.name}
                         </Link>
-                        &nbsp;&nbsp;<span class="glyphicon glyphicon-bookmark"></span> <a href="#">Chủ đề</a>: <a href="#">Fire</a>, <a href="#">Mars</a>
+                        
                     </div>
-                    <div class="col-sm-6 col-md-6">
-                        <span class="glyphicon glyphicon-pencil"></span> <a href="singlepost.html#comments">20 Comments</a>			          		
-                        &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> {this.props.post.created}		          		
+                    <div className="col-sm-6 col-md-6">
+                        <span className="glyphicon glyphicon-pencil"></span> <a href="singlepost.html#comments">20 Comments</a>			          		
+                        &nbsp;&nbsp;<span className="glyphicon glyphicon-time"></span> {this.props.post.created}		          		
                     </div>
                 </div>
 
                 <hr/>
-                <div class="row">
-                    <div class="col-sm-6 col-md-6">
-                        <img  src={this.state.img} style={{width:'700px',height:'300px'}} class="img-responsive"/>
+                <div className="row">
+                    <div className="col-sm-6 col-md-6">
+                        <img  src={this.state.img} aria-hidden alt="Picture of me taking a photo of an image" style={{width:'700px',height:'300px'}} className="img-responsive"/>
                     </div>
                 </div>
 
                 <br />
 
-                <p class="lead">{this.props.post.contentSummary}</p>
+                <p className="lead">{this.props.post.contentSummary}</p>
 
-                <p class="text-right">
+                <p className="text-right">
                     <a href="singlepost.html">
                         continue reading...
                     </a>

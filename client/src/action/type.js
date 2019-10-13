@@ -11,9 +11,7 @@ export const CLEAR_ERRORS='CLEAR_ERROR';
 export const FETCH_USER='FETCH_USER';
 export const ERROR_RESPONSE='ERROR_RESPONSE';
 
-export const GET_POSTLIST='GET_POSTLIST';
 export const GET_PHOTO='GET_PHOTO';
-export const COMMENT_SUCCESS='COMMENT_SUCCESS';
 
 export const FOLLOW='FOLLOW';
 export const FOLLOWED='FOLLOWED';

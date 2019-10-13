@@ -10,6 +10,8 @@ router.route('/NewFeeds').get(controllerPost.getNewFeeds);
 router.route('/photo/:postID').get(controllerPost.photo);
 
 router.route('/addComment').put(controllerAuth.requireSignin,controllerPost.addComment);
+router.route('/addRating').put(controllerAuth.requireSignin,controllerPost.addRating);
+router.route('/checkRatingAndShow').post(controllerAuth.requireSignin,controllerPost.checkRatingAndShow);
 
 
 router.param('userID', controllerUser.UserById);

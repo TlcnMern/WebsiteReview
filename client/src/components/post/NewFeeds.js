@@ -18,15 +18,14 @@ class NewFeeds extends Component{
     }
 
     render(){
-        console.log(this.state.postList)
         return(
         <div className="container">
             <div className="row">
                 <div className="col-md-8">
                     <PostList posts={this.state.postList}/>
                     <ul>
-                        <li><a href="#">&larr; Previous</a></li>
-                        <li><a href="#">Next &rarr;</a></li>
+                        <li>Previous</li>
+                        <li>Next</li>
                     </ul>
                 </div>
                 <div className="col-md-4">

@@ -12,9 +12,9 @@ const UserSchema = new mongoose.Schema({
     required:'Email is required',
     unique:true
   },
-  created: {
+  birthday: {
     type: Date,
-    default: Date.now
+    required:'birthday is required',
   },
   gender: {
     type: String,
@@ -28,6 +28,10 @@ const UserSchema = new mongoose.Schema({
   photo: {
     data: Buffer,
     contentType: String
+  },
+  created: {
+    type: Date,
+    default: Date.now
   },
   following: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
   followers: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
