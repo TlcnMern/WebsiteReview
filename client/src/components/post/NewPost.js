@@ -37,15 +37,17 @@ class NewPost extends Component{
         e.preventDefault();
         const jwt=auth.isAuthenticated();
         const userID=jwt.user._id;
-        var flag=false;
-        flag= newPost(userID,{
-            t:jwt.token
-        },this.postData);
-        if(flag){
-            this.setState({renderAlert:true});
-        }
-        else
-            this.setState({renderAlert:false});
+        newPost(userID,{t:jwt.token},this.postData)
+        .then((data)=>{
+            if(data.error){
+                console.log(data);
+                this.setState({renderAlert:false});
+                return;
+            }
+            else{
+                this.setState({renderAlert:true});
+            }
+        });
     }
     render(){
         return(
@@ -69,11 +71,11 @@ class NewPost extends Component{
                     <form onSubmit={this.onSubmitPost}>
                         <div className="form-group">
                             <label htmlFor="title">Tiêu đề</label>
-                            <input rows="5" className="form-control" name="title" onChange={this.handleChange('title')} required/>
+                            <input rows="5" className="form-control" name="title" onChange={this.handleChange('title')}  required/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="theme">Chuyên đề</label> <br></br>
-                            <select onChange={this.handleChange('theme')} className="theme"  required>
+                            <select onChange={this.handleChange('theme')} className="theme" required >
                                 <option selected value="movie">Phim</option>
                                 <option value="trip">Du lịch</option>
                                 <option value="food">Ẩm thực</option>
@@ -90,14 +92,14 @@ class NewPost extends Component{
                         </div>
                         <div className="form-group">
                             <label htmlFor="contentSummary">Nội dung tóm tắt</label>
-                            <textarea rows="5" className="form-control" name="contentSummary" onChange={this.handleChange('contentSummary')} required></textarea>
+                            <textarea rows="5" className="form-control" name="contentSummary" onChange={this.handleChange('contentSummary')}required ></textarea>
                         </div>
                         <div className="form-group">
                             <label htmlFor="content">Nội dung </label>
                             <textarea rows="5" className="form-control" name="content" onChange={this.handleChange('content')} required></textarea>
                         </div>
                         <div className="form-group">
-                            <input accept="image/*" name="photo" onChange={this.handleChange('photo')} id="icon-button-file" type="file"  required/>
+                            <input accept="image/*" multiple  name="photo" onChange={this.handleChange('photo')} id="icon-button-file" type="file" required />
                         </div>
             
                         <div className="form-group">

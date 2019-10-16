@@ -10,9 +10,11 @@ router.route('/NewFeeds').get(controllerPost.getNewFeeds);
 router.route('/photo/:postID').get(controllerPost.photo);
 
 router.route('/addComment').put(controllerAuth.requireSignin,controllerPost.addComment);
+router.route('/addSubComment').put(controllerAuth.requireSignin,controllerPost.addSubComment);
+
 router.route('/addRating').put(controllerAuth.requireSignin,controllerPost.addRating);
 router.route('/checkRatingAndShow').post(controllerAuth.requireSignin,controllerPost.checkRatingAndShow);
-
+router.route('/updateRatingOfUser').put(controllerAuth.requireSignin, controllerPost.updateRatingOfUser);
 
 router.param('userID', controllerUser.UserById);
 router.param('postID', controllerPost.postByID);

@@ -31,18 +31,18 @@ const create = (req, res, next) => {
 }
 
 const getNewFeeds=(req,res,next)=>{
-    Post.find({},{title:1,theme:1,content:1,contentSummary:1,productReview:1,link:1,created:1})
-    .populate('postedBy', '_id name')
-    .populate('comments.postedBy', '_id name')
-    .sort('-created')
-    .exec((err, posts) => {
-      if (err) {
-        return res.status(400).json({
-          error: errorHandler.getErrorMessage(err)
-        })
-      }
-      res.json(posts);
-    })
+  Post.find({},{title:1,theme:1,content:1,contentSummary:1,productReview:1,link:1,created:1,comments:1})
+  .populate('postedBy', '_id name')
+  .populate('comments.postedBy', '_id name')
+  .sort('-created')
+  .exec((err, posts) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(posts);
+  })
 }
 
 const photo = (req, res, next) => {
@@ -80,7 +80,57 @@ const addComment=(req,res,next)=>{
 }
 
 
-//update rating in the post
+// //version2
+// const addComment=(req,res,next)=>{
+//   let comment=new Comment(req.body);
+//   comment.save((err, result) => {
+//     if (err) {
+//       console.log(err);
+//       return res.status(400).json({
+//         error: errorHandler.getErrorMessage(err)
+//       })
+//     }
+//     Post.findByIdAndUpdate(req.body.postId, {$push: {comments: result._id}}, {new: true})
+//     .populate('comments.postedBy', '_id name')
+//     .populate('postedBy', '_id name')
+//     .exec((err, result2) => {
+//       if (err) {
+//         return res.status(400).json({
+//           error: errorHandler.getErrorMessage(err)
+//         })
+//       }
+//           console.log(result2);
+//       // res.json(result);
+//     })
+
+
+//     res.json(result);
+
+//   })
+
+ 
+// }
+
+const addSubComment=(req,res,next)=>{
+  console.log(req.body);
+  var subComment={};
+  subComment.content=req.body.content;
+  subComment.commentBy=req.body.userId;
+  Post.updateOne({'_id':req.body.postId,'comments._id':req.body.commentId}, {$push: {'comments.$.subComment': subComment}})
+  .populate('comments.postedBy', '_id name')
+  .exec((err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    console.log(result);
+    res.json(result);
+  })
+}
+
+//add rating of user
 const addRating=(req,res,next)=>{
   let rating ={};
   rating.point = req.body.point;
@@ -97,8 +147,8 @@ const addRating=(req,res,next)=>{
     res.json(result);
   })
 }
-//check user used to evaluation for post ? show rating : set rating 0
 
+//check user used to evaluation for post ? show rating : set rating 0
 const checkRatingAndShow=(req,res)=>{
   const userId = req.body.userId;
   const postId = req.body.postId;
@@ -111,7 +161,26 @@ const checkRatingAndShow=(req,res)=>{
       return res.status('400').json({
         error: "Post not found"
       })
+    // console.log(result[0].ratings)
     res.json(result[0].ratings);
+  })
+}
+
+//update Rating When user used to evaluation
+const updateRatingOfUser=(req,res)=>{
+  const userId=req.body.userId;
+  const postId=req.body.postId;
+  const point =req.body.point;
+  Post.update({_id:postId,'ratings.postedBy':userId}, {$set: {'ratings.$.point': point}} )
+  .exec((err,result)=>{
+    if(err || !result){
+      console.log(err);
+      return res.status('400').json({
+        error:"Post not found"
+      })
+    }
+    console.log(result);
+    res.json(result);
   })
 }
 
@@ -122,5 +191,7 @@ module.exports={
     postByID:postByID,
     addComment:addComment,
     addRating:addRating,
-    checkRatingAndShow:checkRatingAndShow
+    checkRatingAndShow:checkRatingAndShow,
+    updateRatingOfUser:updateRatingOfUser,
+    addSubComment:addSubComment
 }

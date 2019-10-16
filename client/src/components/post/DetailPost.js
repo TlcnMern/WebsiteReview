@@ -13,6 +13,10 @@ class DetailPost extends Component{
         img:'',
         pointRating:null
     }
+    constructor(){
+        super();
+        this.changeCheckRating=this.changeCheckRating.bind(this);
+    }
 
     arrayBufferToBase64(buffer) {
         var binary = '';
@@ -60,6 +64,11 @@ class DetailPost extends Component{
                 img: base64Flag + imageStr
             })
         })
+    };
+
+    changeCheckRating(rating){
+        console.log(rating);
+        this.setState({pointRating:rating});
     }
 
     render(){
@@ -118,7 +127,7 @@ class DetailPost extends Component{
                     (
                         <div>
                             <p>Bạn đánh giá bài viết như thế nào ?</p>
-                            <Rating rating={this.state.pointRating}  idPost={post._id}/>
+                            <Rating changeCheckRating={this.changeCheckRating} check={this.state.pointRating} rating={this.state.pointRating}  idPost={post._id}/>
                         </div>
                     )
                 }

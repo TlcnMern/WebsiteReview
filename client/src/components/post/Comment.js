@@ -3,8 +3,11 @@ import React, {Component} from 'react';
 import {auth} from '../../action/helper';
 import {addComment} from '../../action/postAction';
 import {connect} from 'react-redux';
+import SubComment from './SubComment';
 
 class Comment extends Component{
+
+
     state = {
         content: '',
         comments:[]
@@ -57,6 +60,28 @@ class Comment extends Component{
                 </div>
                     
             );
+    };
+
+    onClickReply(){
+        this.setState({reply:!this.state.reply});
+    }
+    
+    renderCreateSubComment(){
+        if(this.props.isAuthenticated)
+            return(
+                <div>
+                    <form onSubmit={this.onSubmitComment}>
+                        <div className="col-md-12 form-group">
+                            <textarea className="form-control" id="comment" placeholder="Comment" onChange={this.handleChange('content')}></textarea>
+                        </div>
+                        <div className="col-md-12 form-group text-right">
+                            <button type="submit" className="btn btn-primary" >Send</button>
+                        </div>
+                    </form>		
+                    <hr />			
+                </div>
+                    
+            );
     }
 
 
@@ -67,19 +92,7 @@ class Comment extends Component{
 
                 {
                     this.state.comments.length>0? this.state.comments.map((item, i) => {
-                    return(
-                    
-                    <ul id="comments" >
-                        <li>
-                            <div>
-                                <h6>{item.postedBy.name}</h6>
-                                <p>{item.created}</p>
-                            </div>
-                            <p>
-                                <em>{item.content}</em>
-                            </p>
-                        </li>
-                    </ul>);
+                        return(<SubComment postId={this.props.post._id} comment={item} key={i}/>);
                     }): <p>Không có comment nào cả</p>
                 }
 

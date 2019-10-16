@@ -30,6 +30,11 @@ const PostSchema = new mongoose.Schema({
   },
   comments: [{
     content: String,
+    subComment:[{
+      content: String,
+      created:{ type: Date, default: Date.now},
+      commentBy: { type: mongoose.Schema.ObjectId, ref: 'User'}
+    }],
     created: { type: Date, default: Date.now },
     postedBy: { type: mongoose.Schema.ObjectId, ref: 'User'}
   }],

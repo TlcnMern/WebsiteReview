@@ -4,6 +4,7 @@ var expressJwt = require('express-jwt');
 const config =require('../config/config');
 
 const signin = (req, res) => {
+  console.log(req.body);
   User.findOne({
     "email": req.body.email
   }, (err, user) => {
@@ -37,6 +38,7 @@ const requireSignin = expressJwt({
 
 
 const hasAuthorization = (req, res, next) => {
+  console.log(req.auth);
   const authorized = req.profile && req.auth && req.profile._id == req.auth._id
   console.log('authorized '+ authorized);
   if (!(authorized)) {
