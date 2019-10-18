@@ -1,4 +1,5 @@
 const Post=require('../models/post.model');
+const Comment=require('../models/comment.model');
 const errorHandler =require('../helpers/dbErrorHandler');
 const formidable=require('formidable');
 const fs=require('fs');
@@ -13,7 +14,7 @@ const create = (req, res, next) => {
       })
     }
     let post = new Post(fields);
-    post.postedBy= req.profile;
+    post.postedBy= req.profile._id;
     if(files.photo){
       post.photo.data = fs.readFileSync(files.photo.path);//Buffer(fs.readFileSync(req.file.path), 'base64');
       post.photo.contentType = files.photo.type;//lấy định dạng ảnh
@@ -30,10 +31,19 @@ const create = (req, res, next) => {
   })
 }
 
+
+//version2
 const getNewFeeds=(req,res,next)=>{
-  Post.find({},{title:1,theme:1,content:1,contentSummary:1,productReview:1,link:1,created:1,comments:1})
+  Post.find({})
   .populate('postedBy', '_id name')
-  .populate('comments.postedBy', '_id name')
+  .populate({
+    path:'comments',
+    populate: { path: 'commentBy',select:'_id name' }
+  })
+  .populate({
+    path:'comments',
+    populate: { path: 'subComment.commentBy',select:'_id name'}
+  })
   .sort('-created')
   .exec((err, posts) => {
     if (err) {
@@ -41,6 +51,7 @@ const getNewFeeds=(req,res,next)=>{
         error: errorHandler.getErrorMessage(err)
       })
     }
+    // console.log(posts[0].comments[2]);
     res.json(posts);
   })
 }
@@ -62,62 +73,42 @@ const postByID = (req, res, next, id) => {
   })
 }
 
+
+//version 2
 const addComment=(req,res,next)=>{
-  let commentD ={};
-  commentD.content = req.body.comment;
-  commentD.postedBy = req.body.userId;
-  Post.findByIdAndUpdate(req.body.postId, {$push: {comments: commentD}}, {new: true})
-  .populate('comments.postedBy', '_id name')
-  .populate('postedBy', '_id name')
-  .exec((err, result) => {
+  let comment=new Comment(req.body);
+  comment.save((err, result) => {
     if (err) {
+      console.log(err);
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
       })
     }
-    res.json(result);
+    Post.findByIdAndUpdate(req.body.postId, {$push: {comments: result._id}}, {new: true})
+    .populate('postedBy', '_id name')
+    .populate({
+      path:'comments',
+      populate: { path: 'commentBy',select:'_id name' }
+    })
+    .exec((err, result2) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(result2.comments);
+    })
   })
 }
 
 
-// //version2
-// const addComment=(req,res,next)=>{
-//   let comment=new Comment(req.body);
-//   comment.save((err, result) => {
-//     if (err) {
-//       console.log(err);
-//       return res.status(400).json({
-//         error: errorHandler.getErrorMessage(err)
-//       })
-//     }
-//     Post.findByIdAndUpdate(req.body.postId, {$push: {comments: result._id}}, {new: true})
-//     .populate('comments.postedBy', '_id name')
-//     .populate('postedBy', '_id name')
-//     .exec((err, result2) => {
-//       if (err) {
-//         return res.status(400).json({
-//           error: errorHandler.getErrorMessage(err)
-//         })
-//       }
-//           console.log(result2);
-//       // res.json(result);
-//     })
-
-
-//     res.json(result);
-
-//   })
-
- 
-// }
-
+//version 2
 const addSubComment=(req,res,next)=>{
-  console.log(req.body);
   var subComment={};
   subComment.content=req.body.content;
   subComment.commentBy=req.body.userId;
-  Post.updateOne({'_id':req.body.postId,'comments._id':req.body.commentId}, {$push: {'comments.$.subComment': subComment}})
-  .populate('comments.postedBy', '_id name')
+  Comment.findByIdAndUpdate({'_id':req.body.commentId}, {$push: {'subComment': subComment}},{new: true})
+  .populate('subComment.commentBy')
   .exec((err, result) => {
     if (err) {
       console.log(err);
@@ -126,7 +117,7 @@ const addSubComment=(req,res,next)=>{
       })
     }
     console.log(result);
-    res.json(result);
+    res.json(result.subComment);
   })
 }
 

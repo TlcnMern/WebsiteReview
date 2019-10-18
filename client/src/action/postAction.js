@@ -29,6 +29,7 @@ export const GetNewFeeds=()=>{
     }
     return axios.get(`${API_URL}/post/NewFeeds`,config)
         .then(res=>{
+            console.log(res.data)
             return res.data;
         })
         .catch(err=>{
@@ -55,10 +56,11 @@ export const addComment = (userId, credentials, postId, comment) =>{
             'Authorization': 'Bearer ' + credentials.t
           }
     }
-    const  body= JSON.stringify({userId:userId, postId: postId, comment: comment});
+    const  body= JSON.stringify({commentBy:userId, postId: postId, content: comment});
 
     return axios.put(`${API_URL}/post/addComment`,body,config)
         .then(res=>{
+            console.log(res.data)
             return res.data;
         })
         .catch(err=>{
@@ -75,8 +77,6 @@ export const addSubComment = (userId, credentials, commentId,postId, content) =>
           }
     }
     const  body= JSON.stringify({userId:userId, commentId: commentId,postId:postId, content:content});
-
-    console.log(body);
     return axios.put(`${API_URL}/post/addSubComment`,body,config)
         .then(res=>{
             return res.data;

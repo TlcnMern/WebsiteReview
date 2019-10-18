@@ -10,8 +10,8 @@ class NewFeeds extends Component{
     }
     componentDidMount(){
         GetNewFeeds().then((data)=>{
-            if(data.err)
-                console.log(data.err);
+            if(data.error)
+                console.log(data.error);
             else
                 this.setState({postList:data})
         });

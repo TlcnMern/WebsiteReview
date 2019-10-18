@@ -31,12 +31,13 @@ class ViewPost extends Component{
     }
 
     render(){
+        console.log('render viewpost');
         return(
             <article>
                 <h4>
                     <Link to={
                         {pathname: '/DetailPost',
-                        state: { post: this.props.post  }}
+                        state: { post: this.props.post, img:this.state.img  }}
                         }>
                         {this.props.post.title}
                     </Link>
@@ -55,8 +56,13 @@ class ViewPost extends Component{
                         
                     </div>
                     <div className="col-sm-6 col-md-6">
-                        <span className="glyphicon glyphicon-pencil"></span> <a href="singlepost.html#comments">20 Comments</a>			          		
-                        &nbsp;&nbsp;<span className="glyphicon glyphicon-time"></span> {this.props.post.created}		          		
+                        <span className="glyphicon glyphicon-pencil"></span> 
+                        {/* <a href="singlepost.html#comments">20 Comments</a>			          		 */}
+                        &nbsp;&nbsp;<span className="glyphicon glyphicon-time"></span>
+                        {
+                            new Date(this.props.post.created).toString()
+                        }    		
+                        
                     </div>
                 </div>
 
@@ -72,9 +78,12 @@ class ViewPost extends Component{
                 <p className="lead">{this.props.post.contentSummary}</p>
 
                 <p className="text-right">
-                    <a href="singlepost.html">
+                    <Link to={
+                        {pathname: '/DetailPost',
+                        state: { post: this.props.post  }}
+                        }>
                         continue reading...
-                    </a>
+                    </Link>
                 </p>
 
                 <hr/>

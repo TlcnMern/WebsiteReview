@@ -28,16 +28,17 @@ const PostSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String
   },
-  comments: [{
-    content: String,
-    subComment:[{
-      content: String,
-      created:{ type: Date, default: Date.now},
-      commentBy: { type: mongoose.Schema.ObjectId, ref: 'User'}
-    }],
-    created: { type: Date, default: Date.now },
-    postedBy: { type: mongoose.Schema.ObjectId, ref: 'User'}
-  }],
+  // comments: [{
+  //   content: String,
+  //   subComment:[{
+  //     content: String,
+  //     created:{ type: Date, default: Date.now},
+  //     commentBy: { type: mongoose.Schema.ObjectId, ref: 'User'}
+  //   }],
+  //   created: { type: Date, default: Date.now },
+  //   postedBy: { type: mongoose.Schema.ObjectId, ref: 'User'}
+  // }],
+  comments:[{type:mongoose.Schema.ObjectId, ref: 'Comment'}],
   ratings:[{
     point:Number,
     created:{type:Date,default:Date.now},

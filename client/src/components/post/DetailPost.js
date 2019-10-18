@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {getPhoto} from '../../action/postAction';
 import {Link} from 'react-router-dom';
 import Comment from './Comment';
 import Rating from './Rating';
@@ -17,14 +16,6 @@ class DetailPost extends Component{
         super();
         this.changeCheckRating=this.changeCheckRating.bind(this);
     }
-
-    arrayBufferToBase64(buffer) {
-        var binary = '';
-        var bytes = [].slice.call(new Uint8Array(buffer));
-        bytes.forEach((b) => binary += String.fromCharCode(b));
-        return window.btoa(binary);
-    };
-
     componentWillMount(){
 
         if(this.props.isAuthenticated){
@@ -52,19 +43,6 @@ class DetailPost extends Component{
             }
         })
     }
-
-    componentDidMount(){
-
-        const { post } = this.props.location.state
-        getPhoto(post._id).then(data=>{
-            var base64Flag = 'data:image/jpeg;base64,';
-            var imageStr =
-                this.arrayBufferToBase64(data.data.data);
-            this.setState({
-                img: base64Flag + imageStr
-            })
-        })
-    };
 
     changeCheckRating(rating){
         console.log(rating);
@@ -107,7 +85,7 @@ class DetailPost extends Component{
                         <hr/>
                         <div className="row">
                             <div className="col-sm-6 col-md-6">
-                                <img src={this.state.img} style={{width:'700px',height:'300px'}} aria-hidden alt="Picture of me taking a photo of an image" className="img-responsive"/>
+                                <img src={this.props.location.state.img} style={{width:'700px',height:'300px'}} aria-hidden alt="Picture of me taking a photo of an image" className="img-responsive"/>
                             </div>
                         </div>
 

@@ -35,7 +35,7 @@ class Comment extends Component{
             if(data.err)
                 console.log(data.err)
             else{
-                var listComment =this.sortComment(data.comments);
+                var listComment =this.sortComment(data);
                 this.setState({comments:listComment});
             }
         })
@@ -46,7 +46,7 @@ class Comment extends Component{
         if(this.props.isAuthenticated)
             return(
                 <div>
-                    <h4>Leave a comment</h4>
+                    {/* <h4>Leave a comment</h4> */}
                     <form onSubmit={this.onSubmitComment}>
                         <div className="col-md-12 form-group">
                             <label htmlFor="email">Comment</label>

@@ -6,7 +6,7 @@ class PostList extends Component{
         return(
             <div>
                 <h3>NEW FEEDS</h3>
-                {this.props.posts? this.props.posts.map((item, i) => {
+                {this.props.posts.length>0? this.props.posts.map((item, i) => {
                     return <ViewPost post={item} key={i}/>
                 }): <div></div>
                 }

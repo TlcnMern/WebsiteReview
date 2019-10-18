@@ -55,12 +55,14 @@ class Rating extends Component{
     };
 
     componentWillReceiveProps(){
+      console.log('alo');
       this.setState({rating:this.props.rating})
     };
 
     rate(rating) {
       const jwt=auth.isAuthenticated();
       const userID=jwt.user._id;
+      console.log(this.state.checkRating);
       if(this.state.checkRating!==null){
         console.log('đã')
         updateRating(userID,{t:jwt.token},this.props.idPost,rating)
