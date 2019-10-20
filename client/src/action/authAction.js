@@ -9,8 +9,6 @@ import {
   
 
 export function login({ email, password }) {
-
-  
   return function (dispatch) {
     axios.post(`${API_URL}/auth/signin`, { email, password })
     .then((response) => {
@@ -32,6 +30,36 @@ export function login({ email, password }) {
       });
     });
   };
+}
+
+export const loginSocial=(accessToken) =>dispatch=>{
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  const body={
+    access_token:accessToken
+  }
+  console.log(body);
+  axios.post(`${API_URL}/auth/oauth/google`,body,config)
+  .then((response)=>{
+    console.log('ngon'+response);
+    auth.authenticate(response.data);   
+    dispatch({
+      type:LOGIN_SUCCESS,
+      payload:response.data
+    });
+  })
+  .catch(err=>{
+    console.log(err);
+    dispatch(
+      returnErrors(err.response.data, err.response.status, 'GET_ERRORS')
+    );
+    dispatch({
+      type: LOGIN_FAIL
+    });
+  });
 }
 
 export const logout=() =>dispatch=>{

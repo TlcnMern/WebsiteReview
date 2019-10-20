@@ -1,4 +1,4 @@
-const User=require('../models/user.model');
+const User=require('../models/usertest');
 const errorHandler=require('../helpers/dbErrorHandler');
 const formidable=require('formidable');
 const fs=require('fs');
@@ -6,8 +6,14 @@ var _ = require('lodash');
 
 
 const register = (req, res) => {
-  const user = new User(req.body)
   console.log(req.body);
+  const user = new User();
+  user.method='local';
+  user.name=req.body.name;
+  user.local.email=req.body.email;
+  user.password=req.body.password;
+  user.gender=req.body.gender;
+  console.log(user);
   user.save((err, result) => {
     if (err) {
       console.log(err);
@@ -25,11 +31,12 @@ const getInfoUser=(req, res)=>{
   const userID = req.params.userID;
   User.findById(userID, (err, user) => {
     if (err) {
+      console.log(err);
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)//No user could be found for this ID
       })
     }
-    const userInfo={_id: user._id, name: user.name, email: user.email,gender:user.gender,created:user.created};
+    const userInfo={_id: user._id, name: user.name, email: user.local.email || user.google.email,gender:user.gender,created:user.created};
     return res.status(200).json({userInfo});
   });
 }
@@ -40,6 +47,7 @@ const UserById=(req,res,next,userID)=>{
       .populate('follower','_id name')
       .exec((err,user)=>{
         if(err || !user){
+          console.log(err);
           return res.status('200').json({
             err:'User not found'
           });

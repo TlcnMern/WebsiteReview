@@ -12,8 +12,10 @@ class NewFeeds extends Component{
         GetNewFeeds().then((data)=>{
             if(data.error)
                 console.log(data.error);
-            else
-                this.setState({postList:data})
+            else{
+                if(data.length>0)
+                    this.setState({postList:data})
+            }
         });
     }
 

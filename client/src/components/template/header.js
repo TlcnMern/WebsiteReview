@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {logout} from '../../action/authAction'
 
+
 class HeaderTemplate extends Component {
   renderLinkGuest(){
     // Unauthenticated navigation
@@ -25,7 +26,6 @@ class HeaderTemplate extends Component {
           <Link to="NewPost">post</Link>
         </li>
       </ul>
-
     );
   }
   renderLinkUser(){

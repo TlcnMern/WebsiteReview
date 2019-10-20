@@ -1,8 +1,14 @@
 const express=require('express');
-const authCtrl=require('../controllers/auth.controller');
-
+const controllerAuth=require('../controllers/auth.controller');
 const router = express.Router()
 
-router.route('/signin').post(authCtrl.signin)
+const passport = require('passport');
+const passportConf = require('../passport');
+router.route('/signin').post(controllerAuth.signin)
+
+
+//signin gg
+router.route('/oauth/google')
+  .post(passport.authenticate('googleToken', { session: false }), controllerAuth.googleOAuth);
 
 module.exports=router;

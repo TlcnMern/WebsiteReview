@@ -48,6 +48,7 @@ export const fetch=(uid)=>{
       });
     })
     .catch(err => {
+      console.log(err);
       dispatch({
         type: ERROR_RESPONSE
       });

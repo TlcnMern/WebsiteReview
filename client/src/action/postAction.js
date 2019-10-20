@@ -29,7 +29,6 @@ export const GetNewFeeds=()=>{
     }
     return axios.get(`${API_URL}/post/NewFeeds`,config)
         .then(res=>{
-            console.log(res.data)
             return res.data;
         })
         .catch(err=>{

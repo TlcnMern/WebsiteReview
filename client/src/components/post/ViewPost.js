@@ -31,7 +31,6 @@ class ViewPost extends Component{
     }
 
     render(){
-        console.log('render viewpost');
         return(
             <article>
                 <h4>

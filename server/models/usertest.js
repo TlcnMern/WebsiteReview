@@ -1,30 +1,62 @@
 const mongoose = require('mongoose');
 var crypto = require('crypto');
-const UserSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+// Create a schema
+const userSchema = new Schema({
+  method: {
+    type: String,
+    enum: ['local', 'google', 'facebook'],
+    required: true
+  },
+  local: {
+    email: {
+      type: String,
+      trim: true,
+      unique:true,
+      lowercase: true
+    },
+    hashed_password:{
+      type:String
+    },
+  },
+  google: {
+    id: {
+      type: String
+    },
+    email: {
+      type: String,
+      trim: true,
+      unique:true,
+      lowercase: true
+    }
+  },
+  facebook: {
+    id: {
+      type: String
+    },
+    email: {
+      type: String,
+      trim: true,
+      unique:true,
+      lowercase: true
+    }
+  },
+
   name: {
     type: String,
-    trim: true,
-    required:'Name is required'
-  },
-  email: {
-    type: String,
-    trim: true,
-    required:'Email is required',
-    unique:true
+    trim: true
   },
   birthday: {
-    type: Date,
-    required:'birthday is required',
+    type: Date
   },
+
   gender: {
-    type: String,
-    default: 'nam'
+    type: String
   },
+
   salt: String,
-  hashed_password:{
-    type:String,
-    required:'password is required'
-  },
+
   photo: {
     data: Buffer,
     contentType: String
@@ -37,19 +69,19 @@ const UserSchema = new mongoose.Schema({
   followers: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
 });
 
-
-UserSchema
+userSchema
   .virtual('password')
   .set(function(password) {
     this._password = password
     this.salt = this.makeSalt()
-    this.hashed_password = this.encryptPassword(password)
+    this.local.hashed_password = this.encryptPassword(password)
   })
   .get(function() {
     return this._password
 });
 
-UserSchema.path('hashed_password').validate(function(v) {
+
+userSchema.path('local.hashed_password').validate(function(v) {
   if (this._password && this._password.length < 6) {
     this.invalidate('password', 'Password must be at least 6 characters.')
   }
@@ -58,9 +90,9 @@ UserSchema.path('hashed_password').validate(function(v) {
   }
 }, null);
 
-UserSchema.methods = {
+userSchema.methods = {
   authenticate: function(plainText) {
-    return this.encryptPassword(plainText) === this.hashed_password;
+    return this.encryptPassword(plainText) === this.local.hashed_password;
   },
   encryptPassword: function(password) {
     if (!password) return ''
@@ -78,4 +110,4 @@ UserSchema.methods = {
   }
 };
 
-module.exports= mongoose.model('User', UserSchema);
+module.exports= mongoose.model('User', userSchema);

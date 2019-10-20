@@ -18,7 +18,7 @@ app.use('/', userRoutes);
 app.use('/auth',authRouters);
 app.use('/post',postRouters);
 const db=config.mongoUri;
-mongoose.connect(db, { useNewUrlParser: true });
+mongoose.connect(db, { useUnifiedTopology: true});
 const connection = mongoose.connection;
 
 connection.once('open', function() {

@@ -8,6 +8,7 @@ import "../../public/stylesheets/partials/login.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../../public/images/logo192.png";
 import {Redirect} from 'react-router-dom';
+import LoginSocial from '../template/LoginSocial';
 
 
 class Login extends Component {
@@ -75,7 +76,8 @@ class Login extends Component {
             <input type="submit" className="fadeIn fourth" value="Log In"/>
           </form>
           {this.renderAlert()}
-          <div id="formFooter">
+          <LoginSocial/>
+          <div style={{marginTop:"10px"}} id="formFooter">
             <span className="underlineHover">Forgot Password?</span>
           </div>
 

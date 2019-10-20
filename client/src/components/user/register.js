@@ -13,7 +13,7 @@ class Register extends Component{
         password:'',
         confirmPassword:'',
         gender:'',
-        birthday:Date,
+        // birthday:Date,
         flag:false
     }
 
@@ -56,7 +56,7 @@ class Register extends Component{
                     <form className="form-horizontal" method="post" onSubmit={this.onSubmitRegister}>
                         <input type="text" className="fadeIn second" name="name" placeholder="Enter your Name" onChange={this.handleChange} required/>
                         <input type="text" className="fadeIn second" name="email" placeholder="Enter your Email" onChange={this.handleChange} required/>
-                        <input type="datetime-local" className="birthday" name="birthday" onChange={this.handleChange} required/>
+                        {/* <input type="datetime-local" className="birthday" name="birthday" onChange={this.handleChange} required/> */}
                         <select onChange={this.handleChange} name="gender" className="gender" >
                             <option  value="Nam">Nam</option>
                             <option selected value="Nữ">Nữ</option>
