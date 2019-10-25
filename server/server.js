@@ -17,6 +17,8 @@ app.use(bodyParser.json());
 app.use('/', userRoutes);
 app.use('/auth',authRouters);
 app.use('/post',postRouters);
+
+
 const db=config.mongoUri;
 mongoose.connect(db, { useUnifiedTopology: true});
 const connection = mongoose.connection;

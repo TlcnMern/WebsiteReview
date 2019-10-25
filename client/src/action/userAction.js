@@ -18,12 +18,15 @@ export const RegisterAction =(user)=>dispatch=>{
   const body=JSON.stringify(user);
   axios 
     .post(`${API_URL}/users`,body,config)
-    .then(res=>
+    .then(res=>{
+      console.log(res);
       dispatch({
         type:REGISTER_SUCCESS,
         payload:res.data
-      }))
+      });
+    })
     .catch(err=>{
+      console.log(err)
       dispatch(
         returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
       );

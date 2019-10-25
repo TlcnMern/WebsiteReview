@@ -7,24 +7,40 @@ var _ = require('lodash');
 
 const register = (req, res) => {
   console.log(req.body);
-  const user = new User();
-  user.method='local';
-  user.name=req.body.name;
-  user.local.email=req.body.email;
-  user.password=req.body.password;
-  user.gender=req.body.gender;
-  console.log(user);
-  user.save((err, result) => {
+  User.findOne({ "local.email": req.body.email}, (err, result)=>{
     if (err) {
-      console.log(err);
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
+      });
+    }
+    if(result){
+      res.status(403).json({
+        message: "User existed!"
       })
     }
-    res.status(200).json({
-      message: "Successfully signed up!"
-    })
-  })
+    else{
+      const user = new User();
+      user.method='local';
+      user.name=req.body.name;
+      user.local.email=req.body.email;
+      user.password=req.body.password;
+      user.gender=req.body.gender;
+      user.save((err, result) => {
+        if (err) {
+          console.log(err);
+          return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+          })
+        }
+        res.status(200).json({
+          message: "Successfully signed up!"
+        })
+      })
+    }
+   
+  });
+  
+
 };
 
 const getInfoUser=(req, res)=>{

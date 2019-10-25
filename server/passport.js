@@ -9,10 +9,10 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
   clientSecret: config.oauth.google.clientSecret
 }, async (accessToken, refreshToken, profile, done) => {
   try {
-    // // Should have full user profile over here
-    // console.log('profile', profile);
-    // console.log('accessToken', accessToken);
-    // console.log('refreshToken', refreshToken);
+    // Should have full user profile over here
+    console.log('profile', profile);
+    console.log('accessToken', accessToken);
+    console.log('refreshToken', refreshToken);
 
     const existingUser = await User.findOne({ "google.id": profile.id });
     if (existingUser) {
