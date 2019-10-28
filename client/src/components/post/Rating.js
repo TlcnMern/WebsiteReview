@@ -55,7 +55,6 @@ class Rating extends Component{
     };
 
     componentWillReceiveProps(){
-      console.log('alo');
       this.setState({rating:this.props.rating})
     };
 

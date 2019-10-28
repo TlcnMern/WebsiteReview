@@ -1,13 +1,10 @@
-import { GET_PHOTO}  from '../action/type';
+import { GET_PHOTO, GET_COMMENT}  from '../action/type';
 
 
 const INITIAL_STATE={
-    infoPost:{},
     message:'',
-    isComment:false,
     err:'',
-    listPost:[],
-    photoData:{}
+    listComment:[]
 };
 
 export default function(state=INITIAL_STATE,action){
@@ -17,6 +14,11 @@ export default function(state=INITIAL_STATE,action){
                     ...state,
                     photoData:action.payload
                 }
+        case GET_COMMENT:
+            return{
+                ...state,
+                listComment:action.payload
+            }
         default: return state;
     }
 }

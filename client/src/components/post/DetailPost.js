@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import Comment from './Comment';
+import Comment from '../comment/Comment';
 import Rating from './Rating';
 import {auth} from '../../action/helper';
 import {checkRatingAndShow} from '../../action/postAction';
 import {connect} from 'react-redux';
+import {getComment} from '../../action/postAction';
 
 class DetailPost extends Component{
 
@@ -17,9 +18,9 @@ class DetailPost extends Component{
         this.changeCheckRating=this.changeCheckRating.bind(this);
     }
     componentWillMount(){
-
+        const { post } = this.props.location.state;
+        this.props.getComment(post._id)
         if(this.props.isAuthenticated){
-            const { post } = this.props.location.state
             this.checkRating(post._id);
         }
     }
@@ -96,7 +97,7 @@ class DetailPost extends Component{
 
                         <hr/>
                     </article>
-                    <Comment post={post}/>  
+                    <Comment postId={post._id}/>  
                 </div>
                 <div className="col-md-4">
                 <p>Điểm đánh giá bài viết</p>
@@ -128,4 +129,4 @@ function mapToStateToProps(state){
 }
 
 
-export default connect(mapToStateToProps)(DetailPost) ;
+export default connect(mapToStateToProps,{getComment})(DetailPost) ;

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {API_URL} from '../action/helper';
+import { GET_COMMENT } from './type';
 
 export const newPost=(userID,credentials,post)=>{
     const config={
@@ -47,7 +48,8 @@ export const getPhoto=(idpost)=>{
     })
 }
 
-export const addComment = (userId, credentials, postId, comment) =>{
+//comment
+export const addComment = (userId, credentials, postId, comment)=>dispatch=>{
     const config={
         headers: {
             'Accept': 'application/json',
@@ -60,14 +62,17 @@ export const addComment = (userId, credentials, postId, comment) =>{
     return axios.put(`${API_URL}/post/addComment`,body,config)
         .then(res=>{
             console.log(res.data)
-            return res.data;
+            dispatch({
+                type:GET_COMMENT,
+                payload:res.data
+            });
         })
         .catch(err=>{
             return err;
         });
 }
 
-export const addSubComment = (userId, credentials, commentId,postId, content) =>{
+export const deleteComment = (postId,userId, credentials, commentId)=>dispatch=>{
     const config={
         headers: {
             'Accept': 'application/json',
@@ -75,7 +80,48 @@ export const addSubComment = (userId, credentials, commentId,postId, content) =>
             'Authorization': 'Bearer ' + credentials.t
           }
     }
-    const  body= JSON.stringify({userId:userId, commentId: commentId,postId:postId, content:content});
+    const  body= JSON.stringify({ postId: postId, commentId: commentId});
+    return axios.put(`${API_URL}/post/deleteComment/`+userId,body,config)
+        .then(res=>{
+            console.log(res.data)
+            dispatch({
+                type:GET_COMMENT,
+                payload:res.data
+            });
+        })
+        .catch(err=>{
+            return err;
+        });
+}
+
+export const getComment = (postId)=>dispatch=>{
+    const config={
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type':'application/json'
+        }
+    }
+    return axios.get(`${API_URL}/post/getComment/`+postId,config)
+        .then(res=>{
+            dispatch({
+                type:GET_COMMENT,
+                payload:res.data
+            });
+        })
+        .catch(err=>{
+            return err;
+        });
+}
+
+export const addSubComment = (userId, credentials, commentId, content) =>{
+    const config={
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + credentials.t
+          }
+    }
+    const  body= JSON.stringify({userId:userId, commentId: commentId, content:content});
     return axios.put(`${API_URL}/post/addSubComment`,body,config)
         .then(res=>{
             return res.data;
@@ -83,8 +129,27 @@ export const addSubComment = (userId, credentials, commentId,postId, content) =>
         .catch(err=>{
             return err;
         });
-  }
+}
 
+export const updateComment = (commentId,userId, credentials, content)=>{
+    const config={
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + credentials.t
+          }
+    }
+    const  body= JSON.stringify({ content: content, commentId: commentId});
+    return axios.put(`${API_URL}/post/updateComment/`+userId,body,config)
+        .then(res=>{
+            console.log(res.data)
+        })
+        .catch(err=>{
+            return err;
+        });
+}
+
+//Rating
 export const addRating = (userId, credentials, postId, point) =>{
     const config={
         headers: {

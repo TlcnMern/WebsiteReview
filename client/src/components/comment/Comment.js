@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {auth} from '../../action/helper';
 import {addComment} from '../../action/postAction';
 import {connect} from 'react-redux';
-import SubComment from './SubComment';
+import ViewComment from './ViewComment';
 
 class Comment extends Component{
 
@@ -12,10 +12,6 @@ class Comment extends Component{
         content: '',
         comments:[]
     };
-    componentWillMount(){
-        var listComment =this.sortComment(this.props.post.comments);
-        this.setState({comments:listComment})
-    }
     handleChange= name => event => {
         this.setState({[name]: event.target.value});
     }
@@ -28,17 +24,8 @@ class Comment extends Component{
         e.preventDefault();
         const jwt=auth.isAuthenticated();
         const userID=jwt.user._id;
-        
-        addComment(userID,{
-            t:jwt.token
-        },this.props.post._id,this.state.content).then((data)=>{
-            if(data.err)
-                console.log(data.err)
-            else{
-                var listComment =this.sortComment(data);
-                this.setState({comments:listComment});
-            }
-        })
+        console.log(this.props.postId);
+        this.props.addComment(userID,{t:jwt.token},this.props.postId,this.state.content)
     }
 
 
@@ -61,10 +48,6 @@ class Comment extends Component{
                     
             );
     };
-
-    onClickReply(){
-        this.setState({reply:!this.state.reply});
-    }
     
     renderCreateSubComment(){
         if(this.props.isAuthenticated)
@@ -91,8 +74,8 @@ class Comment extends Component{
                 {this.renderCreateComment()}
 
                 {
-                    this.state.comments.length>0? this.state.comments.map((item, i) => {
-                        return(<SubComment postId={this.props.post._id} comment={item} key={i}/>);
+                    this.props.listComment.length>0? this.props.listComment.map((item, i) => {
+                        return(<ViewComment postId={this.props.postId} key={i} comment={item}/>);
                     }): <p>Không có comment nào cả</p>
                 }
 
@@ -104,8 +87,9 @@ class Comment extends Component{
 
 function mapToStateProps(state){
     return{
-        isAuthenticated: state.auth.isAuthenticated
-    }
+        isAuthenticated: state.auth.isAuthenticated,
+        listComment:state.post.listComment
+    };
 }
 
-export default connect(mapToStateProps) (Comment);
+export default connect(mapToStateProps,{addComment}) (Comment);

@@ -3,10 +3,10 @@ const errorHandler=require('../helpers/dbErrorHandler');
 const formidable=require('formidable');
 const fs=require('fs');
 var _ = require('lodash');
+const aclStore=require('../helpers/acl-store');
 
 
 const register = (req, res) => {
-  console.log(req.body);
   User.findOne({ "local.email": req.body.email}, (err, result)=>{
     if (err) {
       return res.status(400).json({
@@ -21,10 +21,12 @@ const register = (req, res) => {
     else{
       const user = new User();
       user.method='local';
+      user.role='user';
       user.name=req.body.name;
       user.local.email=req.body.email;
       user.password=req.body.password;
       user.gender=req.body.gender;
+      
       user.save((err, result) => {
         if (err) {
           console.log(err);
@@ -32,12 +34,15 @@ const register = (req, res) => {
             error: errorHandler.getErrorMessage(err)
           })
         }
-        res.status(200).json({
-          message: "Successfully signed up!"
-        })
+        aclStore.aclStore.acl.addUserRoles(result._id.toString(), result.role, err => {
+          if (!err) {
+            res.status(200).json({
+              message: "Successfully signed up!"
+            })
+          }
+        });
       })
     }
-   
   });
   
 
@@ -68,12 +73,13 @@ const UserById=(req,res,next,userID)=>{
             err:'User not found'
           });
         }
+        req.session={
+          userId:user._id.toString()
+        };
         req.profile=user;
         next();
       })
 }
-
-
 
 const photo = (req, res, next) => {
   if(req.profile.photo.data){
@@ -86,7 +92,7 @@ const photo = (req, res, next) => {
 const defaultPhoto = (req, res) => {
   return res.sendFile(process.cwd()+profileImage);
 }
-
+//update info user
 const update = (req, res, next) => {
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
@@ -125,7 +131,6 @@ const checkFollow= (req, res) => {
   res.json(match);
 }
 
-
 //người mình theo dõi
 const addFollowing = (req, res, next) => {
   User.findByIdAndUpdate(req.body.userId, {$push: {following: req.body.followId}}, (err, result) => {
@@ -137,7 +142,6 @@ const addFollowing = (req, res, next) => {
     next();
   })
 }
-
 
 //người theo dõi mình
 const addFollower = (req, res) => {
@@ -156,7 +160,6 @@ const addFollower = (req, res) => {
   })
 }
 
-
 const removeFollowing = (req, res, next) => {
   User.findByIdAndUpdate(req.body.userID, {$pull: {following: req.body.unFollowId}}, (err, result) => {
     if (err) {
@@ -167,6 +170,7 @@ const removeFollowing = (req, res, next) => {
     next();
   })
 }
+
 const removeFollower = (req, res) => {
   User.findByIdAndUpdate(req.body.unFollowId, {$pull: {followers: req.body.userID}}, {new: true})
   .populate('following', '_id name')

@@ -31,21 +31,12 @@ const userSchema = new Schema({
       lowercase: true
     }
   },
-  facebook: {
-    id: {
-      type: String
-    },
-    email: {
-      type: String,
-      trim: true,
-      unique:true,
-      lowercase: true
-    }
-  },
-
   name: {
     type: String,
     trim: true
+  },
+  role: {
+    type: String
   },
   birthday: {
     type: Date

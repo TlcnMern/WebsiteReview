@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-
 import { auth } from '../../action/helper';
-import { addSubComment } from '../../action/postAction';
+import { addSubComment} from '../../action/postAction';
 import { connect } from 'react-redux';
 
 class SubComment extends Component {
@@ -9,7 +8,7 @@ class SubComment extends Component {
 
     state = {
         content: '',
-        listSubComment: this.props.comment.subComment || [],
+        listSubComment: this.props.listSubComment || [],
         reply: false
     };
 
@@ -25,7 +24,7 @@ class SubComment extends Component {
         e.preventDefault();
         const jwt = auth.isAuthenticated();
         const userID = jwt.user._id;
-        addSubComment(userID, { t: jwt.token }, this.props.comment._id, this.props.postId, this.state.content)
+        addSubComment(userID, { t: jwt.token }, this.props.commentId, this.state.content)
             .then((data) => {
                 if (data.err)
                     console.log(data.err)
@@ -72,35 +71,17 @@ class SubComment extends Component {
             );
     }
 
-
     render() {
         return (
-            <ul id="comments" >
-                <li>
-
-                    <div>
-                        <h6>{this.props.comment.commentBy.name}</h6>
-                        <p>
-                            <em>{this.props.comment.content}</em>
-                        </p>
-
-                        <p>
-                            {this.props.comment.created}
-                            {
-                                this.props.isAuthenticated &&
-                                <button onClick={this.onClickReply.bind(this)} className="btn btn-link" style={{ marginLeft: '10px' }}>Reply</button>
-                            }
-                        </p>
-                    </div>
-
-
-                </li>
-
+            <div>
+                {this.props.isAuthenticated &&
+                 <button onClick={this.onClickReply.bind(this)} className="btn btn-link" style={{ marginLeft: '10px' }}>Reply</button>
+                }
                 {
                     this.state.reply && this.renderCreateSubComment()
                 }
                 <div style={{ marginLeft: '40px' }} >{this.renderViewSubComment()}</div>
-            </ul>
+            </div>
         );
     }
 }

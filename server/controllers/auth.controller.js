@@ -1,4 +1,5 @@
 const User =require('../models/usertest');
+const Comment=require('../models/comment.model');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 const config =require('../config/config');
@@ -36,7 +37,6 @@ const requireSignin = expressJwt({
   userProperty: 'auth'
 })
 
-
 const hasAuthorization = (req, res, next) => {
   console.log(req.auth);
   const authorized = req.profile && req.auth && req.profile._id == req.auth._id
@@ -62,10 +62,24 @@ const  googleOAuth= async (req, res, next) => {
   // res.status(200).json({ token });
 }
 
+const checkAuthorizedComment = (req, res, next) => {
+  const commentID=req.body.commentID;
+  const userID=req.session.userId;
+  Comment.findOne({_id:commentID,commentBy:userID}, (err, comment) => {
+    if (err || !comment){
+      console.log(err);
+      return res.status('401').json({
+        error: "User not authorized"
+      });
+    }
+    return res.json(true);
+  })
+}
 
 module.exports={
     signin:signin,
     requireSignin:requireSignin,
     hasAuthorization:hasAuthorization,
-    googleOAuth:googleOAuth
+    googleOAuth:googleOAuth,
+    checkAuthorizedComment:checkAuthorizedComment
 }

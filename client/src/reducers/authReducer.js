@@ -3,11 +3,13 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    AUTHORIZED
   } from '../action/type';
 
   const initialState = {
     isAuthenticated: false,
+    isAuthorized:false
   };
   
   export default function(state = initialState, action) {
@@ -31,6 +33,12 @@ import {
           ...state,
           token: null,
           isAuthenticated: false,
+          isAuthorized:false
+        };
+      case AUTHORIZED:
+        return {
+          ...state,
+          isAuthorized: true,
         };
       default:
         return state;

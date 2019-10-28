@@ -31,8 +31,6 @@ const create = (req, res, next) => {
   })
 }
 
-
-//version2
 const getNewFeeds=(req,res,next)=>{
   Post.find({})
   .populate('postedBy', '_id name')
@@ -51,7 +49,6 @@ const getNewFeeds=(req,res,next)=>{
         error: errorHandler.getErrorMessage(err)
       })
     }
-    // console.log(posts[0].comments[2]);
     res.json(posts);
   })
 }
@@ -60,7 +57,6 @@ const photo = (req, res, next) => {
   res.set("Content-Type", req.post.photo.contentType);
   return res.json(req.post.photo);
 }
-
 
 const postByID = (req, res, next, id) => {
   Post.findById(id).populate('postedBy', '_id name').exec((err, post) => {
@@ -73,8 +69,29 @@ const postByID = (req, res, next, id) => {
   })
 }
 
-
-//version 2
+//commnet
+  //get comment and sub comment of 1 post
+const getComment=(req,res)=>{
+  Post.find({_id:req.post._id})
+  .populate({
+    path:'comments',
+    populate: { path: 'commentBy',select:'_id name' }
+  })
+  .populate({
+    path:'comments',
+    populate: { path: 'subComment.commentBy',select:'_id name'}
+  })
+  .exec((err, posts) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(posts[0].comments);
+  })
+}
+  //add comment
 const addComment=(req,res,next)=>{
   let comment=new Comment(req.body);
   comment.save((err, result) => {
@@ -101,8 +118,52 @@ const addComment=(req,res,next)=>{
   })
 }
 
+  //delete comment
+const deleteComment=(req,res)=>{
+  const commentId= req.body.commentId;
+  Comment.remove({_id:commentId},(err,result)=>{
+    if(err){
+      console.log(err);
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      });
+    }
+    Post.findByIdAndUpdate({_id:req.body.postId},{$pull:{comments:{$in: [commentId]}}}, {new: true})
+    .populate({
+      path:'comments',
+      populate: { path: 'commentBy',select:'_id name' }
+    })
+    .populate({
+      path:'comments',
+      populate: { path: 'subComment.commentBy',select:'_id name'}
+    })
+    .exec((err, result2) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(result2.comments)
+    })
+  });   
+}
+  //update comment
+const updateComment = (req, res) => {
+  const commentId=req.body.commentId;
+  const content =req.body.content;
+  Comment.updateOne({_id:commentId},{content:content},(err,result)=>{
+    if(err){
+      console.log(err);
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(result);
+  })
+}
 
-//version 2
+
+  //add subComment
 const addSubComment=(req,res,next)=>{
   var subComment={};
   subComment.content=req.body.content;
@@ -116,12 +177,12 @@ const addSubComment=(req,res,next)=>{
         error: errorHandler.getErrorMessage(err)
       })
     }
-    console.log(result);
     res.json(result.subComment);
   })
 }
 
-//add rating of user
+//rating
+  //add rating of user
 const addRating=(req,res,next)=>{
   let rating ={};
   rating.point = req.body.point;
@@ -139,7 +200,7 @@ const addRating=(req,res,next)=>{
   })
 }
 
-//check user used to evaluation for post ? show rating : set rating 0
+  //check user used to evaluation for post ? show rating : set rating 0
 const checkRatingAndShow=(req,res)=>{
   const userId = req.body.userId;
   const postId = req.body.postId;
@@ -157,7 +218,7 @@ const checkRatingAndShow=(req,res)=>{
   })
 }
 
-//update Rating When user used to evaluation
+  //update Rating When user used to evaluation
 const updateRatingOfUser=(req,res)=>{
   const userId=req.body.userId;
   const postId=req.body.postId;
@@ -175,6 +236,7 @@ const updateRatingOfUser=(req,res)=>{
   })
 }
 
+
 module.exports={
     create:create,
     getNewFeeds:getNewFeeds,
@@ -184,5 +246,8 @@ module.exports={
     addRating:addRating,
     checkRatingAndShow:checkRatingAndShow,
     updateRatingOfUser:updateRatingOfUser,
-    addSubComment:addSubComment
+    addSubComment:addSubComment,
+    deleteComment:deleteComment,
+    getComment:getComment,
+    updateComment:updateComment
 }
