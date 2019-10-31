@@ -11,45 +11,36 @@ class DetailPost extends Component{
 
     state={
         img:'',
-        pointRating:null
-    }
-    constructor(){
-        super();
-        this.changeCheckRating=this.changeCheckRating.bind(this);
+        isLoading:false,
+        point:null
     }
     componentWillMount(){
         const { post } = this.props.location.state;
-        this.props.getComment(post._id)
         if(this.props.isAuthenticated){
-            this.checkRating(post._id);
-        }
-    }
-    checkRating=(postId)=>{
-        const jwt=auth.isAuthenticated();
-        const userID=jwt.user._id;
-        
-        checkRatingAndShow(userID,{
-            t:jwt.token
-        },postId).then((data)=>{
-            if(data.error){
-                console.log(data);
-                return;
-            }
-            else{
-                if(data.length===0){//nếu chưa đánh giá
-                    return;
+            const jwt=auth.isAuthenticated();
+            const userID=jwt.user._id;
+            checkRatingAndShow(userID,{t:jwt.token},post._id).then((data)=>{
+                if(data===null){
+                    this.setState({
+                        isLoading:true,
+                        point:null
+                    });
                 }
-                this.setState({pointRating:data[0].point});
-                return data[0].point;
-            }
-        })
+                else{
+                    if(data.error){
+                        console.log(data.error);
+                    }
+                    else{
+                        this.setState({
+                            isLoading:true,
+                            point:data
+                        })
+                    }
+                }
+            });
+        }
+        this.props.getComment(post._id)
     }
-
-    changeCheckRating(rating){
-        console.log(rating);
-        this.setState({pointRating:rating});
-    }
-
     render(){
         var  post ={};
         if(this.props.location.state.post){
@@ -78,15 +69,15 @@ class DetailPost extends Component{
 
                             </div>
                             <div className="col-sm-6 col-md-6">
-                                <span className="glyphicon glyphicon-pencil"></span> <a href="singlepost.html#comments">20 Comments</a>			          		
-                                &nbsp;&nbsp;<span className="glyphicon glyphicon-time"></span> {post.created}		          		
+                                <span className="glyphicon glyphicon-pencil"></span> 
+                                <p>Ngày đăng: {post.created}</p>           		
                             </div>
                         </div>
 
                         <hr/>
                         <div className="row">
                             <div className="col-sm-6 col-md-6">
-                                <img src={this.props.location.state.img} style={{width:'700px',height:'300px'}} aria-hidden alt="Picture of me taking a photo of an image" className="img-responsive"/>
+                                <img src={this.props.location.state.img} style={{maxWidth:'200%', height:'auto'}} aria-hidden alt="Picture of me taking a photo of an image" className="img-responsive"/>
                             </div>
                         </div>
 
@@ -99,6 +90,7 @@ class DetailPost extends Component{
                     </article>
                     <Comment postId={post._id}/>  
                 </div>
+       
                 <div className="col-md-4">
                 <p>Điểm đánh giá bài viết</p>
                     <Rating rating={3} disabled={true} />
@@ -106,25 +98,22 @@ class DetailPost extends Component{
                     (
                         <div>
                             <p>Bạn đánh giá bài viết như thế nào ?</p>
-                            <Rating changeCheckRating={this.changeCheckRating} check={this.state.pointRating} rating={this.state.pointRating}  idPost={post._id}/>
+                            {
+                                this.state.isLoading ? <Rating rating={this.state.point} idPost={post._id}/>:<p>dcm dang tai</p>
+                            }
                         </div>
                     )
                 }
-                    
-
                 </div>
-
             </div>
         </div>
-
-            
-
         );
     }
 }
 function mapToStateToProps(state){
     return{
-        isAuthenticated:state.auth.isAuthenticated
+        isAuthenticated:state.auth.isAuthenticated,
+        pointRateOfUser:state.post.pointRateOfUser
     }
 }
 

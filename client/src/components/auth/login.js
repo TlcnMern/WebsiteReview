@@ -37,6 +37,7 @@ class Login extends Component {
     this.props.login(user);
   };
 
+
   renderAlert() {
     if (this.props.error.msg.error) 
       return (
@@ -59,9 +60,6 @@ class Login extends Component {
     if (this.props.isAuthenticated) {
       return (<Redirect to={from}/>);
     }
-
-
-
     return (
 
       <div className="wrapper fadeInDown">

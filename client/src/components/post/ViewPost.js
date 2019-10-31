@@ -55,20 +55,17 @@ class ViewPost extends Component{
                         
                     </div>
                     <div className="col-sm-6 col-md-6">
-                        <span className="glyphicon glyphicon-pencil"></span> 
-                        {/* <a href="singlepost.html#comments">20 Comments</a>			          		 */}
-                        &nbsp;&nbsp;<span className="glyphicon glyphicon-time"></span>
-                        {
+                        <p> Ngày đăng: {
                             new Date(this.props.post.created).toString()
-                        }    		
-                        
+                            }   
+                        </p>   
                     </div>
                 </div>
 
                 <hr/>
                 <div className="row">
                     <div className="col-sm-6 col-md-6">
-                        <img  src={this.state.img} aria-hidden alt="Picture of me taking a photo of an image" style={{width:'700px',height:'300px'}} className="img-responsive"/>
+                        <img  src={this.state.img} aria-hidden alt="Picture of me taking a photo of an image" style={{maxWidth:'200%', height:'auto'}} className="img-responsive"/>
                     </div>
                 </div>
 

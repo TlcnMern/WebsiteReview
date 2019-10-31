@@ -11,8 +11,8 @@ export const CLEAR_ERRORS='CLEAR_ERROR';
 export const FETCH_USER='FETCH_USER';
 export const ERROR_RESPONSE='ERROR_RESPONSE';
 
-export const GET_PHOTO='GET_PHOTO';
 export const GET_COMMENT='GET_COMMENT';
+export const GET_RATING='GET_RATING';
 
 export const FOLLOW='FOLLOW';
 export const FOLLOWED='FOLLOWED';

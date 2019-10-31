@@ -15,11 +15,6 @@ class Comment extends Component{
     handleChange= name => event => {
         this.setState({[name]: event.target.value});
     }
-    sortComment(comments){
-        return comments.sort(function(a,b){
-            return new Date(b.created)-new Date(a.created);
-        });
-    }
     onSubmitComment= e => {
         e.preventDefault();
         const jwt=auth.isAuthenticated();

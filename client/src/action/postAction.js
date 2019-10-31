@@ -47,7 +47,6 @@ export const getPhoto=(idpost)=>{
         console.log(err);
     })
 }
-
 //comment
 export const addComment = (userId, credentials, postId, comment)=>dispatch=>{
     const config={
@@ -163,6 +162,7 @@ export const addRating = (userId, credentials, postId, point) =>{
     console.log(body);
     return axios.put(`${API_URL}/post/addRating`,body,config)
         .then(res=>{
+            console.log(res.data);
             return res.data;
         })
         .catch(error=>{
@@ -193,7 +193,7 @@ export const updateRating = (userId, credentials, postId, point) =>{
 }
   
 //check user used to evaluation post yes or no
-export const checkRatingAndShow = (userId, credentials, postId) =>{
+export const checkRatingAndShow = (userId, credentials, postId)=>{
     const config={
         headers: {
             'Accept': 'application/json',
@@ -205,10 +205,17 @@ export const checkRatingAndShow = (userId, credentials, postId) =>{
     const  body= JSON.stringify({userId:userId, postId: postId});
     return axios.post(`${API_URL}/post/checkRatingAndShow`,body,config)
         .then(res=>{
-            return res.data;
+            if(res.data.length>0){
+                return res.data[0].point;
+                // dispatch({
+                //     type:GET_RATING,
+                //     payload:res.data[0].point
+                // });
+            }
+            return null;
         })
         .catch(error=>{
-            console.log(error.response);
+            console.log(error);
             return error.response.data;
         });
 }

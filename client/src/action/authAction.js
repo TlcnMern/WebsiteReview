@@ -8,6 +8,7 @@ import {
 
   
 
+
 export function login({ email, password }) {
   return function (dispatch) {
     axios.post(`${API_URL}/auth/signin`, { email, password })
@@ -41,7 +42,6 @@ export const loginSocial=(accessToken) =>dispatch=>{
   const body={
     access_token:accessToken
   }
-  console.log(body);
   axios.post(`${API_URL}/auth/oauth/google`,body,config)
   .then((response)=>{
     auth.authenticate(response.data);   

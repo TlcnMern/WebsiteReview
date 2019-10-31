@@ -1,23 +1,24 @@
-import { GET_PHOTO, GET_COMMENT}  from '../action/type';
+import {GET_COMMENT, GET_RATING}  from '../action/type';
 
 
 const INITIAL_STATE={
     message:'',
     err:'',
-    listComment:[]
+    listComment:[],
+    pointRateOfUser:null
 };
 
 export default function(state=INITIAL_STATE,action){
     switch(action.type){
-        case GET_PHOTO:
-                return{
-                    ...state,
-                    photoData:action.payload
-                }
         case GET_COMMENT:
             return{
                 ...state,
                 listComment:action.payload
+            }
+        case GET_RATING:
+            return{
+                ...state,
+                pointRateOfUser:action.payload
             }
         default: return state;
     }

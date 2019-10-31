@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import EditComment from  './EditComment';
 import SubComment from  './SubComment';
 import {checkAuthorizedComment} from '../../action/authAction';
+import man from '../../public/images/man.png';
 
 class ViewComment extends Component {
 
@@ -15,6 +16,11 @@ class ViewComment extends Component {
         listSubComment: this.props.comment.subComment || [],
         edit:false
     };
+    // sortComment(comments){
+    //     return comments.sort(function(a,b){
+    //         return new Date(b.created)-new Date(a.created);
+    //     });
+    // }
     componentWillMount(){
         if(this.props.isAuthenticated){
             const jwt=auth.isAuthenticated();
@@ -43,32 +49,30 @@ class ViewComment extends Component {
 
     render() {
         return (
-            <ul id="comments" >
-                <li>
-                    <div>
-                        <h6>{this.state.comment.commentBy.name}</h6>
-                        <p>
-                            {
-                                this.state.edit? <EditComment callBack={this.onCallBack.bind(this)} content={this.state.comment.content} commentId={this.state.comment._id}/>:
-                                 <em>{this.state.comment.content}</em>
-                            }
-                        </p>
-                        <div>
-                            {this.state.comment.created}
-                            {
-                                // cho thằng viết ra có 2 chức năng này
-                                this.props.isAuthorized &&[
-                                <button onClick={this.onClickEdit.bind(this)} className="btn btn-link" style={{ marginLeft: '10px' }}>Edit</button>,
-                                <button onClick={this.onDeleteComment.bind(this)} className="btn btn-link" style={{ marginLeft: '10px' }}>Delete</button>                               
-                                ]  
-                            }
-                            {
-                                <SubComment commentId={this.state.comment._id} listSubComment={this.state.comment.subComment}/>
-                            }
-                        </div>
-                    </div>
-                </li>
-            </ul>
+            <div style={{marginLeft:'20px'}}>
+                <h6><img src={man} style={{maxWidth:'30px', height:'30px',marginRight:'5px'}} aria-hidden alt="Picture of me taking a photo of an image"/>
+                {this.state.comment.commentBy.name}</h6>
+                
+                <p>
+                    {
+                        this.state.edit? <EditComment callBack={this.onCallBack.bind(this)} content={this.state.comment.content} commentId={this.state.comment._id}/>:
+                            <em>{this.state.comment.content}</em>
+                    }
+                </p>
+                <div>
+                    {this.state.comment.created}
+                    {
+                        // cho thằng viết ra có 2 chức năng này
+                        this.props.isAuthorized &&[
+                        <button onClick={this.onClickEdit.bind(this)} className="btn btn-link" style={{ marginLeft: '10px' }}>Edit</button>,
+                        <button onClick={this.onDeleteComment.bind(this)} className="btn btn-link" style={{ marginLeft: '10px' }}>Delete</button>                               
+                        ]  
+                    }
+                    {
+                        <SubComment commentId={this.state.comment._id} listSubComment={this.state.comment.subComment}/>
+                    }
+                </div>
+            </div>
         );
     }
 }

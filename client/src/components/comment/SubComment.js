@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { auth } from '../../action/helper';
 import { addSubComment} from '../../action/postAction';
 import { connect } from 'react-redux';
-
+import man from '../../public/images/man.png';
 class SubComment extends Component {
 
 
@@ -40,15 +40,14 @@ class SubComment extends Component {
             return (
                 this.state.listSubComment.map((item, i) => {
                     return (
-                        <li key={i}>
-                            <div>
-                                <h6>{item.commentBy.name}</h6>
-                                <p>{item.content}</p>
-                                <p>
-                                    {item.created}
-                                </p>
-                            </div>
-                        </li>);
+                        <div key={i}>
+                            <h6><img src={man} style={{maxWidth:'30px', height:'30px',marginRight:'5px'}} aria-hidden alt="Picture of me taking a photo of an image"/>
+                            {item.commentBy.name}</h6>
+                            <p>{item.content}</p>
+                            <p>
+                                {item.created}
+                            </p>
+                        </div>);
                 }));
         }
     }

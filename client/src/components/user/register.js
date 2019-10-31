@@ -52,6 +52,7 @@ class Register extends Component{
                 <div id="formContent">
                     <div className="fadeIn first">
                         <img src={logo} id="icon" alt="User Icon" />
+                        <p style={{color:'red'}}>{this.props.message} {this.props.error.msg.message}</p>
                     </div>
                     <form className="form-horizontal" method="post" onSubmit={this.onSubmitRegister}>
                         <input type="text" className="fadeIn second" name="name" placeholder="Enter your Name" onChange={this.handleChange} required/>

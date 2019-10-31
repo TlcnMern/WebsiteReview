@@ -34,14 +34,14 @@ const create = (req, res, next) => {
 const getNewFeeds=(req,res,next)=>{
   Post.find({})
   .populate('postedBy', '_id name')
-  .populate({
-    path:'comments',
-    populate: { path: 'commentBy',select:'_id name' }
-  })
-  .populate({
-    path:'comments',
-    populate: { path: 'subComment.commentBy',select:'_id name'}
-  })
+  // .populate({
+  //   path:'comments',
+  //   populate: { path: 'commentBy',select:'_id name' }
+  // })
+  // .populate({
+  //   path:'comments',
+  //   populate: { path: 'subComment.commentBy',select:'_id name'}
+  // })
   .sort('-created')
   .exec((err, posts) => {
     if (err) {
@@ -183,11 +183,12 @@ const addSubComment=(req,res,next)=>{
 
 //rating
   //add rating of user
-const addRating=(req,res,next)=>{
+const addRating=(req,res)=>{
   let rating ={};
   rating.point = req.body.point;
   rating.postedBy = req.body.userId;
-  Post.findByIdAndUpdate(req.body.postId, {$push: {ratings: rating}}, {new: true})
+  console.log(rating);
+  Post.findByIdAndUpdate({_id:req.body.postId}, {$push: {ratings: rating}}, {new: true})
   .populate('ratings.postedBy', '_id name')
   .populate('postedBy', '_id name')
   .exec((err, result) => {
@@ -196,6 +197,7 @@ const addRating=(req,res,next)=>{
         error: errorHandler.getErrorMessage(err)
       })
     }
+    console.log(result)
     res.json(result);
   })
 }
@@ -209,11 +211,12 @@ const checkRatingAndShow=(req,res)=>{
   )
   .populate('ratings.postedBy', '_id point')
   .exec((err, result) => {
-    if (err || !result)
+    if (err || !result){
+      console.log(err);
       return res.status('400').json({
         error: "Post not found"
       })
-    // console.log(result[0].ratings)
+    }
     res.json(result[0].ratings);
   })
 }

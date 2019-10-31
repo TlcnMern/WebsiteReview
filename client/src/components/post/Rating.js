@@ -3,6 +3,8 @@ import '../../public/stylesheets/partials/rating.scss'
 import PropTypes from 'prop-types';
 import {addRating,updateRating} from '../../action/postAction';
 import {auth} from '../../action/helper';
+import {connect} from 'react-redux';
+
 class Rating extends Component{
   static propTypes= {
       disabled:  PropTypes.bool
@@ -13,17 +15,15 @@ class Rating extends Component{
             rating: this.props.rating || null,
             disabled: this.props.disabled || false,
             temp_rating: null,
-            checkRating:this.props.check || null//vì thằng rating khi hover nó đã thay đổi rồi==>nên phải dùng thằng khác
+            checkRating:this.props.rating || null//vì thằng rating khi hover nó đã thay đổi rồi==>nên phải dùng thằng khác
         }
     }
     renderRatingPost(stars){
       for(var i = 0; i < 5; i++) {
         var klass = 'star-rating__star';
-        
         if (this.state.rating >= i && this.state.rating != null) {
           klass += ' is-selected';
         }
-  
         stars.push(
           <label
             key={i}
@@ -37,10 +37,9 @@ class Rating extends Component{
     renderRatingOfUser(stars){
       for(var j = 0; j < 5; j++) {
         var kla = 'star-rating__star';
-        if (this.state.rating >= j && this.state.rating != null) {
+        if (this.state.rating >= j && this.state.rating  != null) {
           kla += ' is-selected';
         }
-  
         stars.push(
           <label
             key={j}
@@ -54,14 +53,10 @@ class Rating extends Component{
       }
     };
 
-    componentWillReceiveProps(){
-      this.setState({rating:this.props.rating})
-    };
-
     rate(rating) {
       const jwt=auth.isAuthenticated();
       const userID=jwt.user._id;
-      console.log(this.state.checkRating);
+
       if(this.state.checkRating!==null){
         console.log('đã')
         updateRating(userID,{t:jwt.token},this.props.idPost,rating)
@@ -82,32 +77,28 @@ class Rating extends Component{
         console.log('chưa')
         addRating(userID,{t:jwt.token},this.props.idPost,rating)
         .then((data)=>{
-            if(data.error){
-                console.log(data);
-                return;
-            }
-            else{
-              this.setState({
-                rating: rating,
-                temp_rating: rating,
-                checkRating:rating
-              });
-              this.props.changeCheckRating(this.state.checkRating);
-            }
+          if(data.error){
+              console.log(data);
+              return;
+          }
+          else{
+            this.setState({
+              rating: rating,
+              temp_rating: rating,
+              checkRating:rating
+            });
+          }
         })
-
       }
     };
-
     star_over(rating) {
       this.setState({
         rating:rating,
-        temp_rating:this.state.rating
+        temp_rating:this.state.rating//luu lai cai rating cu
       });
     };
-
     star_out() {
-      this.setState({ rating: this.state.temp_rating });
+      this.setState({ rating: this.state.temp_rating });//set lai rating khi dua chuot ra
     };
 
     render() {
@@ -126,7 +117,12 @@ class Rating extends Component{
       );
     }
 }     
+function mapToStateToProps(state){
+  return{
+      pointRateOfUser:state.post.pointRateOfUser
+  }
+}
 
-export default Rating
+export default connect(mapToStateToProps)(Rating) ;
 
 

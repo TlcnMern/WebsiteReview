@@ -22,8 +22,7 @@ import {
       case LOGIN_SUCCESS:
         return {
           ...state,
-          isAuthenticated:true,
-          ...action.payload,
+          isAuthenticated:true
         };
       case LOGIN_FAIL:
       case LOGOUT_SUCCESS:
