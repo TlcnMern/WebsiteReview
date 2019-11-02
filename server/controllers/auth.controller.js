@@ -59,7 +59,6 @@ const  googleOAuth= async (req, res, next) => {
     token,
     user: {_id: req.user.id}
   });
-  // res.status(200).json({ token });
 }
 
 const checkAuthorizedComment = (req, res, next) => {

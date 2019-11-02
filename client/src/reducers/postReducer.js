@@ -1,4 +1,4 @@
-import {GET_COMMENT, GET_RATING}  from '../action/type';
+import {GET_COMMENT}  from '../action/type';
 
 
 const INITIAL_STATE={
@@ -14,11 +14,6 @@ export default function(state=INITIAL_STATE,action){
             return{
                 ...state,
                 listComment:action.payload
-            }
-        case GET_RATING:
-            return{
-                ...state,
-                pointRateOfUser:action.payload
             }
         default: return state;
     }

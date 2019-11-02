@@ -107,8 +107,6 @@ export const checkFollow=(userID,credentials,userIDFollow) =>dispatch=> {
     )})
 }
 
-
-
 export const follow = (userID, credentials, followId) =>dispatch=> {
   const config={
     headers: {

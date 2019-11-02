@@ -18,6 +18,7 @@ class Rating extends Component{
             checkRating:this.props.rating || null//vì thằng rating khi hover nó đã thay đổi rồi==>nên phải dùng thằng khác
         }
     }
+    
     renderRatingPost(stars){
       for(var i = 0; i < 5; i++) {
         var klass = 'star-rating__star';
@@ -56,37 +57,35 @@ class Rating extends Component{
     rate(rating) {
       const jwt=auth.isAuthenticated();
       const userID=jwt.user._id;
-
       if(this.state.checkRating!==null){
-        console.log('đã')
+        console.log('update')
         updateRating(userID,{t:jwt.token},this.props.idPost,rating)
           .then((data)=>{
-              if(data.error){
-                  console.log(data);
-                  return;
-              }
-              else{
-                this.setState({
-                  rating: rating,
-                  temp_rating: rating
-                });
-              }
+            if(data===true){
+              this.setState({
+                rating: rating,
+                temp_rating: rating
+              });
+            }
+            else{
+              console.log(data.error);
+              return;
+            }
           })
       }
       else{
-        console.log('chưa')
         addRating(userID,{t:jwt.token},this.props.idPost,rating)
         .then((data)=>{
-          if(data.error){
-              console.log(data);
-              return;
-          }
-          else{
+          if(data===true){
             this.setState({
               rating: rating,
               temp_rating: rating,
               checkRating:rating
             });
+          }
+          else{
+            console.log(data.error);
+            return;
           }
         })
       }

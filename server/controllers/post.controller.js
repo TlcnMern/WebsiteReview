@@ -68,7 +68,6 @@ const postByID = (req, res, next, id) => {
     next()
   })
 }
-
 //commnet
   //get comment and sub comment of 1 post
 const getComment=(req,res)=>{
@@ -117,7 +116,6 @@ const addComment=(req,res,next)=>{
     })
   })
 }
-
   //delete comment
 const deleteComment=(req,res)=>{
   const commentId= req.body.commentId;
@@ -161,8 +159,6 @@ const updateComment = (req, res) => {
     res.json(result);
   })
 }
-
-
   //add subComment
 const addSubComment=(req,res,next)=>{
   var subComment={};
@@ -180,7 +176,6 @@ const addSubComment=(req,res,next)=>{
     res.json(result.subComment);
   })
 }
-
 //rating
   //add rating of user
 const addRating=(req,res)=>{
@@ -192,16 +187,16 @@ const addRating=(req,res)=>{
   .populate('ratings.postedBy', '_id name')
   .populate('postedBy', '_id name')
   .exec((err, result) => {
-    if (err) {
+    if (err||!result) {
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
       })
     }
-    console.log(result)
-    res.json(result);
+    return res.status('200').json({
+      msg:"Added"
+    })
   })
 }
-
   //check user used to evaluation for post ? show rating : set rating 0
 const checkRatingAndShow=(req,res)=>{
   const userId = req.body.userId;
@@ -220,7 +215,6 @@ const checkRatingAndShow=(req,res)=>{
     res.json(result[0].ratings);
   })
 }
-
   //update Rating When user used to evaluation
 const updateRatingOfUser=(req,res)=>{
   const userId=req.body.userId;
@@ -234,12 +228,11 @@ const updateRatingOfUser=(req,res)=>{
         error:"Post not found"
       })
     }
-    console.log(result);
-    res.json(result);
+    return res.status('200').json({
+      msg:"Updated"
+    })
   })
 }
-
-
 module.exports={
     create:create,
     getNewFeeds:getNewFeeds,

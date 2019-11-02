@@ -37,7 +37,6 @@ export const GetNewFeeds=()=>{
         });
 };
 
-
 export const getPhoto=(idpost)=>{
     return axios.get(`${API_URL}/post/photo/`+idpost)
     .then(res=>{
@@ -159,11 +158,10 @@ export const addRating = (userId, credentials, postId, point) =>{
     }
 
     const  body= JSON.stringify({userId:userId, postId: postId, point: point});
-    console.log(body);
     return axios.put(`${API_URL}/post/addRating`,body,config)
         .then(res=>{
             console.log(res.data);
-            return res.data;
+            return true;
         })
         .catch(error=>{
             console.log(error.response);
@@ -181,10 +179,10 @@ export const updateRating = (userId, credentials, postId, point) =>{
     }
 
     const  body= JSON.stringify({userId:userId, postId: postId, point: point});
-    console.log(body);
     return axios.put(`${API_URL}/post/updateRatingOfUser`,body,config)
         .then(res=>{
-            return res.data;
+            console.log(res.data)
+            return true;
         })
         .catch(error=>{
             console.log(error.response);
@@ -207,10 +205,6 @@ export const checkRatingAndShow = (userId, credentials, postId)=>{
         .then(res=>{
             if(res.data.length>0){
                 return res.data[0].point;
-                // dispatch({
-                //     type:GET_RATING,
-                //     payload:res.data[0].point
-                // });
             }
             return null;
         })

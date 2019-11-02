@@ -8,7 +8,6 @@ import {connect} from 'react-redux';
 import {getComment} from '../../action/postAction';
 
 class DetailPost extends Component{
-
     state={
         img:'',
         isLoading:false,
@@ -48,65 +47,66 @@ class DetailPost extends Component{
         }
         return(
            
-        <div className="container">
-            <div className="row">
-                <div className="col-md-8">
-                    <article>
-                        <h4><span>{post.title}</span></h4>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-8">
+                        <article>
+                            <h4><span>{post.title}</span></h4>
 
-                        <div className="row">
-                            <div className="col-sm-6 col-md-6">
-                            Người đăng: 
-                                <Link to={
-                                    {pathname: '/GuestViewProfile',
-                                    state: { userID: post.postedBy._id  }}
-                                    }>
-                                    
-                                    {post.postedBy.name}
-                                </Link>
-                                <br/> <span>Sản phẩm review: {post.productReview}</span>
-                                <br/> <span>Chủ đề: {post.theme}</span>
+                            <div className="row">
+                                <div className="col-sm-6 col-md-6">
+                                Người đăng: 
+                                    <Link to={
+                                        {pathname: '/GuestViewProfile',
+                                        state: { userID: post.postedBy._id  }}
+                                        }>
+                                        
+                                        {post.postedBy.name}
+                                    </Link>
+                                    <br/> <span>Sản phẩm review: {post.productReview}</span>
+                                    <br/> <span>Chủ đề: {post.theme}</span>
 
+                                </div>
+                                <div className="col-sm-6 col-md-6">
+                                    <span className="glyphicon glyphicon-pencil"></span> 
+                                    <p>Ngày đăng: {post.created}</p>           		
+                                </div>
                             </div>
-                            <div className="col-sm-6 col-md-6">
-                                <span className="glyphicon glyphicon-pencil"></span> 
-                                <p>Ngày đăng: {post.created}</p>           		
+
+                            <hr/>
+                            <div className="row">
+                                <div className="col-sm-6 col-md-6">
+                                    <img src={this.props.location.state.img} style={{maxWidth:'200%', height:'auto'}} aria-hidden alt="Picture of me taking a photo of an image" className="img-responsive"/>
+                                </div>
                             </div>
-                        </div>
 
-                        <hr/>
-                        <div className="row">
-                            <div className="col-sm-6 col-md-6">
-                                <img src={this.props.location.state.img} style={{maxWidth:'200%', height:'auto'}} aria-hidden alt="Picture of me taking a photo of an image" className="img-responsive"/>
+                            <br />
+
+                            <p className="lead">{post.content}</p><br/>
+                            <a href={post.link}>{post.link}</a>
+
+                            <hr/>
+                        </article>
+                        <Comment postId={post._id}/>  
+                    </div>
+        
+                    <div className="col-md-4">
+                    <p>Điểm đánh giá bài viết</p>
+                        <Rating rating={3} disabled={true} />
+                    {this.props.isAuthenticated &&
+                        (
+                            <div>
+                                <p>Bạn đánh giá bài viết như thế nào ?</p>
+                                {
+                                    this.state.isLoading ? <Rating rating={this.state.point} idPost={post._id}/>:<p>dcm dang tai</p>
+                                }
                             </div>
-                        </div>
-
-                        <br />
-
-                        <p className="lead">{post.content}</p><br/>
-                        <a href={post.link}>{post.link}</a>
-
-                        <hr/>
-                    </article>
-                    <Comment postId={post._id}/>  
-                </div>
-       
-                <div className="col-md-4">
-                <p>Điểm đánh giá bài viết</p>
-                    <Rating rating={3} disabled={true} />
-                {this.props.isAuthenticated &&
-                    (
-                        <div>
-                            <p>Bạn đánh giá bài viết như thế nào ?</p>
-                            {
-                                this.state.isLoading ? <Rating rating={this.state.point} idPost={post._id}/>:<p>dcm dang tai</p>
-                            }
-                        </div>
-                    )
-                }
+                        )
+                    }
+                    </div>
                 </div>
             </div>
-        </div>
+            
         );
     }
 }
