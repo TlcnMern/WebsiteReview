@@ -4,11 +4,10 @@ const controllerPost=require('../controllers/post.controller');
 const controllerAuth=require('../controllers/auth.controller');
 const controllerUser=require('../controllers/user.controller');
 
-const aclCofig=require('../config/acl-config');
 const aclStore=require('../helpers/acl-store');
 const aclLibrary=aclStore.aclStore.acl;
 
-router.route('/new/:userID').post(controllerAuth.requireSignin, controllerPost.create);
+router.route('/new/:userID').post(controllerAuth.requireSignin,controllerAuth.hasAuthorization, controllerPost.create);
 router.route('/NewFeeds').get(controllerPost.getNewFeeds);
 router.route('/photo/:postID').get(controllerPost.photo);
 
@@ -18,6 +17,7 @@ router.route('/addComment').put(controllerAuth.requireSignin,controllerPost.addC
 router.route('/addSubComment').put(controllerAuth.requireSignin,controllerPost.addSubComment);
 router.route('/deleteComment/:userID').put(controllerAuth.requireSignin,controllerAuth.hasAuthorization,aclLibrary.middleware(2),controllerPost.deleteComment);
 router.route('/updateComment/:userID').put(controllerAuth.requireSignin,controllerAuth.hasAuthorization,controllerPost.updateComment);
+router.route('/checkAuthorizedComment/:userID').post(controllerPost.checkAuthorizedComment);
 
 //rating
 router.route('/addRating').put(controllerAuth.requireSignin,controllerPost.addRating);

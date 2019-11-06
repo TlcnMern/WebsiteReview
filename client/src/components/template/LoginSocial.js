@@ -21,6 +21,7 @@ class LoginSocial extends Component {
                     buttonText="Login"
                     onSuccess={this.googleResponse}
                     onFailure={this.onFailure}
+                    
                 />
             </div>
         );

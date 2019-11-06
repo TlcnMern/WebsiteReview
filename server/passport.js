@@ -2,6 +2,7 @@ const passport = require('passport');
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
 const config = require('./config/config');
 const User = require('./models/usertest');
+const {aclStore}=require('./helpers/acl-store');
 
 // Google OAuth Strategy
 passport.use('googleToken', new GooglePlusTokenStrategy({
@@ -28,8 +29,14 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
       }
     });
 
-    await newUser.save();
-    done(null, newUser);
+    await newUser.save((err,result)=>{
+      if(err){
+        console.log(err);
+      }
+      aclStore.acl.addUserRoles(result._id.toString(),'user');
+      done(null, result);
+    });
+
   } catch(error) {
     console.log(error);
     done(error, false, error.message);

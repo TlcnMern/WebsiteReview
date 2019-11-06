@@ -2,11 +2,8 @@ const express=require('express');
 const controllerUser=require('../controllers/user.controller');
 const controllerAuth=require('../controllers/auth.controller');
 const router = express.Router();
-
-const aclCofig=require('../config/acl-config');
-
-const aclStore=require('../helpers/acl-store');
-const aclLibrary=aclStore.aclStore.acl;
+const {aclStore}=require('../helpers/acl-store');
+const aclLibrary=aclStore.acl;
 
 //register
 router.route('/users').post(controllerUser.register);

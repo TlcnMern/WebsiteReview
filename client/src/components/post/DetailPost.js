@@ -13,7 +13,7 @@ class DetailPost extends Component{
         isLoading:false,
         point:null
     }
-    componentWillMount(){
+    componentDidMount(){
         const { post } = this.props.location.state;
         if(this.props.isAuthenticated){
             const jwt=auth.isAuthenticated();

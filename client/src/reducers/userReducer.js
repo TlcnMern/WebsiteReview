@@ -1,4 +1,4 @@
-import {FETCH_USER,ERROR_RESPONSE, FOLLOW, FOLLOWED} from '../action/type';
+import {FETCH_USER,ERROR_RESPONSE, FOLLOW, FOLLOWED,CLEAN_PROFILE} from '../action/type';
 
 const INITIAL_STATE = { profile: {}, message: '', error: '',isFollow:false};
 
@@ -12,6 +12,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, error: action.payload,isFollow:true };
     case FOLLOWED:
       return { ...state, error: action.payload,isFollow:false };
+    case CLEAN_PROFILE:
+        return { ...state,message:'',error:'',isFollow:false };
     default:
         return state;
   }

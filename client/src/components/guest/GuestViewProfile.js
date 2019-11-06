@@ -19,16 +19,11 @@ class profile extends Component{
     }
 
 
-    componentWillMount(){
-        //nếu là guest thì bật follow
-        if(this.props.isAuthenticated===false){
-        //    this.setState({stateFollow:false});
-        }
-        else{
+    componentDidMount(){
+        if(this.props.isAuthenticated===true){
             const jwt = auth.isAuthenticated();
             this.props.checkFollow(jwt.user._id,{t:jwt.token},this.props.location.state.userID)
         }
-
     }
 
     render(){
@@ -52,7 +47,7 @@ class profile extends Component{
                 <div className="container main-secction">
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12 image-section">
-                            <img src="https://png.pngtree.com/thumb_back/fw800/back_pic/00/08/57/41562ad4a92b16a.jpg"  aria-hidden alt="Picture of me taking a photo of an image"/>
+                            <img src="https://cdn5.f-cdn.com/contestentries/1301217/27758306/5acbe9c5814e4_thumb900.jpg"  aria-hidden alt="Picture of me taking a photo of an image"/>
                         </div>
                         <div className="row user-left-part">
 

@@ -24,10 +24,13 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: 'content is required'
   },
-  photo: {
-    data: Buffer,
-    contentType: String
-  },
+  photo: [{
+    type:String
+  }],
+  // photo: {
+  //   data: Buffer,
+  //   contentType: String
+  // },
   // comments: [{
   //   content: String,
   //   subComment:[{

@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const PORT = 4000;
 const config=require('./config/config');
 
+// const socketOps = require('./config/socketOps');
+// const socket = require('socket.io');
+
 const aclConfig =require('./config/acl-config');
 app.use(cors());
 app.use(bodyParser.json());
@@ -25,6 +28,9 @@ function _mongo_connected( error) {
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
 });
+// let io = socket(server);
+// socketOps.allSocketOps(io)
+
 
 function authorizationSetup() {
     aclConfig.dbConnection(mongoose.connection.db);

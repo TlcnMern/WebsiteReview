@@ -13,7 +13,6 @@ const userSchema = new Schema({
     email: {
       type: String,
       trim: true,
-      unique:true,
       lowercase: true
     },
     hashed_password:{
@@ -27,7 +26,6 @@ const userSchema = new Schema({
     email: {
       type: String,
       trim: true,
-      unique:true,
       lowercase: true
     }
   },
@@ -56,6 +54,14 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  notifyComment: [{
+    commentBy: {type:mongoose.Schema.ObjectId, ref: 'User'},
+    postComment: {type:mongoose.Schema.ObjectId, ref: 'Post'},
+    seen:{
+      type:Boolean,
+      default:false
+    }
+  }],
   following: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
   followers: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
 });

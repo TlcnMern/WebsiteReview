@@ -19,7 +19,6 @@ class Comment extends Component{
         e.preventDefault();
         const jwt=auth.isAuthenticated();
         const userID=jwt.user._id;
-        console.log(this.props.postId);
         this.props.addComment(userID,{t:jwt.token},this.props.postId,this.state.content)
     }
 

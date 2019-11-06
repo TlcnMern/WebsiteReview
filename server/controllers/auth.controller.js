@@ -38,7 +38,6 @@ const requireSignin = expressJwt({
 })
 
 const hasAuthorization = (req, res, next) => {
-  console.log(req.auth);
   const authorized = req.profile && req.auth && req.profile._id == req.auth._id
   console.log('authorized '+ authorized);
   if (!(authorized)) {
@@ -50,10 +49,8 @@ const hasAuthorization = (req, res, next) => {
 }
 
 const  googleOAuth= async (req, res, next) => {
-  // Generate token
-  console.log('got here');
   const token = jwt.sign({
-    _id: req.user.id
+    _id: req.user._id
   }, config.jwtSecret);
   return res.json({
     token,
@@ -61,24 +58,9 @@ const  googleOAuth= async (req, res, next) => {
   });
 }
 
-const checkAuthorizedComment = (req, res, next) => {
-  const commentID=req.body.commentID;
-  const userID=req.session.userId;
-  Comment.findOne({_id:commentID,commentBy:userID}, (err, comment) => {
-    if (err || !comment){
-      console.log(err);
-      return res.status('401').json({
-        error: "User not authorized"
-      });
-    }
-    return res.json(true);
-  })
-}
-
 module.exports={
     signin:signin,
     requireSignin:requireSignin,
     hasAuthorization:hasAuthorization,
-    googleOAuth:googleOAuth,
-    checkAuthorizedComment:checkAuthorizedComment
+    googleOAuth:googleOAuth
 }

@@ -11,7 +11,7 @@ class profile extends Component{
                 <div className="container main-secction">
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12 image-section">
-                            <img src="https://png.pngtree.com/thumb_back/fw800/back_pic/00/08/57/41562ad4a92b16a.jpg" aria-hidden alt="Picture of me taking a photo of an image"/>
+                            <img src='https://cdn5.f-cdn.com/contestentries/1301217/27758306/5acbe9c5814e4_thumb900.jpg' aria-hidden alt="Picture of me taking a photo of an image"/>
                         </div>
                         <div className="row user-left-part">
                             <div className="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
@@ -55,6 +55,7 @@ class profile extends Component{
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div className="col-md-4 img-main-rightPart">
                                                 <div className="row">
                                                     <div className="col-md-12">

@@ -4,7 +4,7 @@ import { deleteComment } from '../../action/postAction';
 import { connect } from 'react-redux';
 import EditComment from  './EditComment';
 import SubComment from  './SubComment';
-import {checkAuthorizedComment} from '../../action/authAction';
+import {checkAuthorizedComment} from '../../action/postAction';
 import man from '../../public/images/man.png';
 
 class ViewComment extends Component {
@@ -21,7 +21,7 @@ class ViewComment extends Component {
     //         return new Date(b.created)-new Date(a.created);
     //     });
     // }
-    componentWillMount(){
+    componentDidMount(){
         if(this.props.isAuthenticated){
             const jwt=auth.isAuthenticated();
             const userID=jwt.user._id;
@@ -64,8 +64,8 @@ class ViewComment extends Component {
                     {
                         // cho thằng viết ra có 2 chức năng này
                         this.props.isAuthorized &&[
-                        <button onClick={this.onClickEdit.bind(this)} className="btn btn-link" style={{ marginLeft: '10px' }}>Edit</button>,
-                        <button onClick={this.onDeleteComment.bind(this)} className="btn btn-link" style={{ marginLeft: '10px' }}>Delete</button>                               
+                        <button onClick={this.onClickEdit.bind(this)} key={1} className="btn btn-link" style={{ marginLeft: '10px' }}>Edit</button>,
+                        <button onClick={this.onDeleteComment.bind(this)} key={2} className="btn btn-link" style={{ marginLeft: '10px' }}>Delete</button>                               
                         ]  
                     }
                     {

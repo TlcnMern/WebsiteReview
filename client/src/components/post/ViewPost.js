@@ -3,7 +3,6 @@ import {getPhoto} from '../../action/postAction';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-
 class ViewPost extends Component{
 
     state={
@@ -22,7 +21,7 @@ class ViewPost extends Component{
         getPhoto(this.props.post._id).then(data=>{
             var base64Flag = 'data:image/jpeg;base64,';
             var imageStr =
-                this.arrayBufferToBase64(data.data.data);
+                this.arrayBufferToBase64(data.data);
             this.setState({
                 img: base64Flag + imageStr
             })
@@ -36,7 +35,7 @@ class ViewPost extends Component{
                 <h4>
                     <Link to={
                         {pathname: '/DetailPost',
-                        state: { post: this.props.post, img:this.state.img  }}
+                        state: { post: this.props.post,img:this.state.img }}
                         }>
                         {this.props.post.title}
                     </Link>

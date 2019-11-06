@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {API_URL} from '../action/helper';
-import { GET_COMMENT } from './type';
+import { GET_COMMENT,AUTHORIZED } from './type';
 
 export const newPost=(userID,credentials,post)=>{
     const config={
@@ -9,6 +9,7 @@ export const newPost=(userID,credentials,post)=>{
             'Authorization':'bearer '+credentials.t
         }
     }
+
     const body=post;
 
     return axios.post(`${API_URL}/post/new/`+userID,body,config)
@@ -47,6 +48,25 @@ export const getPhoto=(idpost)=>{
     })
 }
 //comment
+export const checkAuthorizedComment=(jwt,userID,commentID) =>dispatch=>{
+    const config={
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + jwt.t
+        }
+      }
+    const body=JSON.stringify({commentID:commentID});
+    axios.post(`${API_URL}/post/checkAuthorizedComment/`+userID,body,config)
+    .then(res=>dispatch({
+      type:AUTHORIZED,
+      payload:res.data
+    }))
+    .catch(err=>{
+      console.log(err);
+    })
+}
+
 export const addComment = (userId, credentials, postId, comment)=>dispatch=>{
     const config={
         headers: {
@@ -59,7 +79,6 @@ export const addComment = (userId, credentials, postId, comment)=>dispatch=>{
 
     return axios.put(`${API_URL}/post/addComment`,body,config)
         .then(res=>{
-            console.log(res.data)
             dispatch({
                 type:GET_COMMENT,
                 payload:res.data
@@ -81,7 +100,6 @@ export const deleteComment = (postId,userId, credentials, commentId)=>dispatch=>
     const  body= JSON.stringify({ postId: postId, commentId: commentId});
     return axios.put(`${API_URL}/post/deleteComment/`+userId,body,config)
         .then(res=>{
-            console.log(res.data)
             dispatch({
                 type:GET_COMMENT,
                 payload:res.data
@@ -140,7 +158,7 @@ export const updateComment = (commentId,userId, credentials, content)=>{
     const  body= JSON.stringify({ content: content, commentId: commentId});
     return axios.put(`${API_URL}/post/updateComment/`+userId,body,config)
         .then(res=>{
-            console.log(res.data)
+            console.log(res.data);
         })
         .catch(err=>{
             return err;

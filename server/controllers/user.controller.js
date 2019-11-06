@@ -3,7 +3,7 @@ const errorHandler=require('../helpers/dbErrorHandler');
 const formidable=require('formidable');
 const fs=require('fs');
 var _ = require('lodash');
-const aclStore=require('../helpers/acl-store');
+const {aclStore}=require('../helpers/acl-store');
 
 
 const register = (req, res) => {
@@ -19,14 +19,17 @@ const register = (req, res) => {
       })
     }
     else{
-      const user = new User();
-      user.method='local';
-      user.role='user';
-      user.name=req.body.name;
-      user.local.email=req.body.email;
-      user.password=req.body.password;
-      user.gender=req.body.gender;
-      
+      const user = new User({
+        method:'local',
+        name:req.body.name,
+        local:{
+          email:req.body.email
+        },
+        password:req.body.password,
+        gender:req.body.gender
+
+      });
+
       user.save((err, result) => {
         if (err) {
           console.log(err);
@@ -34,7 +37,7 @@ const register = (req, res) => {
             error: errorHandler.getErrorMessage(err)
           })
         }
-        aclStore.aclStore.acl.addUserRoles(result._id.toString(), result.role, err => {
+        aclStore.acl.addUserRoles(result._id.toString(),'user', err => {
           if (!err) {
             res.status(200).json({
               message: "Successfully signed up!"
