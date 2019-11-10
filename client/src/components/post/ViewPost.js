@@ -6,7 +6,17 @@ import PostComment from "../comment/Comment";
 
 
 class ViewPost extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+          renderComment:false,
+          renderRating:false
+        };
+    
+        this.onClickComment=this.onClickComment.bind(this);
+        this.onClickRating=this.onClickRating.bind(this);
 
+      }
     state={
         img:''
     }
@@ -31,6 +41,25 @@ class ViewPost extends Component{
         
         
     }
+    onClickComment(){
+        this.setState({renderComment:true});
+        this.setState({renderRating:false});
+      };
+      onClickRating(){
+        this.setState({renderRating:true});
+        this.setState({renderComment:false});
+      };
+      renderCommentorRating(){
+        if(this.state.renderComment)
+          return (
+              <div><PostComment postId={this.props.post._id}/></div>
+            
+          ) ;
+          if(this.state.renderRating)
+          return (
+            <div>Rating</div>
+          ) ;
+      }
 
     render(){
         return(
@@ -75,7 +104,7 @@ class ViewPost extends Component{
                             <span className="rateBar-Rate" onClick={this.onClickRating}>
                                 <img src="https://img.icons8.com/ios/20/000000/christmas-star.png" alt="Rate"/>
                             </span>
-                            <PostComment postId={this.props.post._id}/>
+                            {this.renderCommentorRating()}
                         </div>
                     </div>
                 </div>
