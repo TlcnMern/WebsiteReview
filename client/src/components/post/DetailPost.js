@@ -39,6 +39,8 @@ class DetailPost extends Component{
             });
         }
         this.props.getComment(post._id)
+
+
     }
     render(){
         var  post ={};
@@ -46,66 +48,66 @@ class DetailPost extends Component{
              post  = this.props.location.state.post;
         }
         return(
-           
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-8">
-                        <article>
-                            <h4><span>{post.title}</span></h4>
-
-                            <div className="row">
-                                <div className="col-sm-6 col-md-6">
-                                Người đăng: 
-                                    <Link to={
-                                        {pathname: '/GuestViewProfile',
-                                        state: { userID: post.postedBy._id  }}
-                                        }>
-                                        
-                                        {post.postedBy.name}
-                                    </Link>
-                                    <br/> <span>Sản phẩm review: {post.productReview}</span>
-                                    <br/> <span>Chủ đề: {post.theme}</span>
-
-                                </div>
-                                <div className="col-sm-6 col-md-6">
-                                    <span className="glyphicon glyphicon-pencil"></span> 
-                                    <p>Ngày đăng: {post.created}</p>           		
-                                </div>
-                            </div>
-
-                            <hr/>
-                            <div className="row">
-                                <div className="col-sm-6 col-md-6">
-                                    <img src={this.props.location.state.img} style={{maxWidth:'200%', height:'auto'}} aria-hidden alt="Picture of me taking a photo of an image" className="img-responsive"/>
-                                </div>
-                            </div>
-
-                            <br />
-
-                            <p className="lead">{post.content}</p><br/>
-                            <a href={post.link}>{post.link}</a>
-
-                            <hr/>
-                        </article>
-                        <Comment postId={post._id}/>  
-                    </div>
-        
-                    <div className="col-md-4">
-                    <p>Điểm đánh giá bài viết</p>
-                        <Rating rating={3} disabled={true} />
-                    {this.props.isAuthenticated &&
-                        (
-                            <div>
-                                <p>Bạn đánh giá bài viết như thế nào ?</p>
-                                {
-                                    this.state.isLoading ? <Rating rating={this.state.point} idPost={post._id}/>:<p>dcm dang tai</p>
-                                }
-                            </div>
-                        )
-                    }
+            <div className="boxContent">
+            <div className="CT-BaiViet">
+                <div className="TitleBV">{post.title}</div>
+                <div className="SPBV"><span>{post.productReview}</span></div>
+                <div className="NDBV">
+                    <div className="row GT-BaiViet">
+                        <div className="col-sm-5 TLBV">
+                            <span className="txtTomTat">Giới thiệu</span><br/>
+                            <span>- Người đăng: 
+                                <Link to={
+                                    {pathname: '/GuestViewProfile',
+                                    state: { userID: post.postedBy._id  }}}>
+                                    {post.postedBy.name}
+                                </Link>
+                            </span><br/>
+                            <span>- Sản phẩm review: {post.productReview}</span><br/>
+                            <span>- Chủ đề: {post.theme}</span><br/>
+                            <span>- Ngày đăng: 
+                                {new Intl.DateTimeFormat('en-GB', { 
+                                    month: '2-digit', 
+                                    day: '2-digit',
+                                    year: 'numeric', 
+                                    }).format(new Date(post.created))}
+                            </span><br/>
+                            <span>- Link:<a href={post.link}>{post.link}</a></span><br/>
+                            <span> <Rating rating={3} disabled={true} /></span>
+                        </div>
+                        <div className="col-sm-7 TomTat">
+                            <span className="txtTomTat">Tóm tắt</span><br/>
+                            <span>{post.contentSummary}</span>
+                        </div>
+                    </div> 
+                    <div className="row MainBV ">
+                        <div className="col-sm-9 ND-BaiViet">
+                            <span className="txtND-BaiViet">Nội dung Review</span><br/>
+                            <span>{post.content}</span>
+                        </div>
+                        <div className="col-sm-3 anh-BV"> 
+                        <span className="txtND-BaiViet">Ảnh minh họa</span><br/>
+                        <img src={this.props.location.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
+                        <img src={this.props.location.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
+                        <img src={this.props.location.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
+                        <img src={this.props.location.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
                     </div>
                 </div>
             </div>
+            <div className="CommentBV">
+                <Comment postId={post._id}/> 
+            </div>
+            {this.props.isAuthenticated &&
+            (
+                    <div>
+                        <p>Bạn đánh giá bài viết như thế nào ?</p>
+                        {
+                            this.state.isLoading ? <Rating rating={this.state.point} idPost={post._id}/>:<p>dcm dang tai</p>
+                        }
+                    </div>
+            )}
+        </div>
+        </div>
             
         );
     }

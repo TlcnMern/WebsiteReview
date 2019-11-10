@@ -15,12 +15,13 @@ class LoginSocial extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{marginLeft: '120px',marginTop: '50px'}}>
                 <GoogleLogin
                     clientId='185189707578-c9cj84i6p7cjnhgpglik4nda5f6r45eh.apps.googleusercontent.com'
-                    buttonText="Login"
+                    buttonText="Login with Google"
                     onSuccess={this.googleResponse}
                     onFailure={this.onFailure}
+
                     
                 />
             </div>

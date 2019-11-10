@@ -24,8 +24,8 @@ class EditComment extends Component {
     }
     render() {
         return [
-            <input key={1} value={this.state.content} name='content' onChange={this.handleChange.bind(this)}></input>,
-            <button key={2} onClick={this.onClickSave.bind(this)}>save</button>
+            <input className="editiCmt" key={1} value={this.state.content} name='content' onChange={this.handleChange.bind(this)}></input>,
+            <button className="editbCmt" key={2} onClick={this.onClickSave.bind(this)}>save</button>
         ];
     }
 }
