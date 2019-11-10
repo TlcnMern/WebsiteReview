@@ -6,6 +6,7 @@ import {auth} from '../../action/helper';
 import {checkRatingAndShow} from '../../action/postAction';
 import {connect} from 'react-redux';
 import {getComment} from '../../action/postAction';
+import {getPhoto} from '../../action/postAction';
 
 class DetailPost extends Component{
     state={
@@ -13,6 +14,13 @@ class DetailPost extends Component{
         isLoading:false,
         point:null
     }
+    arrayBufferToBase64(buffer) {
+        var binary = '';
+        var bytes = [].slice.call(new Uint8Array(buffer));
+        bytes.forEach((b) => binary += String.fromCharCode(b));
+        return window.btoa(binary);
+    };
+
     componentDidMount(){
         const { post } = this.props.location.state;
         if(this.props.isAuthenticated){
@@ -39,6 +47,14 @@ class DetailPost extends Component{
             });
         }
         this.props.getComment(post._id)
+        getPhoto(post._id).then(data=>{
+            var base64Flag = 'data:image/jpeg;base64,';
+            var imageStr =
+                this.arrayBufferToBase64(data.data);
+            this.setState({
+                img: base64Flag + imageStr
+            })
+        })
 
 
     }
@@ -114,10 +130,11 @@ class DetailPost extends Component{
 }
 function mapToStateToProps(state){
     return{
+        photo:state.post.photo,
         isAuthenticated:state.auth.isAuthenticated,
         pointRateOfUser:state.post.pointRateOfUser
     }
 }
 
 
-export default connect(mapToStateToProps,{getComment})(DetailPost) ;
+export default connect(mapToStateToProps,{getComment,getPhoto})(DetailPost) ;
