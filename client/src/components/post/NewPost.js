@@ -23,7 +23,18 @@ class NewPost extends Component{
         redirectHome:false,
         imgs:[]
     }
-     
+    handleChange= name => event => {
+        var value;
+        if(name==='photo'){
+            this.setState({
+                imgs:event.target.files
+            })
+        }
+        else{
+            value=event.target.value
+            this.postData.set(name, value);
+        }
+    }
            
     componentDidMount(){
         this.postData = new FormData()

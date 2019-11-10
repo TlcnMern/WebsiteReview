@@ -2,7 +2,11 @@ import React, {Component} from 'react';
 import {getPhoto} from '../../action/postAction';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import PostComment from "../comment/Comment";
+import PostComment from "./ViewPostComment";
+import Rating from './Rating';
+import {auth} from '../../action/helper';
+import {checkRatingAndShow} from '../../action/postAction';
+import {getComment} from '../../action/postAction';
 
 
 class ViewPost extends Component{
@@ -18,7 +22,9 @@ class ViewPost extends Component{
 
       }
     state={
-        img:''
+        img:'',
+        isLoading:false,
+        point:null
     }
 
 
@@ -30,6 +36,32 @@ class ViewPost extends Component{
     };
 
     componentDidMount(){
+        
+        const postID = this.props.post._id;
+        if(this.props.isAuthenticated){
+            const jwt=auth.isAuthenticated();
+            const userID=jwt.user._id;
+            checkRatingAndShow(userID,{t:jwt.token},postID).then((data)=>{
+                if(data===null){
+                    this.setState({
+                        isLoading:true,
+                        point:null
+                    });
+                }
+                else{
+                    if(data.error){
+                        console.log(data.error);
+                    }
+                    else{
+                        this.setState({
+                            isLoading:true,
+                            point:data
+                        })
+                    }
+                }
+            });
+        }
+        getComment(this.props.post._id)
         getPhoto(this.props.post._id).then(data=>{
             var base64Flag = 'data:image/jpeg;base64,';
             var imageStr =
@@ -38,7 +70,7 @@ class ViewPost extends Component{
                 img: base64Flag + imageStr
             })
         })
-        
+     
         
     }
     onClickComment(){
@@ -50,14 +82,42 @@ class ViewPost extends Component{
         this.setState({renderComment:false});
       };
       renderCommentorRating(){
-        if(this.state.renderComment)
+        
+        if(this.state.renderRating)
           return (
-              <div><PostComment postId={this.props.post._id}/></div>
+            //   <div><PostComment postId={this.props.post._id}/></div>
+            
+            <div>
+                {this.props.isAuthenticated &&
+                (
+                        <div>
+                            <p>Bạn đánh giá bài viết như thế nào ?</p>
+                            {
+                                this.state.isLoading ? <Rating rating={this.state.point} idPost={this.props.post._id}/>:<p>dcm dang tai</p>
+                            }
+                        </div>
+                )}
+            </div>
             
           ) ;
-          if(this.state.renderRating)
-          return (
-            <div>Rating</div>
+          if(this.state.renderComment)
+          return (<div>
+
+
+              
+                {this.props.isAuthenticated &&
+                (
+                        <div>
+                            {
+                                this.state.post ? <PostComment post={this.props.post} />:<p>dcm dang tai</p>
+                            }
+                        </div>
+                        
+                )}
+                
+               
+          </div>
+            
           ) ;
       }
 
@@ -113,8 +173,10 @@ class ViewPost extends Component{
 }
 function mapToStateProps(state){
     return{
-        photo:state.post.photo
+        photo:state.post.photo,
+        isAuthenticated:state.auth.isAuthenticated,
+        pointRateOfUser:state.post.pointRateOfUser
     }
 }
 
-export default connect(mapToStateProps,{getPhoto})(ViewPost);
+export default connect(mapToStateProps,{getComment,getPhoto})(ViewPost);
