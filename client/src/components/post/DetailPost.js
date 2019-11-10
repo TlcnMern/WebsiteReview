@@ -103,10 +103,10 @@ class DetailPost extends Component{
                         </div>
                         <div className="col-sm-3 anh-BV"> 
                         <span className="txtND-BaiViet">Ảnh minh họa</span><br/>
-                        <img src={this.props.location.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
-                        <img src={this.props.location.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
-                        <img src={this.props.location.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
-                        <img src={this.props.location.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
+                        <img src={this.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
+                        <img src={this.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
+                        <img src={this.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
+                        <img src={this.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
                     </div>
                 </div>
             </div>
