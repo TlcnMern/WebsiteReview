@@ -145,7 +145,7 @@ class ViewPost extends Component{
                             state: { userID: this.props.post.postedBy._id  }}
                             }>
                             <span title={this.props.post.postedBy.name}> <img width="22px " height="22px " className="user_avatar_link " src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/p960x960/72701345_964247143929133_5610529934977007616_o.jpg?_nc_cat=108&cachebreaker=hd&_nc_oc=AQk8kHSTIH3zGKJhJ1_ozUX-5HnogxpMC2Duv07HicF99Xr61wpEk3AjgzHGMkI98f8&_nc_ht=scontent.fsgn2-3.fna&oh=a50ee3696a6513807b6e99fb9bc539e3&oe=5E571E05" alt="Nguyễn Tuấn Vũ "/></span>
-                            {this.props.post.postedBy.name}
+                            <span style={{marginLeft:'10px'}}>{this.props.post.postedBy.name}</span>
                         </Link>
                         &nbsp;&nbsp;<span className="glyphicon glyphicon-time"></span>
                 

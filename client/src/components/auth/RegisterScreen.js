@@ -47,20 +47,22 @@ class Register extends Component{
 
     render(){
         return(
-            <div className="loginright">
-              <h1>Sign In</h1>
-              <p><i>with one of your social</i></p>
-              <p><i>profiles</i></p>
+            <div className="boxLoginorRegister fadeIn second">
               <form className="form-horizontal" method="post" onSubmit={this.onSubmitRegister}>
                         <input type="text" className="fadeIn second" name="name" placeholder="Enter your Name" onChange={this.handleChange} required/>
+                        <span className="symbol-input100"><i className="fa fa-user" aria-hidden="true"></i></span>
                         <input type="text" className="fadeIn second" name="email" placeholder="Enter your Email" onChange={this.handleChange} required/>
+                        <span className="symbol-input100"><i className="fa fa-envelope" aria-hidden="true"></i></span>
                         {/* <input type="datetime-local" className="birthday" name="birthday" onChange={this.handleChange} required/> */}
-                        <select onChange={this.handleChange} name="gender" className="gender" >
+                        <select onChange={this.handleChange} name="gender" className="gender fadeIn second" >
                             <option  value="Nam">Nam</option>
                             <option selected value="Nữ">Nữ</option>
                         </select>
+                        <span className="symbol-input100"><i className="fa fa-venus-mars" aria-hidden="true"></i></span>
                         <input type="password" className="fadeIn second" name="password" placeholder="Enter your NamePassword"onChange={this.handleChange} required/>
+                        <span className="symbol-input100"><i className="fa fa-lock" aria-hidden="true"></i></span>
                         <input type="password" className="fadeIn second" name="confirmPassword" placeholder="Confirm your Password" onChange={this.handleChange} required/>
+                        <span className="symbol-input100"><i className="fa fa-lock" aria-hidden="true"></i></span>
                         <input type="submit" className="fadeIn fourth" value="Register"/>
                     </form>
              

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../action/authAction';
@@ -52,10 +52,7 @@ class Login extends Component {
   render() {
     return (
 
-      <div className="loginleft" id="loginleft">
-      <h1>Login</h1>
-      <p><i>To your Account</i></p>
-      <p className="or"><i>or</i></p>
+      <div className="boxLoginorRegister fadeIn second" id="loginleft">
 
 
 
@@ -74,16 +71,14 @@ class Login extends Component {
             <span className="symbol-input100">	
               <i className="fa fa-lock" aria-hidden="true"></i>
             </span>
-
+            <p className="forgot-password fadeIn second">Quên mật khẩu? Nhấn vào <Link to="/ForgotPassword">đây</Link></p>
 
             
-            <input type="submit" className="fadeIn fourth" value="Log In"/>
+            <input type="submit" className="fadeIn fourth" id="btnLogin" value="Log In"/>
           </form>
           {this.renderAlert()}
 
           <LoginSocial/>
-
-      <p className="forgot">Forgot Password?</p>
 
   </div>
     );

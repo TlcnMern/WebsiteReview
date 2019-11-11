@@ -393,12 +393,16 @@ body {
     border: none;
 }
 
+.boxLoginorRegister {
+    padding: 35px 27px;
+}
+
 .dialogLogin .loginleft {
     width: 50%;
     float: left;
-    /*border-right:1px solid #fff;*/
+    border-right: 1px solid #f1f1f1;
     height: 100%;
-    /*padding:15px 0 0 0;*/
+    padding: 0;
     background-color: #fff;
     position: relative;
 }
@@ -512,16 +516,69 @@ body {
       }*/
 
 .dialogLogin .loginright {
-    /*height:100%;*/
     width: 50%;
     float: left;
     height: 100%;
     margin-left: -5px;
     padding-right: 5px;
-    /* background-image: url('../../images/vu.jpg'); */
-    background-color: #fff;
+    background-color: #ffffff;
     background-size: cover;
     text-align: center;
+}
+
+#btnLogin {
+    color: rgb(74, 74, 74);
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 14px;
+    user-select: none;
+    margin-bottom: 15px;
+    width: 70%;
+    height: 41px;
+    line-height: 41px;
+    background: rgb(253, 216, 53);
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    padding: 0px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.btnLoginSocial {
+    display: inline-block !important;
+    font-weight: 400 !important;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer !important;
+    white-space: nowrap;
+    font-size: 14px !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none;
+    user-select: none !important;
+    margin-bottom: 15px;
+    width: 100% !important;
+    color: rgb(255, 255, 255) !important;
+    border-width: 0px !important;
+    border-style: initial !important;
+    border-color: initial !important;
+    border-image: initial !important;
+    padding: 0px !important;
+    border-radius: 4px !important;
+    outline: none;
+    background-color: rgb(223, 74, 50) !important;
+}
+
+.btnLoginSocial span {
+    padding: 10px !important;
+    margin: 10px;
 }
 
 .loginright h1 {
@@ -555,6 +612,22 @@ body {
     border: 1px solid #F8F8F8;
     background-color: #F8F8F8;
     border-radius: 25px;
+    height: 34px;
+    line-height: 34px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(204, 204, 204);
+    border-image: initial;
+    border-radius: 4px;
+    padding: 6px 12px;
+    outline: none;
+}
+
+.forgot-password {
+    font-size: 12px;
+    margin: 20px 0px 30px !important;
+    color: #858585;
 }
 
 .loginright form input:focus {
@@ -579,6 +652,15 @@ body {
     background-color: #FFBF37;
     color: #fff;
     font-weight: bold;
+}
+
+.Left-Content {
+    width: 360px;
+    float: left;
+    padding: 45px 30px;
+    background: rgb(255, 255, 255);
+    border-radius: 6px 0px 0px 6px;
+    overflow: hidden;
 }
 
 .social button {
@@ -631,10 +713,39 @@ body {
 }
 
 .thumbnailgallery {
-    margin-bottom: 40px;
-    width: 100%;
-    height: 108px;
+    height: 100%;
     overflow: hidden;
+    margin-bottom: 40px;
+    margin-left: 10px;
+    margin-top: 20px;
+    overflow: hidden;
+    background: #fff;
+    width: 98%;
+    margin-right: 10px;
+    border: 1px solid #f1f1f1;
+}
+
+.thumbnailgallery .slick-arrow {
+    display: block !important;
+    width: 70px;
+    height: 70px;
+    margin-left: 5px;
+    z-index: 2;
+}
+
+.thumbnailgallery .slick-next:before,
+.slick-prev:before {
+    color: #1DA1F2 !important;
+}
+
+.thumbnailgallery .slick-list {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 98%;
+}
+
+.thumbnailgallery .slick-list .slick-slide {
+    padding: 5px 5px 5px 5px;
 }
 
 .showrooms a.logo {
@@ -865,8 +976,7 @@ main {
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
-    color: #42b1fa;
-    ;
+    color: #b4b4b4;
 }
 
 .nav li:hover,

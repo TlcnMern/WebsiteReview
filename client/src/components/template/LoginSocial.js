@@ -15,10 +15,10 @@ class LoginSocial extends Component {
 
     render() {
         return (
-            <div style={{marginLeft: '120px',marginTop: '50px'}}>
-                <GoogleLogin
+            <div>
+                <GoogleLogin className='fadeIn fourth btnLoginSocial'
                     clientId='185189707578-c9cj84i6p7cjnhgpglik4nda5f6r45eh.apps.googleusercontent.com'
-                    buttonText="Login with Google"
+                    buttonText="Đăng nhập bằng Google"
                     onSuccess={this.googleResponse}
                     onFailure={this.onFailure}
 

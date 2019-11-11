@@ -15,6 +15,25 @@ import RegisterScreen from './RegisterScreen';
 
 
 class Login extends Component {
+  
+  
+  constructor(props){
+    super(props);
+    this.state={
+        renderLogin:true,
+        renderRegister:false
+    };
+    this.onClickLogin=this.onClickLogin.bind(this);
+    this.onClickRegister=this.onClickRegister.bind(this);
+  }
+  onClickLogin(){
+    this.setState({renderLogin:true});
+    this.setState({renderRegister:false});
+  };
+  onClickRegister(){
+      this.setState({renderRegister:true});
+      this.setState({renderLogin:false});
+  };
   state = {
     modal: false,
     email: '',
@@ -52,7 +71,71 @@ class Login extends Component {
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  
+  renderleftContent(){
+    const {from} = this.props.location.state || {
+      from: {
+        pathname: '/'
+      }
+    };
+    if (this.props.isAuthenticated) {
+      return (<Redirect to={from}/>);
+    }
+    if(this.state.renderLogin)
+      return (
+        <div className="loginleft" id="loginleft">
+        
+        <div className="Left-Content fadeIn second">
+          <h2>Đăng nhập</h2>
+          <p>Đăng nhập để theo dõi đơn hàng, lưu <br/>danh sách sản phẩm yêu thích, nhận<br/> nhiều ưu đãi hấp dẫn.</p>
+          <img src="https://frontend.tikicdn.com/_new-next/static/img/graphic-map.png" alt="vu"/>
+        </div>
+         </div>
+        
+      ) ;
+      if(this.state.renderRegister)
+      return (
+        <div className="loginleft" id="loginleft">
+        
+        <div class="Left-Content fadeIn second">
+          <h2>Tạo tài khoản</h2>
+          <p>Tạo tài khoản để theo dõi đơn hàng, lưu <br/>danh sách sản phẩm yêu thích, nhận<br/> nhiều ưu đãi hấp dẫn.</p>
+          <img src="https://frontend.tikicdn.com/_new-next/static/img/graphic-map.png" alt="vu"/>
+          </div>
+         </div>
+        
+      ) ;
+  }
+  rendermyMenu(){
+    const {from} = this.props.location.state || {
+      from: {
+        pathname: '/'
+      }
+    };
+    if (this.props.isAuthenticated) {
+      return (<Redirect to={from}/>);
+    }
+    if(this.state.renderLogin)
+      return (
+        <div className="loginright">
+            <ul className="nav">
+                <li  className="actived"><span onClick={this.onClickLogin} >Login</span></li>
+                <li><span onClick={this.onClickRegister}>Register</span></li>
+            </ul>
+            <LoginScreen/>
+        </div>
+      ) ;
+      if(this.state.renderRegister)
+      return (
+        <div className="loginright">
+            <ul className="nav">
+                <li ><span onClick={this.onClickLogin}>Login</span></li>
+                <li className="actived"><span onClick={this.onClickRegister} >Register</span></li>
+            </ul>
+            <RegisterScreen/>
+          
+        </div>
+      ) ;
+  }
   
   render() {
     const {from} = this.props.location.state || {
@@ -64,49 +147,12 @@ class Login extends Component {
       return (<Redirect to={from}/>);
     }
     return (
-
-      // <div className="boxContent wrapper fadeInDown">
-      //   <div id="formContent">
-      //     <div className="fadeIn first">
-      //       <img src={logo} id="icon" alt="User Icon" />
-      //     </div>
-
-      //     <form onSubmit= {this.onSubmit}>
-            
-      //       <span>
-      //         <input type="text" id="login" className="fadeIn second" name="email" placeholder="email" onChange={this.onChange} />
-      //       </span>
-      //       <span class="symbol-input100">
-      //         <i class="fa fa-envelope" aria-hidden="true"></i>
-      //       </span>
-
-      //       <span>
-      //         <input type="password" id="password" className="fadeIn third" name="password" placeholder="password" onChange={this.onChange} />
-      //       </span>
-      //       <span class="symbol-input100">	
-      //         <i class="fa fa-lock" aria-hidden="true"></i>
-      //       </span>
-
-
-            
-      //       <input type="submit" className="fadeIn fourth" value="Log In"/>
-      //     </form>
-      //     {this.renderAlert()}
-      //     <LoginSocial/>
-      //     <div style={{marginTop:"10px"}} id="formFooter">
-      //       <span className="underlineHover">Forgot Password?</span>
-      //     </div>
-
-      //   </div>
-      // </div>
-
-
       <div className="boxContent" >
-      <div className="dialogLogin">
-          <LoginScreen/>
-          <RegisterScreen/>
-          
+        <div className="dialogLogin">
+        {this.renderleftContent()}  
+        {this.rendermyMenu()}  
         </div>
+         
       </div>
     );
   }
