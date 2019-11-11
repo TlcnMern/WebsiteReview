@@ -100,127 +100,6 @@ const postByID = (req, res, next, id) => {
     next()
   })
 }
-//commnet
-const checkAuthorizedComment = (req, res) => {
-  const commentID=req.body.commentID;
-  const userID=req.session.userId;
-  Comment.findOne({_id:commentID,commentBy:userID}, (err, comment) => {
-    if (err || !comment){
-      console.log(err);
-      return res.status('401').json({
-        error: "User not authorized"
-      });
-    }
-    return res.json(true);
-  })
-}
-  //get comment and sub comment of 1 post
-const getComment=(req,res)=>{
-  Post.find({_id:req.post._id})
-  .populate({
-    path:'comments',
-    populate: { path: 'commentBy',select:'_id name' }
-  })
-  .populate({
-    path:'comments',
-    populate: { path: 'subComment.commentBy',select:'_id name'}
-  })
-  .exec((err, posts) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(posts[0].comments);
-  })
-}
-  //add comment
-const addComment=(req,res,next)=>{
-  let comment=new Comment(req.body);
-  comment.save((err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    Post.findByIdAndUpdate(req.body.postId, {$push: {comments: result._id}}, {new: true})
-    .populate('postedBy', '_id name')
-    .populate({
-      path:'comments',
-      populate: { path: 'commentBy',select:'_id name' }
-    })
-    .exec((err, result2) => {
-      if (err) {
-        return res.status(400).json({
-          error: errorHandler.getErrorMessage(err)
-        })
-      }
-      res.json(result2.comments);
-    })
-  })
-}
-  //delete comment
-const deleteComment=(req,res)=>{
-  const commentId= req.body.commentId;
-  Comment.remove({_id:commentId},(err,result)=>{
-    if(err){
-      console.log(err);
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      });
-    }
-    Post.findByIdAndUpdate({_id:req.body.postId},{$pull:{comments:{$in: [commentId]}}}, {new: true})
-    .populate({
-      path:'comments',
-      populate: { path: 'commentBy',select:'_id name' }
-    })
-    .populate({
-      path:'comments',
-      populate: { path: 'subComment.commentBy',select:'_id name'}
-    })
-    .exec((err, result2) => {
-      if (err) {
-        return res.status(400).json({
-          error: errorHandler.getErrorMessage(err)
-        })
-      }
-      res.json(result2.comments)
-    })
-  });   
-}
-  //update comment
-const updateComment = (req, res) => {
-  const commentId=req.body.commentId;
-  const content =req.body.content;
-  Comment.updateOne({_id:commentId},{content:content},(err,result)=>{
-    if(err){
-      console.log(err);
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(result);
-  })
-}
-  //add subComment
-const addSubComment=(req,res,next)=>{
-  var subComment={};
-  subComment.content=req.body.content;
-  subComment.commentBy=req.body.userId;
-  Comment.findByIdAndUpdate({'_id':req.body.commentId}, {$push: {'subComment': subComment}},{new: true})
-  .populate('subComment.commentBy')
-  .exec((err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(result.subComment);
-  })
-}
 //rating
   //add rating of user
 const addRating=(req,res)=>{
@@ -284,13 +163,7 @@ module.exports={
     getNewFeeds:getNewFeeds,
     photo:photo,
     postByID:postByID,
-    addComment:addComment,
     addRating:addRating,
     checkRatingAndShow:checkRatingAndShow,
-    updateRatingOfUser:updateRatingOfUser,
-    addSubComment:addSubComment,
-    deleteComment:deleteComment,
-    getComment:getComment,
-    updateComment:updateComment,
-    checkAuthorizedComment:checkAuthorizedComment
+    updateRatingOfUser:updateRatingOfUser
 }

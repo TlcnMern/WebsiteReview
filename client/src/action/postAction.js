@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../action/helper';
-import { GET_COMMENT, AUTHORIZED } from './type';
+import { GET_COMMENT} from './type';
 
 export const newPost = (userID, credentials, post) => {
     const config = {
@@ -39,16 +39,16 @@ export const GetNewFeeds = () => {
 };
 
 export const getPhoto = (idpost) => {
-        return axios.get(`${API_URL}/post/photo/` + idpost)
-            .then(res => {
-                return res.data;
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-    //comment
-export const checkAuthorizedComment = (jwt, userID, commentID) => dispatch => {
+    return axios.get(`${API_URL}/post/photo/` + idpost)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
+//comment
+export const checkAuthorizedComment = (jwt, userID, commentID) => {
     const config = {
         headers: {
             'Accept': 'application/json',
@@ -57,11 +57,28 @@ export const checkAuthorizedComment = (jwt, userID, commentID) => dispatch => {
         }
     }
     const body = JSON.stringify({ commentID: commentID });
-    axios.post(`${API_URL}/post/checkAuthorizedComment/` + userID, body, config)
-        .then(res => dispatch({
-            type: AUTHORIZED,
-            payload: res.data
-        }))
+    return axios.post(`${API_URL}/post/checkAuthorizedComment/` + userID, body, config)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
+
+export const checkAuthorizedSubComment = (jwt, userID, commentId, subCommentId) =>{
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt.t
+        }
+    }
+    const body = JSON.stringify({ commentId: commentId,subCommentId:subCommentId });
+    return axios.post(`${API_URL}/post/checkAuthorizedSubComment/` + userID, body, config)
+        .then(res => {
+            return res.data;
+        })
         .catch(err => {
             console.log(err);
         })
@@ -106,6 +123,30 @@ export const deleteComment = (postId, userId, credentials, commentId) => dispatc
             });
         })
         .catch(err => {
+            return err;
+        });
+}
+
+export const deleteSubComment = (commentId, userId, credentials, subCommentId) => {
+    const body = {commentId: commentId, subCommentId: subCommentId }
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + credentials.t
+        },
+        data:body
+    }
+
+
+    console.log(body)
+    return axios.delete(`${API_URL}/post/deleteSubComment/` + userId,config )
+        .then(res => {
+            console.log(res.data)
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err)
             return err;
         });
 }
@@ -159,6 +200,25 @@ export const updateComment = (commentId, userId, credentials, content) => {
     return axios.put(`${API_URL}/post/updateComment/` + userId, body, config)
         .then(res => {
             console.log(res.data);
+        })
+        .catch(err => {
+            return err;
+        });
+}
+
+//update subcomment
+export const updateSubComment = (subCommentId, userId, credentials, content) => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + credentials.t
+        }
+    }
+    const body = JSON.stringify({ content: content , subCommentId:subCommentId});
+    return axios.put(`${API_URL}/post/updateSubComment/` + userId, body, config)
+        .then(res => {
+            return res.data;
         })
         .catch(err => {
             return err;

@@ -9,8 +9,7 @@ class Comment extends Component{
 
 
     state = {
-        content: '',
-        comments:[]
+        content: ''
     };
     handleChange= name => event => {
         this.setState({[name]: event.target.value});
@@ -70,10 +69,11 @@ class Comment extends Component{
 
 
     render(){
+        // console.log( this.props.listComment)
         return(
             <div>
                 {this.renderCreateComment()}
-
+                
                 {
                     this.props.listComment.length>0? this.props.listComment.map((item, i) => {
                         return(<ViewComment postId={this.props.postId} key={i} comment={item}/>);

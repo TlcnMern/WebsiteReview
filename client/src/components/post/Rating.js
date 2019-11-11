@@ -15,9 +15,9 @@ class Rating extends Component{
             temp_rating: null
         }
     }
-    componentWillReceiveProps(){
-        this.setState({rating:this.props.rating})
-    }
+    // componentWillReceiveProps(){
+    //     this.setState({rating:this.props.rating})
+    // }
     rate(rating) {
       const jwt=auth.isAuthenticated();
       const userID=jwt.user._id;
