@@ -1095,8 +1095,12 @@ main {
     font-size: 14px;
 }
 
+.anh-BV {
+    margin: 15px !important;
+}
+
 .anh-BV img:hover {
-    transform: scale(1.5);
+    transform: scale(5);
 }
 
 .anh-BV img {
