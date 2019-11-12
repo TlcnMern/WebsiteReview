@@ -94,7 +94,7 @@ class Login extends Component {
       return (
         <div className="loginleft" id="loginleft">
         
-        <div class="Left-Content fadeIn second">
+        <div className="Left-Content fadeIn second">
           <h2>Tạo tài khoản</h2>
           <p>Tạo tài khoản để theo dõi đơn hàng, lưu <br/>danh sách sản phẩm yêu thích, nhận<br/> nhiều ưu đãi hấp dẫn.</p>
           <img src="https://frontend.tikicdn.com/_new-next/static/img/graphic-map.png" alt="vu"/>
