@@ -6,9 +6,7 @@ import { login } from '../../action/authAction';
 import { clearErrors } from '../../action/errorActions';
 import "../../public/stylesheets/partials/login.css"
 import "bootstrap/dist/css/bootstrap.min.css";
-// import logo from "../../public/images/logo192.png";
 import {Redirect} from 'react-router-dom';
-// import LoginSocial from '../template/LoginSocial';
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
 

@@ -54,7 +54,7 @@ class profileEdit extends Component{
                 <li><span className="lstItem  lstAbtMe">Đổi mật khẩu</span></li>
             </ul>
             <article className="ContentAbtMe col-lg-9">
-                <div className="row rowName">
+                {/* <div className="row rowName">
                     <div className="AvaCol">
                         <div className="AvaLine">
                             <button className="btnAva" title="Thay đổi ảnh đại diện">
@@ -67,7 +67,7 @@ class profileEdit extends Component{
                         <h1 className="NameLine" title="nguyen_vux">nguyen_vux</h1>
                         <button className="btnName" type="button">Thay đổi ảnh đại diện</button>
                     </div>
-                </div>
+                </div> */}
                 <div className="row rowProFile">
                     <aside className="txtProfileCol"><label htmlFor="pepName">Tên</label></aside>
                     <div className="inProfileCol"><input className="inFName" aria-required="true" name="name" id="pepName" type="text" value={this.state.name} onChange={this.onTodoChange}/></div>

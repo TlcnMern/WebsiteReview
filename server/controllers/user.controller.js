@@ -25,9 +25,7 @@ const register = (req, res) => {
         local:{
           email:req.body.email
         },
-        password:req.body.password,
-        gender:req.body.gender
-
+        password:req.body.password
       });
 
       user.save((err, result) => {

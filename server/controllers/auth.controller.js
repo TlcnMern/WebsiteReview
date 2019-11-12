@@ -5,7 +5,6 @@ var expressJwt = require('express-jwt');
 const config =require('../config/config');
 
 const signin = (req, res) => {
-  console.log(req.body);
   User.findOne({
     "local.email": req.body.email
   }, (err, user) => {
@@ -26,7 +25,7 @@ const signin = (req, res) => {
     
     return res.json({
       token,
-      user: {_id: user._id}
+      user: {_id: user._id, avatar:user.avatar}
     });
 
   })

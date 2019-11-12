@@ -7,6 +7,7 @@ import {checkRatingAndShow} from '../../action/postAction';
 import {connect} from 'react-redux';
 import {getComment} from '../../action/postAction';
 import {getPhoto} from '../../action/postAction';
+import CircularIndeterminate from '../template/loading';
 
 class DetailPost extends Component{
     state={
@@ -118,7 +119,7 @@ class DetailPost extends Component{
                     <div>
                         <p>Bạn đánh giá bài viết như thế nào ?</p>
                         {
-                            this.state.isLoading ? <Rating rating={this.state.point} idPost={post._id}/>:<p>dcm dang tai</p>
+                            this.state.isLoading ? <Rating rating={this.state.point} idPost={post._id}/>:<CircularIndeterminate></CircularIndeterminate>
                         }
                     </div>
             )}

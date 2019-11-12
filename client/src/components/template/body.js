@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.min.css';
 import "../../public/stylesheets/partials/style.css"
+import {API_URL,auth} from '../../action/helper';
+import man from '../../public/images/man.png'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -498,10 +500,18 @@ class MainFeed extends Component{
         </ul>  ) ;
       }
       renderPersonalorLogin(){
+        const avatar=auth.getAvatar();
+        var urlAvatar;
+        if(avatar){
+            urlAvatar=API_URL+'/'+avatar;
+        }
+        else{
+            urlAvatar=man;
+        }
         if (this.props.isAuthenticated) {
             return (
             <div className="imgAvatar" id="clsimgAvatar">
-                <img id="anhdd" src="https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-9/p720x720/72482897_955642461456268_3228701545478488064_o.jpg?_nc_cat=102&cachebreaker=hd&_nc_oc=AQkp7PgHFmqowW2nscPch3Ts7CgsISmdsSExZ5_qfKdVIN5tAlqBz4H5tTfG665daao&_nc_ht=scontent.fsgn2-2.fna&oh=18ed1cfefbaf148fd48d05f3d4b25684&oe=5E21D2EA" alt="imgUser" />
+                <img id="anhdd" src={urlAvatar} alt="imgUser" />
                 <Link to="ViewProfile">Nguyen_vux <br/></Link>
             </div>
             );
@@ -528,11 +538,6 @@ class MainFeed extends Component{
                 {this.rendermyMenu()}   
 
             </div>
-
-
-        
-
-
             <div className="boxTopContent ">
                 <div className="bg-white ">
                 <Link to="NewPost">
@@ -571,6 +576,6 @@ class MainFeed extends Component{
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
+    isAuthenticated: state.auth.isAuthenticated
   });
   export default connect(mapStateToProps)(MainFeed);

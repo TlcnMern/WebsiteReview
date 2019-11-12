@@ -46,9 +46,11 @@ const userSchema = new Schema({
 
   salt: String,
 
-  photo: {
-    data: Buffer,
-    contentType: String
+  avatar: {
+    type:String
+  },
+  background: {
+    type:String
   },
   created: {
     type: Date,

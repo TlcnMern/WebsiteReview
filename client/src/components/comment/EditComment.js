@@ -13,7 +13,6 @@ class EditComment extends Component {
     onClickSave(){
         if(this.props.subCommentId){
             const subCommentId=this.props.subCommentId;
-            const commentId=this.props.commentId;
             const jwt=auth.isAuthenticated();
             const userID=jwt.user._id;
             updateSubComment(subCommentId,userID,{t:jwt.token},this.state.content).then((data)=>{

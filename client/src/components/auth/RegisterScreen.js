@@ -53,11 +53,6 @@ class Register extends Component{
                         <span className="symbol-input100"><i className="fa fa-user" aria-hidden="true"></i></span>
                         <input type="text" className="fadeIn second" name="email" placeholder="Enter your Email" onChange={this.handleChange} required/>
                         <span className="symbol-input100"><i className="fa fa-envelope" aria-hidden="true"></i></span>
-                        {/* <input type="datetime-local" className="birthday" name="birthday" onChange={this.handleChange} required/> */}
-                        <select onChange={this.handleChange} name="gender" className="gender fadeIn second" >
-                            <option  value="Nam">Nam</option>
-                            <option selected value="Nữ">Nữ</option>
-                        </select>
                         <span className="symbol-input100"><i className="fa fa-venus-mars" aria-hidden="true"></i></span>
                         <input type="password" className="fadeIn second" name="password" placeholder="Enter your NamePassword"onChange={this.handleChange} required/>
                         <span className="symbol-input100"><i className="fa fa-lock" aria-hidden="true"></i></span>

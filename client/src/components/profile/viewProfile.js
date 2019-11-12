@@ -8,6 +8,8 @@ import ProfileEdit from './profileEdit';
 import { connect } from 'react-redux';
 import {fetch} from '../../action/userAction';
 import {auth} from '../../action/helper';
+import { API_URL } from '../../action/helper';
+import man from '../../public/images/man.png';
 
 class viewProfile extends Component {
     componentWillMount(){
@@ -107,8 +109,16 @@ class viewProfile extends Component {
       }
 
     render() {
-        return (
 
+        const avatar=auth.getAvatar();
+        var urlAvatar;
+        if(avatar){
+            urlAvatar=API_URL+'/'+avatar;
+        }
+        else{
+            urlAvatar=man;
+        }
+        return (
         <div>
               <div className="boxContent">
                 <div className="container">
@@ -119,11 +129,11 @@ class viewProfile extends Component {
                         <div className="row">
                             <div className="left col-lg-4">
                                 <div className="photo-left">
-                                    <img className="photo" src="https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-9/p720x720/72482897_955642461456268_3228701545478488064_o.jpg?_nc_cat=102&cachebreaker=hd&_nc_oc=AQkp7PgHFmqowW2nscPch3Ts7CgsISmdsSExZ5_qfKdVIN5tAlqBz4H5tTfG665daao&_nc_ht=scontent.fsgn2-2.fna&oh=18ed1cfefbaf148fd48d05f3d4b25684&oe=5E21D2EA"  alt="img"/>
-                                    <div className="active"></div>
+                                    <img className="photo" src={urlAvatar} alt="img"/>
+                                    <button className="btnPhotoin-remove " type="button">@</button>
                                 </div>
                                 <h4 className="name">{this.props.profile.name}</h4>
-                                <p className="info">DEVELOPER</p>
+                                <p className="info">BIỆT DANH</p>
                                 <p className="info">{this.props.profile.email}</p>
                                 <div className="stats row">
                                     <div className="stat col-xs-4" style={{paddingRight: '50px'}}>
@@ -142,10 +152,8 @@ class viewProfile extends Component {
 
                             </div>
                             <div className="right col-lg-8">
-                                <span className="follow">Follow</span>
+                                {/* <span className="follow">Follow</span> */}
                                 {this.rendermyMenu()}  
-                   
-                                
                             </div>
                         </div>
                     </main>

@@ -15,8 +15,7 @@ export function login({ email, password }) {
       // cookie.save('user', response.data.user, { path: '/' });
       auth.authenticate(response.data);   //set data(token+user) to sessionStorge
       dispatch({         
-        type: LOGIN_SUCCESS,
-        payload: response.data 
+        type: LOGIN_SUCCESS
       });
       // window.location.href = `${CLIENT_ROOT_URL}`
     })
