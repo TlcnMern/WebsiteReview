@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Comment from '../comment/Comment';
 import Rating from './Rating';
+import ImageSlider from './sliderImage';
 import {auth} from '../../action/helper';
 import {checkRatingAndShow} from '../../action/postAction';
 import {connect} from 'react-redux';
@@ -67,43 +68,46 @@ class DetailPost extends Component{
             <div className="boxContent">
             <div className="CT-BaiViet">
                 <div className="TitleBV">{post.title}</div>
-                <div className="SPBV"><span>{post.productReview}</span></div>
+                
                 <div className="NDBV">
                     <div className="row GT-BaiViet">
                         <div className="col-sm-5 TLBV">
-                            <span className="txtTomTat">Giới thiệu</span><br/>
-                            <span>- Người đăng: 
+                        <ImageSlider/>
+                            
+                        </div>
+                        <div className="col-sm-7 TomTat">
+                        <div className="SPBV">
+                            <span>{post.productReview}</span>
+                            <span> <Rating rating={3} disabled={true} /></span>
+                            <span style={{    fontSize: '13px'}}>Thể loại: <Link to="">{post.theme}</Link></span><br/>
+                        </div>
+                        <div className="clsTomtat">
+                            <span>{post.contentSummary}</span><br/>
+                        </div>
+                        <div className="clsTomtat">
+
+                            <span>Người đăng: 
                                 <Link to={
                                     {pathname: '/GuestViewProfile',
                                     state: { userID: post.postedBy._id  }}}>
                                     {post.postedBy.name}
                                 </Link>
                             </span><br/>
-                            <span>- Sản phẩm review: {post.productReview}</span><br/>
-                            <span>- Chủ đề: {post.theme}</span><br/>
-                            <span>- Ngày đăng: 
+                            <span>Sản phẩm review: {post.productReview}</span><br/>
+                            <span>Chủ đề: {post.theme}</span><br/>
+                            <span>Ngày đăng: 
                                 {new Intl.DateTimeFormat('en-GB', { 
                                     month: '2-digit', 
                                     day: '2-digit',
                                     year: 'numeric', 
                                     }).format(new Date(post.created))}
                             </span><br/>
-                            <span>- Link:<a href={post.link}>{post.link}</a></span><br/>
-                            <span> <Rating rating={3} disabled={true} /></span>
+                            <span>Link:<a href={post.link}>{post.link}</a></span><br/>
                         </div>
-                        <div className="col-sm-7 TomTat">
-                            <span className="txtTomTat">Tóm tắt</span><br/>
-                            <span>{post.contentSummary}</span>
-                            <div className="anh-BV">
-                                <span className="row txtTomTat txtND-BaiViet">Ảnh minh họa</span><br/>
-                                <div className="row">
-                                    <img src={this.state.img} width="80" height="80" alt="2R4U" style={{margin:'5px'}}/>
-                                    <img src={this.state.img} width="80" height="80" alt="2R4U" style={{margin:'5px'}}/>
-                                    <img src={this.state.img} width="80" height="80" alt="2R4U" style={{margin:'5px'}}/>
-                                    <img src={this.state.img} width="80" height="80" alt="2R4U" style={{margin:'5px'}}/>
                             
-                                </div>
-                            </div>
+                            
+                            
+                            
                         </div>
                     </div> 
                     <div className="row MainBV ">
