@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_URL} from './helper';
+import {API_URL, auth} from './helper';
 import { returnErrors } from './errorActions';
 
 import {
@@ -68,9 +68,15 @@ export const update = (userID, credentials, user) => {
     }
   }
   const body=user;
+  console.log(body);
   return axios.put(`${API_URL}/users/editProfile/`+userID,body,config)
   .then(res=>{
-      return true;
+    console.log(res.data);
+    if(res.data.avatar){
+      sessionStorage.removeItem('avatar')
+      auth.setAvatar(res.data.avatar);
+    }  
+    return true;
   })
   .catch(err=>{
       return err;

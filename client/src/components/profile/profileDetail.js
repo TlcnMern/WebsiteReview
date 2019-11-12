@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetch } from '../../action/userAction';
-import { auth } from '../../action/helper';
 
 class profileDetail extends Component {
-
-    componentWillMount() {
-        if (this.props.authenticate)
-            this.props.fetch(auth.isAuthenticated().user._id, auth.isAuthenticated().token);
-    }
-
     render() {
         return (
             <div className="row clsAbtMe">
@@ -27,6 +20,7 @@ class profileDetail extends Component {
 
                             </div>
                         </div>
+
                         <div className="NameCol">
                             <h1 className="NameLine">{this.props.profile.name}</h1>
                         </div>
