@@ -99,7 +99,7 @@ class NewPost extends Component{
                                     {this.state.imgs && [...this.state.imgs].map((file,i)=>(
                                     <div key={i}>
                                         <img className="imgPhotoin" aria-hidden style={{maxWidth:'100px', height:'100px'}} src={URL.createObjectURL(file)}  alt="Picture of me taking a photo of an image" />
-                                        <button className="btnPhotoin-remove" type="button" value={file.name} onClick={this.removeImage}><i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <button className="btnPhotoin-remove" type="button" value={file.name} onClick={this.removeImage}><i className="fa fa-times" aria-hidden="true"></i></button>
                                     </div>))}
                                     </div>
                                     <p>Tải lên ảnh đại diện cho bài viết tại đây.<br/>Vui lòng chọn ít nhất 1 ảnh để làm avatar.<br/>Lưu ý: Bạn có thể chọn nhiều ảnh, kích thước khuyến khích bé hơn 2mb</p>

@@ -94,35 +94,39 @@ class DetailPost extends Component{
                         <div className="col-sm-7 TomTat">
                             <span className="txtTomTat">Tóm tắt</span><br/>
                             <span>{post.contentSummary}</span>
+                            <div className="anh-BV">
+                                <span className="row txtTomTat txtND-BaiViet">Ảnh minh họa</span><br/>
+                                <div className="row">
+                                    <img src={this.state.img} width="80" height="80" alt="2R4U" style={{margin:'5px'}}/>
+                                    <img src={this.state.img} width="80" height="80" alt="2R4U" style={{margin:'5px'}}/>
+                                    <img src={this.state.img} width="80" height="80" alt="2R4U" style={{margin:'5px'}}/>
+                                    <img src={this.state.img} width="80" height="80" alt="2R4U" style={{margin:'5px'}}/>
+                            
+                                </div>
+                            </div>
                         </div>
                     </div> 
                     <div className="row MainBV ">
-                        <div className="col-sm-9 ND-BaiViet">
+                        <div className="col-sm-12 ND-BaiViet">
                             <span className="txtND-BaiViet">Nội dung Review</span><br/>
                             <span>{post.content}</span>
                         </div>
-                        <div className="col-sm-3 anh-BV"> 
-                        <span className="txtND-BaiViet">Ảnh minh họa</span><br/>
-                        <img src={this.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
-                        <img src={this.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
-                        <img src={this.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
-                        <img src={this.state.img} width="150" height="260" alt="2R4U" style={{marginbottom:'10px'}}/>
+                        
                     </div>
                 </div>
+                <div className="CommentBV">
+                    <Comment postId={post._id}/> 
+                </div>
+                {this.props.isAuthenticated &&
+                (
+                <div>
+                    <p>Bạn đánh giá bài viết như thế nào ?</p>
+                    {
+                        this.state.isLoading ? <Rating rating={this.state.point} idPost={post._id}/>:<p>dcm dang tai</p>
+                    }
+                </div>
+                 )}
             </div>
-            <div className="CommentBV">
-                <Comment postId={post._id}/> 
-            </div>
-            {this.props.isAuthenticated &&
-            (
-                    <div>
-                        <p>Bạn đánh giá bài viết như thế nào ?</p>
-                        {
-                            this.state.isLoading ? <Rating rating={this.state.point} idPost={post._id}/>:<p>dcm dang tai</p>
-                        }
-                    </div>
-            )}
-        </div>
         </div>
             
         );
