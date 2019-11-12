@@ -18,6 +18,11 @@ export const auth = {
     else
       return false
   },
+  setAvatar(avatar) {
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem('avatar', JSON.stringify(avatar));
+    }
+  },
   authenticate(jwt) {
     if (typeof window !== "undefined") {
       sessionStorage.setItem('jwt', JSON.stringify(jwt));

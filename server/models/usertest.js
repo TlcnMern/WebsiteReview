@@ -43,6 +43,10 @@ const userSchema = new Schema({
   gender: {
     type: String
   },
+  
+  address: {
+    type: String
+  },
 
   salt: String,
 

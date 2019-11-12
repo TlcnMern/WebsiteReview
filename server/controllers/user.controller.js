@@ -58,7 +58,7 @@ const getInfoUser=(req, res)=>{
         error: errorHandler.getErrorMessage(err)//No user could be found for this ID
       })
     }
-    const userInfo={_id: user._id, name: user.name, email: user.local.email || user.google.email,gender:user.gender,created:user.created};
+    const userInfo={_id: user._id, name: user.name, email: user.local.email || user.google.email,gender:user.gender,created:user.created,address:user.address,birthday:user.birthday};
     return res.status(200).json({userInfo});
   });
 }
@@ -82,21 +82,13 @@ const UserById=(req,res,next,userID)=>{
       })
 }
 
-const photo = (req, res, next) => {
-  if(req.profile.photo.data){
-    res.set("Content-Type", req.profile.photo.contentType);
-    return res.send(req.profile.photo.data);
-  }
-  next();
-}
-
-const defaultPhoto = (req, res) => {
-  return res.sendFile(process.cwd()+profileImage);
-}
 //update info user
 const update = (req, res, next) => {
   let form = new formidable.IncomingForm();
+  form.uploadDir='./dist';
   form.keepExtensions = true;
+  form.maxFieldsSize=10*1024*1024;//10MB
+
   form.parse(req, (err, fields, files) => {
     if (err) {
       return res.status(400).json({
@@ -104,12 +96,10 @@ const update = (req, res, next) => {
       });
     }
     let user = req.profile;
-
     user = _.extend(user, fields);
     user.updated = Date.now();
     if(files.photo){
-      user.photo.data = fs.readFileSync(files.photo.path);
-      user.photo.contentType = files.photo.type;
+      user.avatar=files.photo.path.toString().replace("\\","/");
     }
     user.save((err, result) => {
       if (err) {
@@ -117,9 +107,9 @@ const update = (req, res, next) => {
           error: errorHandler.getErrorMessage(err)
         });
       }
-      user.hashed_password = undefined;
-      user.salt = undefined;
-      res.json(user);
+      result.hashed_password = undefined;
+      result.salt = undefined;
+      res.json(result);
     })
   })
 }
@@ -192,8 +182,6 @@ module.exports = {
   register: register,
   getInfoUser:getInfoUser,
   UserById: UserById,
-  photo: photo,
-  defaultPhoto:defaultPhoto,
   update:update,
   checkFollow:checkFollow,
   addFollowing:addFollowing,
