@@ -1409,32 +1409,43 @@ a:visited {
 
 .clsDangBai .avatar {
     text-align: center;
+    padding: 10px;
+    margin: 5px;
 }
 
 .avatar button {
-    background: none;
-    line-height: 26px;
-    border-radius: 10px;
-    border: 1px solid #ff0000;
+    border: 1px solid #495057;
     text-align: center;
     font-family: Roboto;
     font-weight: 600;
+    color: white;
+    position: static;
     font-size: 12px;
+    /* top: -30px; */
+    box-shadow: 0 0 1px 2px #d1d1d1;
     text-transform: uppercase;
-    min-width: 95px;
+    /* margin-top: -50px; */
+    opacity: 0.7;
+    border-radius: 3px;
 }
 
 .avatar p {
     margin-top: 5px;
     margin-bottom: 0;
     font-family: Roboto;
-    font-size: 12px;
-    color: #000;
-    font-weight: 600;
+    font-size: 13px;
+    text-align: justify;
+    color: #6d6d6d;
 }
 
 .mt-10 {
+    box-shadow: 0 0 10px 4px #f1f1f1;
     margin-top: 10px;
+    margin-left: -20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    border: 2px solid #f1f1f1;
 }
 
 .box_input {
@@ -1444,24 +1455,34 @@ a:visited {
 }
 
 .pr-0 {
-    padding-right: 0 !important;
+    padding: 5px !important;
 }
 
 .content_form label {
     font-family: Roboto;
     font-weight: bold;
     text-align: right;
-    line-height: 40px;
+    font-size: 12px;
 }
 
 .content_form select {
-    border-radius: 20px;
-    line-height: 40px;
-    height: 40px;
-    font-family: Roboto;
-    text-align: center;
-    font-size: 13px;
-    border-color: #333;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    cursor: default;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-height: 34px;
+    position: relative;
+    box-sizing: border-box;
+    height: 34px;
+    width: 70%;
+    border-color: rgb(204, 204, 204);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    transition: all 100ms ease 0s;
+    outline: 0px !important;
+    margin-bottom: 10px;
 }
 
 .link_title {
@@ -1516,7 +1537,7 @@ a:visited {
 }
 
 .btn_res {
-    background: #ba1f23;
+    background: #00afef;
     color: #fff;
     text-transform: uppercase;
     min-width: 140px;
@@ -1528,6 +1549,10 @@ a:visited {
     text-align: center;
     border-radius: 15px;
     font-size: 18px;
+}
+
+.content-row {
+    margin: 5px !important;
 }
 
 .clsDangBai h3 {
@@ -2050,13 +2075,20 @@ svg:not(:root) {
 .imgPhotoin {
     width: 150px;
     height: 150px !important;
-    border: 1px solid #00afef;
-    border-radius: 10px;
+    border: 1px solid #c1c1c1;
+    box-shadow: 0 0 5px 4px #c1c1c1;
+}
+
+.clsPhotoin {
+    overflow: auto;
+    max-height: 170px;
+    margin: 0 !important;
+    background: transparent;
 }
 
 .btnPhotoin-remove {
     position: absolute;
-    background: red !important;
+    background: #495057!important;
     width: 25px !important;
     min-width: 25px !important;
     margin-left: -25px;
