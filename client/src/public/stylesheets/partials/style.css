@@ -5,6 +5,7 @@
 
 body {
     margin: 0;
+    overflow: auto;
 }
 
 .topnav {
@@ -1069,18 +1070,46 @@ main {
     margin-top: 5px;
 }
 
+.GT-BaiViet,
+.MainBV,
+.CommentBV {
+    background: #ffffff;
+}
+
+.SPBV {
+    font-size: 24px;
+    font-weight: 300;
+    color: #333;
+    line-height: 30px;
+    padding: 3px;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.clsTomtat {
+    border-bottom: 1px solid #d1d1d1;
+    padding: 10px;
+}
+
 .TLBV {
     color: #616770;
     font-size: 13px;
+    box-shadow: 0 0 5px 5px #d1d1d1;
+    padding: 10px;
+    margin: 10px 0 10px 0;
 }
 
 .TitleBV {
-    background-color: #f5f6f7;
+    background-color: #ffffff;
     border-bottom: 1px solid #dddfe2;
     border-radius: 2px 2px 0 0;
     font-weight: bold;
     padding: 8px 24px 8px 10px;
-    font-size: 16px;
+    font-size: 22px;
+    border-top: 1px solid #ccd0d5;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .MainBV {
@@ -1105,6 +1134,30 @@ main {
 
 .anh-BV img {
     transition: transform .2s;
+}
+
+.imageSlider {
+    width: 100%;
+}
+
+.imageSlider-zoom .slick-prev::before {
+    color: #56b9f5;
+    margin-left: 12px;
+}
+
+.imageSlider-zoom .slick-next:before {
+    color: #56b9f5;
+    margin-left: -20px;
+}
+
+.imageSlider-multi .slick-prev::before {
+    color: #56b9f5;
+    margin-left: 12px;
+}
+
+.imageSlider-multi .slick-next:before {
+    color: #56b9f5;
+    margin-left: -20px;
 }
 
 .txtND-BaiViet {
@@ -1783,7 +1836,11 @@ a:visited {
 }
 
 .CommentBV {
-    border-top: 1px solid #ccd0d5;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 10px;
 }
 
 .btnSubmitComt {
@@ -1960,7 +2017,7 @@ a:visited {
 .CT-BaiViet {
     position: relative;
     padding: 0 0 0 0;
-    background-color: #ffffff !important;
+    background-color: transparent !important;
     margin-bottom: 30px;
     margin-left: 10px;
     bottom: 5px;
