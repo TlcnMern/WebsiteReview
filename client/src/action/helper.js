@@ -18,15 +18,20 @@ export const auth = {
     else
       return false
   },
+  getName() {
+    if (typeof window == "undefined")
+      return false
+    if (sessionStorage.getItem('name'))
+      return JSON.parse(sessionStorage.getItem('name'))
+    else
+      return false
+  },
   setAvatar(avatar) {
-    if (typeof window !== "undefined") {
-      sessionStorage.setItem('avatar', JSON.stringify(avatar));
-    }
+    sessionStorage.setItem('avatar', JSON.stringify(avatar));
   },
   authenticate(jwt) {
-    if (typeof window !== "undefined") {
-      sessionStorage.setItem('jwt', JSON.stringify(jwt));
-      sessionStorage.setItem('avatar', JSON.stringify(jwt.user.avatar));
-    }
+    sessionStorage.setItem('jwt', JSON.stringify(jwt));
+    sessionStorage.setItem('avatar', JSON.stringify(jwt.user.avatar));
+    sessionStorage.setItem('name', JSON.stringify(jwt.user.name));
   }
 }

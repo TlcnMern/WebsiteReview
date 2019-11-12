@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../action/authAction';
@@ -37,50 +37,40 @@ class Login extends Component {
 
 
   renderAlert() {
-    if (this.props.error.msg.error) 
+    if (this.props.error.msg.error)
       return (
         <div>
-          <span style={{color:'red'}}>{this.props.error.msg.error}</span>
+          <span style={{ color: 'red' }}>{this.props.error.msg.error}</span>
         </div>);
   }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  
-  
+
+
   render() {
     return (
-
       <div className="boxLoginorRegister fadeIn second" id="loginleft">
-
-
-
-      <form onSubmit= {this.onSubmit}>
-            
-            <span>
-              <input type="text" id="login" className="fadeIn second" name="email" placeholder="email" onChange={this.onChange} />
-            </span>
-            <span className="symbol-input100">
-              <i className="fa fa-user" aria-hidden="true"></i>
-            </span>
-
-            <span>
-              <input type="password" id="password" className="fadeIn third" name="password" placeholder="password" onChange={this.onChange} />
-            </span>
-            <span className="symbol-input100">	
-              <i className="fa fa-lock" aria-hidden="true"></i>
-            </span>
-            <p className="forgot-password fadeIn second">Quên mật khẩu? Nhấn vào <Link to="/ForgotPassword">đây</Link></p>
-
-            
-            <input type="submit" className="fadeIn fourth" id="btnLogin" value="Log In"/>
-          </form>
-          {this.renderAlert()}
-
-          <LoginSocial/>
-
-  </div>
+        <form onSubmit={this.onSubmit}>
+          <span>
+            <input type="text" id="login" className="fadeIn second" name="email" placeholder="email" onChange={this.onChange} />
+          </span>
+          <span className="symbol-input100">
+            <i className="fa fa-user" aria-hidden="true"></i>
+          </span>
+          <span>
+            <input type="password" id="password" className="fadeIn third" name="password" placeholder="password" onChange={this.onChange} />
+          </span>
+          <span className="symbol-input100">
+            <i className="fa fa-lock" aria-hidden="true"></i>
+          </span>
+          <p className="forgot-password fadeIn second">Quên mật khẩu? Nhấn vào <Link to="/ForgotPassword">đây</Link></p>
+          <input type="submit" className="fadeIn fourth" id="btnLogin" value="Log In" />
+        </form>
+        {this.renderAlert()}
+        <LoginSocial />
+      </div>
     );
   }
 }

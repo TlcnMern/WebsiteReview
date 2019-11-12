@@ -9,9 +9,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {Redirect} from 'react-router-dom';
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
-
-
-
 class Login extends Component {
   
   

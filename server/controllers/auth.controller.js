@@ -25,7 +25,7 @@ const signin = (req, res) => {
     
     return res.json({
       token,
-      user: {_id: user._id, avatar:user.avatar}
+      user: {_id: user._id, avatar:user.avatar,name:user.name}
     });
 
   })
@@ -47,13 +47,13 @@ const hasAuthorization = (req, res, next) => {
   next()
 }
 
-const  googleOAuth= async (req, res, next) => {
+const  googleOAuth= async (req, res) => {
   const token = jwt.sign({
     _id: req.user._id
   }, config.jwtSecret);
   return res.json({
     token,
-    user: {_id: req.user.id}
+    user: {_id: req.user.id,avatar:req.user.avatar,name:req.user.name},
   });
 }
 

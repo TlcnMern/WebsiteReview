@@ -13,11 +13,6 @@ import man from '../../public/images/man.png';
 import UploadAvatar from './UploadAvatar';
 
 class viewProfile extends Component {
-    componentDidMount() {
-        if (this.props.authenticate)
-            this.props.fetch(auth.isAuthenticated().user._id, auth.isAuthenticated().token);
-    }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -25,7 +20,8 @@ class viewProfile extends Component {
             renderNotify: false,
             renderPost: true,
             renderEdit: false,
-            openUploadAvatar:false
+            openUploadAvatar: false,
+            urlAvatar:''
         };
 
         this.onClickProfile = this.onClickProfile.bind(this);
@@ -35,6 +31,22 @@ class viewProfile extends Component {
         this.onChangeRenderEdit = this.onChangeRenderEdit.bind(this);
         this.onClickAvatar = this.onClickAvatar.bind(this);
         this.callBackChangeStateOpen = this.callBackChangeStateOpen.bind(this);
+    }
+    componentDidMount() {
+        if (this.props.authenticate)
+            this.props.fetch(auth.isAuthenticated().user._id, auth.isAuthenticated().token);
+        const avatar = auth.getAvatar();
+        if (avatar) {
+            if (avatar.search('dist') > 0) {
+                this.state.urlAvatar = API_URL + '/' + avatar;
+            }
+            else {
+                this.state.urlAvatar = avatar;
+            }
+        }
+        else {
+            this.state.urlAvatar = man;
+        }
     }
 
     onClickProfile() {
@@ -60,9 +72,9 @@ class viewProfile extends Component {
         this.setState({ renderEdit: true });
     };
 
-    onClickAvatar(){
+    onClickAvatar() {
         this.setState({
-            openUploadAvatar:true
+            openUploadAvatar: true
         })
     }
 
@@ -70,9 +82,9 @@ class viewProfile extends Component {
         this.setState({ renderEdit: false });
     };
 
-    callBackChangeStateOpen(){
+    callBackChangeStateOpen() {
         this.setState({
-            openUploadAvatar:false
+            openUploadAvatar: false
         })
     }
 
@@ -127,15 +139,6 @@ class viewProfile extends Component {
     }
 
     render() {
-
-        const avatar = auth.getAvatar();
-        var urlAvatar;
-        if (avatar) {
-            urlAvatar = API_URL + '/' + avatar;
-        }
-        else {
-            urlAvatar = man;
-        }
         return (
             <div>
                 <div className="boxContent">
@@ -147,9 +150,9 @@ class viewProfile extends Component {
                             <div className="row">
                                 <div className="left col-lg-4">
                                     <div className="photo-left">
-                                        <img className="photo" src={urlAvatar} alt="img" />
+                                        <img className="photo" src={this.state.urlAvatar} alt="img" />
                                         <button className="btnPhotoin-remove" onClick={this.onClickAvatar} type="button">@</button>
-                                        {this.state.openUploadAvatar?<UploadAvatar callBackChangeStateOpen={this.callBackChangeStateOpen} open={this.state.openUploadAvatar}/>:<div></div>}
+                                        {this.state.openUploadAvatar ? <UploadAvatar callBackChangeStateOpen={this.callBackChangeStateOpen} open={this.state.openUploadAvatar} /> : <div></div>}
                                     </div>
                                     <h4 className="name">{this.props.profile.name}</h4>
                                     <p className="info">BIỆT DANH</p>

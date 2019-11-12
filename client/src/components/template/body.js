@@ -12,7 +12,33 @@ import PropTypes from 'prop-types';
 class MainFeed extends Component{
     static propTypes = {
         isAuthenticated: PropTypes.bool
-      };
+    };
+
+    state={
+        urlAvatar:'',
+        name:''
+    }
+    
+    componentDidMount(){
+        const avatar=auth.getAvatar();
+        var name=auth.getName();
+        if(avatar){
+            if(avatar.search('dist')>0){
+                this.state.urlAvatar=API_URL+'/'+avatar;
+            }
+            else{
+                this.state.urlAvatar=avatar;
+            }
+        }
+        else{
+            this.state.urlAvatar=man;
+        }
+        if(name){
+            this.setState({
+                name:name
+            })
+        }
+    }
     constructor(props) {
         super(props);
     
@@ -500,19 +526,11 @@ class MainFeed extends Component{
         </ul>  ) ;
       }
       renderPersonalorLogin(){
-        const avatar=auth.getAvatar();
-        var urlAvatar;
-        if(avatar){
-            urlAvatar=API_URL+'/'+avatar;
-        }
-        else{
-            urlAvatar=man;
-        }
         if (this.props.isAuthenticated) {
             return (
             <div className="imgAvatar" id="clsimgAvatar">
-                <img id="anhdd" src={urlAvatar} alt="imgUser" />
-                <Link to="ViewProfile">Nguyen_vux <br/></Link>
+                <img id="anhdd" src={this.state.urlAvatar} alt="imgUser" />
+                <Link to="ViewProfile">{this.state.name} <br/></Link>
             </div>
             );
           }

@@ -15,6 +15,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
     // console.log('accessToken', accessToken);
     // console.log('refreshToken', refreshToken);
 
+    // console.log(profile)
     const existingUser = await User.findOne({ "google.id": profile.id });
     if (existingUser) {
       return done(null, existingUser);
@@ -26,7 +27,8 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
       google: {
         id: profile.id,
         email: profile.emails[0].value
-      }
+      },
+      avatar:profile.photos[0].value.replace("=s50","")
     });
 
     await newUser.save((err,result)=>{

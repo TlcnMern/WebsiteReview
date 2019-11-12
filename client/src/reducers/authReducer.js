@@ -27,7 +27,9 @@ import {
       case LOGIN_FAIL:
       case LOGOUT_SUCCESS:
       case REGISTER_FAIL:
-        sessionStorage.removeItem('jwt')
+        sessionStorage.removeItem('jwt');
+        sessionStorage.removeItem('avatar');
+        sessionStorage.removeItem('name');
         return {
           ...state,
           token: null,
