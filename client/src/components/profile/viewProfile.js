@@ -20,8 +20,7 @@ class viewProfile extends Component {
             renderNotify: false,
             renderPost: true,
             renderEdit: false,
-            openUploadAvatar: false,
-            urlAvatar:''
+            openUploadAvatar: false
         };
 
         this.onClickProfile = this.onClickProfile.bind(this);
@@ -35,18 +34,6 @@ class viewProfile extends Component {
     componentDidMount() {
         if (this.props.authenticate)
             this.props.fetch(auth.isAuthenticated().user._id, auth.isAuthenticated().token);
-        const avatar = auth.getAvatar();
-        if (avatar) {
-            if (avatar.search('dist') > 0) {
-                this.state.urlAvatar = API_URL + '/' + avatar;
-            }
-            else {
-                this.state.urlAvatar = avatar;
-            }
-        }
-        else {
-            this.state.urlAvatar = man;
-        }
     }
 
     onClickProfile() {
@@ -139,6 +126,19 @@ class viewProfile extends Component {
     }
 
     render() {
+        const avatar = this.props.profile.avatar;
+        var urlAvatar='';
+        if (avatar) {
+            if (avatar.search('dist') > 0) {
+                urlAvatar = API_URL + '/' + avatar;
+            }
+            else {
+                urlAvatar = avatar;
+            }
+        }
+        else {
+            urlAvatar = man;
+        }
         return (
             <div>
                 <div className="boxContent">
@@ -150,7 +150,7 @@ class viewProfile extends Component {
                             <div className="row">
                                 <div className="left col-lg-4">
                                     <div className="photo-left">
-                                        <img className="photo" src={this.state.urlAvatar} alt="img" />
+                                        <img className="photo" src={urlAvatar} alt="img" />
                                         <button className="btnPhotoin-remove" onClick={this.onClickAvatar} type="button">@</button>
                                         {this.state.openUploadAvatar ? <UploadAvatar callBackChangeStateOpen={this.callBackChangeStateOpen} open={this.state.openUploadAvatar} /> : <div></div>}
                                     </div>

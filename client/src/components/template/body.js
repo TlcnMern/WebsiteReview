@@ -14,31 +14,6 @@ class MainFeed extends Component{
         isAuthenticated: PropTypes.bool
     };
 
-    state={
-        urlAvatar:'',
-        name:''
-    }
-    
-    componentDidMount(){
-        const avatar=auth.getAvatar();
-        var name=auth.getName();
-        if(avatar){
-            if(avatar.search('dist')>0){
-                this.state.urlAvatar=API_URL+'/'+avatar;
-            }
-            else{
-                this.state.urlAvatar=avatar;
-            }
-        }
-        else{
-            this.state.urlAvatar=man;
-        }
-        if(name){
-            this.setState({
-                name:name
-            })
-        }
-    }
     constructor(props) {
         super(props);
     
@@ -526,11 +501,25 @@ class MainFeed extends Component{
         </ul>  ) ;
       }
       renderPersonalorLogin(){
+        const avatar=auth.getAvatar();
+        var urlAvatar='';
+        var name=auth.getName();
+        if(avatar){
+            if(avatar.search('dist')>0){
+                urlAvatar=API_URL+'/'+avatar;
+            }
+            else{
+                urlAvatar=avatar;
+            }
+        }
+        else{
+            urlAvatar=man;
+        }
         if (this.props.isAuthenticated) {
             return (
             <div className="imgAvatar" id="clsimgAvatar">
-                <img id="anhdd" src={this.state.urlAvatar} alt="imgUser" />
-                <Link to="ViewProfile">{this.state.name} <br/></Link>
+                <img id="anhdd" src={urlAvatar} alt="imgUser" />
+                <Link to="ViewProfile">{name} <br/></Link>
             </div>
             );
           }
