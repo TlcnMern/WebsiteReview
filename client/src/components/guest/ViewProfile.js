@@ -6,7 +6,6 @@ import {fetch} from '../../action/userAction';
 class ViewProfie extends Component{
 
     componentWillMount(){
-
         this.props.fetch(this.props.userID);
     }
 
