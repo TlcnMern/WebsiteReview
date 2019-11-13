@@ -40,7 +40,7 @@ class EditComment extends Component {
     }
     render() {
         return [<input className="editiCmt" key={1} value={this.state.content} name='content'
-            onChange={this.handleChange.bind(this)} > </input>,
+            onChange={this.handleChange.bind(this)} />,
         <button className="editbCmt" key={2} onClick={this.onClickSave.bind(this)} > save </button>
         ];
     }
