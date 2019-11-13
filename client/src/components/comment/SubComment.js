@@ -78,14 +78,14 @@ class SubComment extends Component {
     render() {
         return (
             <div>
-                <div style={{ marginLeft: '40px' }} >{this.renderViewSubComment()}</div>
-                {this.props.isAuthenticated &&
-                 <button onClick={this.onClickReply.bind(this)} className="btn btn-link" style={{ marginLeft: '10px' }}>Reply</button>
-                }
-                {
-                    this.state.reply && this.renderCreateSubComment()
-                }
                 
+                {/* {this.props.isAuthenticated &&
+                 <button onClick={this.onClickReply.bind(this)} className="btn btn-link" style={{ marginLeft: '10px' }}>Reply</button>
+                } */}
+                {
+                   this.renderCreateSubComment()
+                }
+                <div style={{ marginLeft: '40px' }} >{this.renderViewSubComment()}</div>
             </div>
         );
     }

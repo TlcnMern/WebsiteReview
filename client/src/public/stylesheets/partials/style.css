@@ -2161,3 +2161,11 @@ svg:not(:root) {
     align-items: center;
     margin-top: 10px;
 }
+
+.btn-link {
+    font-weight: 400;
+    color: #007bff;
+    text-decoration: none;
+    padding: 5px;
+    font-size: 12px;
+}
