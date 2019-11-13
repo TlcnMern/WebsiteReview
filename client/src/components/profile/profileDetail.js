@@ -11,20 +11,6 @@ class profileDetail extends Component {
                     <li><span className="lstItem  lstAbtMe">Đổi mật khẩu</span></li>
                 </ul>
                 <article className="ContentAbtMe col-lg-9">
-                    {/* <div className="row rowName">
-                        <div className="AvaCol">
-                            <div className="AvaLine">
-                                <button className="btnAva" title="Thay đổi ảnh đại diện">
-                                    <img alt="Thay đổi ảnh đại diện" className="imgAva" src="https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-9/p720x720/72482897_955642461456268_3228701545478488064_o.jpg?_nc_cat=102&cachebreaker=hd&_nc_oc=AQkp7PgHFmqowW2nscPch3Ts7CgsISmdsSExZ5_qfKdVIN5tAlqBz4H5tTfG665daao&_nc_ht=scontent.fsgn2-2.fna&oh=18ed1cfefbaf148fd48d05f3d4b25684&oe=5E21D2EA" />
-                                </button>
-
-                            </div>
-                        </div>
-
-                        <div className="NameCol">
-                            <h1 className="NameLine">{this.props.profile.name}</h1>
-                        </div>
-                    </div> */}
                     <div className="row rowProFile">
                         <aside className="txtProfileCol"><label htmlFor="pepName">Tên</label></aside>
                         <div className="inProfileCol">

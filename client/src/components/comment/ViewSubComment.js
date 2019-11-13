@@ -44,6 +44,7 @@ class ViewSubComment extends Component {
                         })
                     }
                 });
+
             checkAuthorizedComment({ t: jwt.token }, userID, this.props.commentId)//check xem user dang xem co phai la nguoi viet
                 .then((data) => {
                     if (data) {
@@ -76,7 +77,6 @@ class ViewSubComment extends Component {
     render() {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
-        // console.log(this.state.SubComment.content + '  ' + this.state.isAuthorizedSubcomment)
         return (
             <div className="row clsSubcomment">
                 <div className="col-sm-1">

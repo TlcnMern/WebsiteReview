@@ -6,6 +6,7 @@ import {auth} from '../../action/helper';
 class ViewProfie extends Component{
 
     componentDidMount(){
+        console.log('alo')
         if(this.props.authenticate)
             this.props.fetch(auth.isAuthenticated().user._id,auth.isAuthenticated().token);
     }
