@@ -31,7 +31,11 @@ export const auth = {
   },
   authenticate(jwt) {
     sessionStorage.setItem('jwt', JSON.stringify(jwt));
-    sessionStorage.setItem('avatar', JSON.stringify(jwt.user.avatar));
-    sessionStorage.setItem('name', JSON.stringify(jwt.user.name));
+    if(jwt.user.avatar){
+      sessionStorage.setItem('avatar', JSON.stringify(jwt.user.avatar));
+    }
+    if(jwt.user.name){
+      sessionStorage.setItem('name', JSON.stringify(jwt.user.name));
+    }
   }
 }

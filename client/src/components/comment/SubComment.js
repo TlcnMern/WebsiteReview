@@ -45,7 +45,7 @@ class SubComment extends Component {
         if (this.state.listSubComment.length > 0) {
             return (
                 this.state.listSubComment.map((item, i) => {
-                    return (
+                     return (
                         <ViewSubComment callBackResetListSubComment={this.callBackResetListSubComment.bind(this)} commentId={this.props.commentId} SubComment={item} key={i}/>
                         );
                 }));

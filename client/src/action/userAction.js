@@ -68,7 +68,6 @@ export const update = (userID, credentials, user) => {
     }
   }
   const body=user;
-  console.log(body);
   return axios.put(`${API_URL}/users/editProfile/`+userID,body,config)
   .then(res=>{
     console.log(res.data);

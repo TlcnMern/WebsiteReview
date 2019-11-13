@@ -67,6 +67,8 @@ class viewProfile extends Component {
 
     onChangeRenderEdit() {
         this.setState({ renderEdit: false });
+        if (this.props.authenticate)
+            this.props.fetch(auth.isAuthenticated().user._id, auth.isAuthenticated().token);
     };
 
     callBackChangeStateOpen() {
