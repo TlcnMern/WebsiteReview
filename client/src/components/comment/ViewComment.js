@@ -18,6 +18,7 @@ class ViewComment extends Component {
         isAuthorized: false,
         listSubComment: this.props.comment.subComment || [],
         edit: false,
+        reply:false,
         anchorEl: null
     };
     // sortComment(comments){
@@ -44,6 +45,10 @@ class ViewComment extends Component {
         this.setState({ edit: !this.state.edit });
         this.handleClose();
     };
+    onClickReply() {
+        this.setState({ reply: !this.state.reply });
+    };
+
 
     onCallBack(content1) {
         const comment = this.props.comment;
@@ -66,12 +71,19 @@ class ViewComment extends Component {
     handleClose = () => {
         this.setState({ anchorEl: null });
     };
+    renderReply(){
+        if(this.state.reply)
+        return (
+        <div>
+            { <SubComment commentId={this.props.comment._id} listSubComment={this.state.listSubComment} />}
+        </div>);
+    }
 
     render() {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         return (
-            <div style={{ marginLeft: '20px' }}>
+            <div style={{ marginLeft: '20px' ,    padding: '10px'}}>
 
                 <div className="row">
                     <div className="col-sm-1">
@@ -113,16 +125,17 @@ class ViewComment extends Component {
                 </div>
 
                 <div>
-                    <span style={{ fontSize: '10px', fontStyle: 'italic', color: 'rgb(192, 194, 196)' }}>
+                    <span style={{ fontSize: '10px', fontStyle: 'italic', color: 'rgb(192, 194, 196)', marginLeft: '50px' }}>
                         {new Intl.DateTimeFormat('en-GB', {
                             month: '2-digit',
                             day: '2-digit',
                             year: 'numeric',
                         }).format(new Date(this.props.comment.created))}
                     </span>
-                    {
-                        <SubComment commentId={this.props.comment._id} listSubComment={this.state.listSubComment} />
+                    {this.props.isAuthenticated &&
+                        <button onClick={this.onClickReply.bind(this)} className="btn btn-link" style={{ marginLeft: '10px' }}>Reply</button>
                     }
+                    {this.renderReply()}
                 </div>
 
 
