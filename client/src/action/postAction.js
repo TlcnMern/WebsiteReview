@@ -255,6 +255,7 @@ export const addRating = (userId, credentials, postId, point) => {
         });
 }
 
+
 export const updateRating = (userId, credentials, postId, point) => {
     const config = {
         headers: {
@@ -285,18 +286,16 @@ export const checkRatingAndShow = (userId, credentials, postId) => {
             'Authorization': 'Bearer ' + credentials.t
         }
     }
-
     const body = JSON.stringify({ userId: userId, postId: postId });
-    console.log(body);
     return axios.post(`${API_URL}/post/checkRatingAndShow`, body, config)
         .then(res => {
-            if (res.data.length > 0) {
-                return res.data[0].point;
-            }
-            return null;
+            // if (res.data.length > 0) {
+            //     return res.data[0].point;
+            // }
+            // return null;
+            return res.data;
         })
         .catch(error => {
-            console.log(error);
             return error.response.data;
         });
 }

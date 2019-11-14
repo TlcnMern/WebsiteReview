@@ -32,7 +32,6 @@ class DetailPost extends Component {
 
     componentDidMount() {
         const postId = this.match.params.postId;
-        console.log(postId);
         getDetailPost(postId).then((data) => {
             if (data.error) {
                 console.log(data);
@@ -48,22 +47,35 @@ class DetailPost extends Component {
             const jwt = auth.isAuthenticated();
             const userID = jwt.user._id;
             checkRatingAndShow(userID, { t: jwt.token }, postId).then((data) => {
-                if (data === null) {
+                // if (data === null) {
+                //     this.setState({
+                //         isLoading: false,
+                //         point: null
+                //     });
+                // }
+                // else {
+                //     if (data.error) {
+                //         console.log(data.error);
+                //     }
+                //     else {
+                //         this.setState({
+                //             isLoading: false,
+                //             point: data
+                //         })
+                //     }
+                // }
+                if (data.error) {
+                    console.log(data.error);
                     this.setState({
                         isLoading: false,
                         point: null
-                    });
+                    })
                 }
                 else {
-                    if (data.error) {
-                        console.log(data.error);
-                    }
-                    else {
-                        this.setState({
-                            isLoading: false,
-                            point: data
-                        })
-                    }
+                    this.setState({
+                        isLoading: false,
+                        point: data
+                    })
                 }
             });
         }

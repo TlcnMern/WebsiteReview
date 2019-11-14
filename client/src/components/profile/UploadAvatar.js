@@ -46,6 +46,7 @@ class UploadAvatar extends Component {
         });
     }
 
+    
     render() {
         return (
             <div className="UploadAvatar">

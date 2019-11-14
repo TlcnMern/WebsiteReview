@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../public/stylesheets/partials/rating.scss'
 import PropTypes from 'prop-types';
-import {addRating} from '../../action/postAction';
+import {addRating,updateRating} from '../../action/postAction';
 import {auth} from '../../action/helper';
 class Rating extends Component{
   static propTypes= {
@@ -12,30 +12,46 @@ class Rating extends Component{
         this.state={
             rating: this.props.rating || null,
             disabled: this.props.disabled || false,
-            temp_rating: null
+            temp_rating: null,
+            checkRating:this.props.rating || null//vì thằng rating khi hover nó đã thay đổi rồi==>nên phải dùng thằng khác
         }
     }
-    // componentWillReceiveProps(){
-    //     this.setState({rating:this.props.rating})
-    // }
     rate(rating) {
       const jwt=auth.isAuthenticated();
       const userID=jwt.user._id;
-      
-      addRating(userID,{
-          t:jwt.token
-      },this.props.idPost,rating).then((data)=>{
-          if(data.error){
-              console.log(data);
+      if(this.state.checkRating!==null){
+        console.log('update')
+        updateRating(userID,{t:jwt.token},this.props.idPost,rating)
+          .then((data)=>{
+            if(data===true){
+              this.setState({
+                rating: rating,
+                temp_rating: rating
+              });
+            }
+            else{
+              console.log(data.error);
               return;
-          }
-          else{
+            }
+          })
+      }
+      else{
+        console.log('add')
+        addRating(userID,{t:jwt.token},this.props.idPost,rating)
+        .then((data)=>{
+          if(data===true){
             this.setState({
               rating: rating,
-              temp_rating: rating
+              temp_rating: rating,
+              checkRating:rating
             });
           }
-      })
+          else{
+            console.log(data.error);
+            return;
+          }
+        })
+      }
 
     };
     star_over(rating) {

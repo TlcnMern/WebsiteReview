@@ -47,6 +47,14 @@ const PostSchema = new mongoose.Schema({
     created:{type:Date,default:Date.now},
     postedBy:{type:mongoose.Schema.ObjectId, ref: 'User'}
   }],
+  pointRating:{
+    point:Number,
+    oneStar:Number,
+    twoStar:Number,
+    threeStar:Number,
+    forStar:Number,
+    fiveStar:Number
+  },
   postedBy: {type: mongoose.Schema.ObjectId, ref: 'User'},
   created: {
     type: Date,
