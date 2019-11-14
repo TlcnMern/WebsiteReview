@@ -8,6 +8,15 @@ import { checkRatingAndShow, getDetailPost } from '../../action/postAction';
 import { connect } from 'react-redux';
 import { getComment } from '../../action/postAction';
 import Loading from '../template/loading';
+import ProcessRating from './ProcesRating';
+
+const birthdeathrates = [
+    {title:"5 sao", value:36},
+    {title:"4 sao", value:37},
+    {title:"3 sao", value:42},
+    {title:"2 sao", value:0},
+    {title:"1 sao", value:0}
+];
 
 class DetailPost extends Component {
     constructor({ match }) {
@@ -78,7 +87,11 @@ class DetailPost extends Component {
                                 <div className="col-sm-7 TomTat">
                                     <div className="SPBV">
                                         <span>{this.state.post.productReview}</span>
-                                        <span> <Rating rating={3} disabled={true} /></span>
+                                        <span> 
+                                            <Rating rating={3} disabled={true} />
+                                            <ProcessRating data={birthdeathrates}/>
+                                        </span>
+
                                         <span style={{ fontSize: '13px' }}>Thể loại: <Link to="">{this.state.post.theme}</Link></span><br />
                                     </div>
                                     <div className="clsTomtat">
