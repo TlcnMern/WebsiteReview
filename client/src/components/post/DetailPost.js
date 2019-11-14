@@ -103,9 +103,13 @@ class DetailPost extends Component{
                                     }).format(new Date(post.created))}
                             </span><br/>
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <span>
                                 
                                 Link:<a href={post.link}>{post.link}</a></span><br/>
+=======
+                            <span>Link:<a href={post.link}>{post.link}</a></span><br/>
+>>>>>>> parent of 295dba7... updateAll
 =======
                             <span>Link:<a href={post.link}>{post.link}</a></span><br/>
 >>>>>>> parent of 295dba7... updateAll
