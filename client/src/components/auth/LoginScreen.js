@@ -51,21 +51,21 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="boxLoginorRegister fadeIn second" id="loginleft">
+      <div className="boxLoginorRegister second" id="loginleft">
         <form onSubmit={this.onSubmit}>
           <span>
-            <input type="text" id="login" className="fadeIn second" name="email" placeholder="email" onChange={this.onChange} />
+            <input type="text" id="login" className="second" name="email" placeholder="email" onChange={this.onChange} />
           </span>
           <span className="symbol-input100">
             <i className="fa fa-user" aria-hidden="true"></i>
           </span>
           <span>
-            <input type="password" id="password" className="fadeIn third" name="password" placeholder="password" onChange={this.onChange} />
+            <input type="password" id="password" className="third" name="password" placeholder="password" onChange={this.onChange} />
           </span>
           <span className="symbol-input100">
             <i className="fa fa-lock" aria-hidden="true"></i>
           </span>
-          <p className="forgot-password fadeIn second">Quên mật khẩu? Nhấn vào <Link to="/ForgotPassword">đây</Link></p>
+          <p className="forgot-password second">Quên mật khẩu? Nhấn vào <Link to="/ForgotPassword">đây</Link></p>
           <input type="submit" className="fadeIn fourth" id="btnLogin" value="Log In" />
         </form>
         {this.renderAlert()}

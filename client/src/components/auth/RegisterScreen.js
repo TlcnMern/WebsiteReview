@@ -51,20 +51,20 @@ class Register extends Component {
                 <form className="form-horizontal" method="post" onSubmit={this.onSubmitRegister}>
                     <span style={{color:'red'}}>{this.props.message}</span>
 
-                    <input type="text" className="fadeIn second" name="name" placeholder="Enter your Name" onChange={this.handleChange} required />
+                    <input type="text" className="second" name="name" placeholder="Enter your Name" onChange={this.handleChange} required />
                     <span className="symbol-input100"><i className="fa fa-user" aria-hidden="true"></i></span>
 
-                    <input type="text" className="fadeIn second" name="email" placeholder="Enter your Email" onChange={this.handleChange} required />
+                    <input type="text" className="second" name="email" placeholder="Enter your Email" onChange={this.handleChange} required />
                     <span className="symbol-input100"><i className="fa fa-envelope" aria-hidden="true"></i></span>
                     <span className="symbol-input100"><i className="fa fa-venus-mars" aria-hidden="true"></i></span>
 
-                    <input type="password" className="fadeIn second" name="password" placeholder="Enter your NamePassword" onChange={this.handleChange} required />
+                    <input type="password" className="second" name="password" placeholder="Enter your NamePassword" onChange={this.handleChange} required />
                     <span className="symbol-input100"><i className="fa fa-lock" aria-hidden="true"></i></span>
 
-                    <input type="password" className="fadeIn second" name="confirmPassword" placeholder="Confirm your Password" onChange={this.handleChange} required />
+                    <input type="password" className="second" name="confirmPassword" placeholder="Confirm your Password" onChange={this.handleChange} required />
                     <span className="symbol-input100"><i className="fa fa-lock" aria-hidden="true"></i></span>
 
-                    <input type="submit" className="fadeIn fourth" value="Register" />
+                    <input type="submit" className="fourth" value="Register" />
                 </form>
 
             </div>

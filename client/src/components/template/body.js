@@ -7,6 +7,7 @@ import {API_URL,auth} from '../../action/helper';
 import man from '../../public/images/man.png'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {logout} from '../../action/authAction'
 
 
 class MainFeed extends Component{
@@ -28,6 +29,7 @@ class MainFeed extends Component{
           renderFood:false,
           renderTravel:false,
           renderBeauty:false,
+          showMenu: false,
         };
     
         this.onClickHome=this.onClickHome.bind(this);
@@ -38,6 +40,9 @@ class MainFeed extends Component{
         this.onClickFood=this.onClickFood.bind(this);
         this.onClickTravel=this.onClickTravel.bind(this);
         this.onClickBeauty=this.onClickBeauty.bind(this);
+        this.showMenu = this.showMenu.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
+        this.clickLogout=this.clickLogout.bind(this);
       }
     
       toggle(tab) {
@@ -47,6 +52,32 @@ class MainFeed extends Component{
           });
         }
       }
+      showMenu(event) {
+        event.preventDefault();
+        
+        this.setState({ showMenu: true }, () => {
+          document.addEventListener('click', this.closeMenu);
+        });
+      }
+      
+      closeMenu(event) {
+        
+        if (!this.dropdownMenu.contains(event.target)) {
+          
+          this.setState({ showMenu: false }, () => {
+            document.removeEventListener('click', this.closeMenu);
+          });  
+          
+        }
+      }
+      clickLogout(event) {
+        
+        this.setState({ showMenu: false }, () => {
+            document.removeEventListener('click', this.closeMenu);
+          });  
+        this.props.logout();
+      }
+     
       onClickHome(){
         this.setState({renderHome:true});
         this.setState({renderFilm:false});
@@ -519,7 +550,21 @@ class MainFeed extends Component{
             return (
             <div className="imgAvatar FadeIn-load" id="clsimgAvatar">
                 <img id="anhdd" src={urlAvatar} alt="imgUser" />
-                <Link to="ViewProfile">{name} <br/></Link>
+                <span style={{padding:'5px'}}><Link to="ViewProfile"     style={{maxWidth: '110px',width: 'auto', overflow: 'hidden', textOverflow: 'ellipsis', display: 'inline-block', whiteSpace: 'nowrap'}}>{name}<br/></Link></span>
+                <button className="optionUser" onClick={this.showMenu}><i className="fa fa-bars" aria-hidden="true"></i></button>
+                {
+                this.state.showMenu? 
+                (<div
+                    className="menu fadeInDown"
+                    ref={(element) => {
+                        this.dropdownMenu = element;
+                    }}>
+                        <Link to="ViewProfile" style={{borderBottom:"1px solid #d1d1d1"}}><img src="https://img.icons8.com/ios/16/000000/security-pass.png" alt="viewInfo"/> Xem trang cá nhân</Link>
+                        <Link to="ChangePass" style={{borderBottom:"1px solid #d1d1d1"}}><img src="https://img.icons8.com/ios/16/000000/re-enter-pincode.png"alt="changePass"/> Đổi mật khẩu</Link>
+                        <Link to="/" onClick={this.clickLogout} ><img src="https://img.icons8.com/ios/16/000000/export.png" alt="logout"/> Đăng xuất</Link>
+                        
+                </div>): (null)
+                }
             </div>
             );
           }
@@ -585,4 +630,4 @@ class MainFeed extends Component{
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
   });
-  export default connect(mapStateToProps)(MainFeed);
+  export default connect(mapStateToProps,{logout})(MainFeed);

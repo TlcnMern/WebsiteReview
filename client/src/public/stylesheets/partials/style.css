@@ -6,6 +6,8 @@
 body {
     margin: 0;
     overflow: auto;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
 }
 
 .topnav {
@@ -76,11 +78,9 @@ body {
 }
 
 .search-container button {
-    cursor: pointer;
-    display: block;
     height: 35px;
     position: absolute;
-    right: 280px;
+    right: 50px;
     top: 0px;
     width: 26px;
     font-size: 12px;
@@ -230,6 +230,7 @@ body {
 
 .imgAvatar {
     margin: 5px 5px 5px 5px;
+    align-items: center;
 }
 
 .imgAvatar a {
@@ -237,6 +238,17 @@ body {
     font-weight: bold;
     text-align: left;
     color: #14171a
+}
+
+.imgAvatar .optionUser {
+    visibility: hidden;
+    border: none;
+    background: transparent;
+    color: #263d51;
+}
+
+.imgAvatar:hover .optionUser {
+    visibility: visible;
 }
 
 .btnDangNhap {
@@ -2061,6 +2073,38 @@ a:visited {
     bottom: 5px;
     border: 1px solid #e6e6e6;
     border-radius: 5px;
+}
+
+.menu {
+    position: absolute;
+    background: #ffffff;
+    border: 1px solid #d1d1d1;
+    z-index: 1000;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    box-shadow: 0 0 5px 5px #f1f1f1;
+    border-radius: 3px;
+    margin-left: -5px;
+}
+
+.menu a {
+    border: none;
+    background: transparent;
+    text-align: center;
+    color: #000000;
+    width: 100%;
+    padding: 10px;
+}
+
+.menu a:hover {
+    border: none;
+    background: transparent;
+    text-align: center;
+    color: #000000;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.10);
+    padding: 10px;
 }
 
 
