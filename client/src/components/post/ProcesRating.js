@@ -15,6 +15,7 @@ class ProcessRating extends Component {
             ]}
         </div>;
     }
+    
 }
 
 function Bar({ title, value }) {
