@@ -517,7 +517,7 @@ class MainFeed extends Component{
         }
         if (this.props.isAuthenticated) {
             return (
-            <div className="imgAvatar" id="clsimgAvatar">
+            <div className="imgAvatar FadeIn-load" id="clsimgAvatar">
                 <img id="anhdd" src={urlAvatar} alt="imgUser" />
                 <Link to="ViewProfile">{name} <br/></Link>
             </div>

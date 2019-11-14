@@ -23,20 +23,20 @@ class HomeFeed extends Component{
                         <HNewFeed/>
                         
                     </div>
-                    <div className="box-home ">
+                    <div className="box-home fadeInDown ">
                         <div className="header-list-index box-film " style={{margintop: '0px'}} ><span className="title-list-index ">TOP film Review</span><Link to="AllFeed" className="all-list-index" >
                             Xem tất cả
                         </Link></div>
                         <Carousel/>
                     </div>
-                    <div className="box-home ">
+                    <div className="box-home fadeInDown">
                         <div className="header-list-index " style={{margintop: '0px'}}><span className="title-list-index ">NHẠC NỔI TRỘI</span><Link to="AllFeed" className="all-list-index" >
                             Xem tất cả
                         </Link></div>
                         <Carousel/>
                     </div>
 
-                    <div className="box-home ">
+                    <div className="box-home fadeInDown">
                         <div className="header-list-index " style={{margintop: '0px'}}><span className="title-list-index ">TRUYỀN HÌNH ĂN KHÁCH</span><Link to="AllFeed" className="all-list-index" >
                             Xem tất cả
                         </Link></div>
@@ -44,7 +44,7 @@ class HomeFeed extends Component{
 
                     </div>
 
-                    <div className="box-home ">
+                    <div className="box-home fadeInDown">
                         <div className="header-list-index " style={{margintop: '0px'}}><span className="title-list-index ">NÊN ĐỌC GÌ</span><Link to="AllFeed" className="all-list-index" >
                             Xem tất cả
                         </Link></div>
@@ -53,7 +53,7 @@ class HomeFeed extends Component{
 
 
                     </div>
-                    <div className="box-home ">
+                    <div className="box-home fadeInDown">
                         <div className="header-list-index " style={{margintop: '0px'}}><span className="title-list-index ">MÓN NGON NÊN THỬ</span><Link to="AllFeed" className="all-list-index" >
                             Xem tất cả
                         </Link></div>
@@ -62,7 +62,7 @@ class HomeFeed extends Component{
 
 
                     </div>
-                    <div className="box-home ">
+                    <div className="box-home fadeInDown">
                         <div className="header-list-index " style={{margintop: '0px'}}><span className="title-list-index ">ĐI ĐÂU THÌ TỐT</span><Link to="AllFeed" className="all-list-index" >
                             Xem tất cả
                         </Link></div>
@@ -70,7 +70,7 @@ class HomeFeed extends Component{
 
 
                     </div>
-                    <div className="box-home ">
+                    <div className="box-home fadeInDown">
                         <div className="header-list-index " style={{margintop: '0px'}}><span className="title-list-index ">LÀM ĐẸP HÔM NAY</span><Link to="AllFeed" className="all-list-index" >
                             Xem tất cả
                         </Link></div>

@@ -21,7 +21,7 @@ class SliderImage extends Component {
 
   render() {
     return (
-      <div className="imageSlider">
+      <div className="imageSlider FadeIn-load">
         <Slider
           className="imageSlider-zoom"
           asNavFor={this.state.nav2}

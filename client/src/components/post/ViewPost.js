@@ -123,20 +123,25 @@ class ViewPost extends Component{
 
     render(){
         return(
-            <div className="row clsNEWFEED">
-                <div className="col-sm-2">
-                    <div className="imgDD">
-                        <img id="imgSP" src={this.state.img} alt="imgDemo1" />
-                        <Link to="SearchSP">Hotel Del Luna</Link>
+            <div className="row clsNEWFEED fadeInDown">
+                <Link to="Theme" id="btnDetailTheme"><span style={{textTransform: 'capitalize'}}>{this.props.post.theme}</span></Link>
+                <div className="col-sm-3">
+                    <div className="imgDD FadeIn-load">
+                        <img id="imgSP" src={this.state.img} alt="imgDemo1" /><br/>
+                        <Link to="SearchSP">{this.props.post.productReview}</Link>
                     </div>
                 </div>
-                <div className="col-sm-10 detail-NEWFEED">
-                    <Link to={
-                        {pathname: '/DetailPost',
-                        state: { post: this.props.post  }}
+                <div className="col-sm-9 detail-NEWFEED FadeIn-load">
+                    <div className="detail-Title">
+                        <Link to={
+                            {pathname: '/DetailPost',
+                            state: { post: this.props.post  }}
                         }>
-                        <span className="txt-NameBV">{this.props.post.title}</span>
-                    </Link>
+                            <span className="txt-NameBV" style={{textTransform: 'uppercase'}}>{this.props.post.title}</span>
+                        </Link><br/>
+                        <span className="tooltiptext">{this.props.post.title}</span>
+                    </div>
+                    
                     <br/>
                     <div className="text-muted">
                         
@@ -147,13 +152,15 @@ class ViewPost extends Component{
                             <span title={this.props.post.postedBy.name}> <img width="22px " height="22px " className="user_avatar_link " src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/p960x960/72701345_964247143929133_5610529934977007616_o.jpg?_nc_cat=108&cachebreaker=hd&_nc_oc=AQk8kHSTIH3zGKJhJ1_ozUX-5HnogxpMC2Duv07HicF99Xr61wpEk3AjgzHGMkI98f8&_nc_ht=scontent.fsgn2-3.fna&oh=a50ee3696a6513807b6e99fb9bc539e3&oe=5E571E05" alt="Nguyễn Tuấn Vũ "/></span>
                             <span style={{marginLeft:'10px'}}>{this.props.post.postedBy.name}</span>
                         </Link>
-                        &nbsp;&nbsp;<span className="glyphicon glyphicon-time"></span>
+                        
+                        
                 
                         {new Intl.DateTimeFormat('en-GB', { 
                                     month: '2-digit', 
                                     day: '2-digit',
                                     year: 'numeric', 
                                     }).format(new Date(this.props.post.created))}
+                                    
                     </div>
                         <p>{this.props.post.contentSummary}</p>
                         <div className="rateBar">
