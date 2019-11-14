@@ -20,6 +20,7 @@ class ViewComment extends Component {
         edit: false,
         reply:false,
         anchorEl: null
+        
     };
     // sortComment(comments){
     //     return comments.sort(function(a,b){

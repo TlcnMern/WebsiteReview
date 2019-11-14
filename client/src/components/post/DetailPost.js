@@ -102,7 +102,9 @@ class DetailPost extends Component{
                                     year: 'numeric', 
                                     }).format(new Date(post.created))}
                             </span><br/>
-                            <span>Link:<a href={post.link}>{post.link}</a></span><br/>
+                            <span>
+                                
+                                Link:<a href={post.link}>{post.link}</a></span><br/>
                         </div>
                             
                             
