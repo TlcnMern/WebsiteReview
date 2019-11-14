@@ -38,23 +38,15 @@ export const GetNewFeeds = () => {
         });
 };
 
-//get detail post
-export const getDetailPost = (postId) => {
-    const config = {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    }
-    return axios.get(`${API_URL}/post/getDetailPost/`+postId, config)
+export const getPhoto = (idpost) => {
+    return axios.get(`${API_URL}/post/photo/` + idpost)
         .then(res => {
             return res.data;
         })
         .catch(err => {
-            return err;
-        });
-};
-
+            console.log(err);
+        })
+}
 //comment
 export const checkAuthorizedComment = (jwt, userID, commentID) => {
     const config = {

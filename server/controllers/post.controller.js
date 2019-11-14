@@ -23,16 +23,16 @@ const create = (req, res) => {
     post.postedBy= req.profile._id;
     var listImage=files.photo;
     if(listImage){
-      var listPathImage=[];
+      var imageName=[];
       if(Array.isArray(listImage)){
         listImage.forEach(element => {
-          listPathImage.push(element.path.toString().replace("\\","/"));
+          imageName.push(element.path.split('\\')[1]);
         });
       }
       else{
-        listPathImage.push(listImage.path.toString().replace("\\","/"));
+        imageName.push(listImage.path.split('\\')[1]);
       }
-      post.photo = listPathImage;
+      post.photo = imageName;
       post.save((err, result) => {
         if (err) {
           return res.status(400).json({
@@ -47,6 +47,11 @@ const create = (req, res) => {
         error: errorHandler.getErrorMessage(err)
       })
     }
+  
+    // if(files.photo){
+    //   post.photo.data = fs.readFileSync(files.photo.path);//Buffer(fs.readFileSync(req.file.path), 'base64');
+    //   post.photo.contentType = files.photo.type;//lấy định dạng ảnh
+    // }
   })
 }
 
@@ -72,17 +77,16 @@ const getNewFeeds=(req,res)=>{
   })
 }
 
-const getDetailPost=(req,res)=>{
-  const postId=req.params.postId;
-  Post.find({_id:postId})
-  .populate('postedBy', '_id name')
-  .exec((err, post) => {
-    if (err) {
+const photo = (req, res) => {
+  var imageName='dist/'+req.post.photo[0];
+  fs.readFile(imageName,(err, imageData)=>{
+    if(err){
+      console.log(err)
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
       })
     }
-    res.json(post);
+    return res.json(imageData);
   })
 }
 
@@ -157,7 +161,7 @@ const updateRatingOfUser=(req,res)=>{
 module.exports={
     create:create,
     getNewFeeds:getNewFeeds,
-    getDetailPost:getDetailPost,
+    photo:photo,
     postByID:postByID,
     addRating:addRating,
     checkRatingAndShow:checkRatingAndShow,

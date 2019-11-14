@@ -102,9 +102,13 @@ class DetailPost extends Component{
                                     year: 'numeric', 
                                     }).format(new Date(post.created))}
                             </span><br/>
+<<<<<<< HEAD
                             <span>
                                 
                                 Link:<a href={post.link}>{post.link}</a></span><br/>
+=======
+                            <span>Link:<a href={post.link}>{post.link}</a></span><br/>
+>>>>>>> parent of 295dba7... updateAll
                         </div>
                             
                             

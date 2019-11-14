@@ -16,11 +16,10 @@ class profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userID: this.props.location.state ? this.props.location.state.userID : null,
             renderProfile: false,
             renderPost: true
         };
-        this.match=props.match;
-        console.log( this.match.params.userId)
         this.onClickProfile = this.onClickProfile.bind(this);
         this.onClickPost = this.onClickPost.bind(this);
     }
@@ -36,16 +35,16 @@ class profile extends Component {
     componentDidMount() {
         if (this.props.isAuthenticated === true) {
             const jwt = auth.isAuthenticated();
-            this.props.checkFollow(jwt.user._id, { t: jwt.token }, this.match.params.userId);
+            this.props.checkFollow(jwt.user._id, { t: jwt.token }, this.props.location.state.userID);
         }
-        this.props.fetch(this.match.params.userId);
+        this.props.fetch(this.props.location.state.userID);
     }
 
 
     rendermyMenu() {
 
         //trường hợp coi chính mình
-        if (auth.isAuthenticated().user._id === this.match.params.userId) {
+        if (auth.isAuthenticated().user._id === this.props.location.state.userID) {
             return (<Redirect to='/ViewProfile' />);
         }
 
@@ -119,7 +118,7 @@ class profile extends Component {
 
                                 </div>
                                 <div className="right col-lg-8">
-                                    <span className="follow"><Follow followID={ this.match.params.userId} /></span>
+                                    <span className="follow"><Follow followID={this.state.userID} /></span>
                                     {this.rendermyMenu()}
 
 

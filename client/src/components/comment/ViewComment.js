@@ -110,6 +110,7 @@ class ViewComment extends Component {
                         {
                             // cho thằng viết ra có 2 chức năng này
                             this.state.isAuthorized && [
+
                                 <Button aria-owns={open ? 'fade-menu' : undefined} key={0} aria-haspopup="true" onClick={this.handleClick}>
                                     <i className="fa fa-cogs" aria-hidden="true"></i>
                                 </Button>,
@@ -117,6 +118,8 @@ class ViewComment extends Component {
                                     <MenuItem onClick={this.onClickEdit.bind(this)} key={2}><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</MenuItem>
                                     <MenuItem onClick={this.onDeleteComment.bind(this)} key={3}><i className="fa fa-trash-o" aria-hidden="true"></i> Delete</MenuItem>
                                 </Menu>
+
+
                             ]}
                     </div>
 

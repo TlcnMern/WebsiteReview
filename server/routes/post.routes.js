@@ -10,10 +10,10 @@ const aclLibrary=aclStore.aclStore.acl;
 
 router.route('/new/:userID').post(controllerAuth.requireSignin,controllerAuth.hasAuthorization, controllerPost.create);
 router.route('/NewFeeds').get(controllerPost.getNewFeeds);
-router.route('/getDetailPost/:postId').get(controllerPost.getDetailPost);
+router.route('/photo/:postID').get(controllerPost.photo);
 
 //comment
-router.route('/getComment/:postId').get(controllerComment.getComment);
+router.route('/getComment/:postID').get(controllerComment.getComment);
 router.route('/addComment').put(controllerAuth.requireSignin,controllerComment.addComment);
 router.route('/addSubComment').put(controllerAuth.requireSignin,controllerComment.addSubComment);
 router.route('/deleteComment/:userID').put(controllerAuth.requireSignin,controllerAuth.hasAuthorization,aclLibrary.middleware(2),controllerComment.deleteComment);
@@ -30,5 +30,5 @@ router.route('/checkRatingAndShow').post(controllerAuth.requireSignin,controller
 router.route('/updateRatingOfUser').put(controllerAuth.requireSignin, controllerPost.updateRatingOfUser);
 
 router.param('userID', controllerUser.UserById);
-router.param('postId', controllerPost.postByID);
+router.param('postID', controllerPost.postByID);
 module.exports=router;

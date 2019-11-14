@@ -62,6 +62,7 @@ class NewPost extends Component{
         newPost(userID,{t:jwt.token},this.postData)
         .then((data)=>{
             if(data.error){
+                console.log(data);
                 this.setState({renderAlert:false});
                 return;
             }
