@@ -150,8 +150,10 @@ body {
 }
 
 #imgSP {
-    width: 80px;
-    height: 100px;
+    width: auto;
+    height: auto;
+    max-width: 165px;
+    max-height: 165px;
     background-color: #ffffff !important;
     box-shadow: 2px 2px 2px 2px #8080804d;
 }
@@ -216,6 +218,14 @@ body {
     font-size: 12px;
     text-align: center;
     font-weight: 600;
+}
+
+.imgDD a {
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    padding: 5px;
 }
 
 .imgAvatar {
@@ -1945,10 +1955,11 @@ a:visited {
 }
 
 .clsNEWFEED {
-    box-shadow: 5px 5px 2px #8080804d;
-    margin: 5px 5px 15px 10px !important;
-    width: 95%;
-    margin-left: 10px !important;
+    box-shadow: 0 0 5px 2px #8080804d;
+    margin: 5px 5px 15px 25px!important;
+    width: 94%;
+    padding: 10px;
+    align-items: center;
 }
 
 .box-home {
@@ -1963,6 +1974,10 @@ a:visited {
 
 .detail-NEWFEED {
     width: 100%;
+    text-align: justify;
+    font-size: 12px;
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
 }
 
 .text-muted {
@@ -1971,15 +1986,38 @@ a:visited {
     line-height: 25px;
 }
 
+#btnDetailTheme {
+    position: absolute;
+    left: 10px;
+    border: none;
+    background-color: #1DA1F2;
+    color: #fff;
+    width: auto;
+    z-index: 2;
+    padding: 5px;
+    border-top-right-radius: 5px;
+    border-right: thick;
+}
+
 .detail-NEWFEED .txt-NameBV {
-    font-size: 14px;
-    font-weight: 800;
+    font-size: 18px;
+    font-weight: bolder;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 100%;
+    display: inline-block;
+    white-space: nowrap;
+    width: 500px;
     color: #385898;
 }
 
-.detail-NEWFEED {
-    text-align: justify;
-    font-size: 12px;
+.detail-NEWFEED p {
+    font-size: 14px;
+    padding-top: 10px;
+    max-height: 115px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
 }
 
 .user_avatar_link {
@@ -2168,4 +2206,100 @@ svg:not(:root) {
     text-decoration: none;
     padding: 5px;
     font-size: 12px;
+}
+
+
+/* Hiệu ứng load */
+
+.FadeIn-load {
+    animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    /* Firefox */
+    -webkit-animation: fadein 2s;
+    /* Safari and Chrome */
+    -o-animation: fadein 2s;
+    /* Opera */
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein {
+    /* Firefox */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+    /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein {
+    /* Opera */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+.fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+}
+
+
+/* tooltip */
+
+
+/* Tooltip text */
+
+.detail-Title .tooltiptext {
+    visibility: hidden;
+    width: auto;
+    background-color: #fff;
+    color: #949697;
+    text-align: center;
+    padding: 5px;
+    /* border-radius: 6px; */
+    position: absolute;
+    box-shadow: 0 0 2px 2px #d1d1d1;
+    z-index: 1;
+}
+
+
+/* Show the tooltip text when you mouse over the tooltip container */
+
+.detail-Title:hover .tooltiptext {
+    visibility: visible;
 }

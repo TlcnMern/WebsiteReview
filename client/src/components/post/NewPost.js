@@ -62,6 +62,7 @@ class NewPost extends Component{
         newPost(userID,{t:jwt.token},this.postData)
         .then((data)=>{
             if(data.error){
+                console.log(data);
                 this.setState({renderAlert:false});
                 return;
             }
@@ -101,7 +102,7 @@ class NewPost extends Component{
                                         <button className="btnPhotoin-remove" type="button" value={file.name} onClick={this.removeImage}><i className="fa fa-times" aria-hidden="true"></i></button>
                                     </div>))}
                                     </div>
-                                    <p>Tải lên ảnh đại diện cho bài viết tại đây.<br/>Vui lòng chọn ít nhất 1 ảnh để làm avatar.<br/>Lưu ý: Bạn có thể chọn nhiều ảnh, kích thước khuyến khích bé hơn 2mb</p>
+                                    <p>Tải lêsn ảnh đại diện cho bài viết tại đây.<br/>Vui lòng chọn ít nhất 1 ảnh để làm avatar.<br/>Lưu ý: Bạn có thể chọn nhiều ảnh, kích thước khuyến khích bé hơn 2mb</p>
                                 </div>
                             </div>
                             <div className="content_form mt-10 col-sm-8">
