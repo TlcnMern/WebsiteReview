@@ -47,7 +47,7 @@ export const fetch=(uid)=>{
     .then((response) => {
       dispatch({
         type: FETCH_USER,
-        payload: response.data.userInfo,
+        payload: response.data.userInfo
       });
     })
     .catch(err => {

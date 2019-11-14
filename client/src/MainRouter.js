@@ -20,13 +20,13 @@ class MainRouter extends Component {
         <BodyTemplate/>
         <Switch>
           <Route exact path="/" component={HomeFeeds}/>
-          <Route exact path="/Login" component={login}/>
-          <Route exact path="/Register" component={Register}/>
+          <Route path="/Login" component={login}/>
+          <Route path="/Register" component={Register}/>
           <PrivateRoute path="/Profile" component={profile}/>
           <PrivateRoute path="/ViewProfile" component={ViewProfile}/>
           <PrivateRoute path="/NewPost" component={post}/>
-          <Route path="/DetailPost" component={DetailPost}/>
-          <Route path="/GuestViewProfile" component={GuestViewProfile}/>
+          <Route path="/DetailPost/:postId" component={DetailPost}/>
+          <Route path="/GuestViewProfile/:userId" component={GuestViewProfile}/>
         </Switch>
       </BrowserRouter>
     </div>)
