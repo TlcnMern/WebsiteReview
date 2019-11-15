@@ -52,7 +52,7 @@ const PostSchema = new mongoose.Schema({
     oneStar:Number,
     twoStar:Number,
     threeStar:Number,
-    forStar:Number,
+    fourStar:Number,
     fiveStar:Number
   },
   postedBy: {type: mongoose.Schema.ObjectId, ref: 'User'},

@@ -28,6 +28,7 @@ router.route('/updateSubComment/:userID').put(controllerAuth.requireSignin,contr
 router.route('/addRating').put(controllerAuth.requireSignin,controllerPost.addRating);
 router.route('/checkRatingAndShow').post(controllerAuth.requireSignin,controllerPost.checkRatingAndShow);
 router.route('/updateRatingOfUser').put(controllerAuth.requireSignin, controllerPost.updateRatingOfUser);
+router.route('/calculateRaingtingEachPost').get(controllerPost.calculateRaingtingEachPost);
 
 router.param('userID', controllerUser.UserById);
 router.param('postId', controllerPost.postByID);

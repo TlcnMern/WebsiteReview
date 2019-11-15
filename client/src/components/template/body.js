@@ -550,7 +550,7 @@ class MainFeed extends Component{
             return (
             <div className="imgAvatar FadeIn-load" id="clsimgAvatar">
                 <img id="anhdd" src={urlAvatar} alt="imgUser" />
-                <span style={{padding:'5px'}}><Link to="ViewProfile"     style={{maxWidth: '110px',width: 'auto', overflow: 'hidden', textOverflow: 'ellipsis', display: 'inline-block', whiteSpace: 'nowrap'}}>{name}<br/></Link></span>
+                <span style={{padding:'5px'}}><Link to="/ViewProfile"     style={{maxWidth: '110px',width: 'auto', overflow: 'hidden', textOverflow: 'ellipsis', display: 'inline-block', whiteSpace: 'nowrap'}}>{name}<br/></Link></span>
                 <button className="optionUser" onClick={this.showMenu}><i className="fa fa-bars" aria-hidden="true"></i></button>
                 {
                 this.state.showMenu? 
@@ -559,7 +559,7 @@ class MainFeed extends Component{
                     ref={(element) => {
                         this.dropdownMenu = element;
                     }}>
-                        <Link to="ViewProfile" style={{borderBottom:"1px solid #d1d1d1"}}><img src="https://img.icons8.com/ios/16/000000/security-pass.png" alt="viewInfo"/> Xem trang cá nhân</Link>
+                        <Link to="/ViewProfile" style={{borderBottom:"1px solid #d1d1d1"}}><img src="https://img.icons8.com/ios/16/000000/security-pass.png" alt="viewInfo"/> Xem trang cá nhân</Link>
                         <Link to="ChangePass" style={{borderBottom:"1px solid #d1d1d1"}}><img src="https://img.icons8.com/ios/16/000000/re-enter-pincode.png"alt="changePass"/> Đổi mật khẩu</Link>
                         <Link to="/" onClick={this.clickLogout} ><img src="https://img.icons8.com/ios/16/000000/export.png" alt="logout"/> Đăng xuất</Link>
                         
@@ -571,7 +571,7 @@ class MainFeed extends Component{
           else
           return(
             <div className="btnDangNhap" id="clsbtnDangNhap">
-                <Link to="Login">  <button id="btnUser" type="button" onClick={this.clickUser}>Đăng Nhập</button></Link>
+                <Link to="/Login">  <button id="btnUser" type="button" onClick={this.clickUser}>Đăng Nhập</button></Link>
 
             </div>
           );
@@ -592,7 +592,7 @@ class MainFeed extends Component{
             </div>
             <div className="boxTopContent ">
                 <div className="bg-white ">
-                <Link to="NewPost">
+                <Link to="/NewPost">
                     <button type="button "  className="btnDangBai ">Đăng bài</button>
                 </Link>
                 </div>

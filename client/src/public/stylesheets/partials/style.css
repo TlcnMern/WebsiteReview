@@ -53,9 +53,6 @@ body {
     padding: 0;
 }
 
-
-/* Style the search box */
-
 .search-container .search-input {
     background-color: #f5f8fa;
     border-radius: 21px;
@@ -92,8 +89,6 @@ body {
     background: #0b7dda;
 }
 
-
-/* Style the navigation menu inside the left column */
 
 #myMenu {
     list-style-type: none;
@@ -533,10 +528,6 @@ body {
     /*text-align:center;*/
 }
 
-
-/*.left .form{
-        border:1px solid;
-      }*/
 
 .dialogLogin .loginright {
     width: 50%;

@@ -10,13 +10,14 @@ const checkAuthorizedComment = (req, res) => {
   const userID=req.session.userId;
   Comment.findOne({_id:commentID,commentBy:userID}, (err, comment) => {
     if (err || !comment){
-      return res.status('401').json({
+      return res.status('204').json({
         error: "User not authorized"
       });
     }
     return res.json(true);
   })
 }
+
 const checkAuthorizedSubComment = (req, res) => {
   // const commentId=req.body.commentId;
   const subCommentId=req.body.subCommentId;

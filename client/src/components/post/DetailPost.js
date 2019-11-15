@@ -4,20 +4,11 @@ import Comment from '../comment/Comment';
 import Rating from './Rating';
 import ImageSlider from './sliderImage';
 import { auth } from '../../action/helper';
-import { checkRatingAndShow, getDetailPost } from '../../action/postAction';
+import { checkRatingAndShow, getDetailPost,calculateRaingtingEachPost} from '../../action/postAction';
 import { connect } from 'react-redux';
 import { getComment } from '../../action/postAction';
 import Loading from '../template/loading';
 import ProcessRating from './ProcesRating';
-
-const birthdeathrates = [
-    { title: "5 sao", value: 36 },
-    { title: "4 sao", value: 37 },
-    { title: "3 sao", value: 42 },
-    { title: "2 sao", value: 0 },
-    { title: "1 sao", value: 0 }
-];
-
 
 class DetailPost extends Component {
     constructor({ match }) {
@@ -41,31 +32,16 @@ class DetailPost extends Component {
                     post: data[0]
                 })
             }
-        })
+        });
+
+        calculateRaingtingEachPost();
+
 
         if (this.props.isAuthenticated) {
             const jwt = auth.isAuthenticated();
             const userID = jwt.user._id;
             checkRatingAndShow(userID, { t: jwt.token }, postId).then((data) => {
-                // if (data === null) {
-                //     this.setState({
-                //         isLoading: false,
-                //         point: null
-                //     });
-                // }
-                // else {
-                //     if (data.error) {
-                //         console.log(data.error);
-                //     }
-                //     else {
-                //         this.setState({
-                //             isLoading: false,
-                //             point: data
-                //         })
-                //     }
-                // }
                 if (data.error) {
-                    console.log(data.error);
                     this.setState({
                         isLoading: false,
                         point: null
@@ -99,8 +75,8 @@ class DetailPost extends Component {
                                 <div className="col-sm-7 TomTat">
                                     <div className="SPBV">
                                         <span>{this.state.post.productReview}</span>
-                                        <span> <Rating rating={3} disabled={true} /></span>
-                                        <ProcessRating data={birthdeathrates} />
+                                        <span> <Rating rating={this.state.post.pointRating.point-1} disabled={true} /></span>
+                                        <ProcessRating data={this.state.post.pointRating} />
 
                                         <span style={{ fontSize: '13px' }}>Thể loại: <Link to="">{this.state.post.theme}</Link></span><br />
                                     </div>

@@ -38,6 +38,23 @@ export const GetNewFeeds = () => {
         });
 };
 
+export const calculateRaingtingEachPost = () => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    return axios.get(`${API_URL}/post/calculateRaingtingEachPost`, config)
+        .then(res => {
+            console.log(res.data)
+            return res.data;
+        })
+        .catch(err => {
+            return err;
+        });
+};
+
 //get detail post
 export const getDetailPost = (postId) => {
     const config = {
@@ -69,8 +86,8 @@ export const checkAuthorizedComment = (jwt, userID, commentID) => {
         .then(res => {
             return res.data;
         })
-        .catch(err => {
-            console.log(err);
+        .catch(error => {
+            return false;
         })
 }
 
@@ -246,7 +263,6 @@ export const addRating = (userId, credentials, postId, point) => {
     const body = JSON.stringify({ userId: userId, postId: postId, point: point });
     return axios.put(`${API_URL}/post/addRating`, body, config)
         .then(res => {
-            console.log(res.data);
             return true;
         })
         .catch(error => {
