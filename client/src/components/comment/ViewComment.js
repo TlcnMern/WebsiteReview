@@ -7,10 +7,9 @@ import SubComment from './SubComment';
 import { checkAuthorizedComment } from '../../action/postAction';
 import man from '../../public/images/man.png';
 import { Link } from 'react-router-dom';
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem"
-import Fade from "@material-ui/core/Fade";
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 class ViewComment extends Component {
     state = {
@@ -18,8 +17,7 @@ class ViewComment extends Component {
         isAuthorized: false,
         listSubComment: this.props.comment.subComment || [],
         edit: false,
-        reply: false,
-        anchorEl: null
+        reply: false
 
     };
     componentDidMount() {
@@ -37,10 +35,15 @@ class ViewComment extends Component {
         }
     }
 
+    shouldComponentUpdate(nextProp, nextState) {
+        console.log(nextState);
+        return (this.state !== nextState)
+    }
+
     onClickEdit() {
         this.setState({ edit: !this.state.edit });
-        this.handleClose();
     };
+
     onClickReply() {
         this.setState({ reply: !this.state.reply });
     };
@@ -59,13 +62,6 @@ class ViewComment extends Component {
         this.props.deleteComment(postId, userID, { t: jwt.token }, commentId);
     }
 
-    handleClick = event => {
-        this.setState({ anchorEl: event.currentTarget });
-    };
-
-    handleClose = () => {
-        this.setState({ anchorEl: null });
-    };
     renderReply() {
         if (this.state.reply)
             return (
@@ -75,9 +71,6 @@ class ViewComment extends Component {
     }
 
     render() {
-        console.log(this.state)
-        const { anchorEl } = this.state;
-        const open = Boolean(anchorEl);
         return (
             <div style={{ marginLeft: '20px', padding: '10px' }}>
 
@@ -105,18 +98,17 @@ class ViewComment extends Component {
                         </div>
                         {
                             // cho thằng viết ra có 2 chức năng này
-                            this.state.isAuthorized && [
+                            this.state.isAuthorized && (
+                                <div>
+                                    <MuiThemeProvider>
+                                        <DropDownMenu>
+                                            <MenuItem onClick={this.onClickEdit.bind(this)} ><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</MenuItem>
+                                            <MenuItem onClick={this.onDeleteComment.bind(this)}><i className="fa fa-trash-o" aria-hidden="true"></i> Delete</MenuItem>
+                                        </DropDownMenu>
+                                    </MuiThemeProvider>
+                                </div>
 
-                                <Button aria-owns={open ? 'fade-menu' : undefined} key={0} aria-haspopup="true" onClick={this.handleClick}>
-                                    <i className="fa fa-cogs" aria-hidden="true"></i>
-                                </Button>,
-                                <Menu id="fade-menu" anchorEl={anchorEl} open={open} key={1} onClose={this.handleClose} TransitionComponent={Fade}>
-                                    <MenuItem onClick={this.onClickEdit.bind(this)} key={2}><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</MenuItem>
-                                    <MenuItem onClick={this.onDeleteComment.bind(this)} key={3}><i className="fa fa-trash-o" aria-hidden="true"></i> Delete</MenuItem>
-                                </Menu>
-
-
-                            ]}
+                            )}
                     </div>
 
                 </div>

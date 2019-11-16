@@ -10,6 +10,8 @@ import { getComment } from '../../action/postAction';
 import Loading from '../template/loading';
 import ProcessRating from './ProcesRating';
 
+// import FeatureOfComment from '../comment/FeatureOfComment';
+
 class DetailPost extends Component {
     constructor({ match }) {
         super();
@@ -58,6 +60,7 @@ class DetailPost extends Component {
         this.props.getComment(postId)
     }
     render() {
+        console.log('alo')
         if (this.state.post === null) {
             return (
                 <div className="row">
@@ -75,6 +78,7 @@ class DetailPost extends Component {
                                 <div className="col-sm-5 TLBV">
                                     <ImageSlider />
                                 </div>
+                                {/* <FeatureOfComment/> */}
                                 <div className="col-sm-7 TomTat">
                                     <div className="SPBV">
                                         <span>{this.state.post.productReview}</span>
