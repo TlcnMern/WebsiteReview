@@ -18,15 +18,10 @@ class ViewComment extends Component {
         isAuthorized: false,
         listSubComment: this.props.comment.subComment || [],
         edit: false,
-        reply:false,
+        reply: false,
         anchorEl: null
-        
+
     };
-    // sortComment(comments){
-    //     return comments.sort(function(a,b){
-    //         return new Date(b.created)-new Date(a.created);
-    //     });
-    // }
     componentDidMount() {
         if (this.props.isAuthenticated) {
             const jwt = auth.isAuthenticated();
@@ -50,7 +45,6 @@ class ViewComment extends Component {
         this.setState({ reply: !this.state.reply });
     };
 
-
     onCallBack(content1) {
         const comment = this.props.comment;
         comment.content = content1;
@@ -72,19 +66,20 @@ class ViewComment extends Component {
     handleClose = () => {
         this.setState({ anchorEl: null });
     };
-    renderReply(){
-        if(this.state.reply)
-        return (
-        <div>
-            { <SubComment commentId={this.props.comment._id} listSubComment={this.state.listSubComment} />}
-        </div>);
+    renderReply() {
+        if (this.state.reply)
+            return (
+                <div>
+                    {<SubComment commentId={this.props.comment._id} listSubComment={this.state.listSubComment} />}
+                </div>);
     }
 
     render() {
+        console.log(this.state)
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         return (
-            <div style={{ marginLeft: '20px' ,    padding: '10px'}}>
+            <div style={{ marginLeft: '20px', padding: '10px' }}>
 
                 <div className="row">
                     <div className="col-sm-1">
@@ -92,14 +87,15 @@ class ViewComment extends Component {
                     </div>
                     <div className="row col-sm-11">
                         <div className="ContentComment">
+
                             <Link to={
                                 {
-                                    pathname: '/GuestViewProfile',
-                                    state: { userID: this.props.comment.commentBy._id }
-                                }
-                            }>
+                                    pathname: `/GuestViewProfile/${this.props.comment.commentBy._id}`
+                                }}>
                                 {this.props.comment.commentBy.name}
-                                 </Link>
+
+                            </Link>
+
                             <span>
                                 {this.state.edit ? <EditComment callBack={this.onCallBack.bind(this)} content={this.props.comment.content} commentId={this.props.comment._id} /> :
                                     <em>{this.props.comment.content}</em>

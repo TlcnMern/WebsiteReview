@@ -47,7 +47,6 @@ export const calculateRaingtingEachPost = () => {
     }
     return axios.get(`${API_URL}/post/calculateRaingtingEachPost`, config)
         .then(res => {
-            console.log(res.data)
             return res.data;
         })
         .catch(err => {
@@ -305,10 +304,6 @@ export const checkRatingAndShow = (userId, credentials, postId) => {
     const body = JSON.stringify({ userId: userId, postId: postId });
     return axios.post(`${API_URL}/post/checkRatingAndShow`, body, config)
         .then(res => {
-            // if (res.data.length > 0) {
-            //     return res.data[0].point;
-            // }
-            // return null;
             return res.data;
         })
         .catch(error => {

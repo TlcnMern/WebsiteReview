@@ -11,8 +11,6 @@ class Register extends Component {
         email: '',
         password: '',
         confirmPassword: '',
-        gender: '',
-        // birthday:Date,
         flag: false
     }
 
@@ -23,13 +21,11 @@ class Register extends Component {
 
     onSubmitRegister = e => {
         e.preventDefault();
-        const { name, email, password, gender, birthday } = this.state;
+        const { name, email, password } = this.state;
         const user = {
             name,
             email,
-            password,
-            gender,
-            birthday
+            password
         };
         this.props.RegisterAction(user);
     }

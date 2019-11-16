@@ -1,8 +1,6 @@
 const Post=require('../models/post.model');
 const Comment=require('../models/comment.model');
 const errorHandler =require('../helpers/dbErrorHandler');
-const fs=require('fs');
-
 
 //commnet
 const checkAuthorizedComment = (req, res) => {

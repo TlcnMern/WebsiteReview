@@ -1,7 +1,6 @@
-const User=require('../models/usertest');
+const User=require('../models/user.model');
 const errorHandler=require('../helpers/dbErrorHandler');
 const formidable=require('formidable');
-const fs=require('fs');
 var _ = require('lodash');
 const {aclStore}=require('../helpers/acl-store');
 
@@ -82,7 +81,6 @@ const UserById=(req,res,next,userID)=>{
         next();
       })
 }
-
 //update info user
 const update = (req, res, next) => {
   let form = new formidable.IncomingForm();
@@ -122,7 +120,6 @@ const checkFollow= (req, res) => {
   });
   res.json(match);
 }
-
 //người mình theo dõi
 const addFollowing = (req, res, next) => {
   User.findByIdAndUpdate(req.body.userId, {$push: {following: req.body.followId}}, (err, result) => {
@@ -134,7 +131,6 @@ const addFollowing = (req, res, next) => {
     next();
   })
 }
-
 //người theo dõi mình
 const addFollower = (req, res) => {
   User.findByIdAndUpdate(req.body.followId, {$push: {followers: req.body.userId}}, {new: true})

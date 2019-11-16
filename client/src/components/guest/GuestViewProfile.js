@@ -15,8 +15,9 @@ import Follow from '../user/follow';
 class profile extends Component {
     constructor(props) {
         super(props);
+        this.match=props.match;
         this.state = {
-            userID: this.props.location.state ? this.props.location.state.userID : null,
+            userId: this.match.params.userId,
             renderProfile: false,
             renderPost: true
         };
@@ -35,16 +36,16 @@ class profile extends Component {
     componentDidMount() {
         if (this.props.isAuthenticated === true) {
             const jwt = auth.isAuthenticated();
-            this.props.checkFollow(jwt.user._id, { t: jwt.token }, this.props.location.state.userID);
+            this.props.checkFollow(jwt.user._id, { t: jwt.token }, this.state.userId);
         }
-        this.props.fetch(this.props.location.state.userID);
+        this.props.fetch(this.state.userId);
     }
 
 
     rendermyMenu() {
 
         //trường hợp coi chính mình
-        if (auth.isAuthenticated().user._id === this.props.location.state.userID) {
+        if (auth.isAuthenticated().user._id === this.match.params.userId) {
             return (<Redirect to='/ViewProfile' />);
         }
 
@@ -74,7 +75,7 @@ class profile extends Component {
         const avatar = this.props.profile.avatar;
         var urlAvatar='';
         if (avatar) {
-            if (avatar.search('dist') > 0) {
+            if (avatar.includes('dist')) {
                 urlAvatar = API_URL + '/' + avatar;
             }
             else {
@@ -118,7 +119,7 @@ class profile extends Component {
 
                                 </div>
                                 <div className="right col-lg-8">
-                                    <span className="follow"><Follow followID={this.state.userID} /></span>
+                                    <span className="follow"><Follow followID={this.state.userId} /></span>
                                     {this.rendermyMenu()}
 
 

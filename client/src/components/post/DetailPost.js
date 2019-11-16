@@ -60,7 +60,10 @@ class DetailPost extends Component {
     render() {
         if (this.state.post === null) {
             return (
-                <div><Loading /></div>);
+                <div className="row">
+                    <div className="col-lg-5"></div>
+                    <Loading className="col-lg-3" />
+                </div>);
         }
         else {
             return (

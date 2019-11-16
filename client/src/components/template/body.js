@@ -70,8 +70,7 @@ class MainFeed extends Component{
           
         }
       }
-      clickLogout(event) {
-        
+      clickLogout() {
         this.setState({ showMenu: false }, () => {
             document.removeEventListener('click', this.closeMenu);
           });  
@@ -535,20 +534,21 @@ class MainFeed extends Component{
         const avatar=auth.getAvatar();
         var urlAvatar='';
         var name=auth.getName();
-        if(avatar){
-            if(avatar.search('dist')>0){
-                urlAvatar=API_URL+'/'+avatar;
+        if (avatar) {
+            if (avatar.includes('dist')) {
+                urlAvatar = API_URL + '/' + avatar;
             }
-            else{
-                urlAvatar=avatar;
+            else {
+                urlAvatar = avatar;
             }
         }
-        else{
-            urlAvatar=man;
+        else {
+            urlAvatar = man;
         }
         if (this.props.isAuthenticated) {
             return (
             <div className="imgAvatar FadeIn-load" id="clsimgAvatar">
+
                 <img id="anhdd" src={urlAvatar} alt="imgUser" />
                 <span style={{padding:'5px'}}><Link to="/ViewProfile"     style={{maxWidth: '110px',width: 'auto', overflow: 'hidden', textOverflow: 'ellipsis', display: 'inline-block', whiteSpace: 'nowrap'}}>{name}<br/></Link></span>
                 <button className="optionUser" onClick={this.showMenu}><i className="fa fa-bars" aria-hidden="true"></i></button>

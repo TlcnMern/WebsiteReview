@@ -1,9 +1,5 @@
 const Post = require('../models/post.model');
-// const Comment=require('../models/comment.model');
 const errorHandler = require('../helpers/dbErrorHandler');
-const formidable = require('formidable');
-// const fs=require('fs');
-const Rating = require('../models/rating.model');
 
 const create = (req, res) => {
   let form = new formidable.IncomingForm();
@@ -123,7 +119,7 @@ const checkRatingAndShow = (req, res) => {
   )
     .exec((err, result) => {
       if (err || !result[0].ratings[0]) {
-        return res.status('400').json({
+        return res.status(401).json({
           error: "Dont have rating"
         })
       }

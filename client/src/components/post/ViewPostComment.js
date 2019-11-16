@@ -37,8 +37,6 @@ class ViewPostComment extends Component{
             });
         }
         this.props.getComment(post._id)
-
-
     }
     render(){
         var  post ={};

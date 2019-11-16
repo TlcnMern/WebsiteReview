@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
 const config = require('./config/config');
-const User = require('./models/usertest');
+const User = require('./models/user.model');
 const {aclStore}=require('./helpers/acl-store');
 
 // Google OAuth Strategy

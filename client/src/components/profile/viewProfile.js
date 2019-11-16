@@ -131,7 +131,7 @@ class viewProfile extends Component {
         const avatar = this.props.profile.avatar;
         var urlAvatar='';
         if (avatar) {
-            if (avatar.search('dist') > 0) {
+            if (avatar.includes('dist')) {
                 urlAvatar = API_URL + '/' + avatar;
             }
             else {

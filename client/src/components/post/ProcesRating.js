@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../../public/stylesheets/partials/processRating.css'
-import { number } from 'prop-types';
 class ProcessRating extends Component {
     constructor(props){
         super(props);
