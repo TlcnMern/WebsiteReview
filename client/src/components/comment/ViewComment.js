@@ -18,7 +18,6 @@ class ViewComment extends Component {
         listSubComment: this.props.comment.subComment || [],
         edit: false,
         reply: false
-
     };
     componentDidMount() {
         if (this.props.isAuthenticated) {
@@ -35,13 +34,15 @@ class ViewComment extends Component {
         }
     }
 
+
     shouldComponentUpdate(nextProp, nextState) {
-        console.log(nextState);
         return (this.state !== nextState)
     }
 
     onClickEdit() {
-        this.setState({ edit: !this.state.edit });
+        this.setState({
+            edit: !this.state.edit
+        });
     };
 
     onClickReply() {

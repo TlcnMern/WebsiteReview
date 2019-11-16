@@ -1,4 +1,5 @@
 const Post = require('../models/post.model');
+const formidable=require('formidable');
 const errorHandler = require('../helpers/dbErrorHandler');
 
 const create = (req, res) => {
