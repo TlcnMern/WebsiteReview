@@ -1,5 +1,4 @@
 const User =require('../models/user.model');
-const Comment=require('../models/comment.model');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 const config =require('../config/config');

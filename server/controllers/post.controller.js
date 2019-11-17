@@ -19,6 +19,7 @@ const create = (req, res) => {
     // }
     let post = new Post(fields);
     post.postedBy = req.profile._id;
+    post.pointRating = {point:null}
     var listImage = files.photo;
     if (listImage) {
       var listPathImage = [];

@@ -17,13 +17,13 @@ const checkAuthorizedComment = (req, res) => {
 }
 
 const checkAuthorizedSubComment = (req, res) => {
-  // const commentId=req.body.commentId;
+  const commentId=req.body.commentId;
   const subCommentId=req.body.subCommentId;
-  // console.log(subCommentId)
-  const userID=req.session.userId;
-  Comment.find({'subComment._id':subCommentId},{subComment: { $elemMatch: { commentBy: userID } }})
+  console.log(subCommentId)
+  const userId=req.session.userId;
+  Comment.find({_id:commentId,'subComment._id':subCommentId,'subComment.commentBy':userId})
   .exec((err, result) => {
-    // console.log(result[0])
+    console.log(result[0])
     if (err || result[0].subComment.length<=0){
       return res.status(204).json({
         error: "User not authorized subcomment"
