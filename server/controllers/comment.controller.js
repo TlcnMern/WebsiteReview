@@ -8,7 +8,7 @@ const checkAuthorizedComment = (req, res) => {
   const userID=req.session.userId;
   Comment.findOne({_id:commentID,commentBy:userID}, (err, comment) => {
     if (err || !comment){
-      return res.status('204').json({
+      return res.status('400').json({
         error: "User not authorized"
       });
     }
@@ -21,16 +21,22 @@ const checkAuthorizedSubComment = (req, res) => {
   const subCommentId=req.body.subCommentId;
   console.log(subCommentId)
   const userId=req.session.userId;
-  Comment.find({_id:commentId,'subComment._id':subCommentId,'subComment.commentBy':userId})
+  Comment.find({_id:commentId}, {
+     subComment: { $elemMatch: { _id: subCommentId ,commentBy:userId} } })
   .exec((err, result) => {
     console.log(result[0])
-    if (err || result[0].subComment.length<=0){
+    if (err){
       return res.status(204).json({
         error: "User not authorized subcomment"
       });
     }
-    // console.log(result[0])
-    return res.json(true);
+    if(result[0].subComment.length!==0){
+      return res.json(true);
+    }else{
+      return res.status(204).json({
+        error: "User not authorized subcomment"
+      });
+    }
   })
 }
   //get comment and sub comment of 1 post

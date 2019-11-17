@@ -9,7 +9,7 @@ import man from '../../public/images/man.png';
 import { Link } from 'react-router-dom';
 import MenuItem from "@material-ui/core/MenuItem"
 import DropDownMenu from 'material-ui/DropDownMenu';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class ViewComment extends Component {
     state = {
