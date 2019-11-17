@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Comment from '../comment/Comment';
 import Rating from './Rating';
-import ImageSlider from './sliderImage';
-import { auth } from '../../action/helper';
+import { auth,API_URL } from '../../action/helper';
 import { checkRatingAndShow, getDetailPost,calculateRaingtingEachPost} from '../../action/postAction';
 import { connect } from 'react-redux';
 import { getComment } from '../../action/postAction';
 import Loading from '../template/loading';
 import ProcessRating from './ProcesRating';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 // import FeatureOfComment from '../comment/FeatureOfComment';
 
@@ -20,7 +22,9 @@ class DetailPost extends Component {
     state = {
         post: null,
         isLoading: true,
-        point: null
+        point: null,
+        nav1: null,
+        nav2: null
     }
 
     componentDidMount() {
@@ -35,6 +39,10 @@ class DetailPost extends Component {
                 })
             }
         });
+        this.setState({
+            nav1: this.slider1,
+            nav2: this.slider2
+          });
 
         calculateRaingtingEachPost();
 
@@ -59,6 +67,39 @@ class DetailPost extends Component {
         }
         this.props.getComment(postId)
     }
+
+    renderSliderImage() {
+        return (
+          <div className="imageSlider FadeIn-load">
+            <Slider
+              className="imageSlider-zoom"
+              asNavFor={this.state.nav2}
+              ref={slider => (this.slider1 = slider)}>
+                  {this.state.post.photo.map(photo => (
+                  <div key={photo}>
+                      <h3>
+                          <img src={`${API_URL}/`+photo} width="300px" height="300px" alt="2R4U" style={{margin:'5px'}}/>
+                      </h3>
+                  </div>))}                   
+              </Slider>
+              <Slider
+                className="imageSlider-multi"
+                asNavFor={this.state.nav1}
+                ref={slider => (this.slider2 = slider)}
+                slidesToShow={3}
+                swipeToSlide={true}
+                focusOnSelect={true}>
+                  {this.state.post.photo.map(photo => (
+                      <div key={photo}>
+                          <h3>
+                              <img src={`${API_URL}/`+photo} width="100px" height="100px" alt="2R4U" style={{margin: '5px',padding: '5px',border: '1px solid #d1d1d1',boxShadow: '0 0 2px 2px #d1d1d1'}}/>
+                          </h3>
+                      </div>))}
+                  </Slider>
+                </div>
+        );
+      }
+
     render() {
         if (this.state.post === null) {
             return (
@@ -75,7 +116,7 @@ class DetailPost extends Component {
                         <div className="NDBV">
                             <div className="row GT-BaiViet">
                                 <div className="col-sm-5 TLBV">
-                                    <ImageSlider />
+                                    {this.renderSliderImage()}
                                 </div>
                                 {/* <FeatureOfComment/> */}
                                 <div className="col-sm-7 TomTat">
