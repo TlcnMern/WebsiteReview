@@ -577,51 +577,48 @@ class MainFeed extends Component{
           );
       }
     render() {
-      
         return(
-          
-  
-     <div className="contentMain">
-        <div className="row">
-    
-            <div className=" boxPersonal">
+                <div className="contentMain">
+                    <div className="row">
                 
-                {this.renderPersonalorLogin()} 
-                {this.rendermyMenu()}   
+                        <div className=" boxPersonal">
+                            
+                            {this.renderPersonalorLogin()} 
+                            {this.rendermyMenu()}   
 
-            </div>
-            <div className="boxTopContent ">
-                <div className="bg-white ">
-                <Link to="/NewPost">
-                    <button type="button "  className="btnDangBai ">Đăng bài</button>
-                </Link>
-                </div>
-                <div className="bg-white ">
-                    <span>BÀI VIẾT NỔI TRỘI</span>
+                        </div>
+                        <div className="boxTopContent ">
+                            <div className="bg-white ">
+                            <Link to="/NewPost">
+                                <button type="button "  className="btnDangBai ">Đăng bài</button>
+                            </Link>
+                            </div>
+                            <div className="bg-white ">
+                                <span>BÀI VIẾT NỔI TRỘI</span>
 
-                    <hr/>
-                    <div className="row ">
-                        <div className="col-sm-2 ">
-                            <div className="imgDD ">
-                                <img src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/p960x960/72701345_964247143929133_5610529934977007616_o.jpg?_nc_cat=108&cachebreaker=hd&_nc_oc=AQk8kHSTIH3zGKJhJ1_ozUX-5HnogxpMC2Duv07HicF99Xr61wpEk3AjgzHGMkI98f8&_nc_ht=scontent.fsgn2-3.fna&oh=a50ee3696a6513807b6e99fb9bc539e3&oe=5E571E05 " width="40px " height="50px " alt="imgDemo1 " />
+                                <hr/>
+                                <div className="row ">
+                                    <div className="col-sm-2 ">
+                                        <div className="imgDD ">
+                                            <img src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/p960x960/72701345_964247143929133_5610529934977007616_o.jpg?_nc_cat=108&cachebreaker=hd&_nc_oc=AQk8kHSTIH3zGKJhJ1_ozUX-5HnogxpMC2Duv07HicF99Xr61wpEk3AjgzHGMkI98f8&_nc_ht=scontent.fsgn2-3.fna&oh=a50ee3696a6513807b6e99fb9bc539e3&oe=5E571E05 " width="40px " height="50px " alt="imgDemo1 " />
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-10 ">
+                                        <Link to="DetailPost">Hotel Del Luna</Link>
+                                        <div className="text-muted " style={{display: 'table-cell', verticalalign: 'middle',lineheight:'25px' }}>
+                                            <Link to="GuestViewProfile"><img width="22px " height="22px " className="user_avatar_link " src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/p960x960/72701345_964247143929133_5610529934977007616_o.jpg?_nc_cat=108&cachebreaker=hd&_nc_oc=AQk8kHSTIH3zGKJhJ1_ozUX-5HnogxpMC2Duv07HicF99Xr61wpEk3AjgzHGMkI98f8&_nc_ht=scontent.fsgn2-3.fna&oh=a50ee3696a6513807b6e99fb9bc539e3&oe=5E571E05" alt="Nguyễn Tuấn Vũ "/></Link> 16-09-2019
+                                            <i className="fa fa-eye "></i> 37
+                                            <i className="fa fa-heart "></i> 0
+                                            <i className="fa fa-comments "></i> 0
+                                        </div>
+                                    </div>
+
+                                </div>
+
                             </div>
                         </div>
-                        <div className="col-sm-10 ">
-                            <Link to="DetailPost">Hotel Del Luna</Link>
-                            <div className="text-muted " style={{display: 'table-cell', verticalalign: 'middle',lineheight:'25px' }}>
-                                <Link to="GuestViewProfile"><img width="22px " height="22px " className="user_avatar_link " src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/p960x960/72701345_964247143929133_5610529934977007616_o.jpg?_nc_cat=108&cachebreaker=hd&_nc_oc=AQk8kHSTIH3zGKJhJ1_ozUX-5HnogxpMC2Duv07HicF99Xr61wpEk3AjgzHGMkI98f8&_nc_ht=scontent.fsgn2-3.fna&oh=a50ee3696a6513807b6e99fb9bc539e3&oe=5E571E05" alt="Nguyễn Tuấn Vũ "/></Link> 16-09-2019
-                                <i className="fa fa-eye "></i> 37
-                                <i className="fa fa-heart "></i> 0
-                                <i className="fa fa-comments "></i> 0
-                            </div>
-                        </div>
-
                     </div>
-
                 </div>
-            </div>
-        </div>
-    </div>
         );
         
     }

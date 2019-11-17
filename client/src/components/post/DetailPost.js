@@ -60,7 +60,6 @@ class DetailPost extends Component {
         this.props.getComment(postId)
     }
     render() {
-        console.log('alo')
         if (this.state.post === null) {
             return (
                 <div className="row">

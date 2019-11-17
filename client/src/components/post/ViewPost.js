@@ -7,7 +7,6 @@ import { auth,API_URL } from '../../action/helper';
 import { checkRatingAndShow } from '../../action/postAction';
 import { getComment } from '../../action/postAction';
 
-
 class ViewPost extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +20,7 @@ class ViewPost extends Component {
 
     }
     state = {
-        isLoading: false,
+        isLoading: true,
         point: null
     }
 
@@ -34,7 +33,7 @@ class ViewPost extends Component {
             checkRatingAndShow(userID, { t: jwt.token }, postID).then((data) => {
                 if (data === null) {
                     this.setState({
-                        isLoading: true,
+                        isLoading: false,
                         point: null
                     });
                 }
@@ -44,7 +43,7 @@ class ViewPost extends Component {
                     }
                     else {
                         this.setState({
-                            isLoading: true,
+                            isLoading: false,
                             point: data
                         })
                     }
@@ -74,7 +73,7 @@ class ViewPost extends Component {
                             <div>
                                 <p>Bạn đánh giá bài viết như thế nào ?</p>
                                 {
-                                    this.state.isLoading ? <Rating rating={this.state.point} idPost={this.props.post._id} /> : <p>dcm dang tai</p>
+                                    this.state.isLoading ? <p>dcm dang tai</p>:<Rating rating={this.state.point} idPost={this.props.post._id} />
                                 }
                             </div>
                         )}
@@ -110,8 +109,7 @@ class ViewPost extends Component {
                     <div className="detail-Title">
                         <Link to={
                             {
-                                pathname: `/DetailPost/${this.props.post._id}`,
-                                state: { post: this.props.post }
+                                pathname: `/DetailPost/${this.props.post._id}`
                             }
                         }>
                             <span className="txt-NameBV">{this.props.post.title}</span>
@@ -144,10 +142,13 @@ class ViewPost extends Component {
                         <span className="rateBar-Comment" onClick={this.onClickComment}>
                             <img src="https://img.icons8.com/ios/20/000000/comments.png" alt="Comment" />
                         </span>
-                        <span className="rateBar-Rate" onClick={this.onClickRating}>
-                            <img src="https://img.icons8.com/ios/20/000000/christmas-star.png" alt="Rate" />
+                        <span>
+                        <span> <Rating rating={this.props.post.pointRating.point-1} disabled={true} /></span>
                         </span>
-                        {this.renderCommentorRating()}
+                        {/* <span className="rateBar-Rate" onClick={this.onClickRating}>
+                            <img src="https://img.icons8.com/ios/20/000000/christmas-star.png" alt="Rate" />
+                        </span> */}
+                        {/* {this.renderCommentorRating()} */}
                     </div>
                 </div>
             </div>

@@ -80,8 +80,8 @@ class ViewSubComment extends Component {
             });
     }
     render() {
-        const { anchorEl } = this.state;
-        const open = Boolean(anchorEl);
+        // const { anchorEl } = this.state;
+        // const open = Boolean(anchorEl);
         return (
             <div className="row clsSubcomment">
                 <div className="col-sm-1">
