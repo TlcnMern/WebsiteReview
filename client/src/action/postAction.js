@@ -38,6 +38,22 @@ export const GetNewFeeds = () => {
         });
 };
 
+export const GetPostFeatured = () => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    return axios.get(`${API_URL}/post/getPostFeatured`, config)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return err;
+        });
+};
+
 export const calculateRaingtingEachPost = () => {
     const config = {
         headers: {

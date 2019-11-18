@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Comment from '../comment/Comment';
+<<<<<<< HEAD
 import Rating from './Rating';
 import { auth,API_URL } from '../../action/helper';
 import { checkRatingAndShow, getDetailPost,calculateRaingtingEachPost} from '../../action/postAction';
@@ -11,6 +12,16 @@ import ProcessRating from './ProcesRating';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+=======
+import Rating from '../rating/Rating';
+import ImageSlider from './sliderImage';
+import { auth } from '../../action/helper';
+import { checkRatingAndShow, getDetailPost,calculateRaingtingEachPost} from '../../action/postAction';
+import { connect } from 'react-redux';
+import { getComment } from '../../action/postAction';
+import Loading from '../template/Loading';
+import ProcessRating from '../rating/ProcesRating';
+>>>>>>> 784ed36e5af954c40c672aa6fb9ee47852388f11
 
 // import FeatureOfComment from '../comment/FeatureOfComment';
 

@@ -10,6 +10,7 @@ const aclLibrary=aclStore.aclStore.acl;
 
 router.route('/new/:userID').post(controllerAuth.requireSignin,controllerAuth.hasAuthorization, controllerPost.create);
 router.route('/NewFeeds').get(controllerPost.getNewFeeds);
+router.route('/getPostFeatured').get(controllerPost.getPostFeatured);
 router.route('/getDetailPost/:postId').get(controllerPost.getDetailPost);
 
 //comment

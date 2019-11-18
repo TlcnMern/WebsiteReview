@@ -10,7 +10,7 @@ import { checkFollow } from '../../action/userAction';
 import man from  '../../public/images/man.png';
 import { fetch } from '../../action/userAction';
 
-import Follow from '../user/follow';
+import Follow from '../user/Follow';
 //khi gọi tới thằng này bằng redirect hoặc link, phải truyền cho nó 1 props là UserID
 class profile extends Component {
     constructor(props) {
@@ -44,9 +44,11 @@ class profile extends Component {
 
     rendermyMenu() {
 
-        //trường hợp coi chính mình
-        if (auth.isAuthenticated().user._id === this.match.params.userId) {
-            return (<Redirect to='/ViewProfile' />);
+        //trường hợp guest xem info user
+        if(this.props.isAuthenticated!==false){
+            if(auth.isAuthenticated().user._id=== this.match.params.userId){
+                return(<Redirect to='/ViewProfile' />);
+            }
         }
 
         if (this.state.renderPost)

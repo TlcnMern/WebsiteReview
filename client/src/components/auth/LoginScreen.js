@@ -6,7 +6,7 @@ import { login } from '../../action/authAction';
 import { clearErrors } from '../../action/errorActions';
 import "../../public/stylesheets/partials/login.css"
 import "bootstrap/dist/css/bootstrap.min.css";
-import LoginSocial from '../template/LoginSocial';
+import LoginSocial from './LoginSocial';
 
 
 class Login extends Component {
