@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetch } from '../../action/userAction';
 
-class profileDetail extends Component {
+class ViewDetailProfile extends Component {
     render() {
         return (
             <div className="row clsAbtMe">
@@ -66,4 +66,4 @@ function mapStateToProp(state) {
     }
 }
 
-export default connect(mapStateToProp, { fetch })(profileDetail);
+export default connect(mapStateToProp, { fetch })(ViewDetailProfile);

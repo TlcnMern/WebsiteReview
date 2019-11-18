@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PostComment from "./ViewPostComment";
-import Rating from './Rating';
+import Rating from '../rating/Rating';
 import { auth,API_URL } from '../../action/helper';
 import { checkRatingAndShow } from '../../action/postAction';
 import { getComment } from '../../action/postAction';

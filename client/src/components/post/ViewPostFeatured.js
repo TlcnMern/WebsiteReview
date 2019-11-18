@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../action/helper';
 import man from '../../public/images/man.png';
-import Rating from '../post/Rating';
+import Rating from '../rating/Rating';
 class ViewPostFeatured extends Component {
 
     state = {
@@ -31,7 +31,15 @@ class ViewPostFeatured extends Component {
                     </div>
                 </div>
                 <div className="col-sm-9 ">
-                    <Link to="DetailPost">{this.state.post.title}</Link>
+
+                    <Link to={
+                            {
+                                pathname: `/DetailPost/${this.state.post._id}`
+                            }
+                        }>
+                        {this.state.post.title}
+                    </Link>
+                    
                     <span style={{ marginLeft: '10px' }}>
                         {new Intl.DateTimeFormat('en-GB', {
                             month: '2-digit',
@@ -45,7 +53,7 @@ class ViewPostFeatured extends Component {
                                 pathname: `/GuestViewProfile/${this.state.post.postedBy._id}`
                             }
                         }>
-                            <img style={{ marginRight: '5px' }} width="22px " height="22px" className="user_avatar_link " src={urlAvatar} alt="image user" />
+                            <img style={{ marginRight: '5px' }} width="22px " height="22px" className="user_avatar_link " src={urlAvatar} alt="imgage_user" />
                             <span>{this.state.post.postedBy.name}</span>
 
                         </Link><br />

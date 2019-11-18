@@ -8,7 +8,7 @@ import man from '../../public/images/man.png';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {logout} from '../../action/authAction';
-import PostFeatured from './PostFeatured';
+import PostFeatured from '../post/PostFeatured';
 
 
 class MainFeed extends Component{

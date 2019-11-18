@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Comment from '../comment/Comment';
-import Rating from './Rating';
+import Rating from '../rating/Rating';
 import ImageSlider from './sliderImage';
 import { auth } from '../../action/helper';
 import { checkRatingAndShow, getDetailPost,calculateRaingtingEachPost} from '../../action/postAction';
 import { connect } from 'react-redux';
 import { getComment } from '../../action/postAction';
-import Loading from '../template/loading';
-import ProcessRating from './ProcesRating';
+import Loading from '../template/Loading';
+import ProcessRating from '../rating/ProcesRating';
 
 // import FeatureOfComment from '../comment/FeatureOfComment';
 
