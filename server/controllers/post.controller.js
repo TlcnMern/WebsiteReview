@@ -68,16 +68,32 @@ const getNewFeeds = (req, res) => {
           error: errorHandler.getErrorMessage(err)
         })
       }
-      posts=posts.slice(0,5);
+      posts=posts.slice(0,3);
       res.json(posts);
     })
 }
 
 const getPostFeatured = (req, res) => {
+
   Post.find({})
     .populate('postedBy', '_id name avatar')
-    .sort({create:-1})
-    .sort({'pointRating.point':-1})
+    .sort({'pointRating.totalRate':-1})
+    .exec((err, posts) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      posts=posts.slice(0,5);
+      res.json(posts);
+    })
+}
+
+const getTopListPostFollowTheme = (req, res) => {
+  const theme=req.params.theme;
+  Post.find({theme:theme})
+    .populate('postedBy', '_id name avatar')
+    .sort({'pointRating.totalRate':-1})
     .exec((err, posts) => {
       if (err) {
         return res.status(400).json({
@@ -199,10 +215,13 @@ const calculateRaingtingEachPost = (req, res) => {
               }
             }
           });
-
-          var point = ((1 * oneStar) + (2 * twoStar) + (3 * threeStar) + (4 * fourStar) + (5 * fiveStar)) / (oneStar + twoStar + threeStar + fourStar + fiveStar);
+          var totalRate= (oneStar + twoStar + threeStar + fourStar + fiveStar);
+          var point = ((1 * oneStar) + (2 * twoStar) + (3 * threeStar) + (4 * fourStar) + (5 * fiveStar)) /totalRate;
+          var n = parseFloat(point); 
+          point = Math.round(n * 100)/100
           var pointRating = {
             point: point,
+            totalRate:totalRate,
             oneStar: oneStar,
             twoStar: twoStar,
             threeStar: threeStar,
@@ -237,5 +256,6 @@ module.exports = {
   checkRatingAndShow: checkRatingAndShow,
   updateRatingOfUser: updateRatingOfUser,
   calculateRaingtingEachPost: calculateRaingtingEachPost,
-  getPostFeatured:getPostFeatured
+  getPostFeatured:getPostFeatured,
+  getTopListPostFollowTheme:getTopListPostFollowTheme
 }

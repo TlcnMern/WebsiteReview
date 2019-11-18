@@ -41,6 +41,7 @@ const PostSchema = new mongoose.Schema({
 
   pointRating:{
     point:Number,
+    totalRate:Number,
     oneStar:Number,
     twoStar:Number,
     threeStar:Number,

@@ -12,6 +12,7 @@ router.route('/new/:userID').post(controllerAuth.requireSignin,controllerAuth.ha
 router.route('/NewFeeds').get(controllerPost.getNewFeeds);
 router.route('/getPostFeatured').get(controllerPost.getPostFeatured);
 router.route('/getDetailPost/:postId').get(controllerPost.getDetailPost);
+router.route('/getTopListPostFollowTheme/:theme').get(controllerPost.getTopListPostFollowTheme);
 
 //comment
 router.route('/getComment/:postId').get(controllerComment.getComment);

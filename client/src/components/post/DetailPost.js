@@ -15,15 +15,12 @@ import ProcessRating from '../rating/ProcesRating';
 class DetailPost extends Component {
     constructor({ match }) {
         super();
-        this.match = match
-    }
-    state = {
-        post: null,
-        isLoading: true,
-        point: null
-    }
-
-    componentDidMount() {
+        this.state = {
+            post: null,
+            isLoading: true,
+            point: null
+        }
+        this.match = match;
         const postId = this.match.params.postId;
         getDetailPost(postId).then((data) => {
             if (data.error) {
@@ -35,21 +32,23 @@ class DetailPost extends Component {
                 })
             }
         });
-
+    }
+    componentDidMount() {
+        const postId = this.match.params.postId;
         calculateRaingtingEachPost();
-
-
         if (this.props.isAuthenticated) {
             const jwt = auth.isAuthenticated();
             const userID = jwt.user._id;
             checkRatingAndShow(userID, { t: jwt.token }, postId).then((data) => {
                 if (data.error) {
+                    console.log('not auth rating')
                     this.setState({
                         isLoading: false,
                         point: null
                     })
                 }
                 else {
+                    console.log(data)
                     this.setState({
                         isLoading: false,
                         point: data

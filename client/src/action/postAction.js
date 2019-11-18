@@ -54,6 +54,23 @@ export const GetPostFeatured = () => {
         });
 };
 
+export const getTopListPostFollowTheme = (theme) => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    return axios.get(`${API_URL}/post/getTopListPostFollowTheme/`+theme, config)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err);
+            return err;
+        });
+};
+
 export const calculateRaingtingEachPost = () => {
     const config = {
         headers: {

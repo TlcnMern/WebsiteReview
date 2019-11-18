@@ -59,8 +59,7 @@ class ViewPostFeatured extends Component {
                         </Link><br />
 
                         <span style={{ fontSize: '10px' }}>
-                        Rating Point: {this.state.post.pointRating.point} point/{this.state.post.pointRating.oneStar+this.state.post.pointRating.twoStar+
-                        this.state.post.pointRating.threeStar+this.state.post.pointRating.fourStar+this.state.post.pointRating.fiveStar||0}vote
+                        Rating Point: {this.state.post.pointRating.point ||0} point/{this.state.post.pointRating.totalRate||0}vote
                             <Rating rating={this.state.post.pointRating.point - 1} disabled={true} />
                         </span>
 

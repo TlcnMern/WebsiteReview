@@ -4,7 +4,7 @@ import login from './components/auth/login'
 import HeaderTemplate from './components/template/Header';
 import BodyTemplate from './components/template/Body';
 import post from './components/post/NewPost';
-import NewFeed from './components/HomeFeed/NewFeed';
+import HomeFeed from './components/HomeFeed/HomeFeed';
 import PrivateRoute from './components/auth/PrivateRoute';
 import DetailPost from './components/post/DetailPost';
 import GuestViewProfile from './components/guest/GuestViewProfile';
@@ -17,7 +17,7 @@ class MainRouter extends Component {
         <HeaderTemplate />
         <BodyTemplate/>
         <Switch>
-          <Route exact path="/" component={NewFeed}/>
+          <Route exact path="/" component={HomeFeed}/>
           <Route path="/Login" component={login}/>
           <PrivateRoute path="/ViewProfile" component={ViewProfile}/>
           <PrivateRoute path="/NewPost" component={post}/>
