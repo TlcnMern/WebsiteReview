@@ -51,7 +51,7 @@ const create = (req, res) => {
 
 const getNewFeeds = (req, res) => {
   Post.find({})
-    .populate('postedBy', '_id name')
+    .populate('postedBy', '_id name avatar')
     // .populate({
     //   path:'comments',
     //   populate: { path: 'commentBy',select:'_id name' }
@@ -60,13 +60,31 @@ const getNewFeeds = (req, res) => {
     //   path:'comments',
     //   populate: { path: 'subComment.commentBy',select:'_id name'}
     // })
-    .sort('-created')
+    .sort({'created':-1})
+    .exec((err, posts) => {
+
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      posts=posts.slice(0,5);
+      res.json(posts);
+    })
+}
+
+const getPostFeatured = (req, res) => {
+  Post.find({})
+    .populate('postedBy', '_id name avatar')
+    .sort({create:-1})
+    .sort({'pointRating.point':-1})
     .exec((err, posts) => {
       if (err) {
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
         })
       }
+      posts=posts.slice(0,5);
       res.json(posts);
     })
 }
@@ -218,5 +236,6 @@ module.exports = {
   addRating: addRating,
   checkRatingAndShow: checkRatingAndShow,
   updateRatingOfUser: updateRatingOfUser,
-  calculateRaingtingEachPost: calculateRaingtingEachPost
+  calculateRaingtingEachPost: calculateRaingtingEachPost,
+  getPostFeatured:getPostFeatured
 }

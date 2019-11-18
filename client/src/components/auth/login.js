@@ -81,7 +81,7 @@ class Login extends Component {
         
         <div className="Left-Content fadeIn second">
           <h2>Đăng nhập</h2>
-          <p>Đăng nhập để theo dõi đơn hàng, lưu <br/>danh sách sản phẩm yêu thích, nhận<br/> nhiều ưu đãi hấp dẫn.</p>
+          <p>Đăng nhập để theo dõi những bài viết hay, <br/>danh sách những độc giả nổi tiếng, <br/>đánh giá và bình luận cùng hàng triệu người dùng khác .</p>
           <img src="https://frontend.tikicdn.com/_new-next/static/img/graphic-map.png" alt="vu"/>
         </div>
          </div>
@@ -93,7 +93,7 @@ class Login extends Component {
         
         <div className="Left-Content fadeIn second">
           <h2>Tạo tài khoản</h2>
-          <p>Tạo tài khoản để theo dõi đơn hàng, lưu <br/>danh sách sản phẩm yêu thích, nhận<br/> nhiều ưu đãi hấp dẫn.</p>
+          <p>Đăng nhập để theo dõi những bài viết hay, <br/>danh sách những độc giả nổi tiếng, <br/>đánh giá và bình luận cùng hàng triệu người dùng khác .</p>
           <img src="https://frontend.tikicdn.com/_new-next/static/img/graphic-map.png" alt="vu"/>
           </div>
          </div>

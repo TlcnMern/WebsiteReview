@@ -44,9 +44,11 @@ class profile extends Component {
 
     rendermyMenu() {
 
-        //trường hợp coi chính mình
-        if (auth.isAuthenticated().user._id === this.match.params.userId) {
-            return (<Redirect to='/ViewProfile' />);
+        //trường hợp guest xem info user
+        if(this.props.isAuthenticated!==false){
+            if(auth.isAuthenticated().user._id=== this.match.params.userId){
+                return(<Redirect to='/ViewProfile' />);
+            }
         }
 
         if (this.state.renderPost)

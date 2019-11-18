@@ -25,7 +25,7 @@ class ViewPostComment extends Component{
                 }
                 else{
                     if(data.error){ 
-                        console.log(data.error);
+                        return;
                     }
                     else{
                         this.setState({
