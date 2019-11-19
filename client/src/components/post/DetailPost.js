@@ -7,13 +7,12 @@ import {getDetailPost} from '../../action/postAction';
 import {calculateRaingtingEachPost,checkRatingAndShow} from '../../action/ratingAction';
 import { connect } from 'react-redux';
 import { getComment } from '../../action/commentAction';
-import Loading from '../template/loading';
+import Loading from '../template/Loading';
 import ProcessRating from '../rating/ProcesRating';
 import { API_URL } from '../../config/helper';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-// import FeatureOfComment from '../comment/FeatureOfComment';
 
 class DetailPost extends Component {
     constructor({ match }) {
@@ -75,20 +74,6 @@ class DetailPost extends Component {
                       </h3>
                   </div>))}                   
               </Slider>
-              {/* <Slider
-                className="imageSlider-multi"
-                asNavFor={this.state.nav1}
-                ref={slider => (this.slider2 = slider)}
-                slidesToShow={3}
-                swipeToSlide={true}
-                focusOnSelect={true}>
-                  {this.state.post.photo.map(photo => (
-                      <div key={photo}>
-                          <h3>
-                              <img src={`${API_URL}/`+photo} width="100px" height="100px" alt="2R4U" style={{margin: '5px',padding: '5px',border: '1px solid #d1d1d1',boxShadow: '0 0 2px 2px #d1d1d1'}}/>
-                          </h3>
-                      </div>))}
-                  </Slider> */}
                 </div>
         );
       }

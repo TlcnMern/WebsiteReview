@@ -4,7 +4,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import "../../public/stylesheets/partials/style.css"
 import PostList from '../post/PostList';
 import { GetNewFeeds } from '../../action/postAction';
-import Loading from '../template/loading';
+import Loading from '../template/Loading';
 class NewFeed extends Component {
   constructor(props) {
     super(props);

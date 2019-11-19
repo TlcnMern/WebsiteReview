@@ -107,10 +107,8 @@ class ViewComment extends Component {
                                         </DropDownMenu>
                                     </MuiThemeProvider>
                                 </div>
-
-                            )}
+                        )}
                     </div>
-
                 </div>
 
                 <div>
@@ -126,10 +124,6 @@ class ViewComment extends Component {
                     }
                     {this.renderReply()}
                 </div>
-
-
-
-
             </div>
         );
     }

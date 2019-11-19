@@ -69,7 +69,6 @@ class Comment extends Component{
 
 
     render(){
-        // console.log( this.props.listComment)
         return(
             <div>
                 {this.renderCreateComment()}
