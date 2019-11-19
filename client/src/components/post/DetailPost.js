@@ -4,10 +4,16 @@ import Comment from '../comment/Comment';
 import Rating from '../rating/Rating';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { API_URL } from '../../config/helper';
 import { auth } from '../../config/helper';
 import {getDetailPost} from '../../action/postAction';
 import {calculateRaingtingEachPost,checkRatingAndShow} from '../../action/ratingAction';
+=======
+import ImageSlider from './sliderImage';
+import { auth } from '../../action/helper';
+import { checkRatingAndShow, getDetailPost,calculateRaingtingEachPost} from '../../action/postAction';
+>>>>>>> parent of 29dc5ae... update-Strutured
 =======
 import ImageSlider from './sliderImage';
 import { auth } from '../../action/helper';

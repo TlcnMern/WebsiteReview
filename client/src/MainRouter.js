@@ -11,10 +11,14 @@ import DetailPost from './components/post/DetailPost';
 import GuestViewProfile from './components/guest/GuestViewProfile';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import ViewProfile from './components/profile/viewProfile';
 import HomeFeed from './components/HomeFeed/HomeFeed';
 import SearchPage from './components/search/SearchPage';
 import post from './components/post/NewPost';
+=======
+import ViewProfile from './components/user/ViewProfile';
+>>>>>>> parent of 29dc5ae... update-Strutured
 =======
 import ViewProfile from './components/user/ViewProfile';
 >>>>>>> parent of 29dc5ae... update-Strutured
