@@ -54,10 +54,6 @@ class ViewPostFeatured extends Component {
                             year: 'numeric',
                         }).format(new Date(this.state.post.created))}
                     </span>
-
-                        {/* <i className="fa fa-eye "></i> 37
-                        <i className="fa fa-heart "></i> 0
-                        <i className="fa fa-comments "></i> 0 */}
                     </div>
                 </div>
             </div>
