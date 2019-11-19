@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import Comment from '../comment/Comment';
 import Rating from '../rating/Rating';
 import ImageSlider from './sliderImage';
-import { auth } from '../../action/helper';
-import { checkRatingAndShow, getDetailPost,calculateRaingtingEachPost} from '../../action/postAction';
+import { auth } from '../../config/helper';
+import {getDetailPost} from '../../action/postAction';
+import {calculateRaingtingEachPost,checkRatingAndShow} from '../../action/ratingAction';
 import { connect } from 'react-redux';
-import { getComment } from '../../action/postAction';
+import { getComment } from '../../action/commentAction';
 import Loading from '../template/Loading';
 import ProcessRating from '../rating/ProcesRating';
 
@@ -41,14 +42,12 @@ class DetailPost extends Component {
             const userID = jwt.user._id;
             checkRatingAndShow(userID, { t: jwt.token }, postId).then((data) => {
                 if (data.error) {
-                    console.log('not auth rating')
                     this.setState({
                         isLoading: false,
                         point: null
                     })
                 }
                 else {
-                    console.log(data)
                     this.setState({
                         isLoading: false,
                         point: data

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { API_URL } from '../../action/helper';
+import { API_URL } from '../../config/helper';
 import man from '../../public/images/man.png';
 import Rating from '../rating/Rating';
 class ViewPostFeatured extends Component {

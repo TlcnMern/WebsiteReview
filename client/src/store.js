@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import {auth} from './action/helper';
+import {auth} from './config/helper';
 
 import {
   LOGIN_SUCCESS
-} from './action/type';
+} from './config/type';
 
 const initialState = {};
 

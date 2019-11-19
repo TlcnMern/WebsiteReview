@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import man from '../../public/images/man.png';
-import { auth } from '../../action/helper';
+import { auth } from '../../config/helper';
 import { Link } from 'react-router-dom';
-// import Button from "@material-ui/core/Button";
-// import Menu from "@material-ui/core/Menu";
-// import MenuItem from "@material-ui/core/MenuItem"
-// import Fade from "@material-ui/core/Fade";
 import { connect } from 'react-redux';
 import EditComment from './EditComment';
-import { checkAuthorizedSubComment, checkAuthorizedComment, deleteSubComment } from '../../action/postAction';
+import { checkAuthorizedSubComment, checkAuthorizedComment, deleteSubComment } from '../../action/commentAction';
 
 
 import MenuItem from "@material-ui/core/MenuItem"
@@ -21,15 +17,7 @@ class ViewSubComment extends Component {
         SubComment: this.props.SubComment,
         isAuthorizedSubcomment: false,
         isAuthorized: false
-        // anchorEl: null
     }
-    // handleClick = event => {
-    //     this.setState({ anchorEl: event.currentTarget });
-    // };
-
-    // handleClose = () => {
-    //     this.setState({ anchorEl: null });
-    // };
 
     onCallBack(content1) {
         const SubComment = this.props.SubComment;
@@ -80,8 +68,6 @@ class ViewSubComment extends Component {
             });
     }
     render() {
-        // const { anchorEl } = this.state;
-        // const open = Boolean(anchorEl);
         return (
             <div className="row clsSubcomment">
                 <div className="col-sm-1">
@@ -113,13 +99,8 @@ class ViewSubComment extends Component {
 
                                 // Có tính năng edit thì chỉ là thằng viết ra subcomment
                                 (this.state.isAuthorized || this.state.isAuthorizedSubcomment) &&
-                                // <Button aria-owns={open ? 'fade-menu' : undefined} key={0} aria-haspopup="true" onClick={this.handleClick}>
-                                //     <i className="fa fa-cogs" aria-hidden="true"></i>
-                                // </Button>,
                                 <MuiThemeProvider>
                                     <DropDownMenu style={{overflow:'visible'}}>
-                                        {/* <MenuItem onClick={this.onClickEdit.bind(this)} ><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</MenuItem>
-                                        <MenuItem onClick={this.onDeleteComment.bind(this)}><i className="fa fa-trash-o" aria-hidden="true"></i> Delete</MenuItem> */}
                                         {this.state.isAuthorizedSubcomment &&
                                             <MenuItem onClick={this.onClickEdit.bind(this)}><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</MenuItem>
                                         }
@@ -130,18 +111,6 @@ class ViewSubComment extends Component {
                                     </DropDownMenu>
                                 </MuiThemeProvider>
                             }
-
-                            {/* <Menu id="fade-menu" anchorEl={anchorEl} open={open} onClose={this.handleClose} TransitionComponent={Fade}>
-                                {this.state.isAuthorizedSubcomment &&
-                                    <MenuItem onClick={this.onClickEdit.bind(this)}><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</MenuItem>
-                                }
-                                {
-                                    (this.state.isAuthorized || this.state.isAuthorizedSubcomment) &&
-                                    <MenuItem onClick={this.onDeleteSubComment.bind(this)} key={3}><i className="fa fa-trash-o" aria-hidden="true"></i> Delete</MenuItem>
-                                }
-                            </Menu> */}
-                        
-
                     </div>
                     <div >
                         <span style={{ fontSize: '10px', fontStyle: 'italic', color: '#c0c2c4' }}>

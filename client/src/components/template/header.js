@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.min.css';
 import "../../public/stylesheets/partials/style.css"
-import { logout } from '../../action/authAction'
 import logo from '../../public/images/logo.png';
+import BoxSearch from '../search/BoxSearch';
 
 class HeaderTemplate extends Component {
 
@@ -22,16 +22,7 @@ class HeaderTemplate extends Component {
           <div className="col-sm-7">
             <span className="txtTOP">TRANG CHỦ</span>
           </div>
-
-          <div className="col-sm-3">
-            <div className="search-container">
-              <form action="#">
-                <input className="search-input" type="text" id="search-query" name="name" placeholder="Tìm kiếm" spellCheck="false" />
-                <button type="submit"><i className="fa fa-search"></i></button>
-              </form>
-            </div>
-          </div>
-
+          <BoxSearch/>
         </div>
 
       </div>
@@ -44,4 +35,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, { logout })(HeaderTemplate);
+export default connect(mapStateToProps)(HeaderTemplate);

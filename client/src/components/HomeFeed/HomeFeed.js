@@ -21,7 +21,6 @@ class HomeFeed extends Component {
                                 </div>
                                 <hr />
                                 <NewFeed />
-
                             </div>
                             <div className="box-home fadeInDown ">
                                 <div className="header-list-index box-film " style={{ margintop: '0px' }} ><span className="title-list-index ">TOP film Review</span>

@@ -4,7 +4,7 @@ import {
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
     REGISTER_FAIL
-  } from '../action/type';
+  } from '../config/type';
 
   const initialState = {
     isAuthenticated: false,

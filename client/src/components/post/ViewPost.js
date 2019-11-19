@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Rating from '../rating/Rating';
-import { API_URL } from '../../action/helper';
+import { API_URL } from '../../config/helper';
 
 class ViewPost extends Component {
     constructor(props) {

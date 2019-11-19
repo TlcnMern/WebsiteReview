@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Comment from '../comment/Comment';
-import {auth} from '../../action/helper';
+import {auth} from '../../config/helper';
 import {checkRatingAndShow} from '../../action/postAction';
 import {connect} from 'react-redux';
 import {getComment} from '../../action/postAction';

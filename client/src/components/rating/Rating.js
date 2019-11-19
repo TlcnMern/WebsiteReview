@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../../public/stylesheets/partials/rating.scss'
 import PropTypes from 'prop-types';
-import {addRating,updateRating} from '../../action/postAction';
-import {auth} from '../../action/helper';
+import {addRating,updateRating} from '../../action/ratingAction';
+import {auth} from '../../config/helper';
 class Rating extends Component{
   static propTypes= {
       disabled:  PropTypes.bool

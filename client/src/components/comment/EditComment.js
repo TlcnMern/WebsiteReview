@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateComment, updateSubComment } from '../../action/postAction';
-import { auth } from '../../action/helper';
+import { updateComment, updateSubComment } from '../../action/commentAction';
+import { auth } from '../../config/helper';
 
 class EditComment extends Component {
     state = {

@@ -9,6 +9,7 @@ import PrivateRoute from './components/auth/PrivateRoute';
 import DetailPost from './components/post/DetailPost';
 import GuestViewProfile from './components/guest/GuestViewProfile';
 import ViewProfile from './components/user/ViewProfile';
+import SearchPage from './components/search/SearchPage';
 
 class MainRouter extends Component {
   render() {
@@ -23,6 +24,7 @@ class MainRouter extends Component {
           <PrivateRoute path="/NewPost" component={post}/>
           <Route path="/DetailPost/:postId" component={DetailPost}/>
           <Route path="/GuestViewProfile/:userId" component={GuestViewProfile}/>
+          <Route exact path="/Search" component={SearchPage}/>
         </Switch>
       </BrowserRouter>
     </div>)
