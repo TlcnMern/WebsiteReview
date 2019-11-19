@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import {Redirect } from 'react-router-dom';
 import {
 	withRouter
 } from 'react-router-dom';
@@ -7,7 +6,7 @@ import {
 class BoxSearch extends Component {
 
   state={
-    title:'',
+    title:null,
     redirect:false
   }
 
@@ -18,6 +17,9 @@ class BoxSearch extends Component {
   }
 
   onSubmit=()=>{
+    if(this.state.title===null){
+      return
+    }
     this.props.history.push('/Search');
   }
   render() {

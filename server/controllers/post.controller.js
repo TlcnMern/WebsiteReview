@@ -105,6 +105,20 @@ const getTopListPostFollowTheme = (req, res) => {
     })
 }
 
+const searchPost = (req, res) => {
+  const query=req.query;
+  Post.find({title: {'$regex': query.search, '$options': "i"}})
+    .populate('postedBy', '_id name avatar')
+    .exec((err, posts) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(posts);
+    })
+}
+
 const getDetailPost = (req, res) => {
   const postId = req.params.postId;
   Post.find({ _id: postId })
@@ -136,5 +150,6 @@ module.exports = {
   getDetailPost: getDetailPost,
   postByID: postByID,
   getPostFeatured:getPostFeatured,
-  getTopListPostFollowTheme:getTopListPostFollowTheme
+  getTopListPostFollowTheme:getTopListPostFollowTheme,
+  searchPost:searchPost
 }

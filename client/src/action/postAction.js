@@ -70,6 +70,22 @@ export const getTopListPostFollowTheme = (theme) => {
         });
 };
 
+export const searchPost = (query) => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    return axios.get(`${API_URL}/post/searchPost?search=`+query.title, config)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return err;
+        });
+};
+
 //get detail post
 export const getDetailPost = (postId) => {
     const config = {
