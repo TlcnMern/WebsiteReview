@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
 import {API_URL} from '../../config/helper';
 import Rating from '../rating/Rating';
 const useStyles = makeStyles(theme => ({
@@ -48,14 +47,14 @@ export default function RecipeReviewCard(props) {
   };
 
   return (
-    <Card className={classes.card}>
-      <CardHeader
+    
+    <Card className={classes.card} id="CardCarousel">
+      <CardHeader className="row" id="CardCarouselHeader"
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
+          <Avatar aria-label="recipe" className= {classes.avatar}>
             H
           </Avatar>
         }
-       
         title={props.post.title}
         subheader={new Intl.DateTimeFormat('en-GB', {
           month: '2-digit',
@@ -68,7 +67,7 @@ export default function RecipeReviewCard(props) {
         image={`${API_URL}/`+props.post.photo[0]}
         title="Paella dish"
       />
-      <CardContent>
+      <CardContent id="CardCarouselContent">
         <Typography variant="body2" color="textSecondary" component="p">
         {props.post.contentSummary}
         </Typography>

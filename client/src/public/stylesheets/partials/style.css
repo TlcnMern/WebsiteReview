@@ -2480,3 +2480,34 @@ svg:not(:root) {
 .dropdownMenu button {
     display: block;
 }
+
+
+/* Card thể loại */
+
+#CardCarousel {
+    max-height: 550px;
+    padding: 5px;
+}
+
+#CardCarousel:hover {
+    max-height: 550px;
+    padding: 5px;
+    box-shadow: 0 0 3px 2px #1DA1F2;
+}
+
+#CardCarouselHeader .MuiCardHeader-content {
+    max-height: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80px;
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+#CardCarouselContent {
+    height: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: unset;
+}
