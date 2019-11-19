@@ -22,7 +22,6 @@ export default class MultipleItems extends Component {
           console.log(data)
         }
         else {
-          console.log(data);
           this.setState({
             posts: data
           })

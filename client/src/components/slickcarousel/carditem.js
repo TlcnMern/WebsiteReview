@@ -14,7 +14,7 @@ import { red } from '@material-ui/core/colors';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import {API_URL} from '../../action/helper';
+import {API_URL} from '../../config/helper';
 import Rating from '../rating/Rating';
 const useStyles = makeStyles(theme => ({
   card: {

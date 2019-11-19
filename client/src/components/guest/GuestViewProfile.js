@@ -5,12 +5,12 @@ import ProfilePost from './profilePost';
 import ProfileDetail from './profileDetail'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { auth,API_URL } from '../../action/helper';
+import { auth,API_URL } from '../../config/helper';
 import { checkFollow } from '../../action/userAction';
 import man from  '../../public/images/man.png';
 import { fetch } from '../../action/userAction';
 
-import Follow from '../user/follow';
+import Follow from '../user/Follow';
 //khi gọi tới thằng này bằng redirect hoặc link, phải truyền cho nó 1 props là UserID
 class profile extends Component {
     constructor(props) {
