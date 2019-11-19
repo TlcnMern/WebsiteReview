@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import login from './components/auth/login'
-import HeaderTemplate from './components/template/Header';
-import BodyTemplate from './components/template/Body';
+import HeaderTemplate from './components/template/header';
+import BodyTemplate from './components/template/body';
 import post from './components/post/NewPost';
 import HomeFeed from './components/HomeFeed/HomeFeed';
 import PrivateRoute from './components/auth/PrivateRoute';

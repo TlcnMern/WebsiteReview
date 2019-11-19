@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CardItem from "./carditem";
 import { getTopListPostFollowTheme } from '../../action/postAction';
-import Loading from '../template/Loading';
+import Loading from '../template/loading';
 
 export default class MultipleItems extends Component {
   constructor(props) {

@@ -24,50 +24,36 @@ class ViewPostFeatured extends Component {
             urlAvatar = man;
         }
         return (
-            <div style={{ marginTop: '30px' }} className="row">
-                <div className="col-sm-3 ">
+            <div style={{ marginTop: '30px' }} className="row clsBVNT">
+                <div className="col-sm-5 ">
                     <div className="imgDD ">
-                        <img src={`${API_URL}/` + this.state.post.photo[0]} width="150% " height="150% " alt="imgDemo1 " />
+                        <img src={`${API_URL}/` + this.state.post.photo[0]} alt="imgDemo1 " />
+                        <span style={{ fontSize: '7px' }}>
+                        {/* Rating Point: {this.state.post.pointRating.point} point/{this.state.post.pointRating.oneStar+this.state.post.pointRating.twoStar+
+                        this.state.post.pointRating.threeStar+this.state.post.pointRating.fourStar+this.state.post.pointRating.fiveStar||0}vote */}
+                            <Rating rating={this.state.post.pointRating.point - 1} disabled={true} />
+                        </span>
                     </div>
                 </div>
-                <div className="col-sm-9 ">
-
-                    <Link to={
-                            {
-                                pathname: `/DetailPost/${this.state.post._id}`
-                            }
-                        }>
-                        {this.state.post.title}
-                    </Link>
+                <div className="col-sm-7 " id="detailBVNT">
+                    <Link to="DetailPost" id="TitleBVNT">{this.state.post.title}</Link>
                     
-                    <span style={{ marginLeft: '10px' }}>
-                        {new Intl.DateTimeFormat('en-GB', {
-                            month: '2-digit',
-                            day: '2-digit',
-                            year: 'numeric',
-                        }).format(new Date(this.state.post.created))}
-                    </span>
                     <div className="text-muted " style={{ display: 'table-cell', verticalalign: 'middle', lineheight: '25px' }}>
                         <Link to={
                             {
                                 pathname: `/GuestViewProfile/${this.state.post.postedBy._id}`
                             }
                         }>
-                            <img style={{ marginRight: '5px' }} width="22px " height="22px" className="user_avatar_link " src={urlAvatar} alt="imgage_user" />
-                            <span>{this.state.post.postedBy.name}</span>
-
-                        </Link><br />
-
-                        <span style={{ fontSize: '10px' }}>
-                        Rating Point: {this.state.post.pointRating.point ||0} point/{this.state.post.pointRating.totalRate||0}vote
-                            <Rating rating={this.state.post.pointRating.point - 1} disabled={true} />
-                        </span>
-
-
-
-                        {/* <i className="fa fa-eye "></i> 37
-                        <i className="fa fa-heart "></i> 0
-                        <i className="fa fa-comments "></i> 0 */}
+                            <img style={{ marginRight: '5px' }} width="18px " height="18px" className="user_avatar_link " src={urlAvatar} alt="imageuser" />
+                            <span style={{fontSize:'10px'}}>{this.state.post.postedBy.name}</span>
+                        </Link>
+                        <span style={{ marginLeft: '10px',fontSize:'9px' }}>
+                        {new Intl.DateTimeFormat('en-GB', {
+                            month: '2-digit',
+                            day: '2-digit',
+                            year: 'numeric',
+                        }).format(new Date(this.state.post.created))}
+                    </span>
                     </div>
                 </div>
             </div>

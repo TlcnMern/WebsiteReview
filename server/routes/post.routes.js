@@ -11,6 +11,13 @@ router.route('/getDetailPost/:postId').get(controllerPost.getDetailPost);
 router.route('/getTopListPostFollowTheme/:theme').get(controllerPost.getTopListPostFollowTheme);
 router.route('/searchPost').get(controllerPost.searchPost);
 
+
+//rating
+router.route('/addRating').put(controllerAuth.requireSignin,controllerPost.addRating);
+router.route('/checkRatingAndShow').post(controllerAuth.requireSignin,controllerPost.checkRatingAndShow);
+router.route('/updateRatingOfUser').put(controllerAuth.requireSignin, controllerPost.updateRatingOfUser);
+router.route('/calculateRaingtingEachPost').get(controllerPost.calculateRaingtingEachPost);
+
 router.param('userID', controllerUser.UserById);
 router.param('postId', controllerPost.postByID);
 module.exports=router;

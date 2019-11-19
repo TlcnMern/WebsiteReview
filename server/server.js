@@ -41,5 +41,6 @@ function authorizationSetup() {
     app.use('/post',postRouters);
     app.use('/post',commentRouters);
     app.use('/rating',ratingRouters);
+
 }
   
