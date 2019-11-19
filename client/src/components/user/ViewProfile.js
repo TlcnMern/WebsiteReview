@@ -152,7 +152,7 @@ class viewProfile extends Component {
                                 <div className="left col-lg-4">
                                     <div className="photo-left">
                                         <img className="photo" src={urlAvatar} alt="img" />
-                                        <button className="btnPhotoin-remove" onClick={this.onClickAvatar} type="button">@</button>
+                                        <button className="btnPhotoin-remove btnChangeAvatar" onClick={this.onClickAvatar} type="button"><img src="https://img.icons8.com/cute-clipart/24/000000/camera.png" alt="icCamera"/></button>
                                         {this.state.openUploadAvatar ? <UploadAvatar callBackChangeStateOpen={this.callBackChangeStateOpen} open={this.state.openUploadAvatar} /> : <div></div>}
                                     </div>
                                     <h4 className="name">{this.props.profile.name}</h4>

@@ -46,16 +46,7 @@ class ViewPostFeatured extends Component {
                         }>
                             <img style={{ marginRight: '5px' }} width="18px " height="18px" className="user_avatar_link " src={urlAvatar} alt="imageuser" />
                             <span style={{fontSize:'10px'}}>{this.state.post.postedBy.name}</span>
-
-                        </Link><br />
-
-                        <span style={{ fontSize: '10px' }}>
-                        Rating Point: {this.state.post.pointRating.point ||0} point/{this.state.post.pointRating.totalRate||0}vote
-                            <Rating rating={this.state.post.pointRating.point - 1} disabled={true} />
-                        </span>
-
-                        
-
+                        </Link>
                         <span style={{ marginLeft: '10px',fontSize:'9px' }}>
                         {new Intl.DateTimeFormat('en-GB', {
                             month: '2-digit',
