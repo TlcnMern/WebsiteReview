@@ -1,7 +1,6 @@
-const User=require('../models/usertest');
+const User=require('../models/user.model');
 const errorHandler=require('../helpers/dbErrorHandler');
 const formidable=require('formidable');
-const fs=require('fs');
 var _ = require('lodash');
 const {aclStore}=require('../helpers/acl-store');
 
@@ -25,9 +24,7 @@ const register = (req, res) => {
         local:{
           email:req.body.email
         },
-        password:req.body.password,
-        gender:req.body.gender
-
+        password:req.body.password
       });
 
       user.save((err, result) => {
@@ -60,7 +57,8 @@ const getInfoUser=(req, res)=>{
         error: errorHandler.getErrorMessage(err)//No user could be found for this ID
       })
     }
-    const userInfo={_id: user._id, name: user.name, email: user.local.email || user.google.email,gender:user.gender,created:user.created};
+    const userInfo={_id: user._id, name: user.name, email: user.local.email || user.google.email,gender:user.gender,
+      created:user.created,address:user.address,birthday:user.birthday,avatar:user.avatar};
     return res.status(200).json({userInfo});
   });
 }
@@ -83,22 +81,13 @@ const UserById=(req,res,next,userID)=>{
         next();
       })
 }
-
-const photo = (req, res, next) => {
-  if(req.profile.photo.data){
-    res.set("Content-Type", req.profile.photo.contentType);
-    return res.send(req.profile.photo.data);
-  }
-  next();
-}
-
-const defaultPhoto = (req, res) => {
-  return res.sendFile(process.cwd()+profileImage);
-}
 //update info user
 const update = (req, res, next) => {
   let form = new formidable.IncomingForm();
+  form.uploadDir='./dist';
   form.keepExtensions = true;
+  form.maxFieldsSize=10*1024*1024;//10MB
+
   form.parse(req, (err, fields, files) => {
     if (err) {
       return res.status(400).json({
@@ -106,12 +95,10 @@ const update = (req, res, next) => {
       });
     }
     let user = req.profile;
-
     user = _.extend(user, fields);
     user.updated = Date.now();
     if(files.photo){
-      user.photo.data = fs.readFileSync(files.photo.path);
-      user.photo.contentType = files.photo.type;
+      user.avatar=files.photo.path.toString().replace("\\","/");
     }
     user.save((err, result) => {
       if (err) {
@@ -119,9 +106,9 @@ const update = (req, res, next) => {
           error: errorHandler.getErrorMessage(err)
         });
       }
-      user.hashed_password = undefined;
-      user.salt = undefined;
-      res.json(user);
+      result.hashed_password = undefined;
+      result.salt = undefined;
+      res.json(result);
     })
   })
 }
@@ -133,7 +120,6 @@ const checkFollow= (req, res) => {
   });
   res.json(match);
 }
-
 //người mình theo dõi
 const addFollowing = (req, res, next) => {
   User.findByIdAndUpdate(req.body.userId, {$push: {following: req.body.followId}}, (err, result) => {
@@ -145,7 +131,6 @@ const addFollowing = (req, res, next) => {
     next();
   })
 }
-
 //người theo dõi mình
 const addFollower = (req, res) => {
   User.findByIdAndUpdate(req.body.followId, {$push: {followers: req.body.userId}}, {new: true})
@@ -194,8 +179,6 @@ module.exports = {
   register: register,
   getInfoUser:getInfoUser,
   UserById: UserById,
-  photo: photo,
-  defaultPhoto:defaultPhoto,
   update:update,
   checkFollow:checkFollow,
   addFollowing:addFollowing,

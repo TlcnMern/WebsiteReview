@@ -15,6 +15,5 @@ export const GET_COMMENT='GET_COMMENT';
 
 export const FOLLOW='FOLLOW';
 export const FOLLOWED='FOLLOWED';
-export const AUTHORIZED='AUTHORIZED';
 
 export const CLEAN_PROFILE='CLEAN_PROFILE';

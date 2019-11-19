@@ -1,11 +1,9 @@
-const User =require('../models/usertest');
-const Comment=require('../models/comment.model');
+const User =require('../models/user.model');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 const config =require('../config/config');
 
 const signin = (req, res) => {
-  console.log(req.body);
   User.findOne({
     "local.email": req.body.email
   }, (err, user) => {
@@ -26,7 +24,7 @@ const signin = (req, res) => {
     
     return res.json({
       token,
-      user: {_id: user._id}
+      user: {_id: user._id, avatar:user.avatar,name:user.name}
     });
 
   })
@@ -48,13 +46,13 @@ const hasAuthorization = (req, res, next) => {
   next()
 }
 
-const  googleOAuth= async (req, res, next) => {
+const  googleOAuth= async (req, res) => {
   const token = jwt.sign({
     _id: req.user._id
   }, config.jwtSecret);
   return res.json({
     token,
-    user: {_id: req.user.id}
+    user: {_id: req.user.id,avatar:req.user.avatar,name:req.user.name},
   });
 }
 

@@ -15,8 +15,7 @@ export function login({ email, password }) {
       // cookie.save('user', response.data.user, { path: '/' });
       auth.authenticate(response.data);   //set data(token+user) to sessionStorge
       dispatch({         
-        type: LOGIN_SUCCESS,
-        payload: response.data 
+        type: LOGIN_SUCCESS
       });
       // window.location.href = `${CLIENT_ROOT_URL}`
     })
@@ -44,12 +43,10 @@ export const loginSocial=(accessToken) =>dispatch=>{
   .then((response)=>{
     auth.authenticate(response.data);   
     dispatch({
-      type:LOGIN_SUCCESS,
-      payload:response.data
+      type:LOGIN_SUCCESS
     });
   })
   .catch(err=>{
-    console.log(err);
     dispatch(
       returnErrors(err.response.data, err.response.status, 'GET_ERRORS')
     );

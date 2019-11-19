@@ -1,75 +1,39 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
-import {logout} from '../../action/authAction'
-
+import 'font-awesome/css/font-awesome.min.css';
+import "../../public/stylesheets/partials/style.css"
+import { logout } from '../../action/authAction'
+import logo from '../../public/images/logo.png';
 
 class HeaderTemplate extends Component {
-  renderLinkGuest(){
-    // Unauthenticated navigation
-    return (
-      <ul className="navbar-nav">
 
-        <li style={{marginRight:"10px"}}  key={1}>
-          <Link to="/">Home</Link>
-        </li>
-
-        <li style={{marginRight:"10px"}}  key={2}>
-          <Link to="Login">Login</Link>
-        </li>
-
-        <li style={{marginRight:"10px"}}  key={3}>
-            <Link to="Register">Register</Link>
-        </li>
-        <li  key={4}>
-          <Link to="NewPost">post</Link>
-        </li>
-      </ul>
-    );
-  }
-  renderLinkUser(){
-    return (
-      <ul className="navbar-nav">
-        <li  style={{marginRight:"10px"}}  key={1}>
-          <Link to="/">Home</Link>
-        </li>
-        <li style={{marginRight:"10px"}}  key={2}>
-          <Link to="Profile">My profile</Link>
-        </li>
-        <li style={{marginRight:"10px"}}  key={3}>       
-          <Link to="/" onClick={this.props.logout}>Logout</Link>
-        </li>
-        <li  key={4}>
-          <Link to="NewPost">post</Link>
-        </li>
-      </ul>);
-  }
   render() {
     return (
-      <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <Link to="/">
-            <span className="navbar-brand">
-              Website Review
-            </span>
-          </Link>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            {
-              !this.props.auth.isAuthenticated && (
-                this.renderLinkGuest()
-              )
-            }
-            {
-              this.props.auth.isAuthenticated && (
-                this.renderLinkUser()
-              )
-            }
+      <div className="topnav">
+        <div className="row">
+          <div className="col-sm-2">
+            <Link to="/">
+              <img src={logo} style={{ marginLeft: '20px' }} width="60" height="40" alt="2R4U" />
+              <span style={{ color: '#01A9DB', fontWeight: 'bold' }}>ReviewEvery</span>
+            </Link>
           </div>
-        </nav>
+          <div className="col-sm-7">
+            <span className="txtTOP">TRANG CHỦ</span>
+          </div>
+
+          <div className="col-sm-3">
+            <div className="search-container">
+              <form action="#">
+                <input className="search-input" type="text" id="search-query" name="name" placeholder="Tìm kiếm" spellCheck="false" />
+                <button type="submit"><i className="fa fa-search"></i></button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     );
   }
@@ -80,4 +44,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps,{logout})(HeaderTemplate);
+export default connect(mapStateToProps, { logout })(HeaderTemplate);

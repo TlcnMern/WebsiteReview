@@ -10,7 +10,6 @@ router.route('/users').post(controllerUser.register);
 
 //get info user
 router.route('/users/:userID').get(controllerUser.getInfoUser);
-router.route('/users/photo/:userID').get(controllerUser.photo,controllerUser.defaultPhoto);
 
 //edit profile
 router.route('/users/editProfile/:userID').put(controllerAuth.requireSignin,controllerAuth.hasAuthorization,aclLibrary.middleware(2),controllerUser.update)

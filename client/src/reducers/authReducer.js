@@ -3,13 +3,13 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL,
-    AUTHORIZED
+    REGISTER_FAIL
   } from '../action/type';
 
   const initialState = {
     isAuthenticated: false,
-    isAuthorized:false
+    isAuthorized:false,
+    isAuthorizedSubcomment:false
   };
   
   export default function(state = initialState, action) {
@@ -27,17 +27,14 @@ import {
       case LOGIN_FAIL:
       case LOGOUT_SUCCESS:
       case REGISTER_FAIL:
-        sessionStorage.removeItem('jwt')
+        sessionStorage.removeItem('jwt');
+        sessionStorage.removeItem('avatar');
+        sessionStorage.removeItem('name');
         return {
           ...state,
           token: null,
           isAuthenticated: false,
           isAuthorized:false
-        };
-      case AUTHORIZED:
-        return {
-          ...state,
-          isAuthorized: true,
         };
       default:
         return state;

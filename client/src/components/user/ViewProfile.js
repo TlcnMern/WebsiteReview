@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetch} from '../../action/userAction';
-import {auth} from '../../action/helper';
+
+import { fetch } from '../../action/userAction';
+import { auth } from '../../action/helper';
+import { API_URL } from '../../action/helper';
+import man from '../../public/images/man.png';
+import UploadAvatar from './UploadAvatar';
 
 class ViewProfie extends Component{
 
     componentDidMount(){
+        console.log('alo')
         if(this.props.authenticate)
             this.props.fetch(auth.isAuthenticated().user._id,auth.isAuthenticated().token);
     }

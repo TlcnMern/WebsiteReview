@@ -17,37 +17,40 @@ const PostSchema = new mongoose.Schema({
     type:String,
     required:'content summary is require'
   },
+
   link:{
     type:String,
   },
+
   content: {
     type: String,
     required: 'content is required'
   },
+
   photo: [{
     type:String
   }],
-  // photo: {
-  //   data: Buffer,
-  //   contentType: String
-  // },
-  // comments: [{
-  //   content: String,
-  //   subComment:[{
-  //     content: String,
-  //     created:{ type: Date, default: Date.now},
-  //     commentBy: { type: mongoose.Schema.ObjectId, ref: 'User'}
-  //   }],
-  //   created: { type: Date, default: Date.now },
-  //   postedBy: { type: mongoose.Schema.ObjectId, ref: 'User'}
-  // }],
+  
   comments:[{type:mongoose.Schema.ObjectId, ref: 'Comment'}],
+
   ratings:[{
     point:Number,
     created:{type:Date,default:Date.now},
     postedBy:{type:mongoose.Schema.ObjectId, ref: 'User'}
   }],
+
+  pointRating:{
+    point:Number,
+    totalRate:Number,
+    oneStar:Number,
+    twoStar:Number,
+    threeStar:Number,
+    fourStar:Number,
+    fiveStar:Number
+  },
+
   postedBy: {type: mongoose.Schema.ObjectId, ref: 'User'},
+
   created: {
     type: Date,
     default: Date.now

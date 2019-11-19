@@ -1,15 +1,13 @@
-const Post=require('../models/post.model');
-const Comment=require('../models/comment.model');
-const errorHandler =require('../helpers/dbErrorHandler');
+const Post = require('../models/post.model');
 const formidable=require('formidable');
-const fs=require('fs');
+const errorHandler = require('../helpers/dbErrorHandler');
 
 const create = (req, res) => {
   let form = new formidable.IncomingForm();
-  form.uploadDir='./dist';
+  form.uploadDir = './dist';
   form.keepExtensions = true;
-  form.maxFieldsSize=10*1024*1024;//10MB
-  form.multiples=true;
+  form.maxFieldsSize = 10 * 1024 * 1024;//10MB
+  form.multiples = true;
   form.parse(req, (err, fields, files) => {
     if (err) {
       return res.status(400).json({
@@ -20,19 +18,20 @@ const create = (req, res) => {
     //   console.log(file);
     // }
     let post = new Post(fields);
-    post.postedBy= req.profile._id;
-    var listImage=files.photo;
-    if(listImage){
-      var imageName=[];
-      if(Array.isArray(listImage)){
+    post.postedBy = req.profile._id;
+    post.pointRating = {point:null}
+    var listImage = files.photo;
+    if (listImage) {
+      var listPathImage = [];
+      if (Array.isArray(listImage)) {
         listImage.forEach(element => {
-          imageName.push(element.path.split('\\')[1]);
+          listPathImage.push(element.path.toString().replace("\\", "/"));
         });
       }
-      else{
-        imageName.push(listImage.path.split('\\')[1]);
+      else {
+        listPathImage.push(listImage.path.toString().replace("\\", "/"));
       }
-      post.photo = imageName;
+      post.photo = listPathImage;
       post.save((err, result) => {
         if (err) {
           return res.status(400).json({
@@ -42,52 +41,82 @@ const create = (req, res) => {
         res.json(result);
       })
     }
-    else{
+    else {
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
       })
     }
-  
-    // if(files.photo){
-    //   post.photo.data = fs.readFileSync(files.photo.path);//Buffer(fs.readFileSync(req.file.path), 'base64');
-    //   post.photo.contentType = files.photo.type;//lấy định dạng ảnh
-    // }
   })
 }
 
-const getNewFeeds=(req,res)=>{
+const getNewFeeds = (req, res) => {
   Post.find({})
-  .populate('postedBy', '_id name')
-  // .populate({
-  //   path:'comments',
-  //   populate: { path: 'commentBy',select:'_id name' }
-  // })
-  // .populate({
-  //   path:'comments',
-  //   populate: { path: 'subComment.commentBy',select:'_id name'}
-  // })
-  .sort('-created')
-  .exec((err, posts) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(posts);
-  })
+    .populate('postedBy', '_id name avatar')
+    // .populate({
+    //   path:'comments',
+    //   populate: { path: 'commentBy',select:'_id name' }
+    // })
+    // .populate({
+    //   path:'comments',
+    //   populate: { path: 'subComment.commentBy',select:'_id name'}
+    // })
+    .sort({'created':-1})
+    .exec((err, posts) => {
+
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      posts=posts.slice(0,3);
+      res.json(posts);
+    })
 }
 
-const photo = (req, res) => {
-  var imageName='dist/'+req.post.photo[0];
-  fs.readFile(imageName,(err, imageData)=>{
-    if(err){
-      console.log(err)
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    return res.json(imageData);
-  })
+const getPostFeatured = (req, res) => {
+
+  Post.find({})
+    .populate('postedBy', '_id name avatar')
+    .sort({'pointRating.totalRate':-1})
+    .exec((err, posts) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      posts=posts.slice(0,5);
+      res.json(posts);
+    })
+}
+
+const getTopListPostFollowTheme = (req, res) => {
+  const theme=req.params.theme;
+  Post.find({theme:theme})
+    .populate('postedBy', '_id name avatar')
+    .sort({'pointRating.totalRate':-1})
+    .exec((err, posts) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      posts=posts.slice(0,5);
+      res.json(posts);
+    })
+}
+
+const getDetailPost = (req, res) => {
+  const postId = req.params.postId;
+  Post.find({ _id: postId })
+    .populate('postedBy', '_id name')
+    .exec((err, post) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(post);
+    })
 }
 
 const postByID = (req, res, next, id) => {
@@ -100,197 +129,133 @@ const postByID = (req, res, next, id) => {
     next()
   })
 }
-//commnet
-const checkAuthorizedComment = (req, res) => {
-  const commentID=req.body.commentID;
-  const userID=req.session.userId;
-  Comment.findOne({_id:commentID,commentBy:userID}, (err, comment) => {
-    if (err || !comment){
-      console.log(err);
-      return res.status('401').json({
-        error: "User not authorized"
-      });
-    }
-    return res.json(true);
-  })
-}
-  //get comment and sub comment of 1 post
-const getComment=(req,res)=>{
-  Post.find({_id:req.post._id})
-  .populate({
-    path:'comments',
-    populate: { path: 'commentBy',select:'_id name' }
-  })
-  .populate({
-    path:'comments',
-    populate: { path: 'subComment.commentBy',select:'_id name'}
-  })
-  .exec((err, posts) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(posts[0].comments);
-  })
-}
-  //add comment
-const addComment=(req,res,next)=>{
-  let comment=new Comment(req.body);
-  comment.save((err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    Post.findByIdAndUpdate(req.body.postId, {$push: {comments: result._id}}, {new: true})
-    .populate('postedBy', '_id name')
-    .populate({
-      path:'comments',
-      populate: { path: 'commentBy',select:'_id name' }
-    })
-    .exec((err, result2) => {
-      if (err) {
-        return res.status(400).json({
-          error: errorHandler.getErrorMessage(err)
-        })
-      }
-      res.json(result2.comments);
-    })
-  })
-}
-  //delete comment
-const deleteComment=(req,res)=>{
-  const commentId= req.body.commentId;
-  Comment.remove({_id:commentId},(err,result)=>{
-    if(err){
-      console.log(err);
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      });
-    }
-    Post.findByIdAndUpdate({_id:req.body.postId},{$pull:{comments:{$in: [commentId]}}}, {new: true})
-    .populate({
-      path:'comments',
-      populate: { path: 'commentBy',select:'_id name' }
-    })
-    .populate({
-      path:'comments',
-      populate: { path: 'subComment.commentBy',select:'_id name'}
-    })
-    .exec((err, result2) => {
-      if (err) {
-        return res.status(400).json({
-          error: errorHandler.getErrorMessage(err)
-        })
-      }
-      res.json(result2.comments)
-    })
-  });   
-}
-  //update comment
-const updateComment = (req, res) => {
-  const commentId=req.body.commentId;
-  const content =req.body.content;
-  Comment.updateOne({_id:commentId},{content:content},(err,result)=>{
-    if(err){
-      console.log(err);
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(result);
-  })
-}
-  //add subComment
-const addSubComment=(req,res,next)=>{
-  var subComment={};
-  subComment.content=req.body.content;
-  subComment.commentBy=req.body.userId;
-  Comment.findByIdAndUpdate({'_id':req.body.commentId}, {$push: {'subComment': subComment}},{new: true})
-  .populate('subComment.commentBy')
-  .exec((err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(result.subComment);
-  })
-}
 //rating
-  //add rating of user
-const addRating=(req,res)=>{
-  let rating ={};
+const addRating = (req, res) => {
+  let rating = {};
   rating.point = req.body.point;
   rating.postedBy = req.body.userId;
-  console.log(rating);
-  Post.findByIdAndUpdate({_id:req.body.postId}, {$push: {ratings: rating}}, {new: true})
-  .populate('ratings.postedBy', '_id name')
-  .populate('postedBy', '_id name')
-  .exec((err, result) => {
-    if (err||!result) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
+  Post.findByIdAndUpdate({ _id: req.body.postId }, { $push: { ratings: rating } }, { new: true })
+    .exec((err, result) => {
+      if (err || !result) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      return res.status('200').json({
+        msg: "Added"
       })
-    }
-    return res.status('200').json({
-      msg:"Added"
     })
-  })
-}
-  //check user used to evaluation for post ? show rating : set rating 0
-const checkRatingAndShow=(req,res)=>{
-  const userId = req.body.userId;
-  const postId = req.body.postId;
-  Post.find({_id:postId },
-    {ratings: { $elemMatch: { postedBy:userId } }}
-  )
-  .populate('ratings.postedBy', '_id point')
-  .exec((err, result) => {
-    if (err || !result){
-      console.log(err);
-      return res.status('400').json({
-        error: "Post not found"
-      })
-    }
-    res.json(result[0].ratings);
-  })
-}
-  //update Rating When user used to evaluation
-const updateRatingOfUser=(req,res)=>{
-  const userId=req.body.userId;
-  const postId=req.body.postId;
-  const point =req.body.point;
-  Post.update({_id:postId,'ratings.postedBy':userId}, {$set: {'ratings.$.point': point}} )
-  .exec((err,result)=>{
-    if(err || !result){
-      console.log(err);
-      return res.status('400').json({
-        error:"Post not found"
-      })
-    }
-    return res.status('200').json({
-      msg:"Updated"
-    })
-  })
 }
 
-module.exports={
-    create:create,
-    getNewFeeds:getNewFeeds,
-    photo:photo,
-    postByID:postByID,
-    addComment:addComment,
-    addRating:addRating,
-    checkRatingAndShow:checkRatingAndShow,
-    updateRatingOfUser:updateRatingOfUser,
-    addSubComment:addSubComment,
-    deleteComment:deleteComment,
-    getComment:getComment,
-    updateComment:updateComment,
-    checkAuthorizedComment:checkAuthorizedComment
+const checkRatingAndShow = (req, res) => {
+  const userId = req.body.userId;
+  const postId = req.body.postId;
+  Post.find({ _id: postId },
+    { ratings: { $elemMatch: { postedBy: userId } } }
+  )
+    .exec((err, result) => {
+      if (err || !result[0].ratings[0]) {
+        return res.status(401).json({
+          error: "Dont have rating"
+        })
+      }
+      res.json(result[0].ratings[0].point);
+    })
+}
+
+const updateRatingOfUser = (req, res) => {
+  const userId = req.body.userId;
+  const postId = req.body.postId;
+  const point = req.body.point;
+  Post.update({ _id: postId, 'ratings.postedBy': userId }, { $set: { 'ratings.$.point': point } })
+    .exec((err, result) => {
+      if (err || !result) {
+        return res.status('400').json({
+          error: "Post not found"
+        })
+      }
+      return res.status('200').json({
+        msg: "Updated"
+      })
+    })
+}
+
+const calculateRaingtingEachPost = (req, res) => {
+  Post.find({})
+    .exec((err, posts) => {
+      if (err || !posts[0]) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      posts.forEach(post => {
+        var oneStar = 0, twoStar = 0, threeStar = 0, fourStar = 0, fiveStar = 0;
+        if (post.ratings.length > 0) {
+          post.ratings.forEach(rating => {
+            switch (rating.point) {
+              case 0: {
+                oneStar = oneStar + 1;//so luong nguoi danh gia
+                break;
+              }
+              case 1: {
+                twoStar = twoStar + 1;
+                break;
+              }
+              case 2: {
+                threeStar = threeStar + 1;
+                break;
+              }
+              case 3: {
+                fourStar = fourStar + 1;
+                break;
+              }
+              case 4: {
+                fiveStar = fiveStar + 1;
+                break;
+              }
+            }
+          });
+          var totalRate= (oneStar + twoStar + threeStar + fourStar + fiveStar);
+          var point = ((1 * oneStar) + (2 * twoStar) + (3 * threeStar) + (4 * fourStar) + (5 * fiveStar)) /totalRate;
+          var n = parseFloat(point); 
+          point = Math.round(n * 100)/100
+          var pointRating = {
+            point: point,
+            totalRate:totalRate,
+            oneStar: oneStar,
+            twoStar: twoStar,
+            threeStar: threeStar,
+            fourStar: fourStar,
+            fiveStar: fiveStar
+          }
+
+          Post.update({ _id: post._id }, { $set: { 'pointRating': pointRating } })
+            .exec((err) => {
+              if (err) {
+                return res.status('400').json({
+                  error: "err"
+                })
+              }
+            })
+        }
+      });
+
+      res.status(200).json({
+        data: posts,
+        msg: 'calculate Raingting Each Post done'
+      });
+    })
+}
+
+module.exports = {
+  create: create,
+  getNewFeeds: getNewFeeds,
+  getDetailPost: getDetailPost,
+  postByID: postByID,
+  addRating: addRating,
+  checkRatingAndShow: checkRatingAndShow,
+  updateRatingOfUser: updateRatingOfUser,
+  calculateRaingtingEachPost: calculateRaingtingEachPost,
+  getPostFeatured:getPostFeatured,
+  getTopListPostFollowTheme:getTopListPostFollowTheme
 }

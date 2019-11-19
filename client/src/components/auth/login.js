@@ -6,12 +6,29 @@ import { login } from '../../action/authAction';
 import { clearErrors } from '../../action/errorActions';
 import "../../public/stylesheets/partials/login.css"
 import "bootstrap/dist/css/bootstrap.min.css";
-import logo from "../../public/images/logo192.png";
 import {Redirect} from 'react-router-dom';
-import LoginSocial from '../template/LoginSocial';
-
-
+import LoginScreen from './LoginScreen';
+import RegisterScreen from './RegisterScreen';
 class Login extends Component {
+  
+  
+  constructor(props){
+    super(props);
+    this.state={
+        renderLogin:true,
+        renderRegister:false
+    };
+    this.onClickLogin=this.onClickLogin.bind(this);
+    this.onClickRegister=this.onClickRegister.bind(this);
+  }
+  onClickLogin(){
+    this.setState({renderLogin:true});
+    this.setState({renderRegister:false});
+  };
+  onClickRegister(){
+      this.setState({renderRegister:true});
+      this.setState({renderLogin:false});
+  };
   state = {
     modal: false,
     email: '',
@@ -49,7 +66,71 @@ class Login extends Component {
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  
+  renderleftContent(){
+    const {from} = this.props.location.state || {
+      from: {
+        pathname: '/'
+      }
+    };
+    if (this.props.isAuthenticated) {
+      return (<Redirect to={from}/>);
+    }
+    if(this.state.renderLogin)
+      return (
+        <div className="loginleft" id="loginleft">
+        
+        <div className="Left-Content fadeIn second">
+          <h2>Đăng nhập</h2>
+          <p>Đăng nhập để theo dõi những bài viết hay, <br/>danh sách những độc giả nổi tiếng, <br/>đánh giá và bình luận cùng hàng triệu người dùng khác .</p>
+          <img src="https://frontend.tikicdn.com/_new-next/static/img/graphic-map.png" alt="vu"/>
+        </div>
+         </div>
+        
+      ) ;
+      if(this.state.renderRegister)
+      return (
+        <div className="loginleft" id="loginleft">
+        
+        <div className="Left-Content fadeIn second">
+          <h2>Tạo tài khoản</h2>
+          <p>Đăng nhập để theo dõi những bài viết hay, <br/>danh sách những độc giả nổi tiếng, <br/>đánh giá và bình luận cùng hàng triệu người dùng khác .</p>
+          <img src="https://frontend.tikicdn.com/_new-next/static/img/graphic-map.png" alt="vu"/>
+          </div>
+         </div>
+        
+      ) ;
+  }
+  rendermyMenu(){
+    const {from} = this.props.location.state || {
+      from: {
+        pathname: '/'
+      }
+    };
+    if (this.props.isAuthenticated) {
+      return (<Redirect to={from}/>);
+    }
+    if(this.state.renderLogin)
+      return (
+        <div className="loginright">
+            <ul className="nav">
+                <li  className="actived"><span onClick={this.onClickLogin} >Login</span></li>
+                <li><span onClick={this.onClickRegister}>Register</span></li>
+            </ul>
+            <LoginScreen/>
+        </div>
+      ) ;
+      if(this.state.renderRegister)
+      return (
+        <div className="loginright">
+            <ul className="nav">
+                <li ><span onClick={this.onClickLogin}>Login</span></li>
+                <li className="actived"><span onClick={this.onClickRegister} >Register</span></li>
+            </ul>
+            <RegisterScreen/>
+          
+        </div>
+      ) ;
+  }
   
   render() {
     const {from} = this.props.location.state || {
@@ -61,25 +142,12 @@ class Login extends Component {
       return (<Redirect to={from}/>);
     }
     return (
-
-      <div className="wrapper fadeInDown">
-        <div id="formContent">
-          <div className="fadeIn first">
-            <img src={logo} id="icon" alt="User Icon" />
-          </div>
-
-          <form onSubmit= {this.onSubmit}>
-            <input type="text" id="login" className="fadeIn second" name="email" placeholder="email" onChange={this.onChange} />
-            <input type="password" id="password" className="fadeIn third" name="password" placeholder="password" onChange={this.onChange} /><br />
-            <input type="submit" className="fadeIn fourth" value="Log In"/>
-          </form>
-          {this.renderAlert()}
-          <LoginSocial/>
-          <div style={{marginTop:"10px"}} id="formFooter">
-            <span className="underlineHover">Forgot Password?</span>
-          </div>
-
+      <div className="boxContent" >
+        <div className="dialogLogin">
+        {this.renderleftContent()}  
+        {this.rendermyMenu()}  
         </div>
+         
       </div>
     );
   }
