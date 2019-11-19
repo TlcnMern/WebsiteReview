@@ -1,4 +1,4 @@
-import { GET_COMMENT } from '../config/type';
+import { GET_COMMENT } from '../action/type';
 
 
 const INITIAL_STATE = {

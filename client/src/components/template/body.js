@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.min.css';
 import "../../public/stylesheets/partials/style.css"
-import {API_URL,auth} from '../../config/helper';
+import {API_URL,auth} from '../../action/helper';
 import man from '../../public/images/man.png';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';

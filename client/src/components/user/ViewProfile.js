@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetch } from '../../action/userAction';
-import { auth,API_URL } from '../../config/helper';
+import { auth } from '../../action/helper';
+import { API_URL } from '../../action/helper';
 import man from '../../public/images/man.png';
 import UploadAvatar from './UploadAvatar';
 

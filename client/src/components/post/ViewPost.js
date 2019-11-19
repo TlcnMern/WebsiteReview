@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import man from '../../public/images/man.png';
 import Rating from '../rating/Rating';
-import { API_URL } from '../../config/helper';
+import { API_URL } from '../../action/helper';
 
 class ViewPost extends Component {
     constructor(props) {

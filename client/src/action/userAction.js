@@ -1,11 +1,11 @@
 import axios from 'axios';
-import {API_URL, auth} from '../config/helper';
+import {API_URL, auth} from './helper';
 import { returnErrors } from './errorActions';
 
 import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    FETCH_USER,ERROR_RESPONSE,FOLLOW,FOLLOWED} from '../config/type';
+    FETCH_USER,ERROR_RESPONSE,FOLLOW,FOLLOWED} from './type';
 
 
 export const RegisterAction =(user)=>dispatch=>{

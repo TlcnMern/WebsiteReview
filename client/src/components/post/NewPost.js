@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import '../../public/stylesheets/partials/post.css';
-import {auth} from '../../config/helper';
+import {auth} from '../../action/helper';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal,ModalBody,ModalFooter,Button } from 'reactstrap';
 import {newPost} from '../../action/postAction';

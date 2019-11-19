@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Comment from '../comment/Comment';
 import Rating from '../rating/Rating';
+<<<<<<< HEAD
 import { API_URL } from '../../config/helper';
 import { auth } from '../../config/helper';
 import {getDetailPost} from '../../action/postAction';
 import {calculateRaingtingEachPost,checkRatingAndShow} from '../../action/ratingAction';
+=======
+import ImageSlider from './sliderImage';
+import { auth } from '../../action/helper';
+import { checkRatingAndShow, getDetailPost,calculateRaingtingEachPost} from '../../action/postAction';
+>>>>>>> parent of 29dc5ae... update-Strutured
 import { connect } from 'react-redux';
-import { getComment } from '../../action/commentAction';
+import { getComment } from '../../action/postAction';
 import Loading from '../template/Loading';
 import ProcessRating from '../rating/ProcesRating';
 import "slick-carousel/slick/slick.css";
@@ -47,12 +53,14 @@ class DetailPost extends Component {
             const userID = jwt.user._id;
             checkRatingAndShow(userID, { t: jwt.token }, postId).then((data) => {
                 if (data.error) {
+                    console.log('not auth rating')
                     this.setState({
                         isLoading: false,
                         point: null
                     })
                 }
                 else {
+                    console.log(data)
                     this.setState({
                         isLoading: false,
                         point: data

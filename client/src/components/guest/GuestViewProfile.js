@@ -5,7 +5,7 @@ import ProfilePost from './profilePost';
 import ProfileDetail from './profileDetail'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { auth,API_URL } from '../../config/helper';
+import { auth,API_URL } from '../../action/helper';
 import { checkFollow } from '../../action/userAction';
 import man from  '../../public/images/man.png';
 import { fetch } from '../../action/userAction';

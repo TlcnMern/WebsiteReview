@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import "../../public/stylesheets/partials/editProfie.css";
 import TextField from '@material-ui/core/TextField';
 import { update } from '../../action/userAction';
-import { auth } from '../../config/helper';
+import { auth } from '../../action/helper';
 
 import {update} from '../../action/userAction';
 import {auth} from '../../action/helper';

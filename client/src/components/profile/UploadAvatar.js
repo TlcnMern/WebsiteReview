@@ -4,7 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import '../../public/stylesheets/partials/uploadAvatar.css'
-import {auth} from '../../config/helper';
+import {auth} from '../../action/helper';
 import {update} from '../../action/userAction';
 
 class UploadAvatar extends Component {

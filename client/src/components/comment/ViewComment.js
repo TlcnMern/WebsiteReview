@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { auth } from '../../config/helper';
-import { deleteComment,checkAuthorizedComment } from '../../action/commentAction';
+import { auth } from '../../action/helper';
+import { deleteComment } from '../../action/postAction';
 import { connect } from 'react-redux';
 import EditComment from './EditComment';
 import SubComment from './SubComment';
+import { checkAuthorizedComment } from '../../action/postAction';
 import man from '../../public/images/man.png';
 import { Link } from 'react-router-dom';
 import MenuItem from "@material-ui/core/MenuItem"

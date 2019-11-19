@@ -1,4 +1,4 @@
-import {FETCH_USER,ERROR_RESPONSE, FOLLOW, FOLLOWED,CLEAN_PROFILE} from '../config/type';
+import {FETCH_USER,ERROR_RESPONSE, FOLLOW, FOLLOWED,CLEAN_PROFILE} from '../action/type';
 
 const INITIAL_STATE = { profile: {}, message: '', error: '',isFollow:false};
 

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-import {auth} from '../../config/helper';
-import {addComment} from '../../action/commentAction';
+import {auth} from '../../action/helper';
+import {addComment} from '../../action/postAction';
 import {connect} from 'react-redux';
 import ViewComment from './ViewComment';
 

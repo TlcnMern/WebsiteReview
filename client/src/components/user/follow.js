@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { auth } from '../../config/helper';
+import { auth } from '../../action/helper';
 import {follow,unFollow} from '../../action/userAction';
 
 class Follow extends Component{
