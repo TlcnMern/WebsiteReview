@@ -1,64 +1,117 @@
 import React, { Component } from 'react';
-import "../../public/stylesheets/partials/profile.css"
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'font-awesome/css/font-awesome.min.css';
+import "../../public/stylesheets/partials/style.css"
 import ProfilePost from './profilePost';
-import ProfileDetail from './profileDetail'
+import ProfileDetail from './profileDetail';
+import ProfileEdit from './profileEdit';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { auth,API_URL } from '../../action/helper';
-import { checkFollow } from '../../action/userAction';
-import man from  '../../public/images/man.png';
 import { fetch } from '../../action/userAction';
+import { auth } from '../../action/helper';
+import { API_URL } from '../../action/helper';
+import man from '../../public/images/man.png';
+import UploadAvatar from './UploadAvatar';
 
-import Follow from '../user/follow';
-//khi gọi tới thằng này bằng redirect hoặc link, phải truyền cho nó 1 props là UserID
-class profile extends Component {
+class viewProfile extends Component {
     constructor(props) {
         super(props);
-        this.match=props.match;
         this.state = {
-            userId: this.match.params.userId,
             renderProfile: false,
-            renderPost: true
+            renderNotify: false,
+            renderPost: true,
+            renderEdit: false,
+            openUploadAvatar: false
         };
+
         this.onClickProfile = this.onClickProfile.bind(this);
+        this.onClickNotify = this.onClickNotify.bind(this);
         this.onClickPost = this.onClickPost.bind(this);
+        this.onClickEdit = this.onClickEdit.bind(this);
+        this.onChangeRenderEdit = this.onChangeRenderEdit.bind(this);
+        this.onClickAvatar = this.onClickAvatar.bind(this);
+        this.callBackChangeStateOpen = this.callBackChangeStateOpen.bind(this);
     }
+    componentDidMount() {
+        if (this.props.authenticate)
+            this.props.fetch(auth.isAuthenticated().user._id, auth.isAuthenticated().token);
+    }
+
     onClickProfile() {
         this.setState({ renderProfile: true });
+        this.setState({ renderNotify: false });
         this.setState({ renderPost: false });
     };
+
+    onClickNotify() {
+        this.setState({ renderNotify: true });
+        this.setState({ renderProfile: false });
+        this.setState({ renderPost: false });
+
+    };
+
     onClickPost() {
         this.setState({ renderPost: true });
         this.setState({ renderProfile: false });
+        this.setState({ renderNotify: false });
     };
 
-    componentDidMount() {
-        if (this.props.isAuthenticated === true) {
-            const jwt = auth.isAuthenticated();
-            this.props.checkFollow(jwt.user._id, { t: jwt.token }, this.state.userId);
-        }
-        this.props.fetch(this.state.userId);
+    onClickEdit() {
+        this.setState({ renderEdit: true });
+    };
+
+    onClickAvatar() {
+        this.setState({
+            openUploadAvatar: true
+        })
     }
 
+    onChangeRenderEdit() {
+        this.setState({ renderEdit: false });
+        if (this.props.authenticate)
+            this.props.fetch(auth.isAuthenticated().user._id, auth.isAuthenticated().token);
+    };
+
+    callBackChangeStateOpen() {
+        this.setState({
+            openUploadAvatar: false
+        })
+    }
+
+    renderViewOrEdit() {
+        if (this.state.renderEdit)
+            return <ProfileEdit onChangeRenderEdit={this.onChangeRenderEdit} />;
+        else
+            return (
+                <div>
+                    <ProfileDetail />
+                    <div className="row rowProFile ">
+                        <aside className="txtProfileCol "><label></label></aside>
+                        <button className="btnSaveProfile" disabled="" type="button" onClick={this.onClickEdit}>Chỉnh Sửa</button>
+                    </div>
+                </div>
+            );
+    }
 
     rendermyMenu() {
-
-        //trường hợp guest xem info user
-        if(this.props.isAuthenticated!==false){
-            if(auth.isAuthenticated().user._id=== this.match.params.userId){
-                return(<Redirect to='/ViewProfile' />);
-            }
-        }
-
         if (this.state.renderPost)
             return (
                 <div>
                     <ul className="nav">
                         <li className="actived"><span onClick={this.onClickPost} >BÀI VIẾT</span></li>
+                        <li><span onClick={this.onClickNotify}>THÔNG BÁO</span></li>
                         <li><span onClick={this.onClickProfile}>About me</span></li>
                     </ul>
                     <ProfilePost />
+                </div>
+            );
+        if (this.state.renderNotify)
+            return (
+                <div>
+                    <ul className="nav">
+                        <li ><span onClick={this.onClickPost}>BÀI VIẾT</span></li>
+                        <li className="actived"><span onClick={this.onClickNotify}>THÔNG BÁO</span></li>
+                        <li><span onClick={this.onClickProfile}>About me</span></li>
+                    </ul>
                 </div>
             );
         if (this.state.renderProfile)
@@ -66,9 +119,10 @@ class profile extends Component {
                 <div>
                     <ul className="nav">
                         <li ><span onClick={this.onClickPost}>BÀI VIẾT</span></li>
+                        <li><span onClick={this.onClickNotify}>THÔNG BÁO</span></li>
                         <li className="actived"><span onClick={this.onClickProfile} >About me</span></li>
                     </ul>
-                    {this.props.profile ? <ProfileDetail /> : <div></div>}
+                    {this.renderViewOrEdit()}
                 </div>
             );
     }
@@ -99,11 +153,12 @@ class profile extends Component {
                                 <div className="left col-lg-4">
                                     <div className="photo-left">
                                         <img className="photo" src={urlAvatar} alt="img" />
-                                        <div className="active"></div>
+                                        <button className="btnPhotoin-remove btnChangeAvatar" onClick={this.onClickAvatar} type="button"><img src="https://img.icons8.com/cute-clipart/24/000000/camera.png" alt="icCamera"/></button>
+                                        {this.state.openUploadAvatar ? <UploadAvatar callBackChangeStateOpen={this.callBackChangeStateOpen} open={this.state.openUploadAvatar} /> : <div></div>}
                                     </div>
                                     <h4 className="name">{this.props.profile.name}</h4>
                                     <p className="info">BIỆT DANH</p>
-                                    <p className="info"> {this.props.profile.email}</p>
+                                    <p className="info">{this.props.profile.email}</p>
                                     <div className="stats row">
                                         <div className="stat col-xs-4" style={{ paddingRight: '50px' }}>
                                             <p className="number-stat">3,619</p>
@@ -121,10 +176,8 @@ class profile extends Component {
 
                                 </div>
                                 <div className="right col-lg-8">
-                                    <span className="follow"><Follow followID={this.state.userId} /></span>
+                                    {/* <span className="follow">Follow</span> */}
                                     {this.rendermyMenu()}
-
-
                                 </div>
                             </div>
                         </main>
@@ -132,19 +185,14 @@ class profile extends Component {
                 </div>
 
             </div>
-
         );
     }
 }
-function mapToStateProps(state) {
+function mapStateToProp(state) {
     return {
-        isAuthenticated: state.auth.isAuthenticated,
+        authenticate: state.auth.isAuthenticated,
         profile: state.user.profile
     }
 }
 
-export default connect(mapToStateProps, { checkFollow,fetch })(profile);
-
-
-
-
+export default connect(mapStateToProp, { fetch })(viewProfile);

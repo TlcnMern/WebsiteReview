@@ -23,7 +23,7 @@ class PostFeatured extends Component {
 
     render() {
         return(
-            <div >
+            <div style={{overflow:'auto', maxHeight:'450px'}}>
                 {this.state.listPost? this.state.listPost.map((item, i) => {
                     return <ViewPostFeatured post={item} key={i}/>
                 }): <div></div>

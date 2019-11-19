@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetch } from '../../action/userAction';
 
-class ViewDetailProfile extends Component {
+class profileDetail extends Component {
     render() {
         return (
             <div className="row clsAbtMe">
-                <ul className="ListAbtMe col-lg-3">
-                    <li><span className="lstItem lstAbtMe-Actived ">Chỉnh sửa trang cá nhân</span></li>
-                    <li><span className="lstItem  lstAbtMe">Đổi mật khẩu</span></li>
-                </ul>
-                <article className="ContentAbtMe col-lg-9">
+                <article className="ContentAbtMe col-lg-12">
                     <div className="row rowProFile">
                         <aside className="txtProfileCol"><label htmlFor="pepName">Tên</label></aside>
                         <div className="inProfileCol">
@@ -66,4 +62,4 @@ function mapStateToProp(state) {
     }
 }
 
-export default connect(mapStateToProp, { fetch })(ViewDetailProfile);
+export default connect(mapStateToProp, { fetch })(profileDetail);

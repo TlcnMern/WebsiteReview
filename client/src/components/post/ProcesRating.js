@@ -30,7 +30,7 @@ class ProcessRating extends Component {
 
     }
     render() {
-        return <div className='chart'>
+        return <div className='chart col-sm-8'>
             {[
                 <span key={1} className='label'>Biểu đồ đánh giá</span>,
                 <div key={2}>

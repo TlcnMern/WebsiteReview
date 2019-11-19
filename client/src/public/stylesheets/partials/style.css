@@ -89,7 +89,6 @@ body {
     background: #0b7dda;
 }
 
-
 #myMenu {
     list-style-type: none;
     padding: 0;
@@ -527,7 +526,6 @@ body {
     z-index: 10;
     /*text-align:center;*/
 }
-
 
 .dialogLogin .loginright {
     width: 50%;
@@ -1018,10 +1016,20 @@ main {
 }
 
 .ContentComment {
-    color: currentColor;
-    margin-left: 5px;
-    text-align: justify;
-    font-size: 13px;
+    background-color: #f2f3f5;
+    border-radius: 18px;
+    box-sizing: border-box;
+    color: #1c1e21;
+    width: fit-content;
+    line-height: 16px;
+    display: block !important;
+    padding: 5px;
+    margin: 0;
+    max-width: 100%;
+    word-wrap: break-word;
+    position: relative;
+    white-space: normal;
+    word-break: break-word;
 }
 
 .ReplyComment {
@@ -1073,6 +1081,7 @@ main {
 .TomTat {
     text-align: justify;
     font-size: 14px;
+    margin-right: -10px;
 }
 
 .SPBV,
@@ -1108,7 +1117,7 @@ main {
     font-size: 13px;
     box-shadow: 0 0 5px 5px #d1d1d1;
     padding: 10px;
-    margin: 10px 0 10px 0;
+    margin: 10px 0 10px 10px;
 }
 
 .TitleBV {
@@ -1135,6 +1144,7 @@ main {
 .ND-BaiViet {
     text-align: justify;
     font-size: 14px;
+    padding: 10px;
 }
 
 .anh-BV {
@@ -1150,17 +1160,23 @@ main {
 }
 
 .imageSlider {
-    width: 100%;
+    width: 110%;
+    margin-left: -15px;
 }
 
-.imageSlider-zoom .slick-prev::before {
+.slick-prev::before {
     color: #56b9f5;
-    margin-left: 12px;
+    margin-left: 20px;
 }
 
-.imageSlider-zoom .slick-next:before {
-    color: #56b9f5;
-    margin-left: -20px;
+.slick-next::before {
+    color: #56b9f5 !important;
+    margin-left: -40px !important;
+    z-index: 20;
+}
+
+.slick-arrow {
+    color: #56b9f5 !important;
 }
 
 .imageSlider-multi .slick-prev::before {
@@ -1170,6 +1186,11 @@ main {
 
 .imageSlider-multi .slick-next:before {
     color: #56b9f5;
+    margin-left: -20px;
+}
+
+.imageSlider-multi {
+    padding: 10px;
     margin-left: -20px;
 }
 
@@ -2337,4 +2358,129 @@ svg:not(:root) {
 
 .detail-Title:hover .tooltiptext {
     visibility: visible;
+}
+
+
+/* Anh dai dien */
+
+.photo-left .btnChangeAvatar {
+    visibility: hidden;
+    border: none;
+    background: #00000038 !important;
+    color: #263d51;
+    left: 45px;
+    width: 190px !important;
+    height: 75px;
+    align-items: center;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.photo-left:hover .btnChangeAvatar {
+    visibility: visible;
+}
+
+
+/* Bai viet noi troi */
+
+.clsBVNT:hover {
+    box-shadow: 0 0 5px 5px #d1d1d1;
+    margin: 5px !important;
+    padding: 5px;
+}
+
+.clsBVNT {
+    margin: 5px !important;
+    padding: 5px;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.clsBVNT .imgDD img {
+    width: auto;
+    height: auto;
+    max-width: 100px;
+    max-height: 100px;
+    margin-left: -10px;
+    margin-right: auto;
+    min-height: 50px;
+    vertical-align: middle;
+    box-shadow: 0 0 3px 3px #d1d1d1;
+}
+
+#detailBVNT {
+    border: 1px solid #33bff259;
+    margin-right: -7px;
+    margin-left: 7px;
+    margin-top: -5px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 0;
+}
+
+.clsBVNT:hover .clsDetailBVNT {
+    visibility: visible;
+    width: 100%;
+    background: rgb(255, 255, 255, 0.6);
+    margin-top: -150px;
+    height: 150px;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.clsDetailBVNT {
+    visibility: hidden;
+    width: 100%;
+    background: rgb(255, 255, 255, 0.4);
+    margin-top: -150px;
+    height: 150px;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+#TitleBVNT {
+    background: #00afef;
+    opacity: 0.8;
+    color: #fff;
+    text-align: justify;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 12px;
+    border-top-right-radius: 10px;
+    padding: 5px;
+}
+
+
+/* PostDetail */
+
+.clsRatePostDetail {
+    border-bottom: 1px solid #d1d1d1;
+    margin: 10px;
+}
+
+.table-title {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 20px 0 10px;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+
+/* DropDownMenu */
+
+.dropdownMenu {
+    display: block;
+}
+
+.dropdownMenu button {
+    display: block;
 }

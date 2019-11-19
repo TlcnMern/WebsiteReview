@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Comment from '../comment/Comment';
-<<<<<<< HEAD
 import Rating from './Rating';
 import { auth,API_URL } from '../../action/helper';
 import { checkRatingAndShow, getDetailPost,calculateRaingtingEachPost} from '../../action/postAction';
@@ -12,18 +11,7 @@ import ProcessRating from './ProcesRating';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-=======
-import Rating from '../rating/Rating';
-import ImageSlider from './sliderImage';
-import { auth } from '../../action/helper';
-import { checkRatingAndShow, getDetailPost,calculateRaingtingEachPost} from '../../action/postAction';
-import { connect } from 'react-redux';
-import { getComment } from '../../action/postAction';
-import Loading from '../template/Loading';
-import ProcessRating from '../rating/ProcesRating';
->>>>>>> 784ed36e5af954c40c672aa6fb9ee47852388f11
 
-// import FeatureOfComment from '../comment/FeatureOfComment';
 
 class DetailPost extends Component {
     constructor({ match }) {
@@ -93,7 +81,7 @@ class DetailPost extends Component {
                       </h3>
                   </div>))}                   
               </Slider>
-              <Slider
+              {/* <Slider
                 className="imageSlider-multi"
                 asNavFor={this.state.nav1}
                 ref={slider => (this.slider2 = slider)}
@@ -106,7 +94,7 @@ class DetailPost extends Component {
                               <img src={`${API_URL}/`+photo} width="100px" height="100px" alt="2R4U" style={{margin: '5px',padding: '5px',border: '1px solid #d1d1d1',boxShadow: '0 0 2px 2px #d1d1d1'}}/>
                           </h3>
                       </div>))}
-                  </Slider>
+                  </Slider> */}
                 </div>
         );
       }
@@ -134,7 +122,7 @@ class DetailPost extends Component {
                                     <div className="SPBV">
                                         <span>{this.state.post.productReview}</span>
                                         <span> <Rating rating={this.state.post.pointRating.point-1} disabled={true} /></span>
-                                        <ProcessRating data={this.state.post.pointRating} />
+                                     
 
                                         <span style={{ fontSize: '13px' }}>Thể loại: <Link to="">{this.state.post.theme}</Link></span><br />
                                     </div>
@@ -162,25 +150,41 @@ class DetailPost extends Component {
                                         </span><br />
                                     </div>
                                 </div>
-                                <div className="row MainBV ">
+                                
+                            </div>
+                            <h3 class="table-title">NỘI DUNG REVIEW</h3>
+                            <div className="row MainBV ">
                                     <div className="col-sm-12 ND-BaiViet">
-                                        <span className="txtND-BaiViet">Nội dung Review</span><br />
-                                        <span>{this.state.post.content}</span>
+                                        
+                                        <span style={{padding:'10px'}}>{this.state.post.content}</span>
                                     </div>
                                 </div>
-                            </div>
+                            <h3 class="table-title">NGƯỜI DÙNG NHẬN XÉT</h3>
                             <div className="CommentBV">
-                                <Comment postId={this.state.post._id} />
-                            </div>
-                            {this.props.isAuthenticated &&
-                                (
-                                    <div>
-                                        <p>Bạn đánh giá bài viết như thế nào ?</p>
+                                <div className="row clsRatePostDetail">
+                                    <div className="row col-sm-9" style={{padding:'10px',marginLeft:'15px'}}>
+                                        <div className="col-sm-4">
+                                        <span>
+                                            <span style={{color:'#444',fontSize:'16px'}}>Đánh giá trung bình</span><br/>
+                                            <span style={{fontSize:'48px',color:'red'}}>{this.state.post.pointRating.point}/5 </span><br/>
+                                            <Rating rating={this.state.post.pointRating.point-1} disabled={true} /></span>
+                                        </div>
+                                        <ProcessRating data={this.state.post.pointRating} />
+                                    </div>  
+                                    {this.props.isAuthenticated &&
+                                    (
+                                    <div className="col-sm-3">
+                                        <p>Đánh giá bài viết</p>
                                         {
                                             this.state.isLoading ? <Loading /> : <Rating rating={this.state.point} idPost={this.state.post._id} />
                                         }
                                     </div>
-                                )}
+                                    )}
+                                </div>
+                            
+                                <Comment postId={this.state.post._id} />
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

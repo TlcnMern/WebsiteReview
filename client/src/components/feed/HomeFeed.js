@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.min.css';
 import "../../public/stylesheets/partials/style.css"
-import HNewFeed from './HomeFeedNewFeed';
+import HNewFeed from '../HomeFeed/HomeFeedNewFeed';
 import Carousel from '../slickcarousel/carousel';
 import { Link } from 'react-router-dom';
 

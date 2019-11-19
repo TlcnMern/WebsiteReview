@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PostComment from "./ViewPostComment";
-import Rating from '../rating/Rating';
+import Rating from './Rating';
 import { auth,API_URL } from '../../action/helper';
 import { checkRatingAndShow } from '../../action/postAction';
 import { getComment } from '../../action/postAction';
+import man from '../../public/images/man.png';
 
 class ViewPost extends Component {
     constructor(props) {
@@ -96,6 +97,19 @@ class ViewPost extends Component {
             );
     }
     render() {
+        const avatar = this.props.post.postedBy.avatar;
+        var urlAvatar = '';
+        if (avatar) {
+            if (avatar.includes('dist')) {
+                urlAvatar = API_URL + '/' + avatar;
+            }
+            else {
+                urlAvatar = avatar;
+            }
+        }
+        else {
+            urlAvatar = man;
+        }   
         return (
             <div className="row clsNEWFEED fadeInDown">
                 <Link to="Theme" id="btnDetailTheme"><span style={{ textTransform: 'capitalize' }}>{this.props.post.theme}</span></Link>
@@ -103,6 +117,9 @@ class ViewPost extends Component {
                     <div className="imgDD FadeIn-load">
                         <img id="imgSP" src={`${API_URL}/`+this.props.post.photo[0]} alt="imgDemo1" /><br />
                         <Link to="SearchSP">{this.props.post.productReview}</Link>
+                        <span>
+                        <span> <Rating rating={this.props.post.pointRating.point-1} disabled={true} /></span>
+                        </span>
                     </div>
                 </div>
                 <div className="col-sm-9 detail-NEWFEED FadeIn-load">
@@ -125,7 +142,7 @@ class ViewPost extends Component {
                                 pathname: `/GuestViewProfile/${this.props.post.postedBy._id}`
                             }
                         }>
-                            <span title={this.props.post.postedBy.name}> <img width="22px " height="22px " className="user_avatar_link " src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/p960x960/72701345_964247143929133_5610529934977007616_o.jpg?_nc_cat=108&cachebreaker=hd&_nc_oc=AQk8kHSTIH3zGKJhJ1_ozUX-5HnogxpMC2Duv07HicF99Xr61wpEk3AjgzHGMkI98f8&_nc_ht=scontent.fsgn2-3.fna&oh=a50ee3696a6513807b6e99fb9bc539e3&oe=5E571E05" alt="Nguyễn Tuấn Vũ " /></span>
+                            <span title={this.props.post.postedBy.name}><img style={{ marginRight: '5px' }} width="22px " height="22px" className="user_avatar_link " src={urlAvatar} alt="imageuser" /></span>
                             <span style={{ marginLeft: '10px' }}>{this.props.post.postedBy.name}</span>
                         </Link>
 
@@ -142,9 +159,7 @@ class ViewPost extends Component {
                         <span className="rateBar-Comment" onClick={this.onClickComment}>
                             <img src="https://img.icons8.com/ios/20/000000/comments.png" alt="Comment" />
                         </span>
-                        <span>
-                        <span> <Rating rating={this.props.post.pointRating.point-1} disabled={true} /></span>
-                        </span>
+                        
                         {/* <span className="rateBar-Rate" onClick={this.onClickRating}>
                             <img src="https://img.icons8.com/ios/20/000000/christmas-star.png" alt="Rate" />
                         </span> */}
