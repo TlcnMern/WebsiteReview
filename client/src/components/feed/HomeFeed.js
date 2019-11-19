@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.min.css';
 import "../../public/stylesheets/partials/style.css"
+<<<<<<< HEAD:client/src/components/feed/HomeFeed.js
 import HNewFeed from '../HomeFeed/HomeFeedNewFeed';
 import Carousel from '../slickcarousel/carousel';
 import { Link } from 'react-router-dom';
@@ -85,9 +86,38 @@ class HomeFeed extends Component{
         </div>
         </div>
         );
+=======
+import PostList from '../post/PostList';
+import { GetNewFeeds } from '../../action/postAction';
+import Loading from '../template/Loading';
+class NewFeed extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      postList: []
+    };
+    GetNewFeeds().then((data) => {
+      if (data.error)
+        console.log(data.error);
+      else {
+        if (data.length > 0)
+          this.setState({ postList: data })
+      }
+    });
+  }
+  
+  render() {
+    if(!this.state.postList){
+      return <Loading/>
+>>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3:client/src/components/HomeFeed/NewFeed.js
     }
+    return (
+      <PostList posts={this.state.postList} />
+    );
+
+  }
 }
 
 
 
-export default HomeFeed;
+export default NewFeed;

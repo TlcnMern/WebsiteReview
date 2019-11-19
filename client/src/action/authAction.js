@@ -1,10 +1,10 @@
 import axios from 'axios';
-import {API_URL,auth} from './helper';
+import {API_URL,auth} from '../config/helper';
 import { returnErrors } from './errorActions';
 
 import {
     LOGIN_SUCCESS,    LOGIN_FAIL, LOGOUT_SUCCESS, CLEAR_ERRORS,CLEAN_PROFILE
-} from './type';
+} from '../config/type';
 
 
 export function login({ email, password }) {

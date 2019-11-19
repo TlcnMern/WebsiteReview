@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { auth } from '../../action/helper';
-import { addSubComment} from '../../action/postAction';
+import { auth } from '../../config/helper';
+import { addSubComment} from '../../action/commentAction';
 import { connect } from 'react-redux';
 import ViewSubComment from './ViewSubComment';
 

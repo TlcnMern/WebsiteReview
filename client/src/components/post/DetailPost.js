@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Comment from '../comment/Comment';
+<<<<<<< HEAD
 import Rating from './Rating';
 import { auth,API_URL } from '../../action/helper';
 import { checkRatingAndShow, getDetailPost,calculateRaingtingEachPost} from '../../action/postAction';
@@ -11,11 +12,23 @@ import ProcessRating from './ProcesRating';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+=======
+import Rating from '../rating/Rating';
+import ImageSlider from './sliderImage';
+import { auth } from '../../config/helper';
+import {getDetailPost} from '../../action/postAction';
+import {calculateRaingtingEachPost,checkRatingAndShow} from '../../action/ratingAction';
+import { connect } from 'react-redux';
+import { getComment } from '../../action/commentAction';
+import Loading from '../template/Loading';
+import ProcessRating from '../rating/ProcesRating';
+>>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
 
 
 class DetailPost extends Component {
     constructor({ match }) {
         super();
+<<<<<<< HEAD
         this.match = match
     }
     state = {
@@ -27,6 +40,14 @@ class DetailPost extends Component {
     }
 
     componentDidMount() {
+=======
+        this.state = {
+            post: null,
+            isLoading: true,
+            point: null
+        }
+        this.match = match;
+>>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
         const postId = this.match.params.postId;
         getDetailPost(postId).then((data) => {
             if (data.error) {
@@ -38,14 +59,18 @@ class DetailPost extends Component {
                 })
             }
         });
+<<<<<<< HEAD
         this.setState({
             nav1: this.slider1,
             nav2: this.slider2
           });
 
+=======
+    }
+    componentDidMount() {
+        const postId = this.match.params.postId;
+>>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
         calculateRaingtingEachPost();
-
-
         if (this.props.isAuthenticated) {
             const jwt = auth.isAuthenticated();
             const userID = jwt.user._id;

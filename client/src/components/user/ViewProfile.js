@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import {fetch} from '../../action/userAction';
 import {auth} from '../../action/helper';
+=======
+import { fetch } from '../../action/userAction';
+import { auth,API_URL } from '../../config/helper';
+import man from '../../public/images/man.png';
+import UploadAvatar from './UploadAvatar';
+>>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
 
 class ViewProfie extends Component{
 

@@ -1,101 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import PostComment from "./ViewPostComment";
 import Rating from './Rating';
 import { auth,API_URL } from '../../action/helper';
 import { checkRatingAndShow } from '../../action/postAction';
 import { getComment } from '../../action/postAction';
 import man from '../../public/images/man.png';
+=======
+import Rating from '../rating/Rating';
+import { API_URL } from '../../config/helper';
+>>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
 
 class ViewPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            renderComment: false,
-            renderRating: false
+            isLoading: true,
+            point: null
         };
 
-        this.onClickComment = this.onClickComment.bind(this);
-        this.onClickRating = this.onClickRating.bind(this);
-
-    }
-    state = {
-        isLoading: true,
-        point: null
-    }
-
-
-    componentDidMount() {
-        const postID = this.props.post._id;
-        if (this.props.isAuthenticated) {
-            const jwt = auth.isAuthenticated();
-            const userID = jwt.user._id;
-            checkRatingAndShow(userID, { t: jwt.token }, postID).then((data) => {
-                if (data === null) {
-                    this.setState({
-                        isLoading: false,
-                        point: null
-                    });
-                }
-                else {
-                    if (data.error) {
-                        console.log(data.error);
-                    }
-                    else {
-                        this.setState({
-                            isLoading: false,
-                            point: data
-                        })
-                    }
-                }
-            });
-        }
-        getComment(this.props.post._id)
     }
 
     onClickComment() {
         this.setState({ renderComment: true });
-        this.setState({ renderRating: false });
     };
-    onClickRating() {
-        this.setState({ renderRating: true });
-        this.setState({ renderComment: false });
-    };
-    renderCommentorRating() {
-
-        if (this.state.renderRating)
-            return (
-                //   <div><PostComment postId={this.props.post._id}/></div>
-
-                <div>
-                    {this.props.isAuthenticated &&
-                        (
-                            <div>
-                                <p>Bạn đánh giá bài viết như thế nào ?</p>
-                                {
-                                    this.state.isLoading ? <p>dcm dang tai</p>:<Rating rating={this.state.point} idPost={this.props.post._id} />
-                                }
-                            </div>
-                        )}
-                </div>
-
-            );
-        if (this.state.renderComment)
-            return (<div>
-                {this.props.isAuthenticated &&
-                    (
-                        <div>
-                            {
-                                this.state.post ? <PostComment post={this.props.post} /> : <p>dcm dang tai</p>
-                            }
-                        </div>
-
-                    )}
-            </div>
-
-            );
-    }
     render() {
         const avatar = this.props.post.postedBy.avatar;
         var urlAvatar = '';
@@ -156,14 +86,20 @@ class ViewPost extends Component {
                     <p>{this.props.post.contentSummary}</p>
                     <div className="rateBar">
                         <span className="rateBar-Like"><img src="https://img.icons8.com/ios/20/000000/like.png" alt="Like" /></span>
-                        <span className="rateBar-Comment" onClick={this.onClickComment}>
+                        <span className="rateBar-Comment" >
                             <img src="https://img.icons8.com/ios/20/000000/comments.png" alt="Comment" />
                         </span>
+<<<<<<< HEAD
                         
                         {/* <span className="rateBar-Rate" onClick={this.onClickRating}>
                             <img src="https://img.icons8.com/ios/20/000000/christmas-star.png" alt="Rate" />
                         </span> */}
                         {/* {this.renderCommentorRating()} */}
+=======
+                        <span>
+                        <span> <Rating rating={this.props.post.pointRating.point-1} disabled={true} /></span>
+                        </span>
+>>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
                     </div>
                 </div>
             </div>
@@ -177,4 +113,4 @@ function mapToStateProps(state) {
     }
 }
 
-export default connect(mapToStateProps, { getComment })(ViewPost);
+export default connect(mapToStateProps)(ViewPost);

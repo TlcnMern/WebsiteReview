@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import man from '../../public/images/man.png';
-import { auth } from '../../action/helper';
+import { auth } from '../../config/helper';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import EditComment from './EditComment';
-import { checkAuthorizedSubComment, checkAuthorizedComment, deleteSubComment } from '../../action/postAction';
+import { checkAuthorizedSubComment, checkAuthorizedComment, deleteSubComment } from '../../action/commentAction';
 
 
 import MenuItem from "@material-ui/core/MenuItem"
@@ -17,15 +17,7 @@ class ViewSubComment extends Component {
         SubComment: this.props.SubComment,
         isAuthorizedSubcomment: false,
         isAuthorized: false
-        // anchorEl: null
     }
-    // handleClick = event => {
-    //     this.setState({ anchorEl: event.currentTarget });
-    // };
-
-    // handleClose = () => {
-    //     this.setState({ anchorEl: null });
-    // };
 
     onCallBack(content1) {
         const SubComment = this.props.SubComment;
@@ -76,8 +68,6 @@ class ViewSubComment extends Component {
             });
     }
     render() {
-        // const { anchorEl } = this.state;
-        // const open = Boolean(anchorEl);
         return (
             <div className="row clsSubcomment">
                 <div className="col-sm-1">
@@ -109,13 +99,15 @@ class ViewSubComment extends Component {
 
                                 // Có tính năng edit thì chỉ là thằng viết ra subcomment
                                 (this.state.isAuthorized || this.state.isAuthorizedSubcomment) &&
+<<<<<<< HEAD
                                 // <Button aria-owns={open ? 'fade-menu' : undefined} key={0} aria-haspopup="true" onClick={this.handleClick}>
                                 //     <i className="fa fa-cogs" aria-hidden="true"></i>
                                 // </Button>,
                                 <MuiThemeProvider className="dropdownMenu">
+=======
+                                <MuiThemeProvider>
+>>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
                                     <DropDownMenu style={{overflow:'visible'}}>
-                                        {/* <MenuItem onClick={this.onClickEdit.bind(this)} ><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</MenuItem>
-                                        <MenuItem onClick={this.onDeleteComment.bind(this)}><i className="fa fa-trash-o" aria-hidden="true"></i> Delete</MenuItem> */}
                                         {this.state.isAuthorizedSubcomment &&
                                             <MenuItem onClick={this.onClickEdit.bind(this)}><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</MenuItem>
                                         }

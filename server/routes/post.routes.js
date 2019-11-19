@@ -12,6 +12,7 @@ router.route('/new/:userID').post(controllerAuth.requireSignin,controllerAuth.ha
 router.route('/NewFeeds').get(controllerPost.getNewFeeds);
 router.route('/getPostFeatured').get(controllerPost.getPostFeatured);
 router.route('/getDetailPost/:postId').get(controllerPost.getDetailPost);
+router.route('/getTopListPostFollowTheme/:theme').get(controllerPost.getTopListPostFollowTheme);
 
 //comment
 router.route('/getComment/:postId').get(controllerComment.getComment);
@@ -23,13 +24,6 @@ router.route('/checkAuthorizedComment/:userID').post(controllerAuth.requireSigni
 router.route('/checkAuthorizedSubComment/:userID').post(controllerAuth.requireSignin,controllerAuth.hasAuthorization,controllerComment.checkAuthorizedSubComment);
 router.route('/deleteSubComment/:userID').delete(controllerComment.deleteSubComment);
 router.route('/updateSubComment/:userID').put(controllerAuth.requireSignin,controllerAuth.hasAuthorization,controllerComment.updateSubComment);
-
-
-//rating
-router.route('/addRating').put(controllerAuth.requireSignin,controllerPost.addRating);
-router.route('/checkRatingAndShow').post(controllerAuth.requireSignin,controllerPost.checkRatingAndShow);
-router.route('/updateRatingOfUser').put(controllerAuth.requireSignin, controllerPost.updateRatingOfUser);
-router.route('/calculateRaingtingEachPost').get(controllerPost.calculateRaingtingEachPost);
 
 router.param('userID', controllerUser.UserById);
 router.param('postId', controllerPost.postByID);

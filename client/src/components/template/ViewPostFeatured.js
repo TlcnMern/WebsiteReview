@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { API_URL } from '../../action/helper';
+import { API_URL } from '../../config/helper';
 import man from '../../public/images/man.png';
 import Rating from '../post/Rating';
 class ViewPostFeatured extends Component {
@@ -47,7 +47,16 @@ class ViewPostFeatured extends Component {
                             <img style={{ marginRight: '5px' }} width="18px " height="18px" className="user_avatar_link " src={urlAvatar} alt="imageuser" />
                             <span style={{fontSize:'10px'}}>{this.state.post.postedBy.name}</span>
 
+<<<<<<< HEAD:client/src/components/template/ViewPostFeatured.js
                         </Link>
+=======
+                        </Link><br />
+
+                        <span style={{ fontSize: '10px' }}>
+                        Rating Point: {this.state.post.pointRating.point ||0} point/{this.state.post.pointRating.totalRate||0}vote
+                            <Rating rating={this.state.post.pointRating.point - 1} disabled={true} />
+                        </span>
+>>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3:client/src/components/post/ViewPostFeatured.js
 
                         
 

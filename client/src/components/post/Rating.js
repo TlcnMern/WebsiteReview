@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../../public/stylesheets/partials/rating.scss'
 import PropTypes from 'prop-types';
-import {addRating,updateRating} from '../../action/postAction';
-import {auth} from '../../action/helper';
+import {addRating,updateRating} from '../../action/ratingAction';
+import {auth} from '../../config/helper';
 class Rating extends Component{
   static propTypes= {
       disabled:  PropTypes.bool
@@ -10,10 +10,10 @@ class Rating extends Component{
     constructor(props){
         super(props);
         this.state={
-            rating: this.props.rating || null,
+            rating: !isNaN(this.props.rating)?this.props.rating: null,
             disabled: this.props.disabled || false,
             temp_rating: null,
-            checkRating:this.props.rating || null//vì thằng rating khi hover nó đã thay đổi rồi==>nên phải dùng thằng khác
+            checkRating:!isNaN(this.props.rating)?this.props.rating: null,//vì thằng rating khi hover nó đã thay đổi rồi==>nên phải dùng thằng khác
         }
     }
     rate(rating) {
@@ -30,7 +30,6 @@ class Rating extends Component{
               });
             }
             else{
-              console.log(data.error);
               return;
             }
           })
