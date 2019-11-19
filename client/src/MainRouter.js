@@ -5,21 +5,14 @@ import HeaderTemplate from './components/template/header';
 import BodyTemplate from './components/template/body';
 import Register from './components/user/register';
 import profile from './components/user/profile';
-import post from './components/post/NewPost';
-<<<<<<< HEAD
 import HomeFeeds from './components/feed/HomeFeed';
 import PrivateRoute from './components/auth/PrivateRoute';
 import DetailPost from './components/post/DetailPost';
 import GuestViewProfile from './components/guest/GuestViewProfile';
 import ViewProfile from './components/profile/viewProfile';
-=======
 import HomeFeed from './components/HomeFeed/HomeFeed';
-import PrivateRoute from './components/auth/PrivateRoute';
-import DetailPost from './components/post/DetailPost';
-import GuestViewProfile from './components/guest/GuestViewProfile';
-import ViewProfile from './components/user/ViewProfile';
 import SearchPage from './components/search/SearchPage';
->>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
+import post from './components/post/NewPost';
 
 class MainRouter extends Component {
   render() {
@@ -28,11 +21,8 @@ class MainRouter extends Component {
         <HeaderTemplate />
         <BodyTemplate/>
         <Switch>
-<<<<<<< HEAD
           <Route exact path="/" component={HomeFeeds}/>
-=======
           <Route exact path="/" component={HomeFeed}/>
->>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
           <Route path="/Login" component={login}/>
           <Route path="/Register" component={Register}/>
           <PrivateRoute path="/Profile" component={profile}/>

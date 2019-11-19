@@ -30,48 +30,6 @@ export default class MultipleItems extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 3
-    };
-    return (
-      <div className="thumbnailgallery ">
-        <Slider {...settings}>
-          <div>
-            <h3><CardItem/></h3>
-          </div>
-          <div>
-            <h3><CardItem/></h3>
-          </div>
-          <div>
-            <h3><CardItem/></h3>
-          </div>
-          <div>
-            <h3><CardItem/></h3>
-          </div>
-          <div>
-            <h3><CardItem/></h3>
-          </div>
-          <div>
-            <h3><CardItem/></h3>
-          </div>
-          <div>
-            <h3><CardItem/></h3>
-          </div>
-          <div>
-            <h3><CardItem/></h3>
-          </div>
-          <div>
-            <h3><CardItem/></h3>
-          </div>
-        </Slider>
-      </div>
-    );
-=======
     if (!this.state.posts) {
       return <Loading />
     }
@@ -95,6 +53,5 @@ export default class MultipleItems extends Component {
         </div>
       );
     }
->>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
   }
 }

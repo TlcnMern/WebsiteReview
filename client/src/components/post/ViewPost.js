@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
-import PostComment from "./ViewPostComment";
-import Rating from './Rating';
-import { auth,API_URL } from '../../action/helper';
-import { checkRatingAndShow } from '../../action/postAction';
-import { getComment } from '../../action/postAction';
 import man from '../../public/images/man.png';
-=======
 import Rating from '../rating/Rating';
 import { API_URL } from '../../config/helper';
->>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
 
 class ViewPost extends Component {
     constructor(props) {
@@ -89,17 +81,9 @@ class ViewPost extends Component {
                         <span className="rateBar-Comment" >
                             <img src="https://img.icons8.com/ios/20/000000/comments.png" alt="Comment" />
                         </span>
-<<<<<<< HEAD
-                        
-                        {/* <span className="rateBar-Rate" onClick={this.onClickRating}>
-                            <img src="https://img.icons8.com/ios/20/000000/christmas-star.png" alt="Rate" />
-                        </span> */}
-                        {/* {this.renderCommentorRating()} */}
-=======
                         <span>
                         <span> <Rating rating={this.props.post.pointRating.point-1} disabled={true} /></span>
                         </span>
->>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
                     </div>
                 </div>
             </div>

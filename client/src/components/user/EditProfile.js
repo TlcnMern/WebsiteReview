@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import "../../public/stylesheets/partials/editProfie.css";
-<<<<<<< HEAD
-=======
 import TextField from '@material-ui/core/TextField';
 import { update } from '../../action/userAction';
 import { auth } from '../../config/helper';
->>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
 
 import {update} from '../../action/userAction';
 import {auth} from '../../action/helper';

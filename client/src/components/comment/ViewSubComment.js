@@ -99,14 +99,7 @@ class ViewSubComment extends Component {
 
                                 // Có tính năng edit thì chỉ là thằng viết ra subcomment
                                 (this.state.isAuthorized || this.state.isAuthorizedSubcomment) &&
-<<<<<<< HEAD
-                                // <Button aria-owns={open ? 'fade-menu' : undefined} key={0} aria-haspopup="true" onClick={this.handleClick}>
-                                //     <i className="fa fa-cogs" aria-hidden="true"></i>
-                                // </Button>,
-                                <MuiThemeProvider className="dropdownMenu">
-=======
                                 <MuiThemeProvider>
->>>>>>> 29dc5ae69c4376d54d63feaf0b45de73ddb487e3
                                     <DropDownMenu style={{overflow:'visible'}}>
                                         {this.state.isAuthorizedSubcomment &&
                                             <MenuItem onClick={this.onClickEdit.bind(this)}><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</MenuItem>
