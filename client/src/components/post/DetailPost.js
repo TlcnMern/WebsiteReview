@@ -8,7 +8,7 @@ import {getDetailPost} from '../../action/postAction';
 import {calculateRaingtingEachPost,checkRatingAndShow} from '../../action/ratingAction';
 import { connect } from 'react-redux';
 import { getComment } from '../../action/commentAction';
-import Loading from '../template/Loading';
+import Loading from '../template/loading';
 import ProcessRating from '../rating/ProcesRating';
 
 // import FeatureOfComment from '../comment/FeatureOfComment';
