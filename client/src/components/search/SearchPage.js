@@ -6,7 +6,7 @@ import PostList from '../post/PostList';
 import {searchPost} from '../../action/postAction';
 import qs from  'qs';
 
-class HomeFeed extends Component {
+class SearchPage extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -34,10 +34,10 @@ class HomeFeed extends Component {
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="box-home">
+                                <span  >Kết quả tìm kiếm</span>
                                 <hr />
                                 {this.state.posts.length>0?
                                 <div>
-                                    <span  >Kết quả tìm kiếm</span>
                                     <PostList posts={this.state.posts} />
                                 </div>:
                                 <span className="title-list-index">Không tìm thấy kết quả</span>
@@ -53,4 +53,4 @@ class HomeFeed extends Component {
 
 
 
-export default HomeFeed;
+export default SearchPage;

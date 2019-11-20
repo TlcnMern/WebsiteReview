@@ -1,5 +1,5 @@
 const Post = require('../models/post.model');
-const formidable=require('formidable');
+const formidable = require('formidable');
 const errorHandler = require('../helpers/dbErrorHandler');
 
 const create = (req, res) => {
@@ -19,7 +19,7 @@ const create = (req, res) => {
     // }
     let post = new Post(fields);
     post.postedBy = req.profile._id;
-    post.pointRating = {point:null}
+    post.pointRating = { point: null }
     var listImage = files.photo;
     if (listImage) {
       var listPathImage = [];
@@ -60,7 +60,7 @@ const getNewFeeds = (req, res) => {
     //   path:'comments',
     //   populate: { path: 'subComment.commentBy',select:'_id name'}
     // })
-    .sort({'created':-1})
+    .sort({ 'created': -1 })
     .exec((err, posts) => {
 
       if (err) {
@@ -68,7 +68,7 @@ const getNewFeeds = (req, res) => {
           error: errorHandler.getErrorMessage(err)
         })
       }
-      posts=posts.slice(0,3);
+      posts = posts.slice(0, 3);
       res.json(posts);
     })
 }
@@ -77,37 +77,37 @@ const getPostFeatured = (req, res) => {
 
   Post.find({})
     .populate('postedBy', '_id name avatar')
-    .sort({'pointRating.totalRate':-1})
+    .sort({ 'pointRating.totalRate': -1 })
     .exec((err, posts) => {
       if (err) {
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
         })
       }
-      posts=posts.slice(0,5);
+      posts = posts.slice(0, 5);
       res.json(posts);
     })
 }
 
 const getTopListPostFollowTheme = (req, res) => {
-  const theme=req.params.theme;
-  Post.find({theme:theme})
+  const theme = req.params.theme;
+  Post.find({ theme: theme })
     .populate('postedBy', '_id name avatar')
-    .sort({'pointRating.totalRate':-1})
+    .sort({ 'pointRating.totalRate': -1 })
     .exec((err, posts) => {
       if (err) {
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
         })
       }
-      posts=posts.slice(0,5);
+      posts = posts.slice(0, 5);
       res.json(posts);
     })
 }
 
 const searchPost = (req, res) => {
-  const query=req.query;
-  Post.find({title: {'$regex': query.search, '$options': "i"}})
+  const query = req.query;
+  Post.find({ title: { '$regex': query.search, '$options': "i" } })
     .populate('postedBy', '_id name avatar')
     .exec((err, posts) => {
       if (err) {
@@ -117,6 +117,44 @@ const searchPost = (req, res) => {
       }
       res.json(posts);
     })
+}
+
+const sortPost = (req, res) => {
+
+  const temp = req.query;
+  var query = {};
+  if (temp.theme) {
+    query.theme = temp.theme;
+  }
+  if (temp.kind) {
+    query.kind = temp.kind
+  }
+  if (temp.formality) {
+    query.formality = temp.formality
+  }
+
+  var sort = {}
+  if (temp.sortRate) {
+    if (temp.sortRate === '1') {
+      sort = { 'pointRating.point': -1 };
+    }
+    if (temp.sortRate === '2') {
+      sort = { 'pointRating.totalRate': -1 };
+    }
+  }
+
+  Post.find(query)
+    .populate('postedBy', '_id name avatar')
+    .sort(sort)
+    .exec((err, posts) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(posts);
+    })
+
 }
 
 const getDetailPost = (req, res) => {
@@ -148,8 +186,9 @@ module.exports = {
   create: create,
   getNewFeeds: getNewFeeds,
   getDetailPost: getDetailPost,
-  postByID: postByID, 
-  getPostFeatured:getPostFeatured,
-  getTopListPostFollowTheme:getTopListPostFollowTheme,
-  searchPost:searchPost
+  postByID: postByID,
+  getPostFeatured: getPostFeatured,
+  getTopListPostFollowTheme: getTopListPostFollowTheme,
+  searchPost: searchPost,
+  sortPost: sortPost
 }

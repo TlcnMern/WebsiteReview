@@ -36,7 +36,13 @@ class ViewPostFeatured extends Component {
                     </div>
                 </div>
                 <div className="col-sm-7 " id="detailBVNT">
-                    <Link to="DetailPost" id="TitleBVNT">{this.state.post.title}</Link>
+
+                    <Link id="TitleBVNT" to={
+                            {
+                                pathname: `/DetailPost/${this.state.post._id}`
+                            }
+                        }>
+                    {this.state.post.title}</Link>
                     
                     <div className="text-muted " style={{ display: 'table-cell', verticalalign: 'middle', lineheight: '25px' }}>
                         <Link to={

@@ -86,6 +86,25 @@ export const searchPost = (query) => {
         });
 };
 
+export const sortPost = (params) => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    const body={
+        params:params
+    }
+    return axios.get(`${API_URL}/post/sortPost`,body, config)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return err;
+        });
+};
+
 //get detail post
 export const getDetailPost = (postId) => {
     const config = {

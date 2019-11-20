@@ -10,6 +10,7 @@ import DetailPost from './components/post/DetailPost';
 import GuestViewProfile from './components/guest/GuestViewProfile';
 import ViewProfile from './components/user/ViewProfile';
 import SearchPage from './components/search/SearchPage';
+import FilmFeed from './components/sortTheme/FilmFeed';
 
 class MainRouter extends Component {
   render() {
@@ -19,6 +20,7 @@ class MainRouter extends Component {
         <BodyTemplate/>
         <Switch>
           <Route exact path="/" component={HomeFeed}/>
+          <Route exact path="/FilmFeed" component={FilmFeed}/>
           <Route path="/Login" component={login}/>
           <PrivateRoute path="/ViewProfile" component={ViewProfile}/>
           <PrivateRoute path="/NewPost" component={post}/>

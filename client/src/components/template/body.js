@@ -169,7 +169,7 @@ class MainFeed extends Component{
             </Link>
             </li>
             <li>
-            <Link to="FilmFeed" onClick={this.onClickFilm}>
+            <Link to="/FilmFeed" onClick={this.onClickFilm}>
                 <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/> Phim ảnh
             </Link>
             </li>

@@ -8,6 +8,15 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required:'theme is required'
   },
+
+  kind:{
+    type: String
+  },
+
+  formality:{
+    type:String
+  },
+
   productReview:{
     type: String,
     required: 'productReview is require'
