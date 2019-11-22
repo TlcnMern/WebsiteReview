@@ -70,6 +70,7 @@ export const getTopListPostFollowTheme = (theme) => {
         });
 };
 
+
 export const searchPost = (query) => {
     const config = {
         headers: {
@@ -77,7 +78,7 @@ export const searchPost = (query) => {
             'Content-Type': 'application/json'
         }
     }
-    return axios.get(`${API_URL}/post/searchPost?search=`+query.title, config)
+    return axios.get(`${API_URL}/post/searchPost?search=`+query.productReview, config)
         .then(res => {
             return res.data;
         })

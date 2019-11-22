@@ -102,7 +102,7 @@ class NewPost extends Component{
                                         <button className="btnPhotoin-remove" type="button" value={file.name} onClick={this.removeImage}><i className="fa fa-times" aria-hidden="true"></i></button>
                                     </div>))}
                                     </div>
-                                    <p>Tải lêsn ảnh đại diện cho bài viết tại đây.<br/>Vui lòng chọn ít nhất 1 ảnh để làm avatar.<br/>Lưu ý: Bạn có thể chọn nhiều ảnh, kích thước khuyến khích bé hơn 2mb</p>
+                                    <p>Tải lên ảnh đại diện cho bài viết tại đây.<br/>Vui lòng chọn ít nhất 1 ảnh để làm avatar.<br/>Lưu ý: Bạn có thể chọn nhiều ảnh, kích thước khuyến khích bé hơn 2mb</p>
                                 </div>
                             </div>
                             <div className="content_form mt-10 col-sm-8">
@@ -117,7 +117,7 @@ class NewPost extends Component{
                                     <div className="col-sm-10 ">
                                         <span className="box_input ">
                                             <select onChange={this.handleChange('theme')} className="theme"  >
-                                                <option value="movie">Phim</option>
+                                                <option value="film">Phim</option>
                                                 <option value="trip">Du lịch</option> 
                                                 <option value="food">Ẩm thực</option>
                                                 <option value="book">Sách</option>

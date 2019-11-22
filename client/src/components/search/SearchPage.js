@@ -5,12 +5,14 @@ import "../../public/stylesheets/partials/style.css"
 import PostList from '../post/PostList';
 import {searchPost} from '../../action/postAction';
 import qs from  'qs';
+import Loading from '../template/Loading';
 
 class SearchPage extends Component {
     constructor(props){
         super(props);
         this.state={
-            posts:[]
+            posts:[],
+            isLoading:true
         }
         // console.log(props.location.search);
         var query= qs.parse(props.location.search, { ignoreQueryPrefix: true });
@@ -20,14 +22,14 @@ class SearchPage extends Component {
             }
             else{
                 this.setState({
-                    posts:data
+                    posts:data,
+                    isLoading:false
                 })
             }
         });
     }
 
     render() {
-        console.log(this.state.posts)
         return (
             <div className="boxContent">
                 <div className="col-lg-12">
@@ -36,11 +38,12 @@ class SearchPage extends Component {
                             <div className="box-home">
                                 <span  >Kết quả tìm kiếm</span>
                                 <hr />
-                                {this.state.posts.length>0?
+
+                                {this.state.isLoading? <Loading/>: (this.state.posts.length>0?
                                 <div>
                                     <PostList posts={this.state.posts} />
                                 </div>:
-                                <span className="title-list-index">Không tìm thấy kết quả</span>
+                                <span className="title-list-index">Không tìm thấy kết quả</span>)
                                 }
                             </div>
                         </div>

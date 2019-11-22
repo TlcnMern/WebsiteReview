@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetch } from '../../action/userAction';
 
 class ViewDetailProfile extends Component {
     render() {
@@ -61,9 +60,8 @@ class ViewDetailProfile extends Component {
 
 function mapStateToProp(state) {
     return {
-        authenticate: state.auth.isAuthenticated,
         profile: state.user.profile
     }
 }
 
-export default connect(mapStateToProp, { fetch })(ViewDetailProfile);
+export default connect(mapStateToProp)(ViewDetailProfile);

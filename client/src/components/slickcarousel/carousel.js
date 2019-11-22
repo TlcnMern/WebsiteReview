@@ -38,8 +38,8 @@ export default class MultipleItems extends Component {
         dots: true,
         infinite: true,
         speed: 700,
-        slidesToShow: this.state.posts.length,
-        slidesToScroll: 3
+        slidesToShow:this.state.posts.length,
+        slidesToScroll:  this.state.posts.length
       };
       return (
 

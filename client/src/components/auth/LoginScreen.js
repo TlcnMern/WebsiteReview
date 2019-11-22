@@ -6,8 +6,8 @@ import { login } from '../../action/authAction';
 import { clearErrors } from '../../action/errorActions';
 import "../../public/stylesheets/partials/login.css"
 import "bootstrap/dist/css/bootstrap.min.css";
-import LoginSocial from './LoginSocial';
-
+import LoginWithGoogle from './LoginWithGoogle';
+import LoginWithFacebook from './LoginWithFacebook';
 
 class Login extends Component {
   state = {
@@ -69,7 +69,8 @@ class Login extends Component {
           <input type="submit" className="fadeIn fourth" id="btnLogin" value="Log In" />
         </form>
         {this.renderAlert()}
-        <LoginSocial />
+        <LoginWithGoogle />
+        <LoginWithFacebook/>
       </div>
     );
   }

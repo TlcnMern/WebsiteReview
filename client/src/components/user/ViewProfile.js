@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.min.css';
 import "../../public/stylesheets/partials/style.css"
-import ProfilePost from './profilePost';
+import ViewPostUser from './ViewPostUser';
 import ViewDetailProfile from './ViewDetailProfile';
 import EditProfile from './EditProfile';
 import { connect } from 'react-redux';
@@ -16,14 +16,12 @@ class viewProfile extends Component {
         super(props);
         this.state = {
             renderProfile: false,
-            renderNotify: false,
             renderPost: true,
             renderEdit: false,
             openUploadAvatar: false
         };
 
         this.onClickProfile = this.onClickProfile.bind(this);
-        this.onClickNotify = this.onClickNotify.bind(this);
         this.onClickPost = this.onClickPost.bind(this);
         this.onClickEdit = this.onClickEdit.bind(this);
         this.onChangeRenderEdit = this.onChangeRenderEdit.bind(this);
@@ -37,12 +35,10 @@ class viewProfile extends Component {
 
     onClickProfile() {
         this.setState({ renderProfile: true });
-        this.setState({ renderNotify: false });
         this.setState({ renderPost: false });
     };
 
     onClickNotify() {
-        this.setState({ renderNotify: true });
         this.setState({ renderProfile: false });
         this.setState({ renderPost: false });
 
@@ -51,7 +47,6 @@ class viewProfile extends Component {
     onClickPost() {
         this.setState({ renderPost: true });
         this.setState({ renderProfile: false });
-        this.setState({ renderNotify: false });
     };
 
     onClickEdit() {
@@ -85,7 +80,7 @@ class viewProfile extends Component {
                     <ViewDetailProfile />
                     <div className="row rowProFile ">
                         <aside className="txtProfileCol "><label></label></aside>
-                        <button className="btnSaveProfile" disabled="" type="button" onClick={this.onClickEdit}>Chỉnh Sửa</button>
+                        <button className="btnSaveProfile" type="button" onClick={this.onClickEdit}>Chỉnh Sửa</button>
                     </div>
                 </div>
             );
@@ -97,20 +92,9 @@ class viewProfile extends Component {
                 <div>
                     <ul className="nav">
                         <li className="actived"><span onClick={this.onClickPost} >BÀI VIẾT</span></li>
-                        <li><span onClick={this.onClickNotify}>THÔNG BÁO</span></li>
                         <li><span onClick={this.onClickProfile}>About me</span></li>
                     </ul>
-                    <ProfilePost />
-                </div>
-            );
-        if (this.state.renderNotify)
-            return (
-                <div>
-                    <ul className="nav">
-                        <li ><span onClick={this.onClickPost}>BÀI VIẾT</span></li>
-                        <li className="actived"><span onClick={this.onClickNotify}>THÔNG BÁO</span></li>
-                        <li><span onClick={this.onClickProfile}>About me</span></li>
-                    </ul>
+                    <ViewPostUser />
                 </div>
             );
         if (this.state.renderProfile)
@@ -118,7 +102,6 @@ class viewProfile extends Component {
                 <div>
                     <ul className="nav">
                         <li ><span onClick={this.onClickPost}>BÀI VIẾT</span></li>
-                        <li><span onClick={this.onClickNotify}>THÔNG BÁO</span></li>
                         <li className="actived"><span onClick={this.onClickProfile} >About me</span></li>
                     </ul>
                     {this.renderViewOrEdit()}

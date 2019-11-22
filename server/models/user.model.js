@@ -29,6 +29,16 @@ const userSchema = new Schema({
       lowercase: true
     }
   },
+  facebook: {
+    id: {
+      type: String
+    },
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true
+    }
+  },
   name: {
     type: String,
     trim: true
@@ -60,14 +70,14 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  notifyComment: [{
-    commentBy: {type:mongoose.Schema.ObjectId, ref: 'User'},
-    postComment: {type:mongoose.Schema.ObjectId, ref: 'Post'},
-    seen:{
-      type:Boolean,
-      default:false
-    }
-  }],
+  // notifyComment: [{
+  //   commentBy: {type:mongoose.Schema.ObjectId, ref: 'User'},
+  //   postComment: {type:mongoose.Schema.ObjectId, ref: 'Post'},
+  //   seen:{
+  //     type:Boolean,
+  //     default:false
+  //   }
+  // }],
   following: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
   followers: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
 });

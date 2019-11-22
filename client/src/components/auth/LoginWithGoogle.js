@@ -3,7 +3,7 @@ import { GoogleLogin } from 'react-google-login';
 import { connect } from 'react-redux';
 import {loginSocial} from  '../../action/authAction';
 
-class LoginSocial extends Component {
+class LoginWithGoogle extends Component {
 
     onFailure = (error) => {
         console.log(error);
@@ -31,4 +31,4 @@ const mapStateToProps = state => ({
     error: state.error
 });
   
-export default connect(mapStateToProps,{loginSocial })(LoginSocial);
+export default connect(mapStateToProps,{loginSocial })(LoginWithGoogle);

@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
+const FacebookTokenStrategy = require('passport-facebook-token');
 const config = require('./config/config');
 const User = require('./models/user.model');
 const {aclStore}=require('./helpers/acl-store');
@@ -41,6 +42,35 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
 
   } catch(error) {
     console.log(error);
+    done(error, false, error.message);
+  }
+}));
+
+passport.use('facebookToken', new FacebookTokenStrategy({
+  clientID: config.oauth.facebook.clientID,
+  clientSecret: config.oauth.facebook.clientSecret
+}, async (accessToken, refreshToken, profile, done) => {
+  try {
+    // console.log('profile', profile);
+    
+    const existingUser = await User.findOne({ "facebook.id": profile.id });
+    if (existingUser) {
+      return done(null, existingUser);
+    }
+
+    const newUser = new User({
+      method: 'facebook',
+      name:profile.displayName,
+      facebook: {
+        id: profile.id,
+        email: profile.emails[0].value
+      },
+      avatar:profile.photos[0].value
+    });
+
+    await newUser.save();
+    done(null, newUser);
+  } catch(error) {
     done(error, false, error.message);
   }
 }));

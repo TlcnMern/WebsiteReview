@@ -56,6 +56,32 @@ export const loginSocial=(accessToken) =>dispatch=>{
   });
 }
 
+export const loginWithFacebook=(accessToken) =>dispatch=>{
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  const body={
+    access_token:accessToken
+  }
+  axios.post(`${API_URL}/auth/oauth/facebook`,body,config)
+  .then((response)=>{
+    auth.authenticate(response.data);   
+    dispatch({
+      type:LOGIN_SUCCESS
+    });
+  })
+  .catch(err=>{
+    dispatch(
+      returnErrors(err.response.data, err.response.status, 'GET_ERRORS')
+    );
+    dispatch({
+      type: LOGIN_FAIL
+    });
+  });
+}
+
 export const logout=() =>dispatch=>{
   dispatch({
     type: LOGOUT_SUCCESS

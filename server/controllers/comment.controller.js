@@ -42,7 +42,7 @@ const getComment=(req,res)=>{
   Post.find({_id:req.post._id})
   .populate({
     path:'comments',
-    populate: { path: 'commentBy',select:'_id name' }
+    populate: { path: 'commentBy',select:'_id name avatar' }
   })
   .populate({
     path:'comments',

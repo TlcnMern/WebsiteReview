@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { auth } from '../../config/helper';
+import { auth,API_URL } from '../../config/helper';
 import { deleteComment,checkAuthorizedComment } from '../../action/commentAction';
 import { connect } from 'react-redux';
 import EditComment from './EditComment';
@@ -71,12 +71,26 @@ class ViewComment extends Component {
     }
 
     render() {
+
+        const avatar = this.props.comment.commentBy.avatar;
+        var urlAvatar = '';
+        if (avatar) {
+            if (avatar.includes('dist')) {
+                urlAvatar = API_URL + '/' + avatar;
+            }
+            else {
+                urlAvatar = avatar;
+            }
+        }
+        else {
+            urlAvatar = man;
+        }
         return (
             <div style={{ marginLeft: '20px', padding: '10px' }}>
 
                 <div className="row">
                     <div className="col-sm-1">
-                        <img className="anhdd" src={man} style={{ maxWidth: '30px', height: '30px', marginRight: '5px' }} aria-hidden alt="Picture of me taking a photo of an image" />
+                        <img className="anhdd" src={urlAvatar} style={{ maxWidth: '30px', height: '30px', marginRight: '5px' }} aria-hidden alt="Picture of me taking a photo of an image" />
                     </div>
                     <div className="row col-sm-11">
                         <div className="ContentComment">

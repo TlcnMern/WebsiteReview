@@ -6,7 +6,7 @@ import {
 class BoxSearch extends Component {
 
   state={
-    title:null,
+    productReview:null,
     redirect:false
   }
 
@@ -17,9 +17,9 @@ class BoxSearch extends Component {
   }
 
   onSubmit=()=>{
-    if(this.state.title===null){
-      return
-    }
+    // if(this.state.title===null){
+    //   return
+    // }
     this.props.history.push('/Search');
   }
   render() {
@@ -27,7 +27,7 @@ class BoxSearch extends Component {
       <div className="col-sm-3">
         <div className="search-container">
           <form onSubmit={this.onSubmit}>
-            <input className="search-input" name='title' type="text" onChange={this.handleChange('title')} id="search-query" placeholder="Tìm kiếm" spellCheck="false" />
+            <input className="search-input" name='productReview' type="text" onChange={this.handleChange('productReview')} id="search-query" placeholder="Tìm kiếm sản phẩm review " spellCheck="false" />
             <button onClick={this.onSubmit} type="submit"><i className="fa fa-search"></i></button>
           </form>
         </div>

@@ -107,7 +107,7 @@ const getTopListPostFollowTheme = (req, res) => {
 
 const searchPost = (req, res) => {
   const query = req.query;
-  Post.find({ title: { '$regex': query.search, '$options': "i" } })
+  Post.find({ productReview: { '$regex': query.search, '$options': "i" } })
     .populate('postedBy', '_id name avatar')
     .exec((err, posts) => {
       if (err) {

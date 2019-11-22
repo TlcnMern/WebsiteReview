@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "../../public/stylesheets/partials/profile.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProfilePost from './profilePost';
-import ProfileDetail from './profileDetail'
+import ViewDetailProfile from '../user/ViewDetailProfile'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { auth,API_URL } from '../../config/helper';
@@ -68,7 +68,7 @@ class profile extends Component {
                         <li ><span onClick={this.onClickPost}>BÀI VIẾT</span></li>
                         <li className="actived"><span onClick={this.onClickProfile} >About me</span></li>
                     </ul>
-                    {this.props.profile ? <ProfileDetail /> : <div></div>}
+                    {this.props.profile ? <ViewDetailProfile /> : <div></div>}
                 </div>
             );
     }

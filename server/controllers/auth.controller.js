@@ -56,9 +56,20 @@ const  googleOAuth= async (req, res) => {
   });
 }
 
+const  facebookOAuth= async (req, res) => {
+  const token = jwt.sign({
+    _id: req.user._id
+  }, config.jwtSecret);
+  return res.json({
+    token,
+    user: {_id: req.user.id,avatar:req.user.avatar,name:req.user.name},
+  });
+}
+
 module.exports={
     signin:signin,
     requireSignin:requireSignin,
     hasAuthorization:hasAuthorization,
-    googleOAuth:googleOAuth
+    googleOAuth:googleOAuth,
+    facebookOAuth:facebookOAuth
 }

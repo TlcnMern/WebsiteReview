@@ -10,6 +10,7 @@ const passportConf = require('../passport');//  de yen
 router.route('/signin').post(controllerAuth.signin)
 //signin gg
 router.route('/oauth/google').post(passport.authenticate('googleToken', { session: false }), controllerAuth.googleOAuth);
+router.route('/oauth/facebook').post(passport.authenticate('facebookToken', { session: false }), controllerAuth.facebookOAuth);
 
 router.param('userID', controllerUser.UserById);
 module.exports=router;

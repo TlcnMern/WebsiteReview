@@ -28,7 +28,7 @@ class HomeFeed extends Component {
                                         Xem tất cả
                                     </Link>
                                 </div>
-                                <Carousel theme='movie' />
+                                <Carousel theme='film' />
                             </div>
 
                             <div className="box-home fadeInDown">

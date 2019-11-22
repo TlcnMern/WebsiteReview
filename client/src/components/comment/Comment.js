@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 
-import {auth} from '../../config/helper';
+import {auth,API_URL} from '../../config/helper';
 import {addComment} from '../../action/commentAction';
 import {connect} from 'react-redux';
 import ViewComment from './ViewComment';
+import man from '../../public/images/man.png';
 
 class Comment extends Component{
 
@@ -23,15 +24,28 @@ class Comment extends Component{
 
 
     renderCreateComment(){
+
+        const avatar=auth.getAvatar();
+        var urlAvatar='';
+        if (avatar) {
+            if (avatar.includes('dist')) {
+                urlAvatar = API_URL + '/' + avatar;
+            }
+            else {
+                urlAvatar = avatar;
+            }
+        }
+        else {
+            urlAvatar = man;
+        }
         if(this.props.isAuthenticated)
             return(
                 <div>
-           
                     <form onSubmit={this.onSubmitComment}>
                         <div className="col-md-12 form-group row addCmt">
                         
                             <div className="col-md-1">
-                            <img id="anhdd" src="https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-9/p720x720/72482897_955642461456268_3228701545478488064_o.jpg?_nc_cat=102&cachebreaker=hd&_nc_oc=AQkp7PgHFmqowW2nscPch3Ts7CgsISmdsSExZ5_qfKdVIN5tAlqBz4H5tTfG665daao&_nc_ht=scontent.fsgn2-2.fna&oh=18ed1cfefbaf148fd48d05f3d4b25684&oe=5E21D2EA" alt="imgUser" />
+                            <img id="anhdd" src={urlAvatar} alt="imgUser" />
                             </div>
                             <div className="col-md-10">
                                 <input className="form-control replycomment-input" id="comment" placeholder="Comment" onChange={this.handleChange('content')}></input>
