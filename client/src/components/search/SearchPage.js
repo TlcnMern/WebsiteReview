@@ -14,7 +14,6 @@ class SearchPage extends Component {
             posts:[],
             isLoading:true
         }
-        // console.log(props.location.search);
         var query= qs.parse(props.location.search, { ignoreQueryPrefix: true });
         searchPost(query).then(data=>{
             if(data.error){

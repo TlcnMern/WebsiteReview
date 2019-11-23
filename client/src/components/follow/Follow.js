@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { auth } from '../../config/helper';
+import { auth,API_URL } from '../../config/helper';
 import {follow,unFollow} from '../../action/userAction';
 
 class Follow extends Component{
@@ -12,7 +12,7 @@ class Follow extends Component{
 
     clickFollowButton(){
         if(!this.props.isAuthenticated){
-            window.location.href="http://localhost:3000/Login";
+            window.location.href=`${API_URL}/Login`;
         }
         const jwt = auth.isAuthenticated()
         this.props.follow(jwt.user._id,{t:jwt.token},this.props.followID)

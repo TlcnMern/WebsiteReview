@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Rating from '../rating/Rating';
 import { API_URL } from '../../config/helper';
-import man from '../../public/images/man.png'
+import man from '../../public/images/man.png';
+import Badge from '@material-ui/core/Badge';
+
+
 class ViewPost extends Component {
     constructor(props) {
         super(props);
@@ -38,7 +41,7 @@ class ViewPost extends Component {
                 <Link to="Theme" id="btnDetailTheme"><span style={{ textTransform: 'capitalize' }}>{this.props.post.theme}</span></Link>
                 <div className="col-sm-3">
                     <div className="imgDD FadeIn-load">
-                        <img id="imgSP" src={`${API_URL}/`+this.props.post.photo[0]} alt="imgDemo1" /><br />
+                        <img id="imgSP" src={`${API_URL}/` + this.props.post.photo[0]} alt="imgDemo1" /><br />
                         <Link to="SearchSP">{this.props.post.productReview}</Link>
                     </div>
                 </div>
@@ -53,7 +56,6 @@ class ViewPost extends Component {
                         </Link>
                         <span className="tooltiptext">{this.props.post.title}</span>
                     </div>
-
                     <br />
                     <div className="text-muted">
 
@@ -62,8 +64,8 @@ class ViewPost extends Component {
                                 pathname: `/GuestViewProfile/${this.props.post.postedBy._id}`
                             }
                         }>
-                            <span title={this.props.post.postedBy.name}> 
-                            <img width="22px " height="22px " className="user_avatar_link " src={urlAvatar} alt="Nguyễn Tuấn Vũ " /></span>
+                            <span title={this.props.post.postedBy.name}>
+                                <img width="22px " height="22px " className="user_avatar_link " src={urlAvatar} alt="Nguyễn Tuấn Vũ " /></span>
                             <span style={{ marginLeft: '10px' }}>{this.props.post.postedBy.name}</span>
                         </Link>
 
@@ -77,11 +79,20 @@ class ViewPost extends Component {
                     <p>{this.props.post.contentSummary}</p>
                     <div className="rateBar">
                         <span className="rateBar-Like"><img src="https://img.icons8.com/ios/20/000000/like.png" alt="Like" /></span>
-                        <span className="rateBar-Comment" >
-                            <img src="https://img.icons8.com/ios/20/000000/comments.png" alt="Comment" />
-                        </span>
+
+                        <Link to={
+                            {
+                                pathname: `/DetailPost/${this.props.post._id}`
+                            }
+                        }>
+                            <Badge badgeContent={this.props.post.comments.length||0} style={{ color: "#424242" }}>
+                                <img src="https://img.icons8.com/ios/20/000000/comments.png" alt="Comment" />
+                            </Badge>
+                        </Link>
+
                         <span>
-                        <span> <Rating rating={this.props.post.pointRating.point-1} disabled={true} /></span>
+                            <span> <Rating rating={this.props.post.pointRating.point - 1} disabled={true} /></span>
+                            <span style={{color:'#FA5858'}}>Point Rating: {this.props.post.pointRating.point||0 }point/{this.props.post.pointRating.totalRate||0}vote</span>
                         </span>
                     </div>
                 </div>

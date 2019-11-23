@@ -15,8 +15,8 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
 class DetailPost extends Component {
-    constructor({ match }) {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             post: null,
             isLoading: true,
@@ -24,8 +24,11 @@ class DetailPost extends Component {
             nav1: null,
             nav2: null
         }
-        this.match = match;
-        const postId = this.match.params.postId;
+        calculateRaingtingEachPost();
+    }
+
+    componentDidMount() {
+        const postId = this.props.match.params.postId;
         getDetailPost(postId).then((data) => {
             if (data.error) {
                 console.log(data);
@@ -36,10 +39,6 @@ class DetailPost extends Component {
                 })
             }
         });
-    }
-    componentDidMount() {
-        const postId = this.match.params.postId;
-        calculateRaingtingEachPost();
         if (this.props.isAuthenticated) {
             const jwt = auth.isAuthenticated();
             const userID = jwt.user._id;
@@ -58,8 +57,10 @@ class DetailPost extends Component {
                 }
             });
         }
+
         this.props.getComment(postId)
     }
+
     renderSliderImage() {
         return (
           <div className="imageSlider FadeIn-load">
@@ -78,6 +79,7 @@ class DetailPost extends Component {
         );
       }
     render() {
+        console.log('alo')
         if (this.state.post === null) {
             return (
                 <div className="row">

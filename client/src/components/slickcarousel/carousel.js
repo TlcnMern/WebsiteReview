@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import CardItem from "./carditem";
 import { getTopListPostFollowTheme } from '../../action/postAction';
 import Loading from '../template/Loading';
+import { Link } from 'react-router-dom';
 
 export default class MultipleItems extends Component {
   constructor(props) {
@@ -46,7 +47,14 @@ export default class MultipleItems extends Component {
         <div className="thumbnailgallery ">
           <Slider {...settings}>
             {this.state.posts ? this.state.posts.map((item, i) => {
-              return <CardItem post={item} key={i} />
+              return (  
+                <Link to={
+                  {
+                      pathname: `/DetailPost/${item._id}`
+                  }
+              }>
+                <CardItem post={item} key={i} />
+              </Link>)
             }) : <div></div>
             }
           </Slider>

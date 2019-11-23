@@ -49,7 +49,7 @@ const userSchema = new Schema({
   birthday: {
     type: Date
   },
-
+  
   gender: {
     type: String
   },

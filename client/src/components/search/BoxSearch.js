@@ -17,9 +17,6 @@ class BoxSearch extends Component {
   }
 
   onSubmit=()=>{
-    // if(this.state.title===null){
-    //   return
-    // }
     this.props.history.push('/Search');
   }
   render() {
@@ -35,7 +32,4 @@ class BoxSearch extends Component {
     );
   }
 }
-
-
-// export default BoxSearch;
 export default withRouter(BoxSearch);
