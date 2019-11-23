@@ -16,6 +16,9 @@ class FilmFeed extends Component {
         super(props);
         this.state = {
             posts: [],
+            showKind:null,
+            showForm:null,
+            showRate:null,
             titleKind:null,
             titleForm:null,
             titleRate:null,
@@ -44,28 +47,35 @@ class FilmFeed extends Component {
         this.setState({ anchorRate: event.currentTarget });
     };
 
-    handleClose =(name)=> (e) => {
-        var value='';
-        if(e.nativeEvent){
-            if(e.nativeEvent.target.outerText==='Tất cả'){
-                value='';
-            }
-            else{
-                value=e.nativeEvent.target.outerText;
-            }
-        }
+    handleClose =(name,value) =>(e)=> {
         this.setState({ 
             anchorKind: null,
             anchorForm:null,
             anchorRate:null,
             [name]:value
         });
+
+        if(name==='titleKind'){
+            this.setState({
+                showKind:e.nativeEvent.target.outerText||null
+            })
+        }
+        if(name==='titleForm'){
+            this.setState({
+                showForm:e.nativeEvent.target.outerText||null
+            })
+        }
+        if(name==='titleRate'){
+            this.setState({
+                showRate:e.nativeEvent.target.outerText||null
+            })
+        }
     };
 
     onSort=()=>{
         var temp=null;
         if(this.state.titleRate){
-            if(this.state.titleRate==='Đánh giá tốt nhất'){
+            if(this.state.titleRate==='highPointPating'){
                 temp=1;
             }   
             else{
@@ -116,7 +126,7 @@ class FilmFeed extends Component {
                                             aria-controls={openKind ? 'menu-list-grow' : undefined}
                                             aria-haspopup="true"
                                             onClick={this.handleToggleKind}
-                                        >{this.state.titleKind?this.state.titleKind:<span>Tất cả</span>}
+                                        >{this.state.showKind?this.state.showKind:<span>Tất cả</span>}
                                         
                                         
                                         <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
@@ -131,10 +141,10 @@ class FilmFeed extends Component {
                                                     <Paper>
                                                         <ClickAwayListener  onClickAway={this.handleClose('')}>
                                                             <MenuList  autoFocusItem={openKind} id="menu-list-grow">
-                                                                <MenuItem onClick={this.handleClose('titleKind')}>Tất cả</MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleKind')}>Hành động</MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleKind')}>Cổ Trang </MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleKind')}>Tình cảm</MenuItem>
+                                                                <MenuItem onClick={this.handleClose('titleKind','')}>Tất cả</MenuItem>
+                                                                <MenuItem onClick={this.handleClose('titleKind','action')}>Hành động</MenuItem>
+                                                                <MenuItem onClick={this.handleClose('titleKind','swordplay')}>Cổ Trang </MenuItem>
+                                                                <MenuItem onClick={this.handleClose('titleKind','love')}>Tình cảm</MenuItem>
                                                             </MenuList>
                                                         </ClickAwayListener>
                                                     </Paper>
@@ -149,7 +159,7 @@ class FilmFeed extends Component {
                                             aria-controls={openForm ? 'menu-list-grow' : undefined}
                                             aria-haspopup="true"
                                             onClick={this.handleToggleForm}
-                                        >{this.state.titleForm?this.state.titleForm:<span>Tất cả</span>}
+                                        >{this.state.showForm?this.state.showForm:<span>Tất cả</span>}
 
                                         <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
                                         </Button>
@@ -162,9 +172,9 @@ class FilmFeed extends Component {
                                                     <Paper>
                                                         <ClickAwayListener onClickAway={this.handleClose('')}>
                                                             <MenuList autoFocusItem={openForm} id="menu-list-grow">
-                                                                <MenuItem onClick={this.handleClose('titleForm')}>Tất cả</MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleForm')}>Phim lẻ</MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleForm')}>Phim bộ</MenuItem>
+                                                                <MenuItem onClick={this.handleClose('titleForm','')}>Tất cả</MenuItem>
+                                                                <MenuItem onClick={this.handleClose('titleForm','odd')}>Phim lẻ</MenuItem>
+                                                                <MenuItem onClick={this.handleClose('titleForm','series')}>Phim bộ</MenuItem>
                                                             </MenuList>
                                                         </ClickAwayListener>
                                                     </Paper>
@@ -179,7 +189,7 @@ class FilmFeed extends Component {
                                             aria-controls={openRate ? 'menu-list-grow' : undefined}
                                             aria-haspopup="true"
                                             onClick={this.handleToggleRate}
-                                        >{this.state.titleRate?this.state.titleRate:<span>Tất cả</span>}
+                                        >{this.state.showRate?this.state.showRate:<span>Tất cả</span>}
                                         <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
 
                                         </Button>
@@ -192,9 +202,9 @@ class FilmFeed extends Component {
                                                     <Paper>
                                                         <ClickAwayListener onClickAway={this.handleClose('')}>
                                                             <MenuList autoFocusItem={openRate} id="menu-list-grow">
-                                                                <MenuItem onClick={this.handleClose('titleRate')}>Tất cả</MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleRate')}>Đánh giá tốt nhất</MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleRate')}>Quan tâm nhiều nhất</MenuItem>
+                                                                <MenuItem onClick={this.handleClose('titleRate','')}>Tất cả</MenuItem>
+                                                                <MenuItem onClick={this.handleClose('titleRate','highPointPating')}>Đánh giá tốt nhất</MenuItem>
+                                                                <MenuItem onClick={this.handleClose('titleRate','highVote')}>Quan tâm nhiều nhất</MenuItem>
                                                             </MenuList>
                                                         </ClickAwayListener>
                                                     </Paper>

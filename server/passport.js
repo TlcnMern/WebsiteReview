@@ -68,8 +68,13 @@ passport.use('facebookToken', new FacebookTokenStrategy({
       avatar:profile.photos[0].value
     });
 
-    await newUser.save();
-    done(null, newUser);
+    await newUser.save((err,result)=>{
+      if(err){
+        console.log(err);
+      }
+      aclStore.acl.addUserRoles(result._id.toString(),'user');
+      done(null, result);
+    });
   } catch(error) {
     done(error, false, error.message);
   }

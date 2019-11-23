@@ -46,7 +46,7 @@ const getComment=(req,res)=>{
   })
   .populate({
     path:'comments',
-    populate: { path: 'subComment.commentBy',select:'_id name'}
+    populate: { path: 'subComment.commentBy',select:'_id name avatar'}
   })
   .exec((err, posts) => {
     if (err) {
@@ -69,10 +69,10 @@ const addComment=(req,res,next)=>{
       })
     }
     Post.findByIdAndUpdate(req.body.postId, {$push: {comments: result._id}}, {new: true})
-    .populate('postedBy', '_id name')
+    .populate('postedBy', '_id name avatar')
     .populate({
       path:'comments',
-      populate: { path: 'commentBy',select:'_id name' }
+      populate: { path: 'commentBy',select:'_id name avatar' }
     })
     .exec((err, result2) => {
       if (err) {

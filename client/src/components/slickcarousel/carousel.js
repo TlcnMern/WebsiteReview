@@ -48,13 +48,7 @@ export default class MultipleItems extends Component {
           <Slider {...settings}>
             {this.state.posts ? this.state.posts.map((item, i) => {
               return (  
-                <Link to={
-                  {
-                      pathname: `/DetailPost/${item._id}`
-                  }
-              }>
-                <CardItem post={item} key={i} />
-              </Link>)
+                <CardItem post={item} key={i} />)
             }) : <div></div>
             }
           </Slider>

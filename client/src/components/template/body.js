@@ -24,7 +24,6 @@ class MainFeed extends Component{
           activeTab: '1',
           renderHome:true,
           renderFilm:false,
-          renderMusic:false,
           renderBook:false,
           renderFood:false,
           renderTravel:false,
@@ -33,7 +32,6 @@ class MainFeed extends Component{
     
         this.onClickHome=this.onClickHome.bind(this);
         this.onClickFilm=this.onClickFilm.bind(this);
-        this.onClickMusic=this.onClickMusic.bind(this);
         this.onClickBook=this.onClickBook.bind(this);
         this.onClickFood=this.onClickFood.bind(this);
         this.onClickTravel=this.onClickTravel.bind(this);
@@ -77,7 +75,6 @@ class MainFeed extends Component{
       onClickHome(){
         this.setState({renderHome:true});
         this.setState({renderFilm:false});
-        this.setState({renderMusic:false});
         this.setState({renderBook:false});
         this.setState({renderFood:false});
         this.setState({renderTravel:false});
@@ -85,15 +82,6 @@ class MainFeed extends Component{
       onClickFilm(){
         this.setState({renderFilm:true});
         this.setState({renderHome:false});
-        this.setState({renderMusic:false});
-        this.setState({renderBook:false});
-        this.setState({renderFood:false});
-        this.setState({renderTravel:false});
-      };
-      onClickMusic(){
-        this.setState({renderMusic:true});
-        this.setState({renderHome:false});
-        this.setState({renderFilm:false});
         this.setState({renderBook:false});
         this.setState({renderFood:false});
         this.setState({renderTravel:false});
@@ -102,7 +90,6 @@ class MainFeed extends Component{
         this.setState({renderBook:true});
         this.setState({renderHome:false});
         this.setState({renderFilm:false});
-        this.setState({renderMusic:false});
         this.setState({renderFood:false});
         this.setState({renderTravel:false});
       };
@@ -110,7 +97,6 @@ class MainFeed extends Component{
         this.setState({renderFood:true});
         this.setState({renderHome:false});
         this.setState({renderFilm:false});
-        this.setState({renderMusic:false});
         this.setState({renderBook:false});
         this.setState({renderTravel:false});
       };
@@ -118,7 +104,6 @@ class MainFeed extends Component{
         this.setState({renderTravel:true});
         this.setState({renderHome:false});
         this.setState({renderFilm:false});
-        this.setState({renderMusic:false});
         this.setState({renderBook:false});
         this.setState({renderFood:false});
       };
@@ -138,23 +123,17 @@ class MainFeed extends Component{
             </Link>
             </li>
             <li>
-            <Link to="MusicFeed" onClick={this.onClickMusic}>
-                <img src="https://img.icons8.com/ios/30/000000/music.png" alt="AmNhac"/> Âm nhạc
-            </Link>
-            
-            </li>
-            <li>
-            <Link to="BookFeed" onClick={this.onClickBook}>
+            <Link to="/BookFeed" onClick={this.onClickBook}>
                <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/> Sách / Truyện
             </Link>
             </li>
             <li>
-            <Link to="FoodFeed" onClick={this.onClickFood}>
+            <Link to="/FoodFeed" onClick={this.onClickFood}>
                <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/> Ăn uống
             </Link>
             </li>
             <li>
-            <Link to="TravelFeed" onClick={this.onClickTravel}>
+            <Link to="/TravelFeed" onClick={this.onClickTravel}>
                <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/> Du lịch
             </Link>
             </li>
@@ -171,68 +150,28 @@ class MainFeed extends Component{
             </Link>
             </li>
             <li>
-            <Link to="FilmFeed" className="active-Left">
+            <Link to="/FilmFeed" className="active-Left">
                 <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/> Phim ảnh
             </Link>
             </li>
             <li>
-            <Link to="MusicFeed" onClick={this.onClickMusic}>
-                <img src="https://img.icons8.com/ios/30/000000/music.png" alt="AmNhac"/> Âm nhạc
-            </Link>
-            </li>
-            <li>
-            <Link to="BookFeed" onClick={this.onClickBook}>
+            <Link to="/BookFeed" onClick={this.onClickBook}>
                 <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/> Sách / Truyện
             </Link>
             </li>
             <li>
-            <Link to="FoodFeed" onClick={this.onClickFood}>
+            <Link to="/FoodFeed" onClick={this.onClickFood}>
                 <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/> Ăn uống
             </Link>
             </li>
             <li>
-            <Link to="TravelFeed" onClick={this.onClickTravel}>
+            <Link to="/TravelFeed" onClick={this.onClickTravel}>
                 <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/> Du lịch
             </Link>
             </li>
         </ul>
 
           ) ;
-        if(this.state.renderMusic)
-          return (
-            <ul id="myMenu">
-            <li>
-            <Link to="/" onClick={this.onClickHome}>
-                <img src="https://img.icons8.com/ios/30/000000/home.png" alt="TrangChu"/> Trang chủ
-            </Link>
-            </li>
-            <li>
-            <Link to="FilmFeed" onClick={this.onClickFilm} >
-                <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/> Phim ảnh
-            </Link>
-            </li>
-            <li>
-            <Link to="MusicFeed" className="active-Left" >
-                <img src="https://img.icons8.com/ios/30/000000/music.png" alt="AmNhac"/> Âm nhạc
-            </Link>
-            </li>
-            <li>
-            <Link to="BookFeed" onClick={this.onClickBook}>
-                <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/> Sách / Truyện
-            </Link>
-            </li>
-            <li>
-            <Link to="FoodFeed" onClick={this.onClickFood}>
-                <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/> Ăn uống
-            </Link>
-            </li>
-            <li>
-            <Link to="TravelFeed" onClick={this.onClickTravel}>
-                <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/> Du lịch
-            </Link>
-            </li>
-        </ul> 
-        ) ;
        
         if(this.state.renderBook)
           return (
@@ -243,27 +182,22 @@ class MainFeed extends Component{
             </Link>
             </li>
             <li>
-            <Link to="FilmFeed" onClick={this.onClickFilm} >
+            <Link to="/FilmFeed" onClick={this.onClickFilm} >
                 <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/> Phim ảnh
             </Link>
             </li>
             <li>
-            <Link to="MusicFeed" onClick={this.onClickMusic}>
-                <img src="https://img.icons8.com/ios/30/000000/music.png" alt="AmNhac"/> Âm nhạc
-            </Link>
-            </li>
-            <li>
-            <Link to="BookFeed" className="active-Left"  >
+            <Link to="/BookFeed" className="active-Left"  >
                 <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/> Sách / Truyện
             </Link>
             </li>
             <li>
-            <Link to="FoodFeed" onClick={this.onClickFood}>
+            <Link to="/FoodFeed" onClick={this.onClickFood}>
                 <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/> Ăn uống
             </Link>
             </li>
             <li>
-            <Link to="TravelFeed" onClick={this.onClickTravel}>
+            <Link to="/TravelFeed" onClick={this.onClickTravel}>
                 <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/> Du lịch
             </Link>
             </li>
@@ -277,27 +211,22 @@ class MainFeed extends Component{
             </Link>
             </li>
             <li>
-            <Link to="FilmFeed" onClick={this.onClickFilm} >
+            <Link to="/FilmFeed" onClick={this.onClickFilm} >
                 <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/> Phim ảnh
             </Link>
             </li>
             <li>
-            <Link to="MusicFeed"  onClick={this.onClickMusic} >
-                <img src="https://img.icons8.com/ios/30/000000/music.png" alt="AmNhac"/> Âm nhạc
-            </Link>
-            </li>
-            <li>
-            <Link to="BookFeed" onClick={this.onClickBook}>
+            <Link to="/BookFeed" onClick={this.onClickBook}>
                 <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/> Sách / Truyện
             </Link>
             </li>
             <li>
-            <Link to="FoodFeed" className="active-Left">
+            <Link to="/FoodFeed" className="active-Left">
                 <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/> Ăn uống
             </Link>
             </li>
             <li>
-            <Link to="TravelFeed" onClick={this.onClickTravel}>
+            <Link to="/TravelFeed" onClick={this.onClickTravel}>
                 <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/> Du lịch
             </Link>
             </li>
@@ -313,27 +242,22 @@ class MainFeed extends Component{
             </Link>
             </li>
             <li>
-            <Link to="FilmFeed" onClick={this.onClickFilm} >
+            <Link to="/FilmFeed" onClick={this.onClickFilm} >
                 <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/> Phim ảnh
             </Link>
             </li>
             <li>
-            <Link to="MusicFeed"  onClick={this.onClickMusic}>
-                <img src="https://img.icons8.com/ios/30/000000/music.png" alt="AmNhac"/> Âm nhạc
-            </Link>
-            </li>
-            <li>
-            <Link to="BookFeed" onClick={this.onClickBook}>
+            <Link to="/BookFeed" onClick={this.onClickBook}>
                 <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/> Sách / Truyện
             </Link>
             </li>
             <li>
-            <Link to="FoodFeed" onClick={this.onClickFood}>
+            <Link to="/FoodFeed" onClick={this.onClickFood}>
                 <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/> Ăn uống
             </Link>
             </li>
             <li>
-            <Link to="TravelFeed" className="active-Left" >
+            <Link to="/TravelFeed" className="active-Left" >
                 <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/> Du lịch
             </Link>
             </li>

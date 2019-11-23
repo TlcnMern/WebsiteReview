@@ -14,9 +14,6 @@ const create = (req, res) => {
         error: "Image could not be uploaded"
       })
     }
-    // for (const file of Object.entries(files['photo'])) {
-    //   console.log(file);
-    // }
     let post = new Post(fields);
     post.postedBy = req.profile._id;
     post.pointRating = { point: null }
@@ -120,7 +117,6 @@ const searchPost = (req, res) => {
 }
 
 const sortPost = (req, res) => {
-
   const temp = req.query;
   var query = {};
   if (temp.theme) {

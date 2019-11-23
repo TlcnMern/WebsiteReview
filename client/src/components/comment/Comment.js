@@ -89,7 +89,7 @@ class Comment extends Component{
                 
                 {
                     this.props.listComment.length>0? this.props.listComment.map((item, i) => {
-                        return(<ViewComment postId={this.props.postId} key={i} comment={item}/>);
+                        return(<ViewComment postId={this.props.postId} key={this.props.postId} comment={item}/>);
                     }): <p>Không có comment nào cả</p>
                 }
 

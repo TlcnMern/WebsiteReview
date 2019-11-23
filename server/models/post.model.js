@@ -31,6 +31,10 @@ const PostSchema = new mongoose.Schema({
     type:String,
   },
 
+  linkYoutube:{
+    type:String,
+  },
+
   content: {
     type: String,
     required: 'content is required'
