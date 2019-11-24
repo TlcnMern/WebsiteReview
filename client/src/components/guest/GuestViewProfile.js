@@ -128,7 +128,6 @@ class profile extends Component {
                                         <div className="active"></div>
                                     </div>
                                     <h4 className="name">{this.props.profile.name}</h4>
-                                    <p className="info">BIỆT DANH</p>
                                     <p className="info"> {this.props.profile.email}</p>
                                     <div className="stats row">
                                         <div className="stat col-xs-4" style={{ paddingRight: '50px' }}>

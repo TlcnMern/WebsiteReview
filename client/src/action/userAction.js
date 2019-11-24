@@ -5,7 +5,7 @@ import { returnErrors } from './errorActions';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  FETCH_USER, ERROR_RESPONSE, FOLLOW, FOLLOWED
+  FETCH_USER, ERROR_RESPONSE, FOLLOW, FOLLOWED,GET_AVATAR
 } from '../config/type';
 
 
@@ -20,7 +20,6 @@ export const RegisterAction = (user) => dispatch => {
   axios
     .post(`${API_URL}/users`, body, config)
     .then(res => {
-      console.log(res);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
@@ -60,7 +59,7 @@ export const fetch = (uid) => {
 };
 
 //update info user
-export const update = (userID, credentials, user) => {
+export const update = (userID, credentials, user)=> dispatch => {
   const config = {
     headers: {
       'Accept': 'application/json',
@@ -70,10 +69,12 @@ export const update = (userID, credentials, user) => {
   const body = user;
   return axios.put(`${API_URL}/users/editProfile/` + userID, body, config)
     .then(res => {
-      console.log(res.data);
       if (res.data.avatar) {
-        sessionStorage.removeItem('avatar')
+        sessionStorage.removeItem('avatar');
         auth.setAvatar(res.data.avatar);
+        dispatch({
+          type: GET_AVATAR
+        });
       }
       return true;
     })

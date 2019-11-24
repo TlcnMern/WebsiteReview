@@ -4,8 +4,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import '../../public/stylesheets/partials/uploadAvatar.css'
-import {auth} from '../../config/helper';
-import {update} from '../../action/userAction';
+import { auth } from '../../config/helper';
+import { update } from '../../action/userAction';
+import { connect } from 'react-redux';
 
 class UploadAvatar extends Component {
     constructor(props) {
@@ -16,49 +17,47 @@ class UploadAvatar extends Component {
             img: null
         };
         this.handleChange = this.handleChange.bind(this)
-        this.onUploadAvatar=this.onUploadAvatar.bind(this);
-        this.closeUpload=this.closeUpload.bind(this);
+        this.onUploadAvatar = this.onUploadAvatar.bind(this);
+        this.closeUpload = this.closeUpload.bind(this);
         this.userData = new FormData();
     }
-    handleChange =()=>event => {
+    handleChange = () => event => {
         this.setState({
             img: event.target.files[0]
         })
     }
 
-    closeUpload (){
+    closeUpload() {
         this.setState({
-            open:false
+            open: false
         })
         this.props.callBackChangeStateOpen();
     }
 
-    onUploadAvatar(){
-        const jwt=auth.isAuthenticated();
-        const userID=jwt.user._id;
+    onUploadAvatar() {
+        const jwt = auth.isAuthenticated();
+        const userID = jwt.user._id;
         this.userData.append("photo", this.state.img);
-        update(userID,{t:jwt.token},this.userData)
-        .then((data) => {
-            if (data.err)
-                console.log(data.err);
-            else
-                this.props.callBackChangeStateOpen();
-        });
+        this.props.update(userID, { t: jwt.token }, this.userData)
+            .then((data) => {
+                if (data.err)
+                    console.log(data.err);
+                else
+                    this.props.callBackChangeStateOpen();
+            });
     }
 
-    
+
     render() {
         return (
             <div className="UploadAvatar">
                 <Dialog open={this.state.open}>
                     <DialogTitle>Cập nhật ảnh đại diện</DialogTitle>
                     <DialogContent>
-                        <form>
-                            <input className="fileInput" name="photo" accept="image/*"
-                                type="file"
-                                onChange={this.handleChange('photo')} />
-                            <button className="submitButton" onClick={this.onUploadAvatar} type="submit">Cập nhật</button>
-                        </form>
+                        <input className="fileInput" name="photo" accept="image/*"
+                            type="file"
+                            onChange={this.handleChange('photo')} />
+                        <button className="submitButton" onClick={this.onUploadAvatar} type="submit">Cập nhật</button>
                         <div className="imgPreview">
                             {this.state.img ?
                                 <img aria-hidden
@@ -73,4 +72,7 @@ class UploadAvatar extends Component {
         );
     }
 }
-export default UploadAvatar
+const mapStateToProps = state => ({
+    avatar: state.user.avatar
+});
+export default connect(mapStateToProps, { update })(UploadAvatar);

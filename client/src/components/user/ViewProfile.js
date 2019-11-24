@@ -158,7 +158,7 @@ class viewProfile extends Component {
     }
 
     render() {
-        const avatar = this.props.profile.avatar;
+        const avatar = this.props.avatar;
         var urlAvatar = '';
         if (avatar) {
             if (avatar.includes('dist')) {
@@ -218,7 +218,8 @@ class viewProfile extends Component {
 function mapStateToProp(state) {
     return {
         authenticate: state.auth.isAuthenticated,
-        profile: state.user.profile
+        profile: state.user.profile,
+        avatar:state.user.avatar
     }
 }
 

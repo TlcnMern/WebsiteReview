@@ -3,8 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const PORT = 4000;
 const config=require('./config/config');
+const PORT = config.port;
 
 const aclConfig =require('./config/acl-config');
 

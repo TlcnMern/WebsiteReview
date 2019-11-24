@@ -11,8 +11,6 @@ export const auth = {
       return false
   },
   getAvatar() {
-    if (typeof window == "undefined")
-      return false
     if (sessionStorage.getItem('avatar'))
       return JSON.parse(sessionStorage.getItem('avatar'))
     else

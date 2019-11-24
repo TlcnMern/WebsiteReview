@@ -4,7 +4,7 @@ import rootReducer from './reducers';
 import {auth} from './config/helper';
 
 import {
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,GET_AVATAR
 } from './config/type';
 
 const initialState = {};
@@ -26,6 +26,7 @@ const jwt=auth.isAuthenticated();
 if (jwt) {
   // Update application state. User has token and is probably authenticated
   store.dispatch({ type: LOGIN_SUCCESS });
+  store.dispatch({ type: GET_AVATAR });
 }
 
 export default store;

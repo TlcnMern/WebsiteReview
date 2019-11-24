@@ -27,11 +27,11 @@ class DetailPost extends Component {
             nav2: null,
             youtubeId:null
         }
-        calculateRaingtingEachPost();
     }
 
     componentDidMount() {
         const postId = this.props.match.params.postId;
+        calculateRaingtingEachPost();
         getDetailPost(postId).then((data) => {
             if (data.error) {
                 console.log(data);
@@ -112,7 +112,7 @@ class DetailPost extends Component {
                                         <span> <Rating rating={this.state.post.pointRating.point - 1} disabled={true} /></span>
 
 
-                                        <span style={{ fontSize: '13px' }}>Thể loại: <Link to="">{this.state.post.theme}</Link></span><br />
+                                        <span style={{ fontSize: '13px' }}>Thể loại: <Link to="">{this.state.post.kind}</Link></span><br />
                                     </div>
                                     <div className="clsTomtat">
                                         <span>{this.state.post.contentSummary}</span><br />

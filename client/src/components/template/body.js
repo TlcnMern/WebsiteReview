@@ -266,12 +266,13 @@ class MainFeed extends Component{
         ) ;
       }
       renderPersonalorLogin(){
-        const avatar=auth.getAvatar();
-        var urlAvatar='';
+        // const avatar=auth.getAvatar();
+        var avatar=this.props.avatar
+        var urlAvatar;
         var name=auth.getName();
         if (avatar) {
             if (avatar.includes('dist')) {
-                urlAvatar = API_URL + '/' + avatar;
+                urlAvatar = API_URL.toString() + "/" + avatar.toString();
             }
             else {
                 urlAvatar = avatar;
@@ -344,6 +345,7 @@ class MainFeed extends Component{
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    avatar:state.user.avatar
   });
   export default connect(mapStateToProps,{logout})(MainFeed);

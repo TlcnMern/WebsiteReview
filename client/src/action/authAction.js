@@ -3,7 +3,7 @@ import {API_URL,auth} from '../config/helper';
 import { returnErrors } from './errorActions';
 
 import {
-    LOGIN_SUCCESS,    LOGIN_FAIL, LOGOUT_SUCCESS, CLEAR_ERRORS,CLEAN_PROFILE
+    LOGIN_SUCCESS,    LOGIN_FAIL, LOGOUT_SUCCESS, CLEAR_ERRORS,CLEAN_PROFILE, GET_AVATAR
 } from '../config/type';
 
 
@@ -16,6 +16,9 @@ export function login({ email, password }) {
       auth.authenticate(response.data);   //set data(token+user) to sessionStorge
       dispatch({         
         type: LOGIN_SUCCESS
+      });
+      dispatch({
+        type: GET_AVATAR
       });
       // window.location.href = `${CLIENT_ROOT_URL}`
     })
@@ -45,6 +48,9 @@ export const loginSocial=(accessToken) =>dispatch=>{
     dispatch({
       type:LOGIN_SUCCESS
     });
+    dispatch({
+      type: GET_AVATAR
+    });
   })
   .catch(err=>{
     dispatch(
@@ -70,6 +76,9 @@ export const loginWithFacebook=(accessToken) =>dispatch=>{
     auth.authenticate(response.data);   
     dispatch({
       type:LOGIN_SUCCESS
+    });
+    dispatch({
+      type: GET_AVATAR
     });
   })
   .catch(err=>{

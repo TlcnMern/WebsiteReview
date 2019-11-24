@@ -92,7 +92,6 @@ class ViewPost extends Component {
 
                         <span>
                             <span> <Rating rating={this.props.post.pointRating.point - 1} disabled={true} /></span>
-                            <span style={{color:'#FA5858'}}>Point Rating: {this.props.post.pointRating.point||0 }point/{this.props.post.pointRating.totalRate||0}vote</span>
                         </span>
                     </div>
                 </div>
