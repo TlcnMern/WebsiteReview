@@ -114,7 +114,7 @@ class QLPost extends Component {
                             <td className="col5"><textarea defaultValue="This is a description."/></td>
                             <td className="col6"><textarea defaultValue="This is a description."/></td>
                             <td className="col7">21/11/2019</td>
-                            <th className="col8"><Link to="GuestViewProfile"onClick={this.onClickViewUser}>Nguyễn Tuấn Vũ</Link></th>
+                            <th className="col8" onClick={this.onClickViewUser}><Link to=" " >Nguyễn Tuấn Vũ</Link></th>
                             <th className="col9">Đã Duyệt</th>
                             <td className="col10">
                                 <button onClick={this.onClickViewDetail}><i className="fa fa-info-circle" aria-hidden="true"></i></button>
@@ -132,7 +132,7 @@ class QLPost extends Component {
                             <td className="col5"><textarea defaultValue="This is a description."/></td>
                             <td className="col6"><textarea defaultValue="This is a description."/></td>
                             <td className="col7">21/11/2019</td>
-                            <th className="col8"><Link to="GuestViewProfile"onClick={this.onClickViewUser}>Nguyễn Tuấn Vũ</Link></th>
+                            <th className="col8" onClick={this.onClickViewUser}>Nguyễn Tuấn Vũ</th>
                             <th className="col9">Đã Duyệt</th>
                             <td className="col10">
                                 <button onClick={this.onClickViewDetail}><i className="fa fa-info-circle" aria-hidden="true"></i></button>
@@ -150,7 +150,7 @@ class QLPost extends Component {
                             <td className="col5"><textarea defaultValue="This is a description."/></td>
                             <td className="col6"><textarea defaultValue="This is a description."/></td>
                             <td className="col7">21/11/2019</td>
-                            <th className="col8"><Link to="GuestViewProfile"onClick={this.onClickViewUser}>Nguyễn Tuấn Vũ</Link></th>
+                            <th className="col8" onClick={this.onClickViewUser}>Nguyễn Tuấn Vũ</th>
                             <th className="col9">Đã Duyệt</th>
                             <td className="col10">
                                 <button onClick={this.onClickViewDetail}><i className="fa fa-info-circle" aria-hidden="true"></i></button>
@@ -168,7 +168,7 @@ class QLPost extends Component {
                             <td className="col5"><textarea defaultValue="This is a description."/></td>
                             <td className="col6"><textarea defaultValue="This is a description."/></td>
                             <td className="col7">21/11/2019</td>
-                            <th className="col8"><Link to="GuestViewProfile"onClick={this.onClickViewUser}>Nguyễn Tuấn Vũ</Link></th>
+                            <th className="col8" onClick={this.onClickViewUser}>Nguyễn Tuấn Vũ</th>
                             <th className="col9">Đã Duyệt</th>
                             <td className="col10">
                                 <button onClick={this.onClickViewDetail}><i className="fa fa-info-circle" aria-hidden="true"></i></button>
@@ -186,7 +186,7 @@ class QLPost extends Component {
                             <td className="col5"><textarea defaultValue="This is a description."/></td>
                             <td className="col6"><textarea defaultValue="This is a description."/></td>
                             <td className="col7">21/11/2019</td>
-                            <th className="col8"><Link to="GuestViewProfile"onClick={this.onClickViewUser}>Nguyễn Tuấn Vũ</Link></th>
+                            <th className="col8" onClick={this.onClickViewUser}>Nguyễn Tuấn Vũ</th>
                             <th className="col9">Đã Duyệt</th>
                             <td className="col10">
                                 <button onClick={this.onClickViewDetail}><i className="fa fa-info-circle" aria-hidden="true"></i></button>
