@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 import CardItem from "./carditem";
 import { getTopListPostFollowTheme } from '../../action/postAction';
 import Loading from '../template/Loading';
-import { Link } from 'react-router-dom';
 
 export default class MultipleItems extends Component {
   constructor(props) {

@@ -14,9 +14,15 @@ import FilmFeed from './components/sortTheme/FilmFeed';
 import FoodFeed from './components/sortTheme/FoodFeed';
 import TripFeed from './components/sortTheme/TripFeed';
 import BookFeed from './components/sortTheme/BookFeed';
+// Admin
+import BodyAdminTemplate from './components/template/BodyAdmin';
+import QLPost from './components/admin/post/QLPost';
+import QLUser from './components/admin/user/QLUser';
+import Ana from './components/admin/analytics/Ana'
 
 class MainRouter extends Component {
   render() {
+    if('2'==='1')
     return (<div>
       <BrowserRouter>
         <HeaderTemplate />
@@ -34,6 +40,19 @@ class MainRouter extends Component {
           <Route path="/DetailPost/:postId" component={DetailPost}/>
           <Route path="/GuestViewProfile/:userId" component={GuestViewProfile}/>
           <Route exact path="/Search" component={SearchPage}/>
+        </Switch>
+      </BrowserRouter>
+    </div>)
+    else
+    return (<div>
+      <BrowserRouter>
+        <HeaderTemplate />
+        <BodyAdminTemplate/>
+        <Switch>
+          <Route exact path="/" component={QLPost}/>
+          <Route path="/Login" component={login}/>
+          <Route path="/QLUser" component={QLUser}/>
+          <Route path="/Analytics" component={Ana}/>
         </Switch>
       </BrowserRouter>
     </div>)

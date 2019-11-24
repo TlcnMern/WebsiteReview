@@ -23,7 +23,7 @@ class PostFeatured extends Component {
 
     render() {
         return(
-            <div >
+            <div className="fadeIn" style={{overflow:'auto',height:'400px'}}>
                 {this.state.listPost? this.state.listPost.map((item, i) => {
                     return <ViewPostFeatured post={item} key={i}/>
                 }): <div></div>

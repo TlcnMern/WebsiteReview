@@ -53,6 +53,7 @@ class ViewPostFeatured extends Component {
                             <img style={{ marginRight: '5px' }} width="18px " height="18px" className="user_avatar_link " src={urlAvatar} alt="imageuser" />
                             <span style={{fontSize:'10px'}}>{this.state.post.postedBy.name}</span>
                         </Link>
+                        <br/>
                         <span style={{ marginLeft: '10px',fontSize:'9px' }}>
                         {new Intl.DateTimeFormat('en-GB', {
                             month: '2-digit',
