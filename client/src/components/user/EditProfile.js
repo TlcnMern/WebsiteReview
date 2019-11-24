@@ -31,7 +31,7 @@ class EditProfile extends Component {
     onClickSave() {
         const jwt = auth.isAuthenticated();
         const userID = this.props.profile._id;
-        update(userID, {
+        this.props.update(userID, {
             t: jwt.token
         }, this.userData).then((data) => {
             if (data.err)
@@ -99,4 +99,4 @@ function mapStateToProp(state) {
     }
 }
 
-export default connect(mapStateToProp)(EditProfile);
+export default connect(mapStateToProp,{update})(EditProfile);
