@@ -48,19 +48,19 @@ class MainFeed extends Component{
         return(
               <ul className="menuAdmin">
                   <li className="actived" >
-                    <Link to="/" onClick={this.onClickPost}>
+                    <Link to="/Admin" onClick={this.onClickPost}>
                       <i className="fa fa-sticky-note-o" aria-hidden="true"/>
                       <span>Quản lý bài viết</span>
                     </Link>
                   </li>
                   <li>
-                    <Link to="/QLUser" onClick={this.onClickUser}>
+                    <Link to="/Admin/QLUser" onClick={this.onClickUser}>
                       <i className="fa fa-user" aria-hidden="true"/>
                       <span>Quản lý người dùng</span>
                     </Link>
                   </li>
                   <li>
-                    <Link to="/Analytics" onClick={this.onClickAnalytics}>
+                    <Link to="/Admin/Analytics" onClick={this.onClickAnalytics}>
                       <i className="fa fa-bar-chart" aria-hidden="true"/>
                       <span>Chức năng thống kê</span>
                     </Link> 
@@ -72,19 +72,19 @@ class MainFeed extends Component{
         return(
               <ul className="menuAdmin">
                   <li onClick={this.onClickPost}>
-                    <Link to="/">
+                    <Link to="/Admin">
                       <i className="fa fa-sticky-note-o" aria-hidden="true"/>
                       <span>Quản lý bài viết</span>
                     </Link>
                   </li>
                   <li  className="actived">
-                    <Link to="/QLUser" onClick={this.onClickUser}>
+                    <Link to="/Admin/QLUser" onClick={this.onClickUser}>
                       <i className="fa fa-user" aria-hidden="true"/>
                       <span>Quản lý người dùng</span>
                     </Link>
                   </li>
                   <li>
-                    <Link to="/Analytics" onClick={this.onClickAnalytics}>
+                    <Link to="/Admin/Analytics" onClick={this.onClickAnalytics}>
                       <i className="fa fa-bar-chart" aria-hidden="true"/>
                       <span>Chức năng thống kê</span>
                     </Link> 
@@ -96,19 +96,19 @@ class MainFeed extends Component{
           return(
                 <ul className="menuAdmin">
                     <li onClick={this.onClickPost}>
-                    <Link to="/">
+                    <Link to="/Admin">
                       <i className="fa fa-sticky-note-o" aria-hidden="true"/>
                       <span>Quản lý bài viết</span>
                     </Link>
                   </li>
                   <li>
-                    <Link to="/QLUser" onClick={this.onClickUser}>
+                    <Link to="/Admin/QLUser" onClick={this.onClickUser}>
                     <i className="fa fa-user" aria-hidden="true"/>
                       <span>Quản lý người dùng</span>
                     </Link>
                   </li>
                   <li className="actived">
-                    <Link to="/Analytics" onClick={this.onClickAnalytics}>
+                    <Link to="/Admin/Analytics" onClick={this.onClickAnalytics}>
                       <i className="fa fa-bar-chart" aria-hidden="true"/>
                       <span>Chức năng thống kê</span>
                     </Link> 

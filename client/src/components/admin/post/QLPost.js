@@ -7,7 +7,9 @@ import "../../../public/stylesheets/partials/style.css"
 import "../../../public/stylesheets/partials/styleAdmin.css"
 import BoxSearch from "../../search/BoxSearch"
 import { Link } from 'react-router-dom';
-
+import {dispatchBodyAdmin} from '../../../action/userAction';
+import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
 class QLPost extends Component {
     constructor(props) {
         super(props);
@@ -19,10 +21,7 @@ class QLPost extends Component {
         this.onClickViewDetail = this.onClickViewDetail.bind(this);
         this.onClickViewUser=this.onClickViewUser.bind(this);
         this.onclickClose=this.onclickClose.bind(this);
-        this.props.match.path='';
-        this.props.match.url='';
-        console.log(this.props.match)
-
+        this.props.dispatchBodyAdmin();
     }
 
     onClickViewDetail() {
@@ -207,5 +206,7 @@ class QLPost extends Component {
 }
 
 
-
-export default QLPost;
+const mapStateToProps = state => ({
+    isAuthenticatedAdmin: state.auth.isAuthenticatedAdmin
+  });
+  export default connect(mapStateToProps,{dispatchBodyAdmin})(QLPost);

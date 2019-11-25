@@ -5,9 +5,15 @@ import { returnErrors } from './errorActions';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  FETCH_USER, ERROR_RESPONSE, FOLLOW, FOLLOWED,GET_AVATAR
+  FETCH_USER, ERROR_RESPONSE, FOLLOW, FOLLOWED,GET_AVATAR,DISPATCH_BODY
 } from '../config/type';
 
+//update info user
+export const dispatchBodyAdmin = ()=> dispatch => {
+  dispatch({
+    type: DISPATCH_BODY
+  });
+}
 
 export const RegisterAction = (user) => dispatch => {
   // Headers

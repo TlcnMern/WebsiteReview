@@ -56,13 +56,13 @@ class MainFeed extends Component {
   }
 
   closeMenu(event) {
-
-    if (!this.dropdownMenu.contains(event.target)) {
-
-      this.setState({ showMenu: false }, () => {
-        document.removeEventListener('click', this.closeMenu);
-      });
-
+    if(this.dropdownMenu){
+      if (!this.dropdownMenu.contains(event.target)) {
+        this.setState({ showMenu: false }, () => {
+          document.removeEventListener('click', this.closeMenu);
+        });
+  
+      }
     }
   }
   clickLogout() {
@@ -297,8 +297,9 @@ class MainFeed extends Component {
                 ref={(element) => {
                   this.dropdownMenu = element;
                 }}>
-                <Link to="/ViewProfile" style={{ borderBottom: "1px solid #d1d1d1" }}><img src="https://img.icons8.com/ios/16/000000/security-pass.png" alt="viewInfo" /> Xem trang cá nhân</Link>
-                <Link to="ChangePass" style={{ borderBottom: "1px solid #d1d1d1" }}><img src="https://img.icons8.com/ios/16/000000/re-enter-pincode.png" alt="changePass" /> Đổi mật khẩu</Link>
+                {this.props.isAuthenticatedAdmin &&
+                <Link to="/Admin" style={{ borderBottom: "1px solid #d1d1d1" }}><img src="https://img.icons8.com/ios/16/000000/re-enter-pincode.png" alt="changePass" />Quản lý admin</Link>
+                }
                 <Link to="/" onClick={this.clickLogout} ><img src="https://img.icons8.com/ios/16/000000/export.png" alt="logout" /> Đăng xuất</Link>
 
               </div>) : (null)
@@ -314,6 +315,7 @@ class MainFeed extends Component {
         </div>
       );
   }
+
   render() {
     return (
       <div className="contentMain">
@@ -334,7 +336,9 @@ class MainFeed extends Component {
             <div className="bg-white ">
               <span>BÀI VIẾT NỔI TRỘI</span>
               <hr />
+              {this.props.isBodyAdmin &&
               <PostFeatured />
+              }
             </div>
           </div>
         </div>
@@ -344,8 +348,12 @@ class MainFeed extends Component {
   }
 }
 
+
+
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  isBodyAdmin:state.user.isBodyAdmin,
+  isAuthenticatedAdmin:state.auth.isAuthenticatedAdmin,
   avatar: state.user.avatar
 });
 export default connect(mapStateToProps, { logout })(MainFeed);

@@ -1,7 +1,7 @@
-import { FETCH_USER, ERROR_RESPONSE, FOLLOW, FOLLOWED, CLEAN_PROFILE,GET_AVATAR } from '../config/type';
+import { FETCH_USER, ERROR_RESPONSE, FOLLOW, FOLLOWED, CLEAN_PROFILE,GET_AVATAR, DISPATCH_BODY } from '../config/type';
 import { auth } from '../config/helper';
 
-const INITIAL_STATE = { profile: {}, message: '', error: '', isFollow: false,avatar:'' };
+const INITIAL_STATE = { profile: {}, message: '', error: '', isFollow: false,avatar:'',isBodyAdmin:false };
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -17,6 +17,9 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, message: '', error: '', isFollow: false };
     case GET_AVATAR:{
       return { ...state, avatar:auth.getAvatar()};
+    }
+    case DISPATCH_BODY:{
+      return {...state, isBodyAdmin:true};
     }
     default:
       return state;

@@ -40,7 +40,8 @@ export default function (state = initialState, action) {
         ...state,
         token: null,
         isAuthenticated: false,
-        isAuthorized: false
+        isAuthorized: false,
+        isAuthenticatedAdmin:false
       };
     default:
       return state;

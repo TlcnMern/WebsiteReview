@@ -6,27 +6,34 @@ import "../../../public/stylesheets/partials/styleAdmin.css"
 import DonutChartCate from "./DonutChart";
 import GoogleChart from "./GoogleChart";
 import Select from 'react-select';
-import TopRating from './List5Rating'
-import TopCare from './List5Care'
-import TopUser from './List10User'
+import TopRating from './List5Rating';
+import TopCare from './List5Care';
+import TopUser from './List10User';
+import { dispatchBodyAdmin } from '../../../action/userAction';
+import { connect } from 'react-redux';
+
 class Ana extends Component {
-    renderDonutChartCate(){
-        return(
+    constructor(props) {
+        super(props);
+        this.props.dispatchBodyAdmin();
+    }
+    renderDonutChartCate() {
+        return (
             <div>
-                <DonutChartCate/>
+                <DonutChartCate />
             </div>
         );
-        
+
     }
-    renderGoogleChartCate(){
-        return(
+    renderGoogleChartCate() {
+        return (
             <div>
-                <GoogleChart/>
+                <GoogleChart />
             </div>
         );
-        
+
     }
-    
+
     render() {
         const months = [
             { label: "Tháng 1", value: 1 },
@@ -41,64 +48,66 @@ class Ana extends Component {
             { label: "Tháng 10", value: 10 },
             { label: "Tháng 11", value: 11 },
             { label: "Tháng 12", value: 12 },
-          ];
-          const customStyles = {
+        ];
+        const customStyles = {
             menu: (provided, state) => ({
-              ...provided,
-              width: state.selectProps.width,
-              borderBottom: '1px dotted pink',
-              color: state.selectProps.menuColor,
-              padding: 20,
+                ...provided,
+                width: state.selectProps.width,
+                borderBottom: '1px dotted pink',
+                color: state.selectProps.menuColor,
+                padding: 20,
             }),
-          
-            control: (_, { selectProps: { width }}) => ({
-              width: width
+
+            control: (_, { selectProps: { width } }) => ({
+                width: width
             }),
-          
+
             singleValue: (provided, state) => {
-              const opacity = state.isDisabled ? 0.5 : 1;
-              const transition = 'opacity 300ms';
-          
-              return { ...provided, opacity, transition };
+                const opacity = state.isDisabled ? 0.5 : 1;
+                const transition = 'opacity 300ms';
+
+                return { ...provided, opacity, transition };
             }
-          }          
+        }
         return (
             <div className="boxContentAdmin row" >
                 <div className="boxContentAdmin-left row">
-                    <div className="clsChart-Cate" style={{width:'100%',height:'100%'}}>
+                    <div className="clsChart-Cate" style={{ width: '100%', height: '100%' }}>
                         <h2 className="text-left">Biểu đồ biễu diễn lượng truy cập vào mỗi chủ đề</h2>
                         {this.renderDonutChartCate()}
                     </div>
                     <div className="clsChart-Cate">
                         {this.renderGoogleChartCate()}
                     </div>
-                    
+
                 </div>
                 <div className="row boxContentAdmin-right ">
                     <span id="bcar-Title">BẢNG XẾP HẠNG BÀI VIẾT</span>
-                        <div id="bcar-choosemonth">Chọn tháng để xem:<br/> <Select className="selectMonth" style={customStyles} options={ months } /></div>
-                        <div className="anaTop fadeInDown" >
+                    <div id="bcar-choosemonth">Chọn tháng để xem:<br /> <Select className="selectMonth" style={customStyles} options={months} /></div>
+                    <div className="anaTop fadeInDown" >
                         <div id="top5care">
-                            <span id="anaTop-Title">TOP 5 BÀI VIẾT ĐƯỢC QUAN TÂM NHẤT THÁNG</span><br/>
-                            <TopCare/>
+                            <span id="anaTop-Title">TOP 5 BÀI VIẾT ĐƯỢC QUAN TÂM NHẤT THÁNG</span><br />
+                            <TopCare />
                         </div>
                         <div id="top5rating">
                             <span id="anaTop-Title">TOP 5 BÀI VIẾT ĐƯỢC ĐÁNH GIÁ CAO NHẤT THÁNG</span>
-                            <TopRating/>
+                            <TopRating />
                         </div>
                         <div id="top10user">
                             <span id="anaTop-Title">TOP 10 NGƯỜI DÙNG CÓ BÀI VIẾT NHIỀU NHẤT THÁNG</span>
-                            <TopUser/>
+                            <TopUser />
                         </div>
-                        </div>
-                        
-                        
+                    </div>
+
+
                 </div>
-             
+
             </div>
         );
         // https://apexcharts.com/react-chart-demos/column-charts/column-with-data-labels/
     }
 }
-
-export default Ana;
+const mapStateToProps = state => ({
+    isAuthenticatedAdmin: state.auth.isAuthenticatedAdmin
+});
+export default connect(mapStateToProps, { dispatchBodyAdmin })(Ana);

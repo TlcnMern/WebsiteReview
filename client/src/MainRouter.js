@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import login from './components/auth/login'
 import HeaderTemplate from './components/template/Header';
@@ -19,51 +19,42 @@ import BodyAdminTemplate from './components/template/BodyAdmin';
 import QLPost from './components/admin/post/QLPost';
 import QLUser from './components/admin/user/QLUser';
 import Ana from './components/admin/analytics/Ana';
-import PrivateRouteAdmin from './components/auth/PrivateRouteAdmin';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class MainRouter extends Component {
   render() {
-    if(this.props.isAuthenticatedAdmin)
     return (<div>
       <BrowserRouter>
         <HeaderTemplate />
-        <BodyAdminTemplate/>
+        {this.props.isBodyAdmin?<BodyAdminTemplate/>:
+        <BodyTemplate />
+        }
         <Switch>
-          <PrivateRouteAdmin exact path="/" component={QLPost}/>
-          <PrivateRouteAdmin exact path="/Login" component={QLPost}/>
-          <Route path="/Admin/Login" component={login}/>
-          <PrivateRouteAdmin path="/QLUser" component={QLUser}/>
-          <PrivateRouteAdmin path="/Analytics" component={Ana}/>
+          <Route exact path="/" component={HomeFeed} />
+          <Route exact path="/FilmFeed" component={FilmFeed} />
+          <Route exact path="/FoodFeed" component={FoodFeed} />
+          <Route exact path="/TravelFeed" component={TripFeed} />
+          <Route exact path="/BookFeed" component={BookFeed} />
+
+          <Route path="/Login" component={login} />
+          <PrivateRoute path="/ViewProfile" component={ViewProfile} />
+          <PrivateRoute path="/NewPost" component={post} />
+          <Route path="/DetailPost/:postId" component={DetailPost} />
+          <Route path="/GuestViewProfile/:userId" component={GuestViewProfile} />
+          <Route exact path="/Search" component={SearchPage} />
+
+          <Route exact path="/Admin" component={QLPost} />
+          <Route path="/Admin/QLUser" component={QLUser} />
+          <Route path="/Admin/Analytics" component={Ana} />
         </Switch>
       </BrowserRouter>
     </div>)
-    else{
-      return (<div>
-        <BrowserRouter>
-          <HeaderTemplate />
-          <BodyTemplate/>
-          <Switch>
-            <Route exact path="/" component={HomeFeed}/>
-            <Route exact path="/FilmFeed" component={FilmFeed}/>
-            <Route exact path="/FoodFeed" component={FoodFeed}/>
-            <Route exact path="/TravelFeed" component={TripFeed}/>
-            <Route exact path="/BookFeed" component={BookFeed}/>
-            
-            <Route path="/Login" component={login}/>
-            <PrivateRoute path="/ViewProfile" component={ViewProfile}/>
-            <PrivateRoute path="/NewPost" component={post}/>
-            <Route path="/DetailPost/:postId" component={DetailPost}/>
-            <Route path="/GuestViewProfile/:userId" component={GuestViewProfile}/>
-            <Route exact path="/Search" component={SearchPage}/>
-          </Switch>
-        </BrowserRouter>
-      </div>)
-    }
+    // }
   }
 }
 const mapStateToProps = state => ({
-  isAuthenticatedAdmin: state.auth.isAuthenticatedAdmin
+  isAuthenticatedAdmin: state.auth.isAuthenticatedAdmin,
+  isBodyAdmin:state.user.isBodyAdmin
 });
 export default connect(mapStateToProps)(MainRouter);

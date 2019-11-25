@@ -12,23 +12,17 @@ export function login({ email, password }) {
     axios.post(`${API_URL}/auth/signin`, { email, password })
       .then((response) => {
         auth.authenticate(response.data)
-        if(response.data.isAdmin){
+        if (response.data.isAdmin) {
           dispatch({
             type: LOGIN_SUCCESS_ADMIN
           });
-          dispatch({
-            type: GET_AVATAR
-          });
-  
         }
-        else{
-          dispatch({
-            type: LOGIN_SUCCESS
-          });
-          dispatch({
-            type: GET_AVATAR
-          });
-        }
+        dispatch({
+          type: LOGIN_SUCCESS
+        });
+        dispatch({
+          type: GET_AVATAR
+        });
       })
       .catch(err => {
         console.log(err)
