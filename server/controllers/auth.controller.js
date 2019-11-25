@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 const config = require('../config/config');
+const { aclStore } = require('../helpers/acl-store');
 
 const signin = (req, res) => {
     User.findOne({
@@ -18,15 +19,21 @@ const signin = (req, res) => {
             });
         }
 
-        const token = jwt.sign({
-            _id: user._id
-        }, config.jwtSecret);
+        aclStore.acl.hasRole(user._id.toString(), 'admin', (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            const token = jwt.sign({
+                _id: user._id,
+                isAdmin: result
+            }, config.jwtSecret);
 
-        return res.json({
-            token,
-            user: { _id: user._id, avatar: user.avatar, name: user.name }
-        });
-
+            return res.json({
+                token,
+                user: { _id: user._id, avatar: user.avatar, name: user.name },
+                isAdmin:result
+            });
+        })
     })
 };
 
@@ -37,7 +44,7 @@ const requireSignin = expressJwt({
 
 const hasAuthorization = (req, res, next) => {
     const authorized = req.profile && req.auth && req.profile._id == req.auth._id
-    console.log('authorized ' + authorized);
+    // console.log('authorized ' + authorized);
     if (!(authorized)) {
         return res.status('403').json({
             error: "User is not authorized"
@@ -46,7 +53,7 @@ const hasAuthorization = (req, res, next) => {
     next()
 }
 
-const googleOAuth = async(req, res) => {
+const googleOAuth = async (req, res) => {
     const token = jwt.sign({
         _id: req.user._id
     }, config.jwtSecret);
@@ -56,7 +63,7 @@ const googleOAuth = async(req, res) => {
     });
 }
 
-const facebookOAuth = async(req, res) => {
+const facebookOAuth = async (req, res) => {
     const token = jwt.sign({
         _id: req.user._id
     }, config.jwtSecret);

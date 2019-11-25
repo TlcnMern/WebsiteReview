@@ -17,3 +17,5 @@ export const FOLLOW='FOLLOW';
 export const FOLLOWED='FOLLOWED';
 export const GET_AVATAR='GET_AVATAR';
 export const CLEAN_PROFILE='CLEAN_PROFILE';
+
+export const LOGIN_SUCCESS_ADMIN='LOGIN_SUCCESS_ADMIN';

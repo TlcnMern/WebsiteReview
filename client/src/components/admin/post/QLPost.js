@@ -19,6 +19,9 @@ class QLPost extends Component {
         this.onClickViewDetail = this.onClickViewDetail.bind(this);
         this.onClickViewUser=this.onClickViewUser.bind(this);
         this.onclickClose=this.onclickClose.bind(this);
+        this.props.match.path='';
+        this.props.match.url='';
+        console.log(this.props.match)
 
     }
 

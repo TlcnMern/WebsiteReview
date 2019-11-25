@@ -32,7 +32,6 @@ const register = (req, res) => {
 
       user.save((err, result) => {
         if (err) {
-          console.log(err);
           return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
           })
