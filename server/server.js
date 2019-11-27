@@ -35,12 +35,15 @@ function authorizationSetup() {
     const postRouters=require('./routes/post.routes');
     const ratingRouters=require('./routes/rating.routes');
     const commentRouters=require('./routes/comment.routes');
+    const adminRouter=require('./routes/admin.routes');
 
     app.use('/', userRoutes);
     app.use('/auth',authRouters);
     app.use('/post',postRouters);
     app.use('/post',commentRouters);
     app.use('/rating',ratingRouters);
+
+    app.use('/admin',adminRouter);
 
 }
   

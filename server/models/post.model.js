@@ -52,6 +52,16 @@ const PostSchema = new mongoose.Schema({
     postedBy:{type:mongoose.Schema.ObjectId, ref: 'User'}
   }],
 
+  state:{
+    type:Boolean,
+    default:false
+  },
+
+  hiden:{
+    type:Boolean,
+    default:false
+  },
+  
   pointRating:{
     point:Number,
     totalRate:Number,

@@ -1,11 +1,7 @@
 import { GET_COMMENT } from '../config/type';
 
-
 const INITIAL_STATE = {
-    message: '',
-    err: '',
-    listComment: [],
-    pointRateOfUser: null
+    listComment: []
 };
 
 export default function (state = INITIAL_STATE, action) {
