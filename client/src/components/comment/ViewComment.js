@@ -116,12 +116,12 @@ class ViewComment extends Component {
 
                 <div className="row">
                     <div className="col-sm-1">
-                        <img className="anhdd" src={urlAvatar} style={{ maxWidth: '30px', height: '30px', marginRight: '5px' }} aria-hidden alt="Picture of me taking a photo of an image" />
+                        <img className="anhdd" src={urlAvatar} style={{ width: '40px',borderRadius:'50%', height: '40px', marginRight: '5px' }} aria-hidden alt="Picture of me taking a photo of an image" />
                     </div>
                     <div className="row col-sm-11">
                         <div className="ContentComment">
 
-                            <Link to={
+                            <Link style={{fontWeight:'bold'}} to={
                                 {
                                     pathname: `/GuestViewProfile/${this.props.comment.commentBy._id}`
                                 }}>
@@ -129,17 +129,17 @@ class ViewComment extends Component {
 
                             </Link>
 
-                            <span>
+                            <span >
                                 {this.state.edit ? <EditComment callBack={this.onCallBack.bind(this)} content={this.props.comment.content} commentId={this.props.comment._id} /> :
-                                    <em>{this.props.comment.content}</em>
+                                    <em style={{fontStyle:'normal',fontSize:'14px'}}>{this.props.comment.content}</em>
                                 }
                             </span>
 
-                        </div>
+                        </div >
                         {
                             // cho thằng viết ra có 2 chức năng này
                             this.state.isAuthorized && (
-                                <div>
+                                <div >
                                     {/* <MuiThemeProvider>
                                         <DropDownMenu onClickAway={this.handleClose}>
                                             <MenuItem onClick={this.onClickEdit.bind(this)} ><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</MenuItem>
@@ -172,12 +172,6 @@ class ViewComment extends Component {
                                             </Grow>
                                         )}
                                     </Popper>
-
-
-
-
-
-
                                 </div>
                             )}
                     </div>
@@ -192,7 +186,7 @@ class ViewComment extends Component {
                         }).format(new Date(this.props.comment.created))}
                     </span>
                     {this.props.isAuthenticated &&
-                        <button onClick={this.onClickReply.bind(this)} className="btn btn-link" style={{ marginLeft: '10px' }}>Reply</button>
+                        <button onClick={this.onClickReply.bind(this)} className="btn btn-link" style={{ marginLeft: '10px',fontSize:'11px',fontStyle:'Italic' }}>Trả lời</button>
                     }
                     {this.renderReply()}
                 </div>

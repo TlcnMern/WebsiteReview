@@ -24,8 +24,10 @@ class FoodFeed extends Component {
             titleRate:null,
             anchorKind: null,
             anchorForm: null,
-            anchorRate: null
+            anchorRate: null,
+            renderFilter:false
         };
+        this.onClickFilter = this.onClickFilter.bind(this);
         sortPost({theme:'food'}).then((data) => {
             if (data.error)
                 console.log(data.error);
@@ -34,7 +36,15 @@ class FoodFeed extends Component {
             }
         });
     }
-    
+    onClickFilter() {
+        if(this.state.renderFilter){
+            this.setState({ renderFilter: false });
+        }
+        else{
+            this.setState({ renderFilter: true });
+        }
+        
+    };
     handleToggleKind = event => {
         this.setState({ anchorKind: event.currentTarget });
     };
@@ -98,28 +108,24 @@ class FoodFeed extends Component {
             }
         });
     }
-
-    render() {
+    renderFilter(){
         const { anchorKind,anchorForm,anchorRate } = this.state;
         const openKind = Boolean(anchorKind);
         const openForm = Boolean(anchorForm);
         const openRate = Boolean(anchorRate);
-        return (
-            <div className="boxContent">
-                <div className="col-lg-12">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="box-home">
-                                <h4 style={{ margin: '20px', fontFamily: 'bold' }}> Review món ngon mỗi ngày</h4>
-                                <hr />
-                                <div style={{ marginLeft: '0'}}  className="row">
-                                    <div className="col-lg-3"><span>Thể loại</span></div>
-                                    <div className="col-lg-3"><span>Hình thức</span></div>
-                                    <div className="col-lg-4"><span>Đánh giá</span></div>
-                                </div>
-                                <div style={{ marginBottom: '40px'}} className="row">
+        if(this.state.renderFilter)
+        return(
+            <div className="clsFilter">
+                <div class="arrow"></div>
+                <div style={{ marginLeft: '0'}} className="row">
+                    <div className="col-lg-4"><span style={{color:'#00afef',fontWeight:'bold'}}>Thể loại</span></div>
+                    <div className="col-lg-4"><span style={{color:'#00afef',fontWeight:'bold'}}>Hình thức</span></div>
+                    <div className="col-lg-4"><span style={{color:'#00afef',fontWeight:'bold'}}>Đánh giá</span></div>
+                                
+                </div>
+                <div style={{ marginBottom: '40px'}} className="row">
 
-                                    <div className="col-lg-3">
+                                    <div className="col-lg-4">
                                         <Button
                                             ref={anchorKind}
                                             aria-controls={openKind ? 'menu-list-grow' : undefined}
@@ -150,7 +156,7 @@ class FoodFeed extends Component {
                                         </Popper>
                                     </div>
 
-                                    <div className="col-lg-3">
+                                    <div className="col-lg-4">
                                         <Button
                                             ref={anchorForm}
                                             aria-controls={openForm ? 'menu-list-grow' : undefined}
@@ -210,9 +216,26 @@ class FoodFeed extends Component {
                                         </Popper>
                                     </div> 
                                         
-                                    <Button onClick={this.onSort} variant="contained" color="primary">Lọc</Button>
+                                    <button onClick={this.onSort} id="btnFilter">Lọc</button>
                                 </div>
-
+            </div>
+        );
+    }
+    render() {
+        return (
+            <div className="boxContent">
+                <div className="col-lg-12">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <div className="box-home">
+                                <div className="clsSort">
+                                    <span className="clsSort-title">Sống là để ăn, chứ hông phải ăn là để sống</span>
+                                    <button className="clsSort-btnSort" onClick={this.onClickFilter}>
+                                        <i class="fa fa-sliders" aria-hidden="true" style={{marginRight:'10px'}}></i>Bộ lọc
+                                    </button>
+                                    {this.renderFilter()}
+                                    
+                                </div>
                                 <hr />
                                 {this.state.posts.length>0?
                                 <PostList posts={this.state.posts} />:

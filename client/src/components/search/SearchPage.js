@@ -35,7 +35,7 @@ class SearchPage extends Component {
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="box-home">
-                                <span  >Kết quả tìm kiếm</span>
+                                <span id="KQTK" >Kết quả tìm kiếm</span>
                                 <hr />
 
                                 {this.state.isLoading? <Loading/>: (this.state.posts.length>0?

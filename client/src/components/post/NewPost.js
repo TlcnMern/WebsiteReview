@@ -111,22 +111,21 @@ class NewPost extends Component {
                 </div>
 
                 <div className="row form-group content-row">
-                    <div className="row avatar ">
+                <div className="col-sm-2 pr-0 text-right "><label>Chọn ảnh:</label><br/><span style={{color:'#dbdbdb', fontSize:'10px',fontStyle:'Italic'}}>(Có thể chọn nhiều hơn 1 ảnh)</span><br/></div>
+                    <div className="col-sm-10 row avatar ">
+                        
                         <div className="form-group">
                             <input accept="image/*" multiple name="photo" id="photoin" className="inputfile inputfile-1" onChange={this.handleChange('photo')} type="file" style={{ display: 'none' }} />
-                            <label htmlFor="photoin"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" /></svg> <span>Choose a file&hellip;</span></label>
+                            <label htmlFor="photoin"><img src="https://img.icons8.com/dusk/100/000000/add-image.png" alt="addImg"/></label>
                         </div>
                         <div className="row clsPhotoin">
+                            
                             {this.state.imgs && [...this.state.imgs].map((file, i) => (
-                                <div key={i}>
+                                <div id="createPostImg" key={i}>
                                     <img className="imgPhotoin" aria-hidden style={{ maxWidth: '100%', height: '100%' }} src={URL.createObjectURL(file)} alt="Picture of me taking a photo of an image" />
                                     <button className="btnPhotoin-remove" type="button" value={file.name} onClick={this.removeImage}><i className="fa fa-times" aria-hidden="true"></i></button>
                                 </div>))}
                         </div>
-                        {/* {this.state.imgs.length < 1 &&
-                            <p>Tải lên ảnh đại diện cho bài viết tại đây.<br />
-                                Vui lòng chọn ít nhất 1 ảnh để làm avatar.<br />
-                                Lưu ý: Bạn có thể chọn nhiều ảnh, kích thước khuyến khích bé hơn 2mb</p>} */}
                     </div>
                 </div>
                 <div className="row form-group text-center content-row">
@@ -318,7 +317,18 @@ class NewPost extends Component {
                     </Modal>
                 }
                 <div className="clsBoxDangBai " id="clsBoxDangBai ">
-                    <h1 style={{ marginLeft: '50px' }}>Đăng bài</h1>
+                    <span style={{ padding:'10px',margin:'5px',display:'flex',borderBottom:'1px solid #d1d1d1', fontSize:'18px',color:'#00afef' }}>Đăng bài 
+                        <i style={{position:'absolute',right:'0', color:'#dbdbdb',padding:'10px'}} className="fa fa-question-circle iconNote" aria-hidden="true">
+                            <span className="spanNote">
+                                <div className="arrow"></div>
+                                BÀI VIẾT HIỆU QUẢ <br/>
+                                Bài viết phải đầy đủ thông tin cần thiết<br/>
+                                Bài viết hạn chế teencode/ sai chính tả<br/>
+                                Hình ảnh phải liên quan đến bài đánh giá. Bạn có thể chọn nhiều hình cùng một lúc<br/>
+                            </span>
+                        </i>
+                    </span>
+                    
                     <div className="clsDangBai " id="clsDangBai ">
                         <form action=" " method="post " encType="multipart/form-data " onSubmit={this.onSubmitPost}>
                             <div className="row">

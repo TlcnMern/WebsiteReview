@@ -43,6 +43,9 @@ class ViewPost extends Component {
                     <div className="imgDD FadeIn-load">
                         <img id="imgSP" src={`${API_URL}/` + this.props.post.photo[0]} alt="imgDemo1" /><br />
                         <Link to="SearchSP">{this.props.post.productReview}</Link>
+                        <span>
+                            <span> <Rating rating={this.props.post.pointRating.point - 1} disabled={true} /></span>
+                        </span>
                     </div>
                 </div>
                 <div className="col-sm-9 detail-NEWFEED FadeIn-load">
@@ -52,8 +55,8 @@ class ViewPost extends Component {
                                 pathname: `/DetailPost/${this.props.post._id}`
                             }
                         }>
-                            <span className="txt-NameBV">{this.props.post.title}</span>
-                        </Link>
+                            <span  style={{textTransform:'uppercase'}} className="txt-NameBV">{this.props.post.title}</span>
+                        </Link><br/>
                         <span className="tooltiptext">{this.props.post.title}</span>
                     </div>
                     <br />
@@ -66,7 +69,7 @@ class ViewPost extends Component {
                         }>
                             <span title={this.props.post.postedBy.name}>
                                 <img width="22px " height="22px " className="user_avatar_link " src={urlAvatar} alt="Nguyễn Tuấn Vũ " /></span>
-                            <span style={{ marginLeft: '10px' }}>{this.props.post.postedBy.name}</span>
+                            <span style={{ marginLeft: '10px', marginRight:'10px' }}>{this.props.post.postedBy.name}</span>
                         </Link>
 
                         {new Intl.DateTimeFormat('en-GB', {
@@ -89,10 +92,6 @@ class ViewPost extends Component {
                                 <img src="https://img.icons8.com/ios/20/000000/comments.png" alt="Comment" />
                             </Badge>
                         </Link>
-
-                        <span>
-                            <span> <Rating rating={this.props.post.pointRating.point - 1} disabled={true} /></span>
-                        </span>
                     </div>
                 </div>
             </div>

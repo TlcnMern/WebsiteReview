@@ -28,11 +28,11 @@ class ViewPostFeatured extends Component {
                 <div className="col-sm-5 ">
                     <div className="imgDD ">
                         <img src={`${API_URL}/` + this.state.post.photo[0]} alt="imgDemo1 " />
-                        <span style={{ fontSize: '7px' }}>
+                        <div style={{ fontSize: '7px',marginLeft:'-5px',width:'75px' }}>
                         {/* Rating Point: {this.state.post.pointRating.point} point/{this.state.post.pointRating.oneStar+this.state.post.pointRating.twoStar+
                         this.state.post.pointRating.threeStar+this.state.post.pointRating.fourStar+this.state.post.pointRating.fiveStar||0}vote */}
                             <Rating rating={this.state.post.pointRating.point - 1} disabled={true} />
-                        </span>
+                        </div>
                     </div>
                 </div>
                 <div className="col-sm-7 " id="detailBVNT">
@@ -44,23 +44,25 @@ class ViewPostFeatured extends Component {
                         }>
                     {this.state.post.title}</Link>
                     
-                    <div className="text-muted " style={{ display: 'table-cell', verticalalign: 'middle', lineheight: '25px' }}>
+                    <div className="BVNT-Detail">
                         <Link to={
                             {
                                 pathname: `/GuestViewProfile/${this.state.post.postedBy._id}`
                             }
                         }>
                             <img style={{ marginRight: '5px' }} width="18px " height="18px" className="user_avatar_link " src={urlAvatar} alt="imageuser" />
-                            <span style={{fontSize:'10px'}}>{this.state.post.postedBy.name}</span>
+                            <span style={{fontSize:'13px', color:'#90949c'}}>{this.state.post.postedBy.name}</span>
                         </Link>
                         <br/>
-                        <span style={{ marginLeft: '10px',fontSize:'9px' }}>
-                        {new Intl.DateTimeFormat('en-GB', {
-                            month: '2-digit',
-                            day: '2-digit',
-                            year: 'numeric',
-                        }).format(new Date(this.state.post.created))}
-                    </span>
+                        <span style={{fontSize:'13px',color:'#90949c', marginBottom:'.5rem' }}>
+                            <i className="fa fa-calendar" aria-hidden="true" style={{marginRight:'10px',fontSize:'18px',height:'18px',width:'18px'}}/>
+
+                            {new Intl.DateTimeFormat('en-GB', {
+                                month: '2-digit',
+                                day: '2-digit',
+                                year: 'numeric',
+                            }).format(new Date(this.state.post.created))}
+                        </span>
                     </div>
                 </div>
             </div>

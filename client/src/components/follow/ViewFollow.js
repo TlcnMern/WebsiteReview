@@ -29,28 +29,28 @@ class ViewFollow extends Component {
         // <div>alo</div>
         if (this.state.renderFollower)
             return (
-                <div style={{ paddingBottom: '100px' }}>
-                    <div className="row">
+                <div style={{ paddingBottom: '100px',marginTop:'-40px' }}>
+                    <div>
                         <ul className="nav">
                             <li className="actived"><span onClick={this.onClickFollwer}>Người theo dõi</span></li>
                             <li><span onClick={this.onClickFollowing}>Đang theo dõi</span></li>
                         </ul>
                     </div>
-                    <div className="row">
+                    <div>
                         <ListUserFollow users={this.props.profile.followers} />
                     </div>
                 </div>
             );
         if (this.state.renderFollowing)
             return (
-                <div style={{ paddingBottom: '100px' }}>
-                    <div className="row">
+                <div style={{ paddingBottom: '100px',marginTop:'-40px' }}>
+                    <div>
                         <ul className="nav">
                             <li><span onClick={this.onClickFollwer}>Người theo dõi</span></li>
                             <li className="actived"><span onClick={this.onClickFollowing}>Đang theo dõi</span></li>
                         </ul>
                     </div>
-                    <div className="row">
+                    <div>
                         <ListUserFollow users={this.props.profile.following} />
                     </div>
                 </div>

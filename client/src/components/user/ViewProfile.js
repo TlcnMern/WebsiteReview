@@ -176,20 +176,20 @@ class viewProfile extends Component {
                 <div className="boxContent">
                     <div className="container">
                         <header>
-                            <i className="fa fa-bars" aria-hidden="true"></i>
+                            
                         </header>
                         <main>
                             <div className="row">
                             <div className="left col-lg-4">
                                     <div className="photo-left">
                                         <img className="photo" src={urlAvatar} alt="img" />
-                                        <button className="btnPhotoin-remove btnChangeAvatar" onClick={this.onClickAvatar} type="button"><img src="https://img.icons8.com/cute-clipart/24/000000/camera.png" alt="icCamera" /></button>
+                                        <button className="btnPhotoin-remove btnChangeAvatar" onClick={this.onClickAvatar} type="button"><img src="https://img.icons8.com/cute-clipart/24/000000/camera.png" alt="icCamera" /><br/>Thay đổi ảnh đại diện</button>
                                         {this.state.openUploadAvatar ? <UploadAvatar callBackChangeStateOpen={this.callBackChangeStateOpen} open={this.state.openUploadAvatar} /> : <div></div>}
                                     </div>
-                                    <h4 className="name">{this.props.profile.name}</h4>
+                                    <span className="viewprofile-name">{this.props.profile.name}</span>
                                     <p className="info">{this.props.profile.email}</p>
                                     <div className="stats row">
-                                        <div className="stat col-xs-4" style={{ paddingRight: '50px' }}>
+                                        <div className="stat col-xs-4" style={{ paddingRight: '20px' }}>
                                             <p className="number-stat">{this.state.countIndex.numberFollower}</p>
                                             <p className="desc-stat">Followers</p>
                                         </div>
@@ -197,7 +197,7 @@ class viewProfile extends Component {
                                             <p className="number-stat">{this.state.countIndex.numberFollowing}</p>
                                             <p className="desc-stat">Following</p>
                                         </div>
-                                        <div className="stat col-xs-4" style={{ paddingLeft: '50px' }}>
+                                        <div className="stat col-xs-4" style={{ paddingLeft: '20px' }}>
                                             <p className="number-stat">{this.state.countIndex.numberPost}</p>
                                             <p className="desc-stat">Uploads</p>
                                         </div>

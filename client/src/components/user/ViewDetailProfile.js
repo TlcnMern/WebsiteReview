@@ -5,11 +5,7 @@ class ViewDetailProfile extends Component {
     render() {
         return (
             <div className="row clsAbtMe">
-                <ul className="ListAbtMe col-lg-3">
-                    <li><span className="lstItem lstAbtMe-Actived ">Chỉnh sửa trang cá nhân</span></li>
-                    <li><span className="lstItem  lstAbtMe">Đổi mật khẩu</span></li>
-                </ul>
-                <article className="ContentAbtMe col-lg-9">
+                <article className="ContentAbtMe col-lg-12">
                     <div className="row rowProFile">
                         <aside className="txtProfileCol"><label htmlFor="pepName">Tên</label></aside>
                         <div className="inProfileCol">

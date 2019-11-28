@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.min.css';
 import "../../public/stylesheets/partials/style.css"
-import logo from '../../public/images/logo.png';
+import logo from '../../public/images/logo1.png';
 import BoxSearch from '../search/BoxSearch';
 
 class HeaderTemplate extends Component {
@@ -15,8 +15,7 @@ class HeaderTemplate extends Component {
         <div className="row">
           <div className="col-sm-2">
             <Link to="/">
-              <img src={logo} style={{ marginLeft: '20px' }} width="60" height="40" alt="2R4U" />
-              <span style={{ color: '#01A9DB', fontWeight: 'bold' }}>ReviewEvery</span>
+              <img src={logo} style={{marginLeft: '20px',maxWidth: '230px',maxHeight: '40px',width: 'auto',height: 'auto'}} alt="2R4U" />
             </Link>
           </div>
           <div className="col-sm-7">

@@ -125,12 +125,11 @@ class profile extends Component {
                                 <div className="left col-lg-4">
                                     <div className="photo-left">
                                         <img className="photo" src={urlAvatar} alt="img" />
-                                        <div className="active"></div>
                                     </div>
-                                    <h4 className="name">{this.props.profile.name}</h4>
+                                    <span className="viewprofile-name">{this.props.profile.name}</span>
                                     <p className="info"> {this.props.profile.email}</p>
                                     <div className="stats row">
-                                        <div className="stat col-xs-4" style={{ paddingRight: '50px' }}>
+                                        <div className="stat col-xs-4" style={{ paddingRight: '20px' }}>
                                             <p className="number-stat">{this.state.countIndex.numberFollower}</p>
                                             <p className="desc-stat">Followers</p>
                                         </div>
@@ -138,7 +137,7 @@ class profile extends Component {
                                             <p className="number-stat">{this.state.countIndex.numberFollowing}</p>
                                             <p className="desc-stat">Following</p>
                                         </div>
-                                        <div className="stat col-xs-4" style={{ paddingLeft: '50px' }}>
+                                        <div className="stat col-xs-4" style={{ paddingLeft: '20px' }}>
                                             <p className="number-stat">{this.state.countIndex.numberPost}</p>
                                             <p className="desc-stat">Uploads</p>
                                         </div>
@@ -146,7 +145,7 @@ class profile extends Component {
 
                                 </div>
                                 <div className="right col-lg-8">
-                                    <span className="follow"><Follow followID={this.state.userId} /></span>
+                                    <span><Follow followID={this.state.userId} /></span>
                                     {this.rendermyMenu()}
 
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PostList from '../post/PostList';
 import { sortPost } from '../../action/postAction';
-
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -24,8 +23,10 @@ class FilmFeed extends Component {
             titleRate:null,
             anchorKind: null,
             anchorForm: null,
-            anchorRate: null
+            anchorRate: null,
+            renderFilter:false
         };
+        this.onClickFilter = this.onClickFilter.bind(this);
         sortPost({theme:'film'}).then((data) => {
             if (data.error)
                 console.log(data.error);
@@ -34,6 +35,15 @@ class FilmFeed extends Component {
             }
         });
     }
+    onClickFilter() {
+        if(this.state.renderFilter){
+            this.setState({ renderFilter: false });
+        }
+        else{
+            this.setState({ renderFilter: true });
+        }
+        
+    };
     
     handleToggleKind = event => {
         this.setState({ anchorKind: event.currentTarget });
@@ -99,122 +109,114 @@ class FilmFeed extends Component {
             }
         });
     }
-
-    render() {
+    renderFilter(){
         const { anchorKind,anchorForm,anchorRate } = this.state;
         const openKind = Boolean(anchorKind);
         const openForm = Boolean(anchorForm);
         const openRate = Boolean(anchorRate);
+        if(this.state.renderFilter)
+        return(
+            <div className="clsFilter">
+                <div class="arrow"></div>
+                <div style={{ marginLeft: '0'}} className="row">
+                    <div className="col-lg-4"><span style={{color:'#00afef',fontWeight:'bold'}}>Thể loại</span></div>
+                    <div className="col-lg-4"><span style={{color:'#00afef',fontWeight:'bold'}}>Hình thức</span></div>
+                    <div className="col-lg-4"><span style={{color:'#00afef',fontWeight:'bold'}}>Đánh giá</span></div>
+                </div>
+                <div style={{ marginBottom: '40px'}} className="row">
+            
+                    <div className="col-lg-4">
+                        <Button ref={anchorKind} aria-controls={openKind ? 'menu-list-grow' : undefined} aria-haspopup="true" onClick={this.handleToggleKind}>{this.state.showKind?this.state.showKind:<span>Tất cả</span>}
+                                                            
+                                                            
+                                                            <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
+            
+                                                            </Button>
+                        <Popper style={{ zIndex: '10' }} open={openKind} anchorEl={anchorKind} role={undefined} transition disablePortal>
+                            {({ TransitionProps, placement }) => (
+                            <Grow {...TransitionProps} style={{ transformOrigin: placement==='bottom' ? 'center top' : 'center bottom' }}>
+                                <Paper>
+                                    <ClickAwayListener onClickAway={this.handleClose( '')}>
+                                        <MenuList autoFocusItem={openKind} id="menu-list-grow">
+                                            <MenuItem onClick={this.handleClose( 'titleKind', '')}>Tất cả</MenuItem>
+                                            <MenuItem onClick={this.handleClose( 'titleKind', 'action')}>Hành động</MenuItem>
+                                            <MenuItem onClick={this.handleClose( 'titleKind', 'swordplay')}>Cổ Trang </MenuItem>
+                                            <MenuItem onClick={this.handleClose( 'titleKind', 'love')}>Tình cảm</MenuItem>
+                                        </MenuList>
+                                    </ClickAwayListener>
+                                </Paper>
+                            </Grow>
+                            )}
+                        </Popper>
+                    </div>
+            
+                    <div className="col-lg-4">
+                        <Button ref={anchorForm} aria-controls={openForm ? 'menu-list-grow' : undefined} aria-haspopup="true" onClick={this.handleToggleForm}>{this.state.showForm?this.state.showForm:<span>Tất cả</span>}
+            
+                                                            <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
+                                                            </Button>
+                        <Popper style={{ zIndex: '10' }} open={openForm} anchorEl={anchorForm} role={undefined} transition disablePortal>
+                            {({ TransitionProps, placement }) => (
+                            <Grow {...TransitionProps} style={{ transformOrigin: placement==='bottom' ? 'center top' : 'center bottom' }}>
+                                <Paper>
+                                    <ClickAwayListener onClickAway={this.handleClose( '')}>
+                                        <MenuList autoFocusItem={openForm} id="menu-list-grow">
+                                            <MenuItem onClick={this.handleClose( 'titleForm', '')}>Tất cả</MenuItem>
+                                            <MenuItem onClick={this.handleClose( 'titleForm', 'odd')}>Phim lẻ</MenuItem>
+                                            <MenuItem onClick={this.handleClose( 'titleForm', 'series')}>Phim bộ</MenuItem>
+                                        </MenuList>
+                                    </ClickAwayListener>
+                                </Paper>
+                            </Grow>
+                            )}
+                        </Popper>
+                    </div>
+            
+                    <div className="col-lg-4">
+                        <Button ref={anchorKind} aria-controls={openRate ? 'menu-list-grow' : undefined} aria-haspopup="true" onClick={this.handleToggleRate}>{this.state.showRate?this.state.showRate:<span>Tất cả</span>}
+                                                        <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
+            
+                                                        </Button>
+                        <Popper style={{ zIndex: '10' }} open={openRate} anchorEl={anchorRate} role={undefined} transition disablePortal>
+                            {({ TransitionProps, placement }) => (
+                            <Grow {...TransitionProps} style={{ transformOrigin: placement==='bottom' ? 'center top' : 'center bottom' }}>
+                                <Paper>
+                                    <ClickAwayListener onClickAway={this.handleClose( '')}>
+                                        <MenuList autoFocusItem={openRate} id="menu-list-grow">
+                                            <MenuItem onClick={this.handleClose( 'titleRate', '')}>Tất cả</MenuItem>
+                                            <MenuItem onClick={this.handleClose( 'titleRate', 'highPointPating')}>Đánh giá tốt nhất</MenuItem>
+                                            <MenuItem onClick={this.handleClose( 'titleRate', 'highVote')}>Quan tâm nhiều nhất</MenuItem>
+                                        </MenuList>
+                                    </ClickAwayListener>
+                                </Paper>
+                            </Grow>
+                            )}
+                        </Popper>
+                    </div>
+            
+                    <button onClick={this.onSort} id="btnFilter">Lọc</button>
+                </div>
+            </div>
+        );
+    }
+    render() {
         return (
             <div className="boxContent">
                 <div className="col-lg-12">
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="box-home">
-                                <h4 style={{ margin: '20px', fontFamily: 'bold' }}> Cùng review phim hay mỗi ngày</h4>
-                                <hr />
-                                <div style={{ marginLeft: '0'}}  className="row">
-                                    <div className="col-lg-3"><span>Thể loại</span></div>
-                                    <div className="col-lg-3"><span>Hình thức</span></div>
-                                    <div className="col-lg-4"><span>Đánh giá</span></div>
+                                
+                                <div className="clsSort">
+                                    <span className="clsSort-title">Film là một nghệ thuật, người tìm được phim hay là một nghệ sỹ</span>
+                                    <button className="clsSort-btnSort" onClick={this.onClickFilter}>
+                                        <i class="fa fa-sliders" aria-hidden="true" style={{marginRight:'10px'}}></i>Bộ lọc
+                                    </button>
+                                    {this.renderFilter()}
+                                    
                                 </div>
-                                <div style={{ marginBottom: '40px'}} className="row">
-
-                                    <div className="col-lg-3">
-                                        <Button
-                                            ref={anchorKind}
-                                            aria-controls={openKind ? 'menu-list-grow' : undefined}
-                                            aria-haspopup="true"
-                                            onClick={this.handleToggleKind}
-                                        >{this.state.showKind?this.state.showKind:<span>Tất cả</span>}
-                                        
-                                        
-                                        <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
-
-                                        </Button>
-                                        <Popper style={{ zIndex: '10' }} open={openKind} anchorEl={anchorKind} role={undefined} transition disablePortal>
-                                            {({ TransitionProps, placement }) => (
-                                                <Grow
-                                                    {...TransitionProps}
-                                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                                                >
-                                                    <Paper>
-                                                        <ClickAwayListener  onClickAway={this.handleClose('')}>
-                                                            <MenuList  autoFocusItem={openKind} id="menu-list-grow">
-                                                                <MenuItem onClick={this.handleClose('titleKind','')}>Tất cả</MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleKind','action')}>Hành động</MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleKind','swordplay')}>Cổ Trang </MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleKind','love')}>Tình cảm</MenuItem>
-                                                            </MenuList>
-                                                        </ClickAwayListener>
-                                                    </Paper>
-                                                </Grow>
-                                            )}
-                                        </Popper>
-                                    </div>
-
-                                    <div className="col-lg-3">
-                                        <Button
-                                            ref={anchorForm}
-                                            aria-controls={openForm ? 'menu-list-grow' : undefined}
-                                            aria-haspopup="true"
-                                            onClick={this.handleToggleForm}
-                                        >{this.state.showForm?this.state.showForm:<span>Tất cả</span>}
-
-                                        <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
-                                        </Button>
-                                        <Popper style={{ zIndex: '10' }} open={openForm} anchorEl={anchorForm} role={undefined} transition disablePortal>
-                                            {({ TransitionProps, placement }) => (
-                                                <Grow
-                                                    {...TransitionProps}
-                                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                                                >
-                                                    <Paper>
-                                                        <ClickAwayListener onClickAway={this.handleClose('')}>
-                                                            <MenuList autoFocusItem={openForm} id="menu-list-grow">
-                                                                <MenuItem onClick={this.handleClose('titleForm','')}>Tất cả</MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleForm','odd')}>Phim lẻ</MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleForm','series')}>Phim bộ</MenuItem>
-                                                            </MenuList>
-                                                        </ClickAwayListener>
-                                                    </Paper>
-                                                </Grow>
-                                            )}
-                                        </Popper>
-                                    </div>
-
-                                    <div className="col-lg-4">
-                                        <Button
-                                            ref={anchorKind}
-                                            aria-controls={openRate ? 'menu-list-grow' : undefined}
-                                            aria-haspopup="true"
-                                            onClick={this.handleToggleRate}
-                                        >{this.state.showRate?this.state.showRate:<span>Tất cả</span>}
-                                        <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
-
-                                        </Button>
-                                        <Popper style={{ zIndex: '10' }} open={openRate} anchorEl={anchorRate} role={undefined} transition disablePortal>
-                                            {({ TransitionProps, placement }) => (
-                                                <Grow
-                                                    {...TransitionProps}
-                                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                                                >
-                                                    <Paper>
-                                                        <ClickAwayListener onClickAway={this.handleClose('')}>
-                                                            <MenuList autoFocusItem={openRate} id="menu-list-grow">
-                                                                <MenuItem onClick={this.handleClose('titleRate','')}>Tất cả</MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleRate','highPointPating')}>Đánh giá tốt nhất</MenuItem>
-                                                                <MenuItem onClick={this.handleClose('titleRate','highVote')}>Quan tâm nhiều nhất</MenuItem>
-                                                            </MenuList>
-                                                        </ClickAwayListener>
-                                                    </Paper>
-                                                </Grow>
-                                            )}
-                                        </Popper>
-                                    </div> 
-                                        
-                                    <Button onClick={this.onSort} variant="contained" color="primary">Lọc</Button>
-                                </div>
+                                
+                                
 
                                 <hr />
                                 {this.state.posts.length>0?

@@ -12,11 +12,13 @@ class LoginWithFacebook extends Component {
         return (
             <div>
                 <FacebookLogin
-                    appId="835692456850679"
-                    autoLoad={false}
-                    icon="fa-facebook"
-                    fields="name,email,picture"
-                    callback={this.responseFacebook} />
+                appId="835692456850679"
+                autoLoad={false}
+                fields="name,email,picture"
+                callback={this.responseFacebook}
+                cssClass="btnFacebook fadeIn fourth"
+                icon={<i className="fa fa-facebook" style={{marginLeft:'5px'}}></i>}
+                textButton = "&nbsp;&nbsp;Sign In with Facebook"/>
             </div>
         );
     }
