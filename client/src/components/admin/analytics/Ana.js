@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
-import 'font-awesome/css/font-awesome.min.css';
-import "../../../public/stylesheets/partials/style.css"
-import "../../../public/stylesheets/partials/styleAdmin.css"
-import DonutChartCate from "./DonutChart";
+
 import GoogleChart from "./GoogleChart";
 import Select from 'react-select';
 import TopRating from './List5Rating';
@@ -16,14 +12,6 @@ class Ana extends Component {
     constructor(props) {
         super(props);
         this.props.dispatchBodyAdmin();
-    }
-    renderDonutChartCate() {
-        return (
-            <div>
-                <DonutChartCate />
-            </div>
-        );
-
     }
     renderGoogleChartCate() {
         return (
@@ -72,10 +60,6 @@ class Ana extends Component {
         return (
             <div className="boxContentAdmin row" >
                 <div className="boxContentAdmin-left row">
-                    <div className="clsChart-Cate" style={{ width: '100%', height: '100%' }}>
-                        <h2 className="text-left">Biểu đồ biễu diễn lượng truy cập vào mỗi chủ đề</h2>
-                        {this.renderDonutChartCate()}
-                    </div>
                     <div className="clsChart-Cate">
                         {this.renderGoogleChartCate()}
                     </div>

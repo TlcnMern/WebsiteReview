@@ -20,7 +20,7 @@ import PrivateRoute from './components/auth/PrivateRoute';
 // Admin
 import BodyAdminTemplate from './components/template/BodyAdmin';
 import PostList from './components/admin/post/PostList';
-import QLUser from './components/admin/user/QLUser';
+import UserList from './components/admin/user/UserList';
 import Ana from './components/admin/analytics/Ana';
 
 import { connect } from 'react-redux';
@@ -48,7 +48,7 @@ class MainRouter extends Component {
           <Route exact path="/Search" component={SearchPage} />
 
           <Route exact path="/Admin" component={PostList} />
-          <Route path="/Admin/QLUser" component={QLUser} />
+          <Route path="/Admin/QLUser" component={UserList} />
           <Route path="/Admin/Analytics" component={Ana} />
         </Switch>
       </BrowserRouter>
