@@ -36,7 +36,7 @@ export const hidenPost = (postId) => {
         });
 }
 
-export const allowPost = (postId)  => {
+export const allowPost = (postId) => {
     const config = {
         headers: {
             'Accept': 'application/json'
@@ -72,3 +72,84 @@ export const getUserList = (params) => {
         });
 }
 
+//Quan ly thong ke
+
+export const getPostPopularFollowMonth = (month) => {
+    const config = {
+        headers: {
+            'Accept': 'application/json'
+        }
+    };
+
+    return axios.get(`${API_URL}/admin/getPostPopularFollowMonth/` + month, config)
+        .then(res => {
+            return res.data;
+        })
+        .catch(error => {
+            return error.response.data;
+        });
+}
+
+export const getPostHighRateFollowMonth = (month) => {
+    const config = {
+        headers: {
+            'Accept': 'application/json'
+        }
+    };
+
+    return axios.get(`${API_URL}/admin/getPostHighRateFollowMonth/` + month, config)
+        .then(res => {
+            return res.data;
+        })
+        .catch(error => {
+            return error.response.data;
+        });
+}
+
+export const getUserRaking = (month) => {
+    const config = {
+        headers: {
+            'Accept': 'application/json'
+        }
+    };
+
+    return axios.get(`${API_URL}/admin/getUserRaking/` + month, config)
+        .then(res => {
+            return res.data;
+        })
+        .catch(error => {
+            return error.response.data;
+        });
+}
+
+export const getQuantityUsersEachMonth = () => {
+    const config = {
+        headers: {
+            'Accept': 'application/json'
+        }
+    };
+
+    return axios.get(`${API_URL}/admin/getQuantityUsersEachMonth`, config)
+        .then(res => {
+            return res.data;
+        })
+        .catch(error => {
+            return error.response.data;
+        });
+}
+
+export const getQuantityPostFollowThemeEachMonth = () => {
+    const config = {
+        headers: {
+            'Accept': 'application/json'
+        }
+    };
+
+    return axios.get(`${API_URL}/admin/getQuantityPostFollowThemeEachMonth`, config)
+        .then(res => {
+            return res.data;
+        })
+        .catch(error => {
+            return error.response.data;
+        });
+}

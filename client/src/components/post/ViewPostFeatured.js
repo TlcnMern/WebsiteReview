@@ -28,7 +28,7 @@ class ViewPostFeatured extends Component {
                 <div className="col-sm-5 ">
                     <div className="imgDD ">
                         <img src={`${API_URL}/` + this.state.post.photo[0]} alt="imgDemo1 " />
-                        <div style={{ fontSize: '7px',marginLeft:'-5px',width:'75px' }}>
+                        <div style={{ fontSize: '7px',marginLeft:'-5px',width:'75px' }} id="BVNT-rating">
                         {/* Rating Point: {this.state.post.pointRating.point} point/{this.state.post.pointRating.oneStar+this.state.post.pointRating.twoStar+
                         this.state.post.pointRating.threeStar+this.state.post.pointRating.fourStar+this.state.post.pointRating.fiveStar||0}vote */}
                             <Rating rating={this.state.post.pointRating.point - 1} disabled={true} />

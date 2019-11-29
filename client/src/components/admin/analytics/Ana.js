@@ -1,94 +1,98 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
-import GoogleChart from "./GoogleChart";
-import Select from 'react-select';
-import TopRating from './List5Rating';
-import TopCare from './List5Care';
-import TopUser from './List10User';
+import { Redirect } from 'react-router-dom';
+import Chart from "./Chart";
+import TopChart from "./TopChart";
 import { dispatchBodyAdmin } from '../../../action/userAction';
 import { connect } from 'react-redux';
 
 class Ana extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            renderChart: true,
+            renderTop: false,
+        };
+
+        this.onClickChart = this.onClickChart.bind(this);
+        this.onClickTop = this.onClickTop.bind(this);
         this.props.dispatchBodyAdmin();
     }
-    renderGoogleChartCate() {
-        return (
-            <div>
-                <GoogleChart />
-            </div>
-        );
+    onClickChart() {
+        this.setState({ renderChart: true });
+        this.setState({ renderTop: false });
+    }
+    onClickTop() {
+
+        this.setState({ renderChart: false });
+        this.setState({ renderTop: true });
+    }
+    renderChart() {
+        if (this.state.renderChart)
+            return (
+                <div>
+                    <Chart />
+                </div>
+            );
 
     }
+    renderTop() {
+        if (this.state.renderTop)
+            return (
+                <div>
+                    <TopChart />
+                </div>
+            );
+    }
+    renderBtn() {
+        if (this.state.renderChart)
+            return (
+                <div>
+                    <div className="active-chart btnchart">
+                        <button onClick={this.onClickChart}>
+                            Chart
+                    </button>
+                    </div>
+                    <div className="btnchart">
+                        <button onClick={this.onClickTop}>
+                            Top Chart
+                    </button>
+                    </div>
 
+                </div>
+
+            );
+        if (this.state.renderTop)
+            return (
+                <div>
+                    <div className="btnchart">
+                        <button onClick={this.onClickChart}>
+                            Chart
+                    </button>
+                    </div>
+                    <div className="active-chart btnchart">
+                        <button onClick={this.onClickTop}>
+                            Top Chart
+                    </button>
+                    </div>
+
+                </div>
+
+            );
+
+    }
     render() {
-        if(!this.props.isAuthenticatedAdmin){
-            return <Redirect to="/Login"/>
+        if (!this.props.isAuthenticatedAdmin) {
+            return <Redirect to="/Login" />
         }
 
-        const months = [
-            { label: "Tháng 1", value: 1 },
-            { label: "Tháng 2", value: 2 },
-            { label: "Tháng 3", value: 3 },
-            { label: "Tháng 4", value: 4 },
-            { label: "Tháng 5", value: 5 },
-            { label: "Tháng 6", value: 6 },
-            { label: "Tháng 7", value: 7 },
-            { label: "Tháng 8", value: 9 },
-            { label: "Tháng 9", value: 9 },
-            { label: "Tháng 10", value: 10 },
-            { label: "Tháng 11", value: 11 },
-            { label: "Tháng 12", value: 12 },
-        ];
-        const customStyles = {
-            menu: (provided, state) => ({
-                ...provided,
-                width: state.selectProps.width,
-                borderBottom: '1px dotted pink',
-                color: state.selectProps.menuColor,
-                padding: 20,
-            }),
-
-            control: (_, { selectProps: { width } }) => ({
-                width: width
-            }),
-
-            singleValue: (provided, state) => {
-                const opacity = state.isDisabled ? 0.5 : 1;
-                const transition = 'opacity 300ms';
-
-                return { ...provided, opacity, transition };
-            }
-        }
         return (
             <div className="boxContentAdmin row" >
-                <div className="boxContentAdmin-left row">
-                    <div className="clsChart-Cate">
-                        {this.renderGoogleChartCate()}
-                    </div>
-
+                {this.renderBtn()}
+                <div className="clsChart-Cate">
+                    {this.renderChart()}
+                    {this.renderTop()}
                 </div>
-                <div className="row boxContentAdmin-right ">
-                    <span id="bcar-Title">BẢNG XẾP HẠNG BÀI VIẾT</span>
-                    <div id="bcar-choosemonth">Chọn tháng để xem:<br /> <Select className="selectMonth" style={customStyles} options={months} /></div>
-                    <div className="anaTop fadeInDown" >
-                        <div id="top5care">
-                            <span id="anaTop-Title">TOP 5 BÀI VIẾT ĐƯỢC QUAN TÂM NHẤT THÁNG</span><br />
-                            <TopCare />
-                        </div>
-                        <div id="top5rating">
-                            <span id="anaTop-Title">TOP 5 BÀI VIẾT ĐƯỢC ĐÁNH GIÁ CAO NHẤT THÁNG</span>
-                            <TopRating />
-                        </div>
-                        <div id="top10user">
-                            <span id="anaTop-Title">TOP 10 NGƯỜI DÙNG CÓ BÀI VIẾT NHIỀU NHẤT THÁNG</span>
-                            <TopUser />
-                        </div>
-                    </div>
 
-
-                </div>
 
             </div>
         );

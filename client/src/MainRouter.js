@@ -17,7 +17,6 @@ import TripFeed from './components/sortTheme/TripFeed';
 import BookFeed from './components/sortTheme/BookFeed';
 //PrivateRoute
 import PrivateRoute from './components/auth/PrivateRoute';
-// import PrivateRouteAdmin from './components/auth/PrivateRouteAdmin';
 // Admin
 import BodyAdmin from './components/template/BodyAdmin';
 import PostList from './components/admin/post/PostList';

@@ -1,8 +1,0 @@
-@media screen and (max-width: 800px) {
-    .boxPersonal {
-        display: none;
-    }
-    .boxContent {
-        margin-left: 0;
-    }
-}

@@ -106,7 +106,7 @@ const getPostHighRateFollowMonth = (req, res) => {
         // },
     ])
         // .populate('postedBy', '_id name avatar')
-        .sort({ 'pointRating.totalRate': -1 })
+        .sort({ 'pointRating.point': -1 })
         .exec((err, posts) => {
             if (err) {
                 return res.status(400).json({
@@ -128,7 +128,7 @@ const getUserRaking = (req, res) => {
     Post.aggregate([
         {
             $group: {
-                _id: { postedBy: "$postedBy", month: { $month: '$created' }, $year: "$created"  },
+                _id: { postedBy: "$postedBy", month: { $month: '$created' } },
                 count: { $sum: 1 }
             }
         },
@@ -153,7 +153,7 @@ const getQuantityUsersEachMonth = (req, res) => {
     User.aggregate([
         {
             $group: {
-                _id: {month: { $month: '$created' } , $year: "$created" },
+                _id: {month: { $month: '$created' } },
                 count: { $sum: 1 }
             }
         }
