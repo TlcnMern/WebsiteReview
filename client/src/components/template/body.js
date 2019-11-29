@@ -334,7 +334,7 @@ class MainFeed extends Component {
             <div className="bg-white ">
               <span>BÀI VIẾT NỔI TRỘI</span>
               <hr />
-              {this.props.isBodyAdmin &&
+              {!this.props.isBodyAdmin &&
               <PostFeatured />
               }
             </div>

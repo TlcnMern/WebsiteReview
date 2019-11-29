@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { dispatchBodyAdmin } from '../../../action/userAction';
 import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import ViewPost from './ViewPost';
 import { getPostList } from '../../../action/adminAction';
 import Loading from '../../template/Loading';
@@ -78,6 +79,9 @@ class PostListAdmin extends Component {
     }
 
     render() {
+        if(!this.props.isAuthenticatedAdmin){
+            return <Redirect to="/Login"/>
+        }
         return (
             <div className="boxContentAdmin">
                 <div className="row ToolQL">

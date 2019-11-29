@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import login from './components/auth/login'
-import HeaderTemplate from './components/template/Header';
-import BodyTemplate from './components/template/Body';
+import login from './components/auth/login';
+import HeaderAdmin from './components/template/HeaderAdmin';
+import Header from './components/template/Header';
+import Body from './components/template/Body';
 import post from './components/post/NewPost';
 import HomeFeed from './components/HomeFeed/HomeFeed';
 import DetailPost from './components/post/DetailPost';
@@ -18,7 +19,7 @@ import BookFeed from './components/sortTheme/BookFeed';
 import PrivateRoute from './components/auth/PrivateRoute';
 // import PrivateRouteAdmin from './components/auth/PrivateRouteAdmin';
 // Admin
-import BodyAdminTemplate from './components/template/BodyAdmin';
+import BodyAdmin from './components/template/BodyAdmin';
 import PostList from './components/admin/post/PostList';
 import UserList from './components/admin/user/UserList';
 import Ana from './components/admin/analytics/Ana';
@@ -29,9 +30,8 @@ class MainRouter extends Component {
   render() {
     return (<div>
       <BrowserRouter>
-        <HeaderTemplate />
-        {this.props.isBodyAdmin?<BodyAdminTemplate/>:
-        <BodyTemplate />
+        {this.props.isBodyAdmin ? [<HeaderAdmin key={1} />, <BodyAdmin key={2} />] :
+          [<Header key={3} />, <Body key={4} />]
         }
         <Switch>
           <Route exact path="/" component={HomeFeed} />
@@ -58,6 +58,6 @@ class MainRouter extends Component {
 }
 const mapStateToProps = state => ({
   isAuthenticatedAdmin: state.auth.isAuthenticatedAdmin,
-  isBodyAdmin:state.user.isBodyAdmin
+  isBodyAdmin: state.user.isBodyAdmin
 });
 export default connect(mapStateToProps)(MainRouter);

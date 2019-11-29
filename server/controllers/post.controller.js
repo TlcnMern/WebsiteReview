@@ -48,7 +48,7 @@ const create = (req, res) => {
 }
 
 const getNewFeeds = (req, res) => {
-  Post.find({})
+  Post.find({hiden:null,state:true})
     .populate('postedBy', '_id name avatar')
     // .populate({
     //   path:'comments',
@@ -73,7 +73,7 @@ const getNewFeeds = (req, res) => {
 
 const getPostFeatured = (req, res) => {
 
-  Post.find({})
+  Post.find({hiden:null,state:true})
     .populate('postedBy', '_id name avatar')
     .sort({ 'pointRating.totalRate': -1 })
     .exec((err, posts) => {
@@ -89,7 +89,7 @@ const getPostFeatured = (req, res) => {
 
 const getTopListPostFollowTheme = (req, res) => {
   const theme = req.params.theme;
-  Post.find({ theme: theme })
+  Post.find({ theme: theme,hiden:null,state:true})
     .populate('postedBy', '_id name avatar')
     .sort({ 'pointRating.totalRate': -1 })
     .exec((err, posts) => {
@@ -105,7 +105,7 @@ const getTopListPostFollowTheme = (req, res) => {
 
 const searchPost = (req, res) => {
   const query = req.query;
-  Post.find({ productReview: { '$regex': query.search, '$options': "i" } })
+  Post.find({ productReview: { '$regex': query.search, '$options': "i" },hiden:null,state:true })
     .populate('postedBy', '_id name avatar')
     .exec((err, posts) => {
       if (err) {
@@ -119,7 +119,7 @@ const searchPost = (req, res) => {
 
 const sortPost = (req, res) => {
   const temp = req.query;
-  var query = {};
+  var query = {hiden:null,state:true};
   if (temp.theme) {
     query.theme = temp.theme;
   }

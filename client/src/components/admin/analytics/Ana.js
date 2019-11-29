@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Redirect} from 'react-router-dom';
 import GoogleChart from "./GoogleChart";
 import Select from 'react-select';
 import TopRating from './List5Rating';
@@ -23,6 +23,10 @@ class Ana extends Component {
     }
 
     render() {
+        if(!this.props.isAuthenticatedAdmin){
+            return <Redirect to="/Login"/>
+        }
+
         const months = [
             { label: "Tháng 1", value: 1 },
             { label: "Tháng 2", value: 2 },

@@ -49,7 +49,6 @@ const allowPost = (req, res) => {
         })
 }
 
-
 // quan ly nguoi dung
 const getUserList = (req, res) => {
     const temp = req.query;
@@ -76,7 +75,6 @@ const getPostPopularFollowMonth = (req, res) => {
         { $project: { title: 1, pointRating: 1, photo: 1, postedBy: 1, month: { $month: '$created' } } },
         { $match: { month: parseInt(req.params.month) } }
     ])
-        .populate('postedBy', '_id name avatar')
         .sort({ 'pointRating.totalRate': -1 })
         .exec((err, posts) => {
             if (err) {
@@ -84,24 +82,28 @@ const getPostPopularFollowMonth = (req, res) => {
                     error: errorHandler.getErrorMessage(err)
                 })
             }
-            posts = posts.slice(0, 5);
-            res.json(posts);
+
+            User.populate(posts, { path: 'postedBy' }, function (err, result) {
+                // Your populated translactions are inside populatedTransactions
+                result = result.slice(0, 5);
+                res.json(result);
+            });
         })
 }
 
 //get top 5 post high rating follow Month
 const getPostHighRateFollowMonth = (req, res) => {
     Post.aggregate([
-        // { $project: { title: 1, pointRating: 1, photo: 1, postedBy: 1, month: { $month: '$created' } } },
-        // { $match: { month: parseInt(req.params.month) } },
-        {
-            $lookup: {
-                from: "User",
-                localField: "name",    // field in the orders collection
-                foreignField: "name",  // field in the items collection
-                as: "postedBy"
-             }
-        },
+        { $project: { title: 1, pointRating: 1, photo: 1, postedBy: 1, month: { $month: '$created' } } },
+        { $match: { month: parseInt(req.params.month) } },
+        // {
+        //     "$lookup": {
+        //         "from": "User",
+        //         "localField": "postedBy.str",    // field in the orders collection
+        //         "foreignField": "_id",  // field in the items collection
+        //         "as": "postedBy"
+        //      }
+        // },
     ])
         // .populate('postedBy', '_id name avatar')
         .sort({ 'pointRating.totalRate': -1 })
@@ -111,8 +113,14 @@ const getPostHighRateFollowMonth = (req, res) => {
                     error: errorHandler.getErrorMessage(err)
                 })
             }
-            // posts = posts.slice(0, 5);
-            res.json(posts);
+
+            User.populate(posts, { path: 'postedBy' }, function (err, result) {
+                // Your populated translactions are inside populatedTransactions
+                result = result.slice(0, 5);
+                res.json(result);
+            });
+
+
         })
 }
 //get 10 people have high number post follow month
@@ -120,11 +128,11 @@ const getUserRaking = (req, res) => {
     Post.aggregate([
         {
             $group: {
-                _id: { postedBy: "$postedBy", month: { $month: '$created' } },
+                _id: { postedBy: "$postedBy", month: { $month: '$created' }, $year: "$created"  },
                 count: { $sum: 1 }
             }
         },
-        { $match: { '_id.month': parseInt(req.params.month) } }
+        { $match: { '_id.month': parseInt(req.params.month) } },
     ])
         .exec((err, result) => {
             if (err) {
@@ -132,7 +140,51 @@ const getUserRaking = (req, res) => {
                     error: errorHandler.getErrorMessage(err)
                 })
             }
-            return res.json(result);
+            User.populate(result, { path: '_id.postedBy' }, function (err, users) {
+                // Your populated translactions are inside populatedTransactions
+                users = users.slice(0, 5);
+                res.json(users);
+            });
+        })
+}
+
+//get quantity users each month
+const getQuantityUsersEachMonth = (req, res) => {
+    User.aggregate([
+        {
+            $group: {
+                _id: {month: { $month: '$created' } , $year: "$created" },
+                count: { $sum: 1 }
+            }
+        }
+    ])
+        .exec((err, result) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler.getErrorMessage(err)
+                })
+            }
+            res.json(result);
+        })
+}
+
+//get quantity post follow theme each month
+const getQuantityPostFollowThemeEachMonth = (req, res) => {
+    Post.aggregate([
+        {
+            $group: {
+                _id: {month: { $month: '$created' },theme:'$theme',year: { $year: "$created" }},
+                count: { $sum: 1 }
+            }
+        }
+    ])
+        .exec((err, result) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler.getErrorMessage(err)
+                })
+            }
+            res.json(result);
         })
 }
 
@@ -144,5 +196,7 @@ module.exports = {
 
     getPostPopularFollowMonth: getPostPopularFollowMonth,
     getPostHighRateFollowMonth: getPostHighRateFollowMonth,
-    getUserRaking: getUserRaking
+    getUserRaking: getUserRaking,
+    getQuantityUsersEachMonth: getQuantityUsersEachMonth,
+    getQuantityPostFollowThemeEachMonth:getQuantityPostFollowThemeEachMonth
 }
