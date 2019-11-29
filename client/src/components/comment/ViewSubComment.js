@@ -88,7 +88,7 @@ class ViewSubComment extends Component {
         return (
             <div className="row clsSubcomment">
                 <div className="col-sm-1">
-                    <img className="anhdd" src={urlAvatar} style={{ width: '40px',marginRight:'5px',borderRadius:'50%', height: '40px', marginRight: '5px' }} aria-hidden alt="Picture of me taking a photo of an image" />
+                    <img className="anhdd" src={urlAvatar} style={{ width: '40px',marginRight:'5px',borderRadius:'50%', height: '40px' }} aria-hidden alt="Picture of me taking a photo of an image" />
                 </div>
                 <div className="row col-sm-11">
                     <div className="row ContentComment" style={{maxWidth:'500px'}}>
