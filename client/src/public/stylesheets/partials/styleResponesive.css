@@ -44,6 +44,47 @@
         background-color: #ffffff !important;
         box-shadow: 2px 2px 2px 2px #8080804d;
     }
+    .headerMenu-option {
+        position: fixed;
+        right: 0;
+        display: block;
+        z-index: 3;
+        margin-top: 12px;
+    }
+    .headerMenu-option button {
+        border: none;
+        font-size: 28px;
+        background: transparent;
+    }
+    .MenuResponesive {
+        display: block;
+        position: fixed;
+        z-index: 4;
+        width: 80%;
+        height: 80%;
+        margin-top: 50px;
+        margin-bottom: auto;
+        border: 1px solid #d1d1d1;
+        right: 0;
+        border-radius: 5px;
+    }
+    .MenuResponesive .arrow {
+        background: url("https://www.foody.vn/Scripts/dropdown/arrow-top.png") no-repeat;
+        width: 12px;
+        height: 8px;
+        position: absolute;
+        top: -8px;
+        right: 10px;
+        z-index: 2;
+    }
+    .MenuResponesive .bg-white {
+        padding: 15px;
+        border-radius: 5px;
+        margin: 0;
+    }
+    #BVNT-rating {
+        width: 100% !important;
+    }
 }
 
 @media screen and (max-width: 600px) {

@@ -459,3 +459,14 @@
     text-align: center;
     border-bottom: 1px solid #d1d1d1;
 }
+
+.active-chart,
+.btnchart:hover {
+    background: transparent;
+    border-bottom: 1px solid #00afef;
+}
+
+.btnchart button {
+    border: none;
+    background: transparent;
+}
