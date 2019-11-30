@@ -22,7 +22,6 @@ class Ana extends Component {
         this.setState({ renderTop: false });
     }
     onClickTop() {
-
         this.setState({ renderChart: false });
         this.setState({ renderTop: true });
     }
@@ -46,7 +45,7 @@ class Ana extends Component {
     renderBtn() {
         if (this.state.renderChart)
             return (
-                <div>
+                <div style={{display:'-webkit-inline-box',width: '-webkit-fill-available'}}>
                     <div className="active-chart btnchart">
                         <button onClick={this.onClickChart}>
                             Chart
@@ -63,7 +62,7 @@ class Ana extends Component {
             );
         if (this.state.renderTop)
             return (
-                <div>
+                <div style={{display:'-webkit-inline-box',width: '-webkit-fill-available'}}>
                     <div className="btnchart">
                         <button onClick={this.onClickChart}>
                             Chart

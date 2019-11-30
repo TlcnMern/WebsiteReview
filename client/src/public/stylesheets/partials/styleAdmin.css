@@ -288,12 +288,16 @@
 .clsChart-Cate {
     border: 1px solid #d1d1d1;
     border-radius: 5px;
+    margin-top: 20px;
+    width: -webkit-fill-available;
 }
 
 .clsChart-Cate span {
     text-align: center;
     width: 100%;
     align-items: center;
+    font-weight: bold;
+    color: #00afef;
 }
 
 .clsChart-Cate span .selectMonth {
@@ -316,6 +320,7 @@
 .clsTop {
     margin: 0;
     padding: 2px;
+    padding: 10px;
     border: 1px solid #ffffff;
 }
 
@@ -443,6 +448,16 @@
 .top-DetailTitle span {
     font-size: 12px;
     display: inline-block;
+    text-align: justify;
+}
+
+.top-DetailTitle #top-DetailTitle-author {
+    color: #212121;
+    font-size: 10px;
+}
+
+.top-DetailTitle #top-DetailTitle-title {
+    max-height: 36px;
 }
 
 .top-DetailTitle a {
@@ -452,6 +467,16 @@
 .top-Content span {
     margin-right: -10px;
     font-size: 12px;
+    text-align: center;
+}
+
+.top-Content #top-Content-point {
+    color: red;
+}
+
+.top-Content #top-Content-vote {
+    font-size: 10px;
+    color: #dbdbdb;
 }
 
 .infoAdmin {
@@ -469,4 +494,32 @@
 .btnchart button {
     border: none;
     background: transparent;
+}
+
+.top-Avatar .anhdd {
+    margin: auto;
+}
+
+#QLU-btnSearch {
+    border: none;
+    background: transparent;
+    position: absolute;
+    right: 60px;
+    top: 5px;
+}
+
+.box_input {
+    position: relative;
+    display: block;
+    width: -webkit-fill-available;
+    /* margin-right: 10px; */
+    font-size: 12px;
+}
+
+.box_input span {
+    margin-right: 5px;
+}
+
+.box_input select {
+    font-size: 12px;
 }

@@ -18,7 +18,7 @@ class LineChart extends Component {
                 curve: 'straight'
             },
             title: {
-                text: 'Product Trends by Month',
+                text: 'BIỂU ĐỒ THỂ HIỆN SỐ LƯỢNG NGƯỜI DÙNG TRONG NĂM THEO CÁC THÁNG',
                 align: 'left'
             },
             grid: {

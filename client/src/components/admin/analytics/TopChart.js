@@ -132,10 +132,10 @@ class TopChart extends Component {
         };
 
         return (
-            <div className="row" >
+            <div style={{ width: 'fit-content',margin: 'auto'}}>
                 <span id="bcar-Title">BẢNG XẾP HẠNG BÀI VIẾT</span>
                 <div id="bcar-choosemonth">Chọn tháng để xem:<br />
-                    <Select onChange={this.onChangeMonth} className="selectMonth" style={customStyles} options={months} />
+                    <Select onChange={this.onChangeMonth} className="selectMonth" style={customStyles} options={months} defaultValue={{ label: 'Tháng 11', value: 11 }}/>
                 </div>
                 <div className="anaTop fadeInDown" >
                     <div id="top5care">
@@ -165,7 +165,7 @@ class TopChart extends Component {
                         }
                     </div>
                     <div id="top10user">
-                        <span id="anaTop-Title">TOP 10 NGƯỜI DÙNG CÓ BÀI VIẾT NHIỀU NHẤT THÁNG</span>
+                        <span id="anaTop-Title">TOP 5 NGƯỜI DÙNG CÓ BÀI VIẾT NHIỀU NHẤT THÁNG</span>
                         {
                             this.state.isLoadingUser ? <Loading /> :
                                 (this.state.UserRanking.length > 0 ?

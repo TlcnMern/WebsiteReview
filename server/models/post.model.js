@@ -1,83 +1,82 @@
 const mongoose = require('mongoose');
 const PostSchema = new mongoose.Schema({
-  title:{
-    type:String,
-    required:'Title is required'
-  },
-  theme:{
-    type: String,
-    required:'theme is required'
-  },
+    title: {
+        type: String,
+        required: 'Title is required'
+    },
+    theme: {
+        type: String,
+        required: 'theme is required'
+    },
 
-  kind:{
-    type: String
-  },
+    kind: {
+        type: String
+    },
 
-  formality:{
-    type:String
-  },
+    formality: {
+        type: String
+    },
 
-  productReview:{
-    type: String,
-    required: 'productReview is require'
-  },
+    productReview: {
+        type: String,
+        required: 'productReview is require'
+    },
 
-  contentSummary:{
-    type:String,
-    required:'content summary is require'
-  },
+    contentSummary: {
+        type: String,
+        required: 'content summary is require'
+    },
 
-  link:{
-    type:String,
-  },
+    link: {
+        type: String,
+    },
 
-  linkYoutube:{
-    type:String,
-  },
+    linkYoutube: {
+        type: String,
+    },
 
-  content: {
-    type: String,
-    required: 'content is required'
-  },
+    content: {
+        type: String,
+        required: 'content is required'
+    },
 
-  photo: [{
-    type:String
-  }],
-  
-  comments:[{type:mongoose.Schema.ObjectId, ref: 'Comment'}],
+    photo: [{
+        type: String
+    }],
 
-  ratings:[{
-    point:Number,
-    created:{type:Date,default:Date.now},
-    postedBy:{type:mongoose.Schema.ObjectId, ref: 'User'}
-  }],
+    comments: [{ type: mongoose.Schema.ObjectId, ref: 'Comment' }],
 
-  state:{
-    type:Boolean,
-    default:false
-  },
+    ratings: [{
+        point: Number,
+        created: { type: Date, default: Date.now },
+        postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
+    }],
 
-  hiden:{
-    type:Boolean,
-    default:false
-  },
-  
-  pointRating:{
-    point:Number,
-    totalRate:Number,
-    oneStar:Number,
-    twoStar:Number,
-    threeStar:Number,
-    fourStar:Number,
-    fiveStar:Number
-  },
+    state: {
+        type: Boolean,
+        default: false
+    },
 
-  postedBy: {type: mongoose.Schema.ObjectId, ref: 'User'},
+    hiden: {
+        type: Boolean,
+    },
 
-  created: {
-    type: Date,
-    default: Date.now
-  }
+    pointRating: {
+        point: Number,
+        totalRate: Number,
+        oneStar: Number,
+        twoStar: Number,
+        threeStar: Number,
+        fourStar: Number,
+        fiveStar: Number
+    },
+
+    postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
+
+    created: {
+        type: Date,
+        default: Date.now
+    }
 })
 
-module.exports= mongoose.model('Post', PostSchema);
+module.exports = mongoose.model('Post', PostSchema);

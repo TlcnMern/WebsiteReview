@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+
 import { dispatchBodyAdmin } from '../../../action/userAction';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
@@ -85,40 +85,26 @@ class PostListAdmin extends Component {
         return (
             <div className="boxContentAdmin">
                 <div className="row ToolQL">
-                    <div className="row titleQL col-lg-10">
+                    <div className="row titleQL col-sm-10">
                         <div className=" col-lg-3">
                             <p>Quản lý bài viết</p>
                         </div>
                         <div className=" col-lg-5">
                             <input style={{ padding: '0' }} name='name' type="text" onChange={this.onChangeSearch} placeholder="Tìm kiếm theo tên sản phẩm" spellCheck="false" />
-                            <button onClick={this.onSubmitSearch}><i className="fa fa-search"></i></button>
+                            <button id="QLU-btnSearch" onClick={this.onSubmitSearch}><i className="fa fa-search"></i></button>
                         </div>
                         <div className="row col-lg-4">
-                            <span className=" box_input ">
+                            
+                        </div>
+                    </div>
+                    <div className="PageQL col-sm-2">
+                    <span className=" box_input ">
                                 <span>Trạng thái</span>
                                 <select onChange={this.handleChange} >
                                     <option value={false}>Chưa duyệt</option>
                                     <option value={true}>Đã duyệt</option>
                                 </select>
                             </span>
-                        </div>
-                    </div>
-                    <div className="PageQL col-sm-2">
-                        <ul className="pagination">
-                            <li>
-                                <Link to="">
-                                    &laquo;
-                                    </Link>
-                            </li>
-                            <li><Link to="">1</Link></li>
-                            <li><Link to="">2</Link></li>
-                            <li><Link to="">3</Link></li>
-                            <li>
-                                <Link to="">
-                                    &raquo;
-                                    </Link>
-                            </li>
-                        </ul>
                     </div>
                 </div>
                 <table>
