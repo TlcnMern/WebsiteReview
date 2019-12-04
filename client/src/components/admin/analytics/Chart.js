@@ -69,7 +69,9 @@ class Chart extends Component {
                             t12=element.count
                             break;
                         }
+                        default:{
 
+                        }
                     }
 
                 })
@@ -116,7 +118,9 @@ class Chart extends Component {
                                     t1=['Tháng 1',film,food,book,travel];
                                     break;
                                 }
+                                default:{}
                             }
+                            break;
                         }
                         case 2:{
                             switch(element._id.theme){
@@ -140,7 +144,9 @@ class Chart extends Component {
                                     t2=['Tháng 2',film,food,book,travel];
                                     break;
                                 }
+                                default:{}
                             }
+                            break;
                         }
                         case 3:{
                             switch(element._id.theme){
@@ -164,7 +170,9 @@ class Chart extends Component {
                                     t3=['Tháng 3',film,food,book,travel];
                                     break;
                                 }
+                                default:{}
                             }
+                            break;
                         }
                         case 4:{
                             switch(element._id.theme){
@@ -188,7 +196,9 @@ class Chart extends Component {
                                     t4=['Tháng 4',film,food,book,travel];
                                     break;
                                 }
+                                default:{}
                             }
+                            break;
                         }
                         case 5:{
                             switch(element._id.theme){
@@ -212,7 +222,9 @@ class Chart extends Component {
                                     t5=['Tháng 5',film,food,book,travel];
                                     break;
                                 }
+                                default:{}
                             }
+                            break;
                         }
                         case 6:{
                             switch(element._id.theme){
@@ -236,7 +248,9 @@ class Chart extends Component {
                                     t6=['Tháng 6',film,food,book,travel];
                                     break;
                                 }
+                                default:{}
                             }
+                            break;
                         }
                         case 7:{
                             switch(element._id.theme){
@@ -260,7 +274,9 @@ class Chart extends Component {
                                     t7=['Tháng 7',film,food,book,travel];
                                     break;
                                 }
+                                default:{}
                             }
+                            break;
                         }
                         case 8:{
                             switch(element._id.theme){
@@ -284,7 +300,9 @@ class Chart extends Component {
                                     t8=['Tháng 8',film,food,book,travel];
                                     break;
                                 }
+                                default:{}
                             }
+                            break;
                         }
                         case 9:{
                             switch(element._id.theme){
@@ -308,7 +326,9 @@ class Chart extends Component {
                                     t9=['Tháng 9',film,food,book,travel];
                                     break;
                                 }
+                                default:{}
                             }
+                            break;
                         }
                         case 10:{
                             switch(element._id.theme){
@@ -332,7 +352,9 @@ class Chart extends Component {
                                     t10=['Tháng 10',film,food,book,travel];
                                     break;
                                 }
+                                default:{}
                             }
+                            break;
                         }
                         case 11:{
                             switch(element._id.theme){
@@ -356,7 +378,9 @@ class Chart extends Component {
                                     t11=['Tháng 11',film,food,book,travel];
                                     break;
                                 }
+                                default:{}
                             }
+                            break;
                         }
                         case 12:{
                             switch(element._id.theme){
@@ -380,8 +404,11 @@ class Chart extends Component {
                                     t12=['Tháng 12',film,food,book,travel];
                                     break;
                                 }
+                                default:{}
                             }
+                            break;
                         }
+                        default:{}
 
                     }
 

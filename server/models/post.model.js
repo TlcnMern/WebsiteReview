@@ -58,8 +58,7 @@ const PostSchema = new mongoose.Schema({
   },
 
   hiden:{
-    type:Boolean,
-    default:false
+    type:Boolean
   },
   
   pointRating:{
