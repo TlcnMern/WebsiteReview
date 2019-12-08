@@ -5,7 +5,7 @@ import { auth } from './config/helper';
 import jwt from 'jsonwebtoken';
 
 import {
-  LOGIN_SUCCESS, GET_AVATAR, LOGIN_SUCCESS_ADMIN
+  LOGIN_SUCCESS, GET_AVATAR, LOGIN_SUCCESS_ADMIN, LOGIN_FAIL
 } from './config/type';
 
 const initialState = {};
@@ -25,15 +25,19 @@ const data = auth.isAuthenticated();
 
 //tức nếu còn jwt thì thằng isAuthenticated vẫn luôn đúng
 if (data) {
-  var decoded = jwt.verify(data.token, 'YOUR_secret_key');
-  if (decoded.isAdmin) {
-    store.dispatch({ type: LOGIN_SUCCESS_ADMIN });
-  }
-
-  store.dispatch({ type: LOGIN_SUCCESS });
-  store.dispatch({ type: GET_AVATAR });
-
-
+  jwt.verify(data.token, 'YOUR_secret_key',(err,decode)=>{
+    if(err){
+      store.dispatch({ type: LOGIN_FAIL });
+      return;
+    }
+    else{
+      if (decode.isAdmin) {
+        store.dispatch({ type: LOGIN_SUCCESS_ADMIN });
+      }
+      store.dispatch({ type: LOGIN_SUCCESS });
+      store.dispatch({ type: GET_AVATAR });
+    }
+  });
 }
 
 export default store;

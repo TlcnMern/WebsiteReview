@@ -5,11 +5,14 @@ import ViewDetailProfile from './ViewDetailProfile';
 import EditProfile from './EditProfile';
 import { connect } from 'react-redux';
 import { fetch, getPostUser, countIndex } from '../../action/userAction';
+import { logout } from '../../action/authAction';
+
 import { auth, API_URL } from '../../config/helper';
 import man from '../../public/images/man.png';
 import UploadAvatar from './UploadAvatar';
 import Loading from '../template/Loading';
 
+import jwt from 'jsonwebtoken';
 import ViewFollow from '../follow/ViewFollow';
 
 class viewProfile extends Component {
@@ -35,32 +38,43 @@ class viewProfile extends Component {
         this.callBackChangeStateOpen = this.callBackChangeStateOpen.bind(this);
     }
     componentDidMount() {
-        if (this.props.authenticate)
-            this.props.fetch(auth.isAuthenticated().user._id);
-        countIndex(auth.isAuthenticated().user._id)
-            .then(data => {
-                if (data.error) {
-                    console.log(data)
+        const data = auth.isAuthenticated();
+        //cho nay ma hoa token ra ==>admin thi chi dispatch admin va get avatar
+        if (data) {
+            jwt.verify(data.token, 'YOUR_secret_key', (err) => {
+                if (err) {
+                    this.props.logout()
                 }
                 else {
-                    this.setState({
-                        countIndex: data
-                    })
+                    if (this.props.authenticate)
+                        this.props.fetch(auth.isAuthenticated().user._id);
+                    countIndex(auth.isAuthenticated().user._id)
+                        .then(data => {
+                            if (data.error) {
+                                console.log(data)
+                            }
+                            else {
+                                this.setState({
+                                    countIndex: data
+                                })
+                            }
+                        });
+
+                    getPostUser(auth.isAuthenticated().user._id)
+                        .then(data => {
+                            if (data.error) {
+                                console.log(data);
+                            }
+                            else {
+                                this.setState({
+                                    postsUser: data,
+                                    isLoading: false
+                                })
+                            }
+                        })
                 }
             });
-
-        getPostUser(auth.isAuthenticated().user._id)
-            .then(data => {
-                if (data.error) {
-                    console.log(data);
-                }
-                else {
-                    this.setState({
-                        postsUser: data,
-                        isLoading: false
-                    })
-                }
-            })
+        }
     }
 
     onClickProfile() {
@@ -152,7 +166,7 @@ class viewProfile extends Component {
                         <li><span onClick={this.onClickProfile} >About me</span></li>
                         <li className="actived"><span onClick={this.onClickFollow}>Theo dõi</span></li>
                     </ul>
-                    <ViewFollow/>
+                    <ViewFollow />
                 </div>
             );
     }
@@ -176,14 +190,14 @@ class viewProfile extends Component {
                 <div className="boxContent">
                     <div className="container">
                         <header>
-                            
+
                         </header>
                         <main>
                             <div className="row">
-                            <div className="left col-lg-4">
+                                <div className="left col-lg-4">
                                     <div className="photo-left">
                                         <img className="photo" src={urlAvatar} alt="img" />
-                                        <button className="btnPhotoin-remove btnChangeAvatar" onClick={this.onClickAvatar} type="button"><img src="https://img.icons8.com/cute-clipart/24/000000/camera.png" alt="icCamera" /><br/>Thay đổi ảnh đại diện</button>
+                                        <button className="btnPhotoin-remove btnChangeAvatar" onClick={this.onClickAvatar} type="button"><img src="https://img.icons8.com/cute-clipart/24/000000/camera.png" alt="icCamera" /><br />Thay đổi ảnh đại diện</button>
                                         {this.state.openUploadAvatar ? <UploadAvatar callBackChangeStateOpen={this.callBackChangeStateOpen} open={this.state.openUploadAvatar} /> : <div></div>}
                                     </div>
                                     <span className="viewprofile-name">{this.props.profile.name}</span>
@@ -219,8 +233,8 @@ function mapStateToProp(state) {
     return {
         authenticate: state.auth.isAuthenticated,
         profile: state.user.profile,
-        avatar:state.user.avatar
+        avatar: state.user.avatar
     }
 }
 
-export default connect(mapStateToProp, { fetch })(viewProfile);
+export default connect(mapStateToProp, { fetch, logout })(viewProfile);

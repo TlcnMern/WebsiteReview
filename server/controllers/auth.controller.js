@@ -26,7 +26,8 @@ const signin = (req, res) => {
             const token = jwt.sign({
                 _id: user._id,
                 isAdmin: result
-            }, config.jwtSecret);
+            }, config.jwtSecret,
+            { expiresIn: 30 });
 
             return res.json({
                 token,
@@ -37,10 +38,37 @@ const signin = (req, res) => {
     })
 };
 
-const requireSignin = expressJwt({
-    secret: config.jwtSecret,
-    userProperty: 'auth'
-})
+// const requireSignin = expressJwt({
+//     secret: config.jwtSecret,
+//     userProperty: 'auth'
+// })
+
+const requireSignin = (req, res, next) => {
+    let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
+    if (token.startsWith('Bearer ')) {
+      // Remove Bearer from string
+      token = token.slice(7, token.length);
+    }
+  
+    if (token) {
+      jwt.verify(token, config.secret, (err, decoded) => {
+        if (err) {
+          return res.json({
+            success: false,
+            message: 'Token is not valid'
+          });
+        } else {
+          req.auth = decoded;
+          next();
+        }
+      });
+    } else {
+      return res.json({
+        success: false,
+        message: 'Auth token is not supplied'
+      });
+    }
+  };
 
 const hasAuthorization = (req, res, next) => {
     const authorized = req.profile && req.auth && req.profile._id == req.auth._id
