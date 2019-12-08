@@ -5,7 +5,6 @@ import { getQuantityUsersEachMonth,getQuantityPostFollowThemeEachMonth } from '.
 import Loading from '../../template/Loading';
 
 class Chart extends Component {
-
     state = {
         isLoadingLine:true,
         isLoadingGoogle:true,
@@ -90,7 +89,6 @@ class Chart extends Component {
                 console.log(data);
             }
             else {
-                console.log(data)
                 var t1,t2,t3,t4,t5,t6,t7,t8,
                 t9,t10,t11,t12;
                 data.forEach(element=>{

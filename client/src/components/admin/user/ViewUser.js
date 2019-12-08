@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 class ViewPost extends Component {
 
     render() {
-        console.log(this.props.user)
         return (
             <tr className="body table-row">
                 <td className="col1">{this.props.stt}</td>

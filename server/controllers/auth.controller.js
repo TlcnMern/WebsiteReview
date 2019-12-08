@@ -27,7 +27,7 @@ const signin = (req, res) => {
                 _id: user._id,
                 isAdmin: result
             }, config.jwtSecret,
-            { expiresIn: 30 });
+            { expiresIn: '1h' });
 
             return res.json({
                 token,

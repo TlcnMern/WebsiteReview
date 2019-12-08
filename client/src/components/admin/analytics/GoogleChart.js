@@ -32,6 +32,7 @@ class GoogleChart extends Component {
                                     ['Tháng 11', 1030, 540, 350,999],
                                     ['Tháng 12', 930, 490, 260,1000],
                                 ]}
+                                // data={this.props.data}
                                 options={{
                                     // Material design options
                                     chart: {
