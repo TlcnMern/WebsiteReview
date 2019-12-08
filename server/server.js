@@ -3,8 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const PORT = 4000;
 const config=require('./config/config');
+const PORT = config.port;
 
 const aclConfig =require('./config/acl-config');
 
@@ -33,8 +33,17 @@ function authorizationSetup() {
     const userRoutes=require('./routes/user.routes');
     const authRouters=require('./routes/auth.routes');
     const postRouters=require('./routes/post.routes');
+    const ratingRouters=require('./routes/rating.routes');
+    const commentRouters=require('./routes/comment.routes');
+    const adminRouter=require('./routes/admin.routes');
+
     app.use('/', userRoutes);
     app.use('/auth',authRouters);
     app.use('/post',postRouters);
+    app.use('/post',commentRouters);
+    app.use('/rating',ratingRouters);
+
+    app.use('/admin',adminRouter);
+
 }
   

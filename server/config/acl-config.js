@@ -14,6 +14,13 @@ const dbConnection=(dbConnection) => {
         {resources:'/users/editProfile',permissions:'put'},
         {resources:'/post/deleteComment',permissions:'*'}
       ]
+    },
+    {
+      roles: 'admin',
+      allows: [
+        {resources:'/users/editProfile',permissions:'put'},
+        {resources:'/post/deleteComment',permissions:'*'}
+      ]
     }
   ]);
 

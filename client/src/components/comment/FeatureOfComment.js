@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { auth } from '../../action/helper';
-import { deleteComment } from '../../action/postAction';
+import { deleteComment } from '../../action/commentAction';
 import { connect } from 'react-redux';
 import MenuItem from "@material-ui/core/MenuItem"
 import DropDownMenu from 'material-ui/DropDownMenu';

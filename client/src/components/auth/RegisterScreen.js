@@ -52,9 +52,9 @@ class Register extends Component {
 
                     <input type="text" className="second" name="email" placeholder="Enter your Email" onChange={this.handleChange} required />
                     <span className="symbol-input100"><i className="fa fa-envelope" aria-hidden="true"></i></span>
-                    <span className="symbol-input100"><i className="fa fa-venus-mars" aria-hidden="true"></i></span>
+                    
 
-                    <input type="password" className="second" name="password" placeholder="Enter your NamePassword" onChange={this.handleChange} required />
+                    <input type="password" className="second" name="password" placeholder="Enter your Password" onChange={this.handleChange} required />
                     <span className="symbol-input100"><i className="fa fa-lock" aria-hidden="true"></i></span>
 
                     <input type="password" className="second" name="confirmPassword" placeholder="Confirm your Password" onChange={this.handleChange} required />

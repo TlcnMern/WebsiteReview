@@ -5,14 +5,11 @@ const router = express.Router();
 const {aclStore}=require('../helpers/acl-store');
 const aclLibrary=aclStore.acl;
 
-//register
 router.route('/users').post(controllerUser.register);
-
-//get info user
 router.route('/users/:userID').get(controllerUser.getInfoUser);
-
-//edit profile
 router.route('/users/editProfile/:userID').put(controllerAuth.requireSignin,controllerAuth.hasAuthorization,aclLibrary.middleware(2),controllerUser.update)
+router.route('/users/getPostUser/:userId').get(controllerUser.getPostUser);
+router.route('/users/countIndex/:userId').get(controllerUser.countIndex);
 
 //follow
 router.route('/users/checkFollow/:userID').post(controllerAuth.requireSignin,controllerUser.checkFollow);

@@ -22,6 +22,7 @@
     "mongoose": "^5.7.1",
     "nodemon": "^1.19.2",
     "passport": "^0.4.0",
+    "passport-facebook-token": "^3.3.0",
     "passport-google-plus-token": "^2.1.0",
     "socket.io": "^2.3.0"
   }

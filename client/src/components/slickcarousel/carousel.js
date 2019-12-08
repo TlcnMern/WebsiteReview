@@ -22,7 +22,6 @@ export default class MultipleItems extends Component {
           console.log(data)
         }
         else {
-          console.log(data);
           this.setState({
             posts: data
           })
@@ -39,15 +38,16 @@ export default class MultipleItems extends Component {
         dots: true,
         infinite: true,
         speed: 700,
-        slidesToShow: this.state.posts.length,
-        slidesToScroll: 3
+        slidesToShow:4,
+        slidesToScroll:  this.state.posts.length
       };
       return (
 
         <div className="thumbnailgallery ">
           <Slider {...settings}>
             {this.state.posts ? this.state.posts.map((item, i) => {
-              return <CardItem post={item} key={i} />
+              return (  
+                <CardItem post={item} key={i} />)
             }) : <div></div>
             }
           </Slider>
