@@ -6,9 +6,6 @@ import EditComment from './EditComment';
 import SubComment from './SubComment';
 import man from '../../public/images/man.png';
 import { Link } from 'react-router-dom';
-// import DropDownMenu from 'material-ui/DropDownMenu';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -113,15 +110,14 @@ class ViewComment extends Component {
         const open = Boolean(anchor);
         return (
             <div style={{ marginLeft: '20px', padding: '10px' }}>
-
                 <div className="row">
                     <div className="col-sm-1">
-                        <img className="anhdd" src={urlAvatar} style={{ width: '40px',borderRadius:'50%', height: '40px', marginRight: '5px' }} aria-hidden alt="Picture of me taking a photo of an image" />
+                        <img className="anhdd" src={urlAvatar} style={{ width: '40px', borderRadius: '50%', height: '40px', marginRight: '5px' }} aria-hidden alt="Picture of me taking a photo of an image" />
                     </div>
                     <div className="row col-sm-11">
                         <div className="ContentComment">
 
-                            <Link style={{fontWeight:'bold'}} to={
+                            <Link style={{ fontWeight: 'bold' }} to={
                                 {
                                     pathname: `/GuestViewProfile/${this.props.comment.commentBy._id}`
                                 }}>
@@ -131,7 +127,7 @@ class ViewComment extends Component {
 
                             <span >
                                 {this.state.edit ? <EditComment callBack={this.onCallBack.bind(this)} content={this.props.comment.content} commentId={this.props.comment._id} /> :
-                                    <em style={{fontStyle:'normal',fontSize:'14px'}}>{this.props.comment.content}</em>
+                                    <em style={{ fontStyle: 'normal', fontSize: '14px' }}>{this.props.comment.content}</em>
                                 }
                             </span>
 
@@ -140,13 +136,6 @@ class ViewComment extends Component {
                             // cho thằng viết ra có 2 chức năng này
                             this.state.isAuthorized && (
                                 <div >
-                                    {/* <MuiThemeProvider>
-                                        <DropDownMenu onClickAway={this.handleClose}>
-                                            <MenuItem onClick={this.onClickEdit.bind(this)} ><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</MenuItem>
-                                            <MenuItem onClick={this.onDeleteComment.bind(this)}><i className="fa fa-trash-o" aria-hidden="true"></i> Delete</MenuItem>
-                                        </DropDownMenu>
-                                    </MuiThemeProvider> */}
-
                                     <Button
                                         ref={anchor}
                                         aria-controls={open ? 'menu-list-grow' : undefined}
@@ -176,17 +165,12 @@ class ViewComment extends Component {
                             )}
                     </div>
                 </div>
-
                 <div>
                     <span style={{ fontSize: '10px', fontStyle: 'italic', color: 'rgb(192, 194, 196)', marginLeft: '50px' }}>
-                        {new Intl.DateTimeFormat('en-GB', {
-                            month: '2-digit',
-                            day: '2-digit',
-                            year: 'numeric',
-                        }).format(new Date(this.props.comment.created))}
+                        {auth.formatDate(new Date(this.props.comment.created))}
                     </span>
                     {this.props.isAuthenticated &&
-                        <button onClick={this.onClickReply.bind(this)} className="btn btn-link" style={{ marginLeft: '10px',fontSize:'11px',fontStyle:'Italic' }}>Trả lời</button>
+                        <button onClick={this.onClickReply.bind(this)} className="btn btn-link" style={{ marginLeft: '10px', fontSize: '11px', fontStyle: 'Italic' }}>Trả lời</button>
                     }
                     {this.renderReply()}
                 </div>

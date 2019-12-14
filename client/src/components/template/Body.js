@@ -474,7 +474,6 @@ class MainFeed extends Component {
       return (
         <div className="btnDangNhap" id="clsbtnDangNhap">
           <Link to="/Login">  <button id="btnUser" type="button" onClick={this.clickUser}>Đăng Nhập</button></Link>
-
         </div>
       );
   }

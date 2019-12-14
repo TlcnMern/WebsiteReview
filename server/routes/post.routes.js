@@ -11,6 +11,8 @@ router.route('/getDetailPost/:postId').get(controllerPost.getDetailPost);
 router.route('/getTopListPostFollowTheme/:theme').get(controllerPost.getTopListPostFollowTheme);
 router.route('/searchPost').get(controllerPost.searchPost);
 router.route('/sortPost').get(controllerPost.sortPost);
+router.route('/getPostPaginate/:page').get(controllerPost.getPostPaginate);
+
 
 router.param('userID', controllerUser.UserById);
 router.param('postId', controllerPost.postByID);

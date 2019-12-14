@@ -59,11 +59,10 @@ const getComment=(req,res)=>{
   })
 }
   //add comment
-const addComment=(req,res,next)=>{
+const addComment=(req,res)=>{
   let comment=new Comment(req.body);
   comment.save((err, result) => {
     if (err) {
-      console.log(err);
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
       })

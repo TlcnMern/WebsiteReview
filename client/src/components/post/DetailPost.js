@@ -27,10 +27,20 @@ class DetailPost extends Component {
             nav2: null,
             youtubeId:null
         }
+        this.getInfodetailPost=this.getInfodetailPost.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps){
+        const postId = nextProps.match.params.postId;
+        this.getInfodetailPost(postId)
     }
 
     componentDidMount() {
         const postId = this.props.match.params.postId;
+        this.getInfodetailPost(postId);
+    }
+
+    getInfodetailPost(postId){
         calculateRaingtingEachPost();
         getDetailPost(postId).then((data) => {
             if (data.error) {
@@ -87,7 +97,6 @@ class DetailPost extends Component {
         );
     }
     render() {
-        console.log('alo')
         if (this.state.post === null) {
             return (
                 <div className="row">

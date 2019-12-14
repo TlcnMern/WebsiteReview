@@ -60,7 +60,6 @@ const getNewFeeds = (req, res) => {
     // })
     .sort({ 'created': -1 })
     .exec((err, posts) => {
-
       if (err) {
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
@@ -70,6 +69,18 @@ const getNewFeeds = (req, res) => {
       res.json(posts);
     })
 }
+
+const getPostPaginate = (req, res) => {
+  const page = req.params.page;
+  Post.paginate({}, { page: page, limit: 10 }, function(err, result){
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(result);
+  })
+};
 
 const getPostFeatured = (req, res) => {
 
@@ -187,5 +198,6 @@ module.exports = {
   getPostFeatured: getPostFeatured,
   getTopListPostFollowTheme: getTopListPostFollowTheme,
   searchPost: searchPost,
-  sortPost: sortPost
+  sortPost: sortPost,
+  getPostPaginate:getPostPaginate
 }

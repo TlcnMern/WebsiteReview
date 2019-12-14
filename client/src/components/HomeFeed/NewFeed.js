@@ -11,6 +11,9 @@ class NewFeed extends Component {
     this.state = {
       postList: []
     };
+  }
+
+  componentDidMount() {
     GetNewFeeds().then((data) => {
       if (data.error)
         console.log(data.error);
@@ -20,10 +23,10 @@ class NewFeed extends Component {
       }
     });
   }
-  
+
   render() {
-    if(!this.state.postList){
-      return <Loading/>
+    if (!this.state.postList) {
+      return <Loading />
     }
     return (
       <PostList posts={this.state.postList} />

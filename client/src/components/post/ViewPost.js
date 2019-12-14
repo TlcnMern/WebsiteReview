@@ -6,7 +6,6 @@ import { API_URL } from '../../config/helper';
 import man from '../../public/images/man.png';
 import Badge from '@material-ui/core/Badge';
 
-
 class ViewPost extends Component {
     constructor(props) {
         super(props);
@@ -14,9 +13,7 @@ class ViewPost extends Component {
             isLoading: true,
             point: null
         };
-
     }
-
     onClickComment() {
         this.setState({ renderComment: true });
     };
@@ -44,7 +41,7 @@ class ViewPost extends Component {
                         <img id="imgSP" src={`${API_URL}/` + this.props.post.photo[0]} alt="imgDemo1" /><br />
                         <Link to="SearchSP">{this.props.post.productReview}</Link>
                         <span>
-                            <span> <Rating rating={this.props.post.pointRating.point - 1} disabled={true} /></span>
+                            <span> <Rating key={this.props.post._id} rating={this.props.post.pointRating.point - 1} disabled={true} /></span>
                         </span>
                     </div>
                 </div>
@@ -82,7 +79,6 @@ class ViewPost extends Component {
                     <p>{this.props.post.contentSummary}</p>
                     <div className="rateBar">
                         <span className="rateBar-Like"><img src="https://img.icons8.com/ios/20/000000/like.png" alt="Like" /></span>
-
                         <Link to={
                             {
                                 pathname: `/DetailPost/${this.props.post._id}`

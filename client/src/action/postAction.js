@@ -37,6 +37,22 @@ export const GetNewFeeds = () => {
         });
 };
 
+export const getPostPaginate = (page) => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    return axios.get(`${API_URL}/post/getPostPaginate/`+page, config)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return err;
+        });
+};
+
 export const GetPostFeatured = () => {
     const config = {
         headers: {
