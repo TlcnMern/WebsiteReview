@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
-import 'font-awesome/css/font-awesome.min.css';
-import "../../public/stylesheets/partials/style.css"
 import PostList from '../post/PostList';
 import { GetNewFeeds } from '../../action/postAction';
 import Loading from '../template/Loading';
+import { auth } from '../../config/helper';
 class NewFeed extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +12,13 @@ class NewFeed extends Component {
   }
 
   componentDidMount() {
-    GetNewFeeds().then((data) => {
+    var userId=null;
+    var jwt=auth.isAuthenticated();
+    if(jwt){
+      userId=jwt.user._id;
+    }
+    console.log(userId)
+    GetNewFeeds(userId).then((data) => {
       if (data.error)
         console.log(data.error);
       else {
@@ -34,7 +38,4 @@ class NewFeed extends Component {
 
   }
 }
-
-
-
 export default NewFeed;

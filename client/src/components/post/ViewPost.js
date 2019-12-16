@@ -35,7 +35,7 @@ class ViewPost extends Component {
 
         return (
             <div className="row clsNEWFEED fadeInDown">
-                <Link to="Theme" id="btnDetailTheme"><span style={{ textTransform: 'capitalize' }}>{this.props.post.theme}</span></Link>
+                <Link to={'/'+this.props.post.theme} id="btnDetailTheme"><span style={{ textTransform: 'capitalize' }}>{this.props.post.theme}</span></Link>
                 <div className="col-sm-3">
                     <div className="imgDD FadeIn-load">
                         <img id="imgSP" src={`${API_URL}/` + this.props.post.photo[0]} alt="imgDemo1" /><br />

@@ -47,8 +47,6 @@ class HomeFeed extends Component {
                                 </Link>
                             </div>
                                 <Carousel theme='food'/>
-
-
                             </div>
                             <div className="box-home fadeInDown">
                                 <div className="header-list-index " style={{ margintop: '0px' }}><span className="title-list-index ">ĐI ĐÂU THÌ TỐT</span>

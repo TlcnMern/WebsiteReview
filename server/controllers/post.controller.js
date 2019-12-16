@@ -48,7 +48,14 @@ const create = (req, res) => {
 }
 
 const getNewFeeds = (req, res) => {
-  Post.find({hiden:null,state:true})
+  var query={
+    hiden:null,
+    state:true
+  }
+  if(req.profile){
+    query.postedBy= { $in : req.profile.following }
+  }
+  Post.find(query)
     .populate('postedBy', '_id name avatar')
     // .populate({
     //   path:'comments',
@@ -65,14 +72,14 @@ const getNewFeeds = (req, res) => {
           error: errorHandler.getErrorMessage(err)
         })
       }
-      posts = posts.slice(0, 3);
+      posts = posts.slice(0, 5);
       res.json(posts);
     })
 }
 
 const getPostPaginate = (req, res) => {
   const page = req.params.page;
-  Post.paginate({}, { page: page, limit: 10 }, function(err, result){
+  Post.paginate({hiden:null,state:true}, {populate:{path:'postedBy',select:'_id name avatar'}, page: page, limit: 10 }, function(err, result){
     if (err) {
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)
@@ -83,7 +90,6 @@ const getPostPaginate = (req, res) => {
 };
 
 const getPostFeatured = (req, res) => {
-
   Post.find({hiden:null,state:true})
     .populate('postedBy', '_id name avatar')
     .sort({ 'pointRating.totalRate': -1 })

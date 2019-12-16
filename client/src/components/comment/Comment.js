@@ -4,6 +4,7 @@ import { addComment } from '../../action/commentAction';
 import { connect } from 'react-redux';
 import ViewComment from './ViewComment';
 import man from '../../public/images/man.png';
+import Alert from '../template/Alert';
 
 class Comment extends Component {
     state = {
@@ -52,6 +53,9 @@ class Comment extends Component {
                     <hr />
                 </div>
             );
+        }
+        else {
+            return <Alert/>
         }
 
     };

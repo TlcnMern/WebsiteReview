@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_URL } from '../config/helper';
 
-export const newPost = (userID, credentials, post) => {
+export const newPost = (userId, credentials, post) => {
     const config = {
         headers: {
             'Accept': 'application/json',
@@ -11,7 +11,7 @@ export const newPost = (userID, credentials, post) => {
 
     const body = post;
 
-    return axios.post(`${API_URL}/post/new/` + userID, body, config)
+    return axios.post(`${API_URL}/post/new/` + userId, body, config)
         .then(res => {
             return true;
         })
@@ -21,14 +21,14 @@ export const newPost = (userID, credentials, post) => {
         });
 }
 
-export const GetNewFeeds = () => {
+export const GetNewFeeds = (userId) => {
     const config = {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
     }
-    return axios.get(`${API_URL}/post/NewFeeds`, config)
+    return axios.get(`${API_URL}/post/newFeeds/`+userId, config)
         .then(res => {
             return res.data;
         })

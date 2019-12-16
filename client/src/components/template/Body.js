@@ -124,22 +124,22 @@ class MainFeed extends Component {
             </Link>
           </li>
           <li>
-            <Link to="/FilmFeed" onClick={this.onClickFilm}>
+            <Link to="/Film" onClick={this.onClickFilm}>
               <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh" /> Phim ảnh
             </Link>
           </li>
           <li>
-            <Link to="/BookFeed" onClick={this.onClickBook}>
+            <Link to="/Book" onClick={this.onClickBook}>
               <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen" /> Sách / Truyện
             </Link>
           </li>
           <li>
-            <Link to="/FoodFeed" onClick={this.onClickFood}>
+            <Link to="/Food" onClick={this.onClickFood}>
               <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong" /> Ăn uống
             </Link>
           </li>
           <li>
-            <Link to="/TravelFeed" onClick={this.onClickTravel}>
+            <Link to="/Trip" onClick={this.onClickTravel}>
               <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich" /> Du lịch
             </Link>
           </li>
@@ -156,22 +156,22 @@ class MainFeed extends Component {
             </Link>
           </li>
           <li>
-            <Link to="/FilmFeed" className="active-Left">
+            <Link to="/Film" className="active-Left">
               <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh" /> Phim ảnh
             </Link>
           </li>
           <li>
-            <Link to="/BookFeed" onClick={this.onClickBook}>
+            <Link to="/Book" onClick={this.onClickBook}>
               <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen" /> Sách / Truyện
             </Link>
           </li>
           <li>
-            <Link to="/FoodFeed" onClick={this.onClickFood}>
+            <Link to="/Food" onClick={this.onClickFood}>
               <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong" /> Ăn uống
             </Link>
           </li>
           <li>
-            <Link to="/TravelFeed" onClick={this.onClickTravel}>
+            <Link to="/Trip" onClick={this.onClickTravel}>
               <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich" /> Du lịch
             </Link>
           </li>
@@ -188,22 +188,22 @@ class MainFeed extends Component {
             </Link>
           </li>
           <li>
-            <Link to="/FilmFeed" onClick={this.onClickFilm} >
+            <Link to="/Film" onClick={this.onClickFilm} >
               <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh" /> Phim ảnh
             </Link>
           </li>
           <li>
-            <Link to="/BookFeed" className="active-Left"  >
+            <Link to="/Book" className="active-Left"  >
               <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen" /> Sách / Truyện
             </Link>
           </li>
           <li>
-            <Link to="/FoodFeed" onClick={this.onClickFood}>
+            <Link to="/Food" onClick={this.onClickFood}>
               <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong" /> Ăn uống
             </Link>
           </li>
           <li>
-            <Link to="/TravelFeed" onClick={this.onClickTravel}>
+            <Link to="/Trip" onClick={this.onClickTravel}>
               <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich" /> Du lịch
             </Link>
           </li>
@@ -217,22 +217,22 @@ class MainFeed extends Component {
             </Link>
           </li>
           <li>
-            <Link to="/FilmFeed" onClick={this.onClickFilm} >
+            <Link to="/Film" onClick={this.onClickFilm} >
               <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh" /> Phim ảnh
             </Link>
           </li>
           <li>
-            <Link to="/BookFeed" onClick={this.onClickBook}>
+            <Link to="/Book" onClick={this.onClickBook}>
               <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen" /> Sách / Truyện
             </Link>
           </li>
           <li>
-            <Link to="/FoodFeed" className="active-Left">
+            <Link to="/Food" className="active-Left">
               <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong" /> Ăn uống
             </Link>
           </li>
           <li>
-            <Link to="/TravelFeed" onClick={this.onClickTravel}>
+            <Link to="/Trip" onClick={this.onClickTravel}>
               <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich" /> Du lịch
             </Link>
           </li>
@@ -248,22 +248,22 @@ class MainFeed extends Component {
             </Link>
           </li>
           <li>
-            <Link to="/FilmFeed" onClick={this.onClickFilm} >
+            <Link to="/Film" onClick={this.onClickFilm} >
               <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh" /> Phim ảnh
             </Link>
           </li>
           <li>
-            <Link to="/BookFeed" onClick={this.onClickBook}>
+            <Link to="/Book" onClick={this.onClickBook}>
               <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen" /> Sách / Truyện
             </Link>
           </li>
           <li>
-            <Link to="/FoodFeed" onClick={this.onClickFood}>
+            <Link to="/Food" onClick={this.onClickFood}>
               <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong" /> Ăn uống
             </Link>
           </li>
           <li>
-            <Link to="/TravelFeed" className="active-Left" >
+            <Link to="/Trip" className="active-Left" >
               <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich" /> Du lịch
             </Link>
           </li>
@@ -281,22 +281,22 @@ class MainFeed extends Component {
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/FilmFeed" onClick={this.onClickFilm}>
+        <Link to="/Film" onClick={this.onClickFilm}>
             <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/>
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/BookFeed" onClick={this.onClickBook}>
+        <Link to="/Book" onClick={this.onClickBook}>
            <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/>
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/FoodFeed" onClick={this.onClickFood}>
+        <Link to="/Food" onClick={this.onClickFood}>
            <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/>
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/TravelFeed" onClick={this.onClickTravel}>
+        <Link to="/Trip" onClick={this.onClickTravel}>
            <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/>
         </Link>
         </div>
@@ -313,22 +313,22 @@ class MainFeed extends Component {
         </Link>
         </div>
         <div className="headerMenu-item active-Left">
-        <Link to="/FilmFeed">
+        <Link to="/Film">
             <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/>
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/BookFeed" onClick={this.onClickBook}>
+        <Link to="/Book" onClick={this.onClickBook}>
             <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/>
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/FoodFeed" onClick={this.onClickFood}>
+        <Link to="/Food" onClick={this.onClickFood}>
             <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/>
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/TravelFeed" onClick={this.onClickTravel}>
+        <Link to="/Trip" onClick={this.onClickTravel}>
             <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/>
         </Link>
         </div>
@@ -345,22 +345,22 @@ class MainFeed extends Component {
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/FilmFeed" onClick={this.onClickFilm} >
+        <Link to="/Film" onClick={this.onClickFilm} >
             <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/>
         </Link>
         </div>
         <div className="headerMenu-item active-Left">
-        <Link to="/BookFeed">
+        <Link to="/Book">
             <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/>
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/FoodFeed" onClick={this.onClickFood}>
+        <Link to="/Food" onClick={this.onClickFood}>
             <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/>
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/TravelFeed" onClick={this.onClickTravel}>
+        <Link to="/Trip" onClick={this.onClickTravel}>
             <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/>
         </Link>
         </div>
@@ -374,22 +374,22 @@ class MainFeed extends Component {
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/FilmFeed" onClick={this.onClickFilm} >
+        <Link to="/Film" onClick={this.onClickFilm} >
             <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/>
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/BookFeed" onClick={this.onClickBook}>
+        <Link to="/Book" onClick={this.onClickBook}>
             <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/>
         </Link>
         </div>
         <div className="headerMenu-item active-Left">
-        <Link to="/FoodFeed">
+        <Link to="/Food">
             <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/>
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/TravelFeed" onClick={this.onClickTravel}>
+        <Link to="/Trip" onClick={this.onClickTravel}>
             <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/>
         </Link>
         </div>
@@ -405,22 +405,22 @@ class MainFeed extends Component {
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/FilmFeed" onClick={this.onClickFilm} >
+        <Link to="/Film" onClick={this.onClickFilm} >
             <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/>
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/BookFeed" onClick={this.onClickBook}>
+        <Link to="/Book" onClick={this.onClickBook}>
             <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/>
         </Link>
         </div>
         <div className="headerMenu-item">
-        <Link to="/FoodFeed" onClick={this.onClickFood}>
+        <Link to="/Food" onClick={this.onClickFood}>
             <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/>
         </Link>
         </div>
         <div className="headerMenu-item active-Left">
-        <Link to="/TravelFeed" >
+        <Link to="/Trip" >
             <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/>
         </Link>
         </div>

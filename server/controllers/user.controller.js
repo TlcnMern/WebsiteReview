@@ -51,8 +51,9 @@ const register = (req, res) => {
 };
 
 const getInfoUser = (req, res) => {
-  const userID = req.params.userID;
-  User.findById(userID)
+
+  const userId = req.params.userId;
+  User.findById(userId)
     .populate('followers', '_id name avatar')
     .populate('following', '_id name avatar')
     .exec((err, user) => {
@@ -69,8 +70,12 @@ const getInfoUser = (req, res) => {
     });
 }
 
-const UserById = (req, res, next, userID) => {
-  User.findById(userID)
+const UserById = (req, res, next, userId) => {
+  if(userId==='null'){
+    next();
+    return;
+  }
+  User.findById(userId)
     .populate('following', '_id name')
     .populate('follower', '_id name')
     .exec((err, user) => {

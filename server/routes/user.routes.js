@@ -6,15 +6,15 @@ const {aclStore}=require('../helpers/acl-store');
 const aclLibrary=aclStore.acl;
 
 router.route('/users').post(controllerUser.register);
-router.route('/users/:userID').get(controllerUser.getInfoUser);
-router.route('/users/editProfile/:userID').put(controllerAuth.requireSignin,controllerAuth.hasAuthorization,aclLibrary.middleware(2),controllerUser.update)
+router.route('/users/:userId').get(controllerUser.getInfoUser);
+router.route('/users/editProfile/:userId').put(controllerAuth.requireSignin,controllerAuth.hasAuthorization,aclLibrary.middleware(2),controllerUser.update)
 router.route('/users/getPostUser/:userId').get(controllerUser.getPostUser);
 router.route('/users/countIndex/:userId').get(controllerUser.countIndex);
 
 //follow
-router.route('/users/checkFollow/:userID').post(controllerAuth.requireSignin,controllerUser.checkFollow);
+router.route('/users/checkFollow/:userId').post(controllerAuth.requireSignin,controllerUser.checkFollow);
 router.route('/users/follow').put(controllerAuth.requireSignin,controllerUser.addFollowing,controllerUser.addFollower);
 router.route('/users/unFollow').put(controllerAuth.requireSignin,controllerUser.removeFollowing, controllerUser.removeFollower)
 
-router.param('userID', controllerUser.UserById);
+router.param('userId', controllerUser.UserById);
 module.exports=router;

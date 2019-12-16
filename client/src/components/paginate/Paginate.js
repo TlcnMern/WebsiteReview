@@ -19,19 +19,39 @@ class Paginate extends Component {
         this.props.onCallbackChange(page);
     }
 
+    calculatorPage(){
+        var pager = this.props.pager;
+        var startPage, endPage;
+        if (pager.pages <= 10) {
+            // less than 10 total pages so show all
+            startPage = 1;
+            endPage = pager.pages;
+        } else {
+            // more than 10 total pages so calculate start and end pages
+            if (pager.page <= 6) {
+                startPage = 1;
+                endPage = 10;
+            } else if (pager.page + 4 >= pager.pages) {
+                startPage = pager.pages - 9;
+                endPage = pager.pages;
+            } else {
+                startPage = pager.page - 5;
+                endPage = pager.page + 4;
+            }
+        }
+        var pages = [];
+        for (var i = startPage; i <= endPage; i++) {
+            pages.push(i);
+        }
+        return pages;
+    }
+
     render() {
         var pager = this.props.pager;
         if (!pager.pages || pager.pages <= 1) {
             // don't display pager if there is only 1 page
             return null;
         }
-
-        var pages = [];
-        for (var i = 1; i <= pager.pages; i++) {
-            pages.push(i);
-        }
-        console.log(this.props.pager)
-
         return (
             <ul className="pagination">
                 {/* kiem tra co phai dang o trang hien tai hay khong */}
@@ -47,7 +67,7 @@ class Paginate extends Component {
                         <button onClick={() => this.onClickChangePage(parseInt(pager.page) - 1)}>Previous</button>
                     }
                 </li>
-                {pages.map((page, index) =>
+                {this.calculatorPage().map((page, index) =>
                     <li key={index}>
                         <button className={parseInt(pager.page) === page ? 'activehehe' : ''} onClick={() => this.onClickChangePage(page)}>{page}</button>
                     </li>

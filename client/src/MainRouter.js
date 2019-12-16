@@ -39,10 +39,10 @@ class MainRouter extends Component {
         <Switch>
           <Route exact path="/" component={HomeFeed} />
           <Route exact path="/AllFeed" component={AllFeed} />
-          <Route exact path="/FilmFeed" component={FilmFeed} />
-          <Route exact path="/FoodFeed" component={FoodFeed} />
-          <Route exact path="/TravelFeed" component={TripFeed} />
-          <Route exact path="/BookFeed" component={BookFeed} />
+          <Route exact path="/Film" component={FilmFeed} />
+          <Route exact path="/Food" component={FoodFeed} />
+          <Route exact path="/Trip" component={TripFeed} />
+          <Route exact path="/Book" component={BookFeed} />
 
           <Route path="/Login" component={login} />
           <PrivateRoute path="/ViewProfile" component={ViewProfile} />
