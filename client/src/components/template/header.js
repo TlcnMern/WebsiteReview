@@ -9,7 +9,6 @@ import logo from '../../public/images/logo1.png';
 import BoxSearch from '../search/BoxSearch';
 
 class HeaderTemplate extends Component {
-
   render() {
     return (
       <div className="topnav">

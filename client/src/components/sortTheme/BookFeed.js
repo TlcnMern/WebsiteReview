@@ -209,7 +209,7 @@ class BookFeed extends Component {
                         <div className="col-sm-12">
                             <div className="box-home">
                                 <div className="clsSort">
-                                    <span className="clsSort-title">Sách là nguồn kiến thức bất tận</span>
+                                <img style={{width:'100%'}} src='https://s3-ap-southeast-1.amazonaws.com/wcomvn/wp-content/uploads/2018/12/25102623/BANNER20122018004-01.jpg' alt="img" />
                                     <button className="clsSort-btnSort" onClick={this.onClickFilter}>
                                         <i class="fa fa-sliders" aria-hidden="true" style={{ marginRight: '10px' }}></i>Bộ lọc
                                     </button>
