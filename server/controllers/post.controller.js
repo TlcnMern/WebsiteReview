@@ -57,14 +57,6 @@ const getNewFeeds = (req, res) => {
   }
   Post.find(query)
     .populate('postedBy', '_id name avatar')
-    // .populate({
-    //   path:'comments',
-    //   populate: { path: 'commentBy',select:'_id name' }
-    // })
-    // .populate({
-    //   path:'comments',
-    //   populate: { path: 'subComment.commentBy',select:'_id name'}
-    // })
     .sort({ 'created': -1 })
     .exec((err, posts) => {
       if (err) {

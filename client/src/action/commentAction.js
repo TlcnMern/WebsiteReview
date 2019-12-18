@@ -178,3 +178,61 @@ export const updateSubComment = (subCommentId, userId, credentials, content) => 
             return err;
         });
 }
+
+export const likeComment = (commentId,userId,credentials) => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + credentials.t
+        }
+    }
+
+    var body={commentId}
+    return axios.put(`${API_URL}/post/likeComment/`+userId, body, config)
+        .then(res => {
+            return true
+        })
+        .catch(err => {
+            return false;
+        });
+}
+
+export const unLikeComment = (commentId,userId,credentials)  => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + credentials.t
+        }
+    }
+
+    var body={commentId}
+    return axios.put(`${API_URL}/post/unLikeComment/`+userId, body, config)
+        .then(res => {
+            return true
+        })
+        .catch(err => {
+            return false;
+        });
+}
+
+export const checkLike = (commentId,userId)  => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    }
+
+    var params={commentId:commentId,userId:userId}
+    var body={params:params}
+
+    return axios.get(`${API_URL}/post/checkLike`, body, config)
+        .then(res => {
+            return true
+        })
+        .catch(err => {
+            return false;
+        });
+}

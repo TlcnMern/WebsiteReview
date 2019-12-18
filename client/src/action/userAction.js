@@ -69,7 +69,7 @@ export const update = (userID, credentials, user)=> dispatch => {
   const config = {
     headers: {
       'Accept': 'application/json',
-      'Authorization': 'bearer ' + credentials.t
+      'Authorization': 'Bearer ' + credentials.t
     }
   }
   const body = user;

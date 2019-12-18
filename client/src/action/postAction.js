@@ -5,7 +5,7 @@ export const newPost = (userId, credentials, post) => {
     const config = {
         headers: {
             'Accept': 'application/json',
-            'Authorization': 'bearer ' + credentials.t
+            'Authorization': 'Bearer ' + credentials.t
         }
     }
 

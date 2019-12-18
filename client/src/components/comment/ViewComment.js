@@ -6,7 +6,6 @@ import EditComment from './EditComment';
 import SubComment from './SubComment';
 import man from '../../public/images/man.png';
 import { Link } from 'react-router-dom';
-
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -14,6 +13,8 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+
+import Like from '../common/Like';
 
 class ViewComment extends Component {
     state = {
@@ -166,12 +167,15 @@ class ViewComment extends Component {
                     </div>
                 </div>
                 <div>
-                    <span style={{ fontSize: '10px', fontStyle: 'italic', color: 'rgb(192, 194, 196)', marginLeft: '50px' }}>
+                    {this.props.isAuthenticated && <Like commentId={this.props.comment._id} totalLike={this.props.comment.totalLike} />
+                    }
+                    {this.props.isAuthenticated &&
+                        <button onClick={this.onClickReply.bind(this)} className="btn btn-link" style={{ marginLeft: '10px', fontSize: '11px', fontStyle: 'Italic' }}>
+                            Trả lời</button>
+                    }
+                    <span style={{ fontSize: '10px', fontStyle: 'italic', color: 'rgb(192, 194, 196)', marginLeft: '10px' }}>
                         {auth.formatDate(new Date(this.props.comment.created))}
                     </span>
-                    {this.props.isAuthenticated &&
-                        <button onClick={this.onClickReply.bind(this)} className="btn btn-link" style={{ marginLeft: '10px', fontSize: '11px', fontStyle: 'Italic' }}>Trả lời</button>
-                    }
                     {this.renderReply()}
                 </div>
             </div>

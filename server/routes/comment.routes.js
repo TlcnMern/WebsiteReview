@@ -18,6 +18,10 @@ router.route('/checkAuthorizedSubComment/:userId').post(controllerAuth.requireSi
 router.route('/deleteSubComment/:userId').delete(controllerComment.deleteSubComment);
 router.route('/updateSubComment/:userId').put(controllerAuth.requireSignin,controllerAuth.hasAuthorization,controllerComment.updateSubComment);
 
+router.route('/likeComment/:userId').put(controllerComment.likeComment);
+router.route('/unLikeComment/:userId').put(controllerComment.unLikeComment);
+router.route('/checkLike').get(controllerComment.checkLike);
+
 router.param('userId', controllerUser.UserById);
 router.param('postId', controllerPost.postByID);
 module.exports=router;
