@@ -13,9 +13,11 @@ export const newPost = (userId, credentials, post) => {
 
     return axios.post(`${API_URL}/post/new/` + userId, body, config)
         .then(res => {
+            console.log(res.data)
             return true;
         })
         .catch(error => {
+            console.log(error)
             console.log(error.response);
             return error.response.data;
         });

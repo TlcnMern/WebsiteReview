@@ -1114,6 +1114,7 @@ main {
 .clsTomtat {
     border-bottom: 1px solid #d1d1d1;
     padding: 10px;
+    white-space: pre-wrap;
 }
 
 .TLBV {
@@ -1149,6 +1150,7 @@ main {
     text-align: justify;
     font-size: 14px;
     padding: 30px;
+    white-space: pre-wrap;
 }
 
 .anh-BV {

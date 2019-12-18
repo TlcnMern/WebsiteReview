@@ -114,13 +114,10 @@ class DetailPost extends Component {
                                 <div className="col-sm-5 TLBV">
                                     {this.renderSliderImage()}
                                 </div>
-                                {/* <FeatureOfComment/> */}
                                 <div className="col-sm-7 TomTat">
                                     <div className="SPBV">
                                         <span>{this.state.post.productReview}</span>
                                         <span> <Rating rating={this.state.post.pointRating.point - 1} disabled={true} /></span>
-
-
                                         <span style={{ fontSize: '13px' }}>Thể loại: <Link to="">{this.state.post.kind}</Link></span><br />
                                     </div>
                                     <div className="clsTomtat">
@@ -153,6 +150,7 @@ class DetailPost extends Component {
                             <div className="row MainBV ">
                                 <div className="col-sm-12 ND-BaiViet">
                                     <span style={{ padding: '10px' }}>{this.state.post.content}</span>
+                                    <br/><br/><br/>
                                     {this.state.youtubeId &&
                                         <Youtube youtubeId={this.state.youtubeId}/>
                                     }

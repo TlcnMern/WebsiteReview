@@ -5,16 +5,13 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import man from '../../public/images/man.png';
 import { Link } from 'react-router-dom';
-
 import { API_URL } from '../../config/helper';
-
 class ViewUsersFollow extends Component {
 
     state={
         user:this.props.user
     }
     render() {
-        console.log(this.state.user)
         const avatar = this.state.user.avatar;
         var urlAvatar = '';
         if (avatar) {
