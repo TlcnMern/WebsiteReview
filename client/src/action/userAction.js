@@ -5,13 +5,19 @@ import { returnErrors } from './errorActions';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  FETCH_USER, ERROR_RESPONSE, FOLLOW, FOLLOWED,GET_AVATAR,DISPATCH_BODY
+  FETCH_USER, ERROR_RESPONSE, FOLLOW, FOLLOWED,GET_AVATAR,DISPATCH_BODY, CLEAN_BODYADMIN
 } from '../config/type';
 
 //update info user
 export const dispatchBodyAdmin = ()=> dispatch => {
   dispatch({
     type: DISPATCH_BODY
+  });
+}
+
+export const cleanBodyAdmin = ()=> dispatch => {
+  dispatch({
+    type: CLEAN_BODYADMIN
   });
 }
 

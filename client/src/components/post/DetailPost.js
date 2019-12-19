@@ -55,6 +55,7 @@ class DetailPost extends Component {
                     post: data[0],
                     youtubeId:youtubeId
                 })
+                window.scrollTo(0, 0)
             }
         });
         if (this.props.isAuthenticated) {

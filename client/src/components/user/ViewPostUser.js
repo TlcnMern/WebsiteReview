@@ -11,19 +11,25 @@ class ViewPostUser extends Component {
             <div className="row clsViewPostUser">
                 <div className="col-lg-3">
                     <div className="imgDD">
-                        <img style={{marginBottom:'20px', maxWidth:'120px',maxHeight:'120px',width:'auto',height:'auto'}} id="imgSP" src={`${API_URL}/`+this.props.post.photo[0]} alt="imgDemo1" />
-                        <span style={{fontSize: '10px',fontWeight: 'normal',width: 'auto',maxWidth: '120px'}}>
+                        <img style={{ marginBottom: '20px', maxWidth: '120px', maxHeight: '120px', width: 'auto', height: 'auto' }} id="imgSP" src={`${API_URL}/` + this.props.post.photo[0]} alt="imgDemo1" />
+                        <span style={{ fontSize: '10px', fontWeight: 'normal', width: 'auto', maxWidth: '120px' }}>
                             {this.props.post.productReview}
                         </span>
                     </div>
                 </div>
                 <div className="col-lg-9">
                     <div>
-                        <Link to="SearchSP" className="ViewPostUser-title">{this.props.post.title}</Link><br/>
+                        <Link to={
+                            {
+                                pathname: `/DetailPost/${this.props.post._id}`
+                            }
+                        }>
+                            <span style={{ textTransform: 'uppercase' }} className="ViewPostUser-title">{this.props.post.title}</span>
+                        </Link><br />
                     </div>
                     <div className="text-muted ViewPostUser-detail" style={{ display: 'table-cell', verticalalign: 'middle', lineheight: '25px' }}>
                         <span>Chuyên mục: </span><Link to="Category"> {this.props.post.theme}</Link>
-                        <span style={{marginLeft:'10px'}}>
+                        <span style={{ marginLeft: '10px' }}>
                             {new Intl.DateTimeFormat('en-GB', {
                                 month: '2-digit',
                                 day: '2-digit',

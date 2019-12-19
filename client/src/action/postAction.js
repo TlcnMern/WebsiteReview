@@ -48,6 +48,7 @@ export const getPostPaginate = (page) => {
     }
     return axios.get(`${API_URL}/post/getPostPaginate/`+page, config)
         .then(res => {
+            console.log(res.data)
             return res.data;
         })
         .catch(err => {

@@ -55,7 +55,17 @@ const getComment = (req, res) => {
           error: errorHandler.getErrorMessage(err)
         })
       }
-      res.json(posts[0].comments);
+      var comments = posts[0].comments;
+
+      comments.sort(function (a, b) {
+        var keyA = a.totalLike,
+          keyB = b.totalLike;
+        // Compare the 2 dates
+        if (keyA < keyB) return 1;
+        if (keyA > keyB) return -1;
+        return 0;
+      });
+      res.json(comments);
     })
 }
 //add comment
@@ -79,7 +89,21 @@ const addComment = (req, res) => {
             error: errorHandler.getErrorMessage(err)
           })
         }
-        res.json(result2.comments);
+        var comments = result2.comments;
+  
+        comments.sort(function (a, b) {
+          var keyA = new Date(a.totalLike),
+            keyB = new Date(b.totalLike);
+          // Compare the 2 dates
+          if (keyA < keyB) return 1;
+          if (keyA > keyB) return -1;
+          return 0;
+        });
+
+        comments.splice(0,0,comments[comments.length-1])
+        comments.splice(comments.length-1,1)
+        
+        res.json(comments);
       })
   })
 }
@@ -108,7 +132,18 @@ const deleteComment = (req, res) => {
             error: errorHandler.getErrorMessage(err)
           })
         }
-        res.json(result2.comments)
+
+        var comments = result2.comments;
+
+        comments.sort(function (a, b) {
+          var keyA = a.totalLike,
+            keyB = b.totalLike;
+          // Compare the 2 dates
+          if (keyA < keyB) return 1;
+          if (keyA > keyB) return -1;
+          return 0;
+        });
+        res.json(comments)
       })
   });
 }
@@ -187,10 +222,10 @@ const addSubComment = (req, res, next) => {
 
 //like comment
 const likeComment = (req, res) => {
-  var like={};
-  like.likeBy=req.params.userId;
-  Comment.findByIdAndUpdate({ _id: req.body.commentId }, 
-    { $push: { likes: like },$inc: { totalLike: 1 }}, 
+  var like = {};
+  like.likeBy = req.params.userId;
+  Comment.findByIdAndUpdate({ _id: req.body.commentId },
+    { $push: { likes: like }, $inc: { totalLike: 1 } },
     { new: true })
     .exec((err, result) => {
       if (err || !result) {
@@ -206,10 +241,10 @@ const likeComment = (req, res) => {
 
 //unlike comment
 const unLikeComment = (req, res) => {
-  var like={};
-  like.likeBy=req.params.userId;
-  Comment.findByIdAndUpdate({ _id: req.body.commentId }, 
-    { $pull: { likes: like },$inc: { totalLike: -1 }})
+  var like = {};
+  like.likeBy = req.params.userId;
+  Comment.findByIdAndUpdate({ _id: req.body.commentId },
+    { $pull: { likes: like }, $inc: { totalLike: -1 } })
     .exec((err, result) => {
       if (err || !result) {
         return res.status(400).json({
@@ -225,19 +260,19 @@ const unLikeComment = (req, res) => {
 //check like
 const checkLike = (req, res) => {
   const temp = req.query;
-  var userId=temp.userId;
-  var commentId=temp.commentId;
+  var userId = temp.userId;
+  var commentId = temp.commentId;
   Comment.find({ _id: commentId },
-      { likes: { $elemMatch: {likeBy:userId } } }
+    { likes: { $elemMatch: { likeBy: userId } } }
   )
-      .exec((err, result) => {
-          if (err||!result[0].likes[0]) {
-              return res.status(401).json({
-                  error: "Dont have like"
-              })
-          }
-          res.json({success:true});
-      })
+    .exec((err, result) => {
+      if (err || !result[0].likes[0]) {
+        return res.status(401).json({
+          error: "Dont have like"
+        })
+      }
+      res.json({ success: true });
+    })
 }
 
 module.exports = {
@@ -250,7 +285,7 @@ module.exports = {
   checkAuthorizedSubComment: checkAuthorizedSubComment,
   deleteSubComment: deleteSubComment,
   updateSubComment: updateSubComment,
-  likeComment:likeComment,
-  unLikeComment:unLikeComment,
-  checkLike:checkLike
+  likeComment: likeComment,
+  unLikeComment: unLikeComment,
+  checkLike: checkLike
 }
