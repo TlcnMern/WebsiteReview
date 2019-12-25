@@ -8,6 +8,8 @@
     border-radius: 5px;
     margin-left: auto;
     margin-right: auto;
+    padding: 1px;
+    border-radius: 2px;
 }
 
 .pagination li button {
