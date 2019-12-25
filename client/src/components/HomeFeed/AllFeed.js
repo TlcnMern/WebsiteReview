@@ -72,9 +72,12 @@ class AllFeed extends Component {
                                         <Loading /> :
                                         <PostList posts={this.state.postList} />
                                 }
+                                <div className="row">
                                 {!this.state.isLoading &&
                                     <Paginate pager={this.state.pager} onCallbackChange={this.onCallbackChange} />
                                 }
+                                </div>
+                               
                             </div>
                         </div>
                     </div>
