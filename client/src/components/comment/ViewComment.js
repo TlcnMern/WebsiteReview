@@ -166,7 +166,7 @@ class ViewComment extends Component {
                             )}
                     </div>
                 </div>
-                <div>
+                <div className="clsToolCmt">
                     {this.props.isAuthenticated && <Like commentId={this.props.comment._id} totalLike={this.props.comment.totalLike} />
                     }
                     {this.props.isAuthenticated &&

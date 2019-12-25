@@ -59,10 +59,11 @@ class LikeButton extends Component {
     render() {
         const label = this.state.liked ? 'Unlike' : 'Like'
         return (
-            <div >
-                <button className="btn btn-primary" onClick={this.handleClick}>
+            <div className="clsLikecmt" >
+                <p className="txtLike">{this.props.totalLike} lượt thích</p>
+                <button className="btnLikecmt" onClick={this.handleClick}>
                     {label}</button>
-                <p>{this.props.totalLike}</p>
+                
             </div>
         );
     }

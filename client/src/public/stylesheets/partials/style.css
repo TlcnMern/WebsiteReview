@@ -2757,3 +2757,7 @@ For Reponesive */
 
 
 /* end */
+
+.clsToolCmt {
+    display: -webkit-inline-box;
+}
