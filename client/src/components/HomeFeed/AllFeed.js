@@ -7,13 +7,13 @@ import Paginate from '../paginate/Paginate';
 class AllFeed extends Component {
     state = {
         postList: [],
-        pager:{
-            total:null,
-            limit:null,
-            page:null,
-            pages:null
+        pager: {
+            total: null,
+            limit: null,
+            page: null,
+            pages: null
         },
-        isLoading:true
+        isLoading: true
     };
     componentDidMount() {
         getPostPaginate(1).then((data) => {
@@ -21,36 +21,37 @@ class AllFeed extends Component {
                 console.log(data.error);
             else {
                 if (data)
-                    this.setState({ 
+                    this.setState({
                         postList: data.docs,
-                        pager:{
-                            total:data.total,
-                            limit:data.limit,
-                            page:data.page,
-                            pages:data.pages
+                        pager: {
+                            total: data.total,
+                            limit: data.limit,
+                            page: data.page,
+                            pages: data.pages
                         },
-                        isLoading:false
+                        isLoading: false
                     })
             }
         });
     }
 
-    onCallbackChange=(page)=>{
+    onCallbackChange = (page) => {
         getPostPaginate(page).then((data) => {
             if (data.error)
                 console.log(data.error);
             else {
                 if (data)
-                    this.setState({ 
+                    this.setState({
                         postList: data.docs,
-                        pager:{
-                            total:data.total,
-                            limit:data.limit,
-                            page:data.page,
-                            pages:data.pages
+                        pager: {
+                            total: data.total,
+                            limit: data.limit,
+                            page: data.page,
+                            pages: data.pages
                         },
-                        isLoading:false
+                        isLoading: false
                     })
+                window.scrollTo(0, 0)
             }
         });
     }
@@ -71,8 +72,8 @@ class AllFeed extends Component {
                                         <Loading /> :
                                         <PostList posts={this.state.postList} />
                                 }
-                                {!this.state.isLoading&&
-                                <Paginate pager={this.state.pager} onCallbackChange={this.onCallbackChange}/>
+                                {!this.state.isLoading &&
+                                    <Paginate pager={this.state.pager} onCallbackChange={this.onCallbackChange} />
                                 }
                             </div>
                         </div>
