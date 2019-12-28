@@ -12,19 +12,20 @@ class NewFeed extends Component {
   }
 
   componentDidMount() {
-    var userId=null;
-    var jwt=auth.isAuthenticated();
-    if(jwt){
-      userId=jwt.user._id;
+    var userId = null;
+    var jwt = auth.isAuthenticated();
+    if (jwt) {
+      userId = jwt.user._id;
     }
-    console.log(userId)
     GetNewFeeds(userId).then((data) => {
       if (data.error)
         console.log(data.error);
       else {
         if (data.length > 0)
           this.setState({ postList: data })
+        window.scrollTo(0, 0)
       }
+
     });
   }
 

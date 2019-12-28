@@ -141,3 +141,61 @@ export const getDetailPost = (postId) => {
             return err;
         });
 };
+
+export const likePost = (postId,userId,credentials) => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + credentials.t
+        }
+    }
+
+    var body={postId}
+    return axios.put(`${API_URL}/post/likePost/`+userId, body, config)
+        .then(res => {
+            return true
+        })
+        .catch(err => {
+            return false;
+        });
+}
+
+export const unLikePost = (postId,userId,credentials)  => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + credentials.t
+        }
+    }
+
+    var body={postId}
+    return axios.put(`${API_URL}/post/unLikePost/`+userId, body, config)
+        .then(res => {
+            return true
+        })
+        .catch(err => {
+            return false;
+        });
+}
+
+export const checkLikePost = (postId,userId)  => {
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    }
+
+    var params={postId:postId,userId:userId}
+    var body={params:params}
+
+    return axios.get(`${API_URL}/post/checkLikePost`, body, config)
+        .then(res => {
+            return true
+        })
+        .catch(err => {
+            return false;
+        });
+}

@@ -201,6 +201,20 @@ const getPostUser = (req, res) => {
     })
 }
 
+const getFavoritePostOfUser = (req, res) => {
+  const userId = req.params.userId;
+  Post.find({ likes: { $elemMatch: { likeBy: userId } }})
+    .sort({ 'created': -1 })
+    .exec((err, posts) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(posts);
+    })
+}
+
 const countIndex = (req, res) => {
   const userId = req.params.userId;
   Post.find({ postedBy: userId })
@@ -245,5 +259,6 @@ module.exports = {
   removeFollowing: removeFollowing,
   removeFollower: removeFollower,
   getPostUser: getPostUser,
-  countIndex: countIndex
+  countIndex: countIndex,
+  getFavoritePostOfUser:getFavoritePostOfUser
 }

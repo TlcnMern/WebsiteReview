@@ -13,6 +13,9 @@ router.route('/searchPost').get(controllerPost.searchPost);
 router.route('/sortPost').get(controllerPost.sortPost);
 router.route('/getPostPaginate/:page').get(controllerPost.getPostPaginate);
 
+router.route('/likePost/:userId').put(controllerPost.likePost);
+router.route('/unLikePost/:userId').put(controllerPost.unLikePost);
+router.route('/checkLikePost').get(controllerPost.checkLikePost);
 
 router.param('userId', controllerUser.UserById);
 router.param('postId', controllerPost.postByID);

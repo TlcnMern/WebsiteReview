@@ -60,9 +60,12 @@ const getComment = (req, res) => {
       comments.sort(function (a, b) {
         var keyA = a.totalLike,
           keyB = b.totalLike;
-        // Compare the 2 dates
-        if (keyA < keyB) return 1;
-        if (keyA > keyB) return -1;
+        // Compare the 2 dates'
+        if(keyA>1 && keyB>1){
+          if (keyA < keyB) return 1;
+          if (keyA > keyB) return -1;
+        }
+
         return 0;
       });
       res.json(comments);

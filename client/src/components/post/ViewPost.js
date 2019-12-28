@@ -78,7 +78,7 @@ class ViewPost extends Component {
                     </div>
                     <p>{this.props.post.contentSummary}</p>
                     <div className="rateBar">
-                        <span className="rateBar-Like"><img src="https://img.icons8.com/ios/20/000000/like.png" alt="Like" /></span>
+                        {/* <span className="rateBar-Like"><img src="https://img.icons8.com/ios/20/000000/like.png" alt="Like" /></span> */}
                         <Link to={
                             {
                                 pathname: `/DetailPost/${this.props.post._id}`

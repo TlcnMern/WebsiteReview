@@ -188,6 +188,58 @@ const postByID = (req, res, next, id) => {
   })
 }
 
+const likePost = (req, res) => {
+  var like = {};
+  like.likeBy = req.params.userId;
+  Post.findByIdAndUpdate({ _id: req.body.postId },
+    { $push: { likes: like }, $inc: { totalLike: 1 } })
+    .exec((err, result) => {
+      if (err || !result) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      return res.status('200').json({
+        msg: "Added"
+      })
+    })
+}
+//check like
+const checkLikePost = (req, res) => {
+  const temp = req.query;
+  var userId = temp.userId;
+  var postId = temp.postId;
+  Post.find({ _id: postId },
+    { likes: { $elemMatch: { likeBy: userId } } }
+  )
+    .exec((err, result) => {
+      if (err || !result[0].likes[0]) {
+        return res.status(401).json({
+          error: "Dont have like"
+        })
+      }
+      res.json({ success: true });
+    })
+}
+
+//unlike
+const unLikePost = (req, res) => {
+  var like = {};
+  like.likeBy = req.params.userId;
+  Post.findByIdAndUpdate({ _id: req.body.postId },
+    { $pull: { likes: like }, $inc: { totalLike: -1 } })
+    .exec((err, result) => {
+      if (err || !result) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      return res.status('200').json({
+        msg: "unlike sucssess"
+      })
+    })
+}
+
 module.exports = {
   create: create,
   getNewFeeds: getNewFeeds,
@@ -197,5 +249,8 @@ module.exports = {
   getTopListPostFollowTheme: getTopListPostFollowTheme,
   searchPost: searchPost,
   sortPost: sortPost,
-  getPostPaginate:getPostPaginate
+  getPostPaginate:getPostPaginate,
+  likePost:likePost,
+  checkLikePost:checkLikePost,
+  unLikePost:unLikePost
 }

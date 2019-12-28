@@ -106,6 +106,17 @@ export const getPostUser = (userId) => {
     });
 }
 
+//get posts of user
+export const getFavoritePostOfUser = (userId) => {
+  return axios.get(`${API_URL}/users/getFavoritePostOfUser/` + userId)
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      return err;
+    });
+}
+
 export const countIndex = (userId) => {
   return axios.get(`${API_URL}/users/countIndex/` + userId)
     .then(res => {

@@ -9,6 +9,7 @@ router.route('/users').post(controllerUser.register);
 router.route('/users/:userId').get(controllerUser.getInfoUser);
 router.route('/users/editProfile/:userId').put(controllerAuth.requireSignin,controllerAuth.hasAuthorization,aclLibrary.middleware(2),controllerUser.update)
 router.route('/users/getPostUser/:userId').get(controllerUser.getPostUser);
+router.route('/users/getFavoritePostOfUser/:userId').get(controllerUser.getFavoritePostOfUser);
 router.route('/users/countIndex/:userId').get(controllerUser.countIndex);
 
 //follow

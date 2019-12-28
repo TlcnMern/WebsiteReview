@@ -513,7 +513,7 @@ class MainFeed extends Component {
             <div className="bg-white ">
               {
                 !this.props.isAuthenticated &&
-              <span style={{fontFamily:'monospace', textAlign:'center',display:'flex'}}>Đăng nhập hoặc Đăng ký để để đăng bài và tương tác với nhau.</span>
+              <span style={{fontFamily:'monospace', textAlign:'center',display:'flex'}}>Đăng nhập để để đăng bài và tương tác với nhau.</span>
               }
               <Link to="/NewPost">
                 <button type="button " className="btnDangBai ">Đăng bài</button>

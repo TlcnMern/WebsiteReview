@@ -45,12 +45,21 @@ const PostSchema = new mongoose.Schema({
     type: String
   }],
 
+  totalLike:{
+    type:Number,
+    default:0
+  },
+
   comments: [{ type: mongoose.Schema.ObjectId, ref: 'Comment' }],
 
   ratings: [{
     point: Number,
     created: { type: Date, default: Date.now },
     postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
+  }],
+  
+  likes:[{
+    likeBy:{ type: mongoose.Schema.ObjectId, ref: 'User'}
   }],
 
   state: {
