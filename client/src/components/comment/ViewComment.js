@@ -176,8 +176,9 @@ class ViewComment extends Component {
                     <span style={{ fontSize: '10px', fontStyle: 'italic', color: 'rgb(192, 194, 196)', marginLeft: '10px' }}>
                         {auth.formatDate(new Date(this.props.comment.created))}
                     </span>
-                    {this.renderReply()}
+                    
                 </div>
+                {this.renderReply()}
             </div>
         );
     }
