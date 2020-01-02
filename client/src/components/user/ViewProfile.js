@@ -223,6 +223,7 @@ class ViewProfile extends Component {
         else {
             urlAvatar = man;
         }
+        console.log(this.props.profile.pointTrust)
         return (
             <div>
                 <div className="boxContent">
@@ -253,6 +254,16 @@ class ViewProfile extends Component {
                                             <p className="number-stat">{this.state.countIndex.numberPost}</p>
                                             <p className="desc-stat">Uploads</p>
                                         </div>
+                                    </div>
+
+                                    <div className="row">
+                                        <p>Điểm uy tín: {this.props.profile.pointTrust &&this.props.profile.pointTrust.reputation}</p>
+                                    </div>
+                                    <div className="row">
+                                        <p>Điểm đóng góp: {this.props.profile.pointTrust &&this.props.profile.pointTrust.contribute}</p>
+                                    </div>
+                                    <div className="row">
+                                        <p>Điểm thành tích: {this.props.profile.pointTrust &&this.props.profile.pointTrust.achievement}</p>
                                     </div>
                                 </div>
                                 <div className="right col-lg-8">

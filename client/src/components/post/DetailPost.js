@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Comment from '../comment/Comment';
 import Rating from '../rating/Rating';
 import { auth } from '../../config/helper';
-import { getDetailPost, checkLikePost } from '../../action/postAction';
+import { getDetailPost } from '../../action/postAction';
 import { calculateRaingtingEachPost, checkRatingAndShow } from '../../action/ratingAction';
 import { connect } from 'react-redux';
 import { getComment } from '../../action/commentAction';
@@ -22,8 +22,6 @@ class DetailPost extends Component {
         this.state = {
             post: null,
             isLoading: true,
-            isLoadingFavorite: true,
-            checked: false,
             point: null,
             nav1: null,
             nav2: null,
@@ -77,21 +75,6 @@ class DetailPost extends Component {
                     })
                 }
             });
-            checkLikePost(postId, userId).then(data => {
-                if (!data) {
-                    console.log(data);
-                    this.setState({
-                        isLoadingFavorite: false
-                    })
-                }
-                else {
-                    console.log(data)
-                    this.setState({
-                        checked: true,
-                        isLoadingFavorite: false
-                    })
-                }
-            })
         }
 
         this.props.getComment(postId)
@@ -193,9 +176,7 @@ class DetailPost extends Component {
                                                 {
                                                     this.state.isLoading ? <Loading /> : <Rating rating={this.state.point} idPost={this.state.post._id} />
                                                 }
-                                                {!this.state.isLoadingFavorite &&
-                                                    <Favorite checked={this.state.checked} postId={this.state.post._id} />
-                                                }
+                                                <Favorite postId={this.state.post._id} />
                                             </div>
                                         )}
                                 </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { dispatchBodyAdmin } from '../../../action/userAction';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import { getUserList } from '../../../action/adminAction';
+import { getUserList,updatePointUser } from '../../../action/adminAction';
 import Loading from '../../template/Loading';
 import ViewUser from './ViewUser';
 
@@ -50,6 +50,9 @@ class UserList extends Component {
         };
         this.listUser(query)
     }
+    onClickUpdate = () => {
+        updatePointUser();
+    }
 
     render() {
         if(!this.props.isAuthenticatedAdmin){
@@ -68,7 +71,7 @@ class UserList extends Component {
                         </div>
                     </div>
                     <div className="PageQL col-sm-2">
-                        
+                        <button onClick={this.onClickUpdate}>Câp nhật điểm tín nhiệm người dùng</button>
                     </div>
                 </div>
 

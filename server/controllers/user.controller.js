@@ -64,7 +64,8 @@ const getInfoUser = (req, res) => {
       }
       const userInfo = {
         _id: user._id, name: user.name, email: user.local.email || user.google.email, gender: user.gender,
-        created: user.created, address: user.address, birthday: user.birthday, avatar: user.avatar, followers: user.followers, following: user.following
+        created: user.created, address: user.address, birthday: user.birthday, avatar: user.avatar, followers: user.followers, following: user.following, 
+        pointTrust:user.pointTrust
       };
       return res.status(200).json({ userInfo });
     });

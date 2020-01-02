@@ -17,5 +17,5 @@ router.route('/getPostPopularFollowMonth/:month').get(controllerAdmin.getPostPop
 router.route('/getUserRaking/:month').get(controllerAdmin.getUserRaking);
 router.route('/getQuantityUsersEachMonth').get(controllerAdmin.getQuantityUsersEachMonth);
 router.route('/getQuantityPostFollowThemeEachMonth').get(controllerAdmin.getQuantityPostFollowThemeEachMonth);
-
+router.route('/updatePointUser').get(controllerAdmin.updatePointUser);
 module.exports=router;

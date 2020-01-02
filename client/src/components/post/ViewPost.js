@@ -5,6 +5,7 @@ import Rating from '../rating/Rating';
 import { API_URL } from '../../config/helper';
 import man from '../../public/images/man.png';
 import Badge from '@material-ui/core/Badge';
+import Favorite from '../common/Favorite';
 
 class ViewPost extends Component {
     constructor(props) {
@@ -79,6 +80,10 @@ class ViewPost extends Component {
                     <p>{this.props.post.contentSummary}</p>
                     <div className="rateBar">
                         {/* <span className="rateBar-Like"><img src="https://img.icons8.com/ios/20/000000/like.png" alt="Like" /></span> */}
+                        {this.props.isAuthenticated &&
+                        
+                        <Favorite postId={this.props.post._id}/>
+                        }
                         <Link to={
                             {
                                 pathname: `/DetailPost/${this.props.post._id}`

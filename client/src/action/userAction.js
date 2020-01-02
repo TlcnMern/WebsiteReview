@@ -57,6 +57,7 @@ export const fetch = (uid) => {
   return function (dispatch) {
     axios.get(`${API_URL}/users/${uid}`, config)
       .then((response) => {
+        console.log(response.data)
         dispatch({
           type: FETCH_USER,
           payload: response.data.userInfo
