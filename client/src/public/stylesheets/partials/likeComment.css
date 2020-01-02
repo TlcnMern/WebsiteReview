@@ -10,6 +10,7 @@
 .clsLikecmt {
     width: fit-content;
     display: -webkit-box;
+    height: fit-content;
 }
 
 .clsLikecmt .btnLikecmt {
