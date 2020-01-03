@@ -2761,3 +2761,53 @@ For Reponesive */
 .clsToolCmt {
     display: -webkit-inline-box;
 }
+
+.pointMember {
+    width: 85px;
+    background: none;
+    padding: 5px;
+    text-align: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 85px;
+    opacity: 0.8;
+}
+
+.pointMember .pointMember-c {
+    font-size: 9px;
+    color: #000000;
+}
+
+.pointMember .pointMember-p {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background: #00afef;
+    height: 55px;
+    width: 55px;
+    text-align: -webkit-center;
+    font-size: 30px;
+    font-weight: bolder;
+    margin-left: auto;
+    margin-right: auto;
+    color: #fff;
+}
+
+.btnDiemTinDung {
+    border: none;
+    height: fit-content;
+    font-size: 12px;
+    border-radius: 10px;
+}
+
+.btnDiemTinDung:hover {
+    border: none;
+    height: fit-content;
+    font-size: 12px;
+    border-radius: 10px;
+    background: #00afef;
+    color: #fff;
+    box-shadow: 0 0 2px 2px #fff;
+}

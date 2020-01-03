@@ -51,7 +51,7 @@ class FavoritePost extends Component {
                 return (
                     <FormControlLabel
                         control={< Checkbox onClick={this.onclickLike} icon={< Favorite />} checkedIcon={< FavoriteBorder />} value="checkedH" />}
-                        label="Yêu thích"
+                        
                     />
                 );
             }
@@ -59,7 +59,7 @@ class FavoritePost extends Component {
                 return (
                     <FormControlLabel
                         control={< Checkbox onClick={this.onclickLike} icon={< FavoriteBorder />} checkedIcon={< Favorite />} value="checkedH" />}
-                        label="Yêu thích"
+                        
                     />
                 );
             }

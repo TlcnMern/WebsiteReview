@@ -255,17 +255,28 @@ class ViewProfile extends Component {
                                             <p className="desc-stat">Uploads</p>
                                         </div>
                                     </div>
-
                                     <div className="row">
-                                        <p>Điểm uy tín: {this.props.profile.pointTrust &&this.props.profile.pointTrust.reputation}</p>
+                                        <div className="pointMember">
+                                            <p><span className="pointMember-c">Điểm uy tín: </span><br/>
+                                            <div className="pointMember-p">
+                                                {this.props.profile.pointTrust &&this.props.profile.pointTrust.reputation}  
+                                            </div>
+                                            
+                                            </p>
+                                        </div>
+                                        <div className="pointMember">
+                                            <p><span className="pointMember-c">Điểm đóng góp: </span>
+                                            <br/>
+                                            <div className="pointMember-p">{this.props.profile.pointTrust &&this.props.profile.pointTrust.contribute}</div></p>
+                                        </div>
+                                        <div className="pointMember">
+                                            <p><span className="pointMember-c">Điểm thành tích: </span><br/>
+                                            <div className="pointMember-p">{this.props.profile.pointTrust &&this.props.profile.pointTrust.achievement}</div></p>
+                                        </div>
                                     </div>
-                                    <div className="row">
-                                        <p>Điểm đóng góp: {this.props.profile.pointTrust &&this.props.profile.pointTrust.contribute}</p>
-                                    </div>
-                                    <div className="row">
-                                        <p>Điểm thành tích: {this.props.profile.pointTrust &&this.props.profile.pointTrust.achievement}</p>
-                                    </div>
+                                    
                                 </div>
+                                
                                 <div className="right col-lg-8">
                                     {this.rendermyMenu()}
                                 </div>

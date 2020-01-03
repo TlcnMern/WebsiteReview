@@ -71,7 +71,7 @@ class UserList extends Component {
                         </div>
                     </div>
                     <div className="PageQL col-sm-2">
-                        <button onClick={this.onClickUpdate}>Câp nhật điểm tín nhiệm người dùng</button>
+                        <button className="btnDiemTinDung" onClick={this.onClickUpdate}><i class="fa fa-refresh" aria-hidden="true"></i>  Điểm tín nhiệm</button>
                     </div>
                 </div>
 
