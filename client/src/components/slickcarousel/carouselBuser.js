@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import CardItem from "./carditem";
+import CardItemBU from "./carditemBuser";
 import { getTopListPostFollowTheme } from '../../action/postAction';
 import Loading from '../template/Loading';
 
@@ -37,10 +37,10 @@ export default class MultipleItems extends Component {
       const settings = {
         dots: true,
         infinite: true,
+        slidesToShow:4,
         autoplay: true,
         speed: 3500,
         autoplaySpeed: 3500,
-        slidesToShow:4,
         slidesToScroll:  this.state.posts.length
       };
       return (
@@ -49,7 +49,7 @@ export default class MultipleItems extends Component {
           <Slider {...settings}>
             {this.state.posts ? this.state.posts.map((item, i) => {
               return (  
-                <CardItem post={item} key={i} />)
+                <CardItemBU post={item} key={i} />)
             }) : <div></div>
             }
           </Slider>

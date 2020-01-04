@@ -4,6 +4,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import "../../public/stylesheets/partials/style.css"
 import NewFeed from './NewFeed';
 import Carousel from '../slickcarousel/carousel';
+import CarouselBU from '../slickcarousel/carouselBuser';
 import { Link } from 'react-router-dom';
 import Loading from '../template/Loading';
 
@@ -71,6 +72,14 @@ class HomeFeed extends Component {
                                 {this.state.Loading ? <Loading /> :
                                     <Carousel theme='trip' />
                                 }
+                            </div>
+                            <div className="box-home fadeInDown">
+                                <div className="header-list-index " style={{ margintop: '0px' }}><span className="title-list-index ">TOP NGƯỜI DÙNG NỔI BẬT</span>
+                                <Link to="/TravelFeed" className="all-list-index" >
+                                    Xem tất cả
+                                </Link>
+                            </div>
+                                <CarouselBU theme='trip'/>
                             </div>
                         </div>
                     </div>

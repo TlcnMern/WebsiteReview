@@ -2796,6 +2796,7 @@ For Reponesive */
     margin-right: auto;
     color: black;
 }
+
 .pointMember .pointMember-e {
     border: 1px solid #fff;
     border-radius: 50%;
@@ -2809,6 +2810,7 @@ For Reponesive */
     margin-right: auto;
     color: black;
 }
+
 .pointMember .pointMember-f {
     border: 1px solid #fff;
     border-radius: 50%;
@@ -2822,6 +2824,7 @@ For Reponesive */
     margin-right: auto;
     color: black;
 }
+
 .btnDiemTinDung {
     border: none;
     height: fit-content;
@@ -2837,4 +2840,44 @@ For Reponesive */
     background: #00afef;
     color: #fff;
     box-shadow: 0 0 2px 2px #fff;
+}
+
+.carditem_buser {
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 10px;
+}
+
+.carditem_buser img {
+    height: auto;
+    width: auto;
+    width: 160px;
+    height: 160px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carditem_buser:hover .carditem_buser img {
+    height: auto;
+    width: auto;
+    width: 160px;
+    height: 160px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carditem_buser .txtUserName {
+    visibility: hidden;
+    text-align: center;
+    color: #00afef;
+    font-weight: normal;
+}
+
+.carditem_buser:hover .txtUserName {
+    visibility: visible;
 }
