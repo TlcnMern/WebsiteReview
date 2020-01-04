@@ -39,8 +39,8 @@ export default class MultipleItems extends Component {
         infinite: true,
         slidesToShow:4,
         autoplay: true,
-        speed: 4000,
-        autoplaySpeed: 4000,
+        speed: 3500,
+        autoplaySpeed: 3500,
         slidesToScroll:  this.state.posts.length
       };
       return (

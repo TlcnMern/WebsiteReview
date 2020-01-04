@@ -49,7 +49,11 @@ export default function RecipeReviewCard(props) {
 
   return (
         <div className="carditem_buser">
+            <div className="txtUserName">
+              {props.post.postedBy.name}
+            </div>
             <img width="100%" height="100%" className="user_avatar_link " src={urlAvatar} alt="Nguyễn Tuấn Vũ " />    
+            
         </div>
   );
 }
