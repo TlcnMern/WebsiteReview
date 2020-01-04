@@ -3,34 +3,34 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CardItemBU from "./carditemBuser";
-import { getTopListPostFollowTheme } from '../../action/postAction';
+import { getTopUser } from '../../action/userAction';
 import Loading from '../template/Loading';
 
 export default class MultipleItems extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      theme: this.props.theme,
-      posts: []
+      users:[]
     }
 
   }
   componentDidMount(){
-    getTopListPostFollowTheme(this.state.theme)
+    getTopUser()
       .then(data => {
         if (data.error) {
           console.log(data)
         }
         else {
+          console.log(data)
           this.setState({
-            posts: data
+            users: data
           })
         }
       });
   }
 
   render() {
-    if (!this.state.posts) {
+    if (!this.state.users) {
       return <Loading />
     }
     else {
@@ -40,17 +40,17 @@ export default class MultipleItems extends Component {
         slidesToShow:4,
         autoplay: true,
         speed: 3500,
-        autoplaySpeed: 3500,
-        slidesToScroll:  this.state.posts.length
+        autoplaySpeed: 5000,
+        slidesToScroll:  1
       };
       return (
 
         <div className="thumbnailgallery ">
           <Slider {...settings}>
-            {this.state.posts ? this.state.posts.map((item, i) => {
+            {this.state.users ? this.state.users.map((item) => {
               return (  
-                <CardItemBU post={item} key={i} />)
-            }) : <div></div>
+                <CardItemBU user={item} key={item._id} />)
+            }) : <Loading/>
             }
           </Slider>
         </div>

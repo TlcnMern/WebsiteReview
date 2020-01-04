@@ -38,18 +38,18 @@ export default class MultipleItems extends Component {
         dots: true,
         infinite: true,
         autoplay: true,
-        speed: 3500,
-        autoplaySpeed: 3500,
+        speed: 2000,
+        autoplaySpeed: Math.floor(Math.random() * 10000),
         slidesToShow:4,
-        slidesToScroll:  this.state.posts.length
+        slidesToScroll: 1
       };
       return (
 
         <div className="thumbnailgallery ">
           <Slider {...settings}>
-            {this.state.posts ? this.state.posts.map((item, i) => {
+            {this.state.posts ? this.state.posts.map((item) => {
               return (  
-                <CardItem post={item} key={i} />)
+                <CardItem post={item} key={item._id} />)
             }) : <div></div>
             }
           </Slider>

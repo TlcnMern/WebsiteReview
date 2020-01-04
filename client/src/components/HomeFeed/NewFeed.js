@@ -23,8 +23,8 @@ class NewFeed extends Component {
       else {
         if (data.length > 0)
           this.setState({ postList: data })
-          this.props.onCallBack();
         window.scrollTo(0, 0)
+        this.props.onCallBack();
       }
 
     });

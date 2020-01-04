@@ -64,15 +64,15 @@ const getInfoUser = (req, res) => {
       }
       const userInfo = {
         _id: user._id, name: user.name, email: user.local.email || user.google.email, gender: user.gender,
-        created: user.created, address: user.address, birthday: user.birthday, avatar: user.avatar, followers: user.followers, following: user.following, 
-        pointTrust:user.pointTrust
+        created: user.created, address: user.address, birthday: user.birthday, avatar: user.avatar, followers: user.followers, following: user.following,
+        pointTrust: user.pointTrust
       };
       return res.status(200).json({ userInfo });
     });
 }
 
 const UserById = (req, res, next, userId) => {
-  if(userId==='null'){
+  if (userId === 'null') {
     next();
     return;
   }
@@ -202,9 +202,23 @@ const getPostUser = (req, res) => {
     })
 }
 
+const getTopUser = (req, res) => {
+  User.find({})
+    .sort({ 'pointTrust.totalPoint': -1 })
+    .exec((err, users) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      users = users.slice(0, 10);
+      res.json(users);
+    })
+}
+
 const getFavoritePostOfUser = (req, res) => {
   const userId = req.params.userId;
-  Post.find({ likes: { $elemMatch: { likeBy: userId } }})
+  Post.find({ likes: { $elemMatch: { likeBy: userId } } })
     .sort({ 'created': -1 })
     .exec((err, posts) => {
       if (err) {
@@ -261,5 +275,6 @@ module.exports = {
   removeFollower: removeFollower,
   getPostUser: getPostUser,
   countIndex: countIndex,
-  getFavoritePostOfUser:getFavoritePostOfUser
+  getFavoritePostOfUser: getFavoritePostOfUser,
+  getTopUser: getTopUser
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "../../public/stylesheets/partials/profile.css"
+import Tooltip from '@material-ui/core/Tooltip';
 import ViewDetailProfile from '../user/ViewDetailProfile'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -142,6 +143,19 @@ class profile extends Component {
                                             <p className="desc-stat">Uploads</p>
                                         </div>
                                     </div>
+                                    <Tooltip title="=======> Điểm phân cấp người dùng:&#013; &#010;
+                                                &#013; &#010;* Điểm tín nhiệm:&#013;
+                                                    - Bài viết được người dùng đánh giá 5 sao(+1đ)&#013; &#010;
+                                                    - Bài viết được trên 50 lượt yêu thích (+10)
+                                                    * Điểm đóng góp:
+                                                    - Đăng bài và được duyệt(+10đ)
+                                                    - Đánh giá bài viết bất kỳ(+1đ)
+                                                * Điểm thành tích:
+                                                    - Đăng bài và được duyệt(+10đ)
+                                                    - Bài hát được vote yêu thích(+1đ)
+                                                    - Được trên 20 người dùng đánh giá 1 bài viết (và điểm đánh giá trung bình > 4) (+10đ)">
+                                        <span className="pointTrust"> Điểm uy tín </span>
+                                    </Tooltip>
                                     <div className="row">
                                         <div className="pointMember">
                                             <span className="pointMember-c">Điểm uy tín: </span><br />

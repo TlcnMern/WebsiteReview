@@ -207,8 +207,8 @@ class FilmFeed extends Component {
                             <div className="box-home">
 
                                 <div className="clsSort">
-                                <img style={{width:'100%'}} src='https://s3-ap-southeast-1.amazonaws.com/wcomvn/wp-content/uploads/2018/12/25102623/BANNER20122018004-01.jpg' alt="img" />
-                                    <button className="clsSort-btnSort" onClick={this.onClickFilter}>
+                                <img style={{width:'100%',height:'250px'}} src='https://designer.com.vn/wp-content/uploads/2017/07/poster-phim-hanh-dong.jpg' alt="img" />
+                                    <button style={{marginTop:'252px'}} className="clsSort-btnSort" onClick={this.onClickFilter}>
                                         <i className="fa fa-sliders" aria-hidden="true" style={{ marginRight: '10px' }}></i>Bộ lọc
                                     </button>
                                     {this.renderFilter()}

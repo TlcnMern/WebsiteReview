@@ -108,6 +108,17 @@ export const getPostUser = (userId) => {
 }
 
 //get posts of user
+export const getTopUser = () => {
+  return axios.get(`${API_URL}/users/getTopUser`)
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      return err;
+    });
+}
+
+//get posts of user
 export const getFavoritePostOfUser = (userId) => {
   return axios.get(`${API_URL}/users/getFavoritePostOfUser/` + userId)
     .then(res => {

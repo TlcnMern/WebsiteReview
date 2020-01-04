@@ -227,8 +227,8 @@ class FoodFeed extends Component {
                         <div className="col-sm-12">
                             <div className="box-home">
                                 <div className="clsSort">
-                                    <img style={{ width: '100%',height:'auto' }} src='https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-gourmet-food-pizza-background-template-image_160185.jpg' alt="img" />
-                                    <button style={{marginTop:'320px'}} className="clsSort-btnSort" onClick={this.onClickFilter}>
+                                    <img style={{ width: '100%',height:'250px' }} src='https://image.shutterstock.com/image-photo/mexican-taco-meat-beans-vegetables-260nw-692950210.jpg' alt="img" />
+                                    <button style={{marginTop:'252px'}} className="clsSort-btnSort" onClick={this.onClickFilter}>
                                         <i class="fa fa-sliders" aria-hidden="true" style={{ marginRight: '10px' }}></i>Bộ lọc
                                     </button>
                                     {this.renderFilter()}

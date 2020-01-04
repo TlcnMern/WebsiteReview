@@ -107,7 +107,7 @@ const getTopListPostFollowTheme = (req, res) => {
           error: errorHandler.getErrorMessage(err)
         })
       }
-      posts = posts.slice(0, 5);
+      posts = posts.slice(0, 8);
       res.json(posts);
     })
 }
