@@ -2785,16 +2785,41 @@ For Reponesive */
     border: 1px solid #fff;
     border-radius: 50%;
     background: #00afef;
-    height: 55px;
-    width: 55px;
+    height: 40px;
+    width: 40px;
     text-align: -webkit-center;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bolder;
     margin-left: auto;
     margin-right: auto;
-    color: #fff;
+    color: black;
 }
-
+.pointMember .pointMember-e {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background: red;
+    height: 40px;
+    width: 40px;
+    text-align: -webkit-center;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+}
+.pointMember .pointMember-f {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background: yellow;
+    height: 40px;
+    width: 40px;
+    text-align: -webkit-center;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+}
 .btnDiemTinDung {
     border: none;
     height: fit-content;

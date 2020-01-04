@@ -39,7 +39,7 @@ class MainFeed extends Component {
     this.showMenu = this.showMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.clickLogout = this.clickLogout.bind(this);
-    this.onClickOption=this.onClickOption.bind(this);
+    this.onClickOption = this.onClickOption.bind(this);
   }
 
   toggle(tab) {
@@ -58,7 +58,7 @@ class MainFeed extends Component {
   }
 
   closeMenu(event) {
-    if(this.dropdownMenu){
+    if (this.dropdownMenu) {
       if (!this.dropdownMenu.contains(event.target)) {
         this.setState({ showMenu: false }, () => {
           document.removeEventListener('click', this.closeMenu);
@@ -72,11 +72,11 @@ class MainFeed extends Component {
     });
     this.props.logout();
   }
-  onClickOption(){
-    if(this.state.renderOption)
-    this.setState({renderOption:false});
+  onClickOption() {
+    if (this.state.renderOption)
+      this.setState({ renderOption: false });
     else
-    this.setState({renderOption:true});
+      this.setState({ renderOption: true });
   };
   onClickHome() {
     this.setState({ renderHome: true });
@@ -271,162 +271,162 @@ class MainFeed extends Component {
         </ul>
       );
   }
-  renderheaderMenu(){
-    if(this.state.renderHome)
+  renderheaderMenu() {
+    if (this.state.renderHome)
       return (
         <div id="headerMenu">
-            <div className="headerMenu-item active-Left">
-        <Link to="/">
-           <img src="https://img.icons8.com/ios/30/000000/home.png" alt="TrangChu"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Film" onClick={this.onClickFilm}>
-            <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Book" onClick={this.onClickBook}>
-           <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Food" onClick={this.onClickFood}>
-           <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Trip" onClick={this.onClickTravel}>
-           <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/>
-        </Link>
+          <div className="headerMenu-item active-Left">
+            <Link to="/">
+              <img src="https://img.icons8.com/ios/30/000000/home.png" alt="TrangChu" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Film" onClick={this.onClickFilm}>
+              <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Book" onClick={this.onClickBook}>
+              <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Food" onClick={this.onClickFood}>
+              <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Trip" onClick={this.onClickTravel}>
+              <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich" />
+            </Link>
+          </div>
+
         </div>
 
-    </div>
-
-      ) ;
-    if(this.state.renderFilm)
+      );
+    if (this.state.renderFilm)
       return (
         <div id="headerMenu">
-        <div className="headerMenu-item">
-        <Link to="/" onClick={this.onClickHome}>
-            <img src="https://img.icons8.com/ios/30/000000/home.png" alt="TrangChu"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item active-Left">
-        <Link to="/Film">
-            <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Book" onClick={this.onClickBook}>
-            <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Food" onClick={this.onClickFood}>
-            <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Trip" onClick={this.onClickTravel}>
-            <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/>
-        </Link>
-        </div>
-    </div>
-
-      ) ;
-   
-    if(this.state.renderBook)
-      return (
-        <div id="headerMenu">
-        <div className="headerMenu-item">
-        <Link to="/" onClick={this.onClickHome}>
-            <img src="https://img.icons8.com/ios/30/000000/home.png" alt="TrangChu"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Film" onClick={this.onClickFilm} >
-            <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item active-Left">
-        <Link to="/Book">
-            <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Food" onClick={this.onClickFood}>
-            <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Trip" onClick={this.onClickTravel}>
-            <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/>
-        </Link>
-        </div>
-    </div> );
-    if(this.state.renderFood)
-      return (
-        <div id="headerMenu">
-        <div className="headerMenu-item">
-        <Link to="/" onClick={this.onClickHome}>
-            <img src="https://img.icons8.com/ios/30/000000/home.png" alt="TrangChu"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Film" onClick={this.onClickFilm} >
-            <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Book" onClick={this.onClickBook}>
-            <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item active-Left">
-        <Link to="/Food">
-            <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Trip" onClick={this.onClickTravel}>
-            <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/>
-        </Link>
+          <div className="headerMenu-item">
+            <Link to="/" onClick={this.onClickHome}>
+              <img src="https://img.icons8.com/ios/30/000000/home.png" alt="TrangChu" />
+            </Link>
+          </div>
+          <div className="headerMenu-item active-Left">
+            <Link to="/Film">
+              <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Book" onClick={this.onClickBook}>
+              <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Food" onClick={this.onClickFood}>
+              <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Trip" onClick={this.onClickTravel}>
+              <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich" />
+            </Link>
+          </div>
         </div>
 
-    </div> 
-     ) ;
-    if(this.state.renderTravel)
+      );
+
+    if (this.state.renderBook)
       return (
         <div id="headerMenu">
-        <div className="headerMenu-item">
-        <Link to="/" onClick={this.onClickHome}>
-            <img src="https://img.icons8.com/ios/30/000000/home.png" alt="TrangChu"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Film" onClick={this.onClickFilm} >
-            <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Book" onClick={this.onClickBook}>
-            <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item">
-        <Link to="/Food" onClick={this.onClickFood}>
-            <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong"/>
-        </Link>
-        </div>
-        <div className="headerMenu-item active-Left">
-        <Link to="/Trip" >
-            <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich"/>
-        </Link>
-        </div>
+          <div className="headerMenu-item">
+            <Link to="/" onClick={this.onClickHome}>
+              <img src="https://img.icons8.com/ios/30/000000/home.png" alt="TrangChu" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Film" onClick={this.onClickFilm} >
+              <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh" />
+            </Link>
+          </div>
+          <div className="headerMenu-item active-Left">
+            <Link to="/Book">
+              <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Food" onClick={this.onClickFood}>
+              <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Trip" onClick={this.onClickTravel}>
+              <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich" />
+            </Link>
+          </div>
+        </div>);
+    if (this.state.renderFood)
+      return (
+        <div id="headerMenu">
+          <div className="headerMenu-item">
+            <Link to="/" onClick={this.onClickHome}>
+              <img src="https://img.icons8.com/ios/30/000000/home.png" alt="TrangChu" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Film" onClick={this.onClickFilm} >
+              <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Book" onClick={this.onClickBook}>
+              <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen" />
+            </Link>
+          </div>
+          <div className="headerMenu-item active-Left">
+            <Link to="/Food">
+              <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Trip" onClick={this.onClickTravel}>
+              <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich" />
+            </Link>
+          </div>
 
-    </div>  
-    ) ;
+        </div>
+      );
+    if (this.state.renderTravel)
+      return (
+        <div id="headerMenu">
+          <div className="headerMenu-item">
+            <Link to="/" onClick={this.onClickHome}>
+              <img src="https://img.icons8.com/ios/30/000000/home.png" alt="TrangChu" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Film" onClick={this.onClickFilm} >
+              <img src="https://img.icons8.com/ios/30/000000/film-reel.png" alt="PhimAnh" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Book" onClick={this.onClickBook}>
+              <img src="https://img.icons8.com/ios/30/000000/book-shelf.png" alt="SachTruyen" />
+            </Link>
+          </div>
+          <div className="headerMenu-item">
+            <Link to="/Food" onClick={this.onClickFood}>
+              <img src="https://img.icons8.com/ios/30/000000/street-food.png" alt="AnUong" />
+            </Link>
+          </div>
+          <div className="headerMenu-item active-Left">
+            <Link to="/Trip" >
+              <img src="https://img.icons8.com/ios/30/000000/trave-diary.png" alt="DuLich" />
+            </Link>
+          </div>
+
+        </div>
+      );
   }
   renderPersonalorLogin() {
     // const avatar=auth.getAvatar();
@@ -477,58 +477,58 @@ class MainFeed extends Component {
         </div>
       );
   }
-  renderOptionMenu(){
-    if(this.state.renderOption)
-    return(
-      <div className="MenuResponesive">
-        <div class="arrow"></div>
-        <div className="bg-white ">
-              <span>BÀI VIẾT NỔI TRỘI</span>
-              <hr />
-              {!this.props.isBodyAdmin &&
+  renderOptionMenu() {
+    if (this.state.renderOption)
+      return (
+        <div className="MenuResponesive">
+          <div class="arrow"></div>
+          <div className="bg-white ">
+            <span>BÀI VIẾT NỔI TRỘI</span>
+            <hr />
+            {!this.props.isBodyAdmin &&
               <PostFeatured />
-              }
-            </div>
-      </div>
-    );
+            }
+          </div>
+        </div>
+      );
   }
   render() {
     return (
       <div>
-            {this.renderheaderMenu()}
-            <div className="headerMenu-option">
-              <button onClick={this.onClickOption}><i className="fa fa-bars" aria-hidden="true"></i></button>
+        {this.renderheaderMenu()}
+        <div className="headerMenu-option">
+          <button onClick={this.onClickOption}><i className="fa fa-bars" aria-hidden="true"></i></button>
+        </div>
+        {this.renderOptionMenu()}
+        <div className="contentMain">
+          <div className="row">
+
+            <div className=" boxPersonal">
+
+              {this.renderPersonalorLogin()}
+              {this.rendermyMenu()}
+
             </div>
-            {this.renderOptionMenu()}
-      <div className="contentMain">
-        <div className="row">
-
-          <div className=" boxPersonal">
-
-            {this.renderPersonalorLogin()}
-            {this.rendermyMenu()}
-
-          </div>
-          <div className="boxTopContent ">
-            <div className="bg-white ">
-              {
-                !this.props.isAuthenticated &&
-              <span style={{fontFamily:'monospace', textAlign:'center',display:'flex'}}>Đăng nhập để để đăng bài và tương tác với nhau.</span>
-              }
-              <Link to="/NewPost">
-                <button type="button " className="btnDangBai ">Đăng bài</button>
-              </Link>
-            </div>
-            <div className="bg-white ">
-              <span>BÀI VIẾT NỔI TRỘI</span>
-              <hr />
-              {!this.props.isBodyAdmin &&
-              <PostFeatured />
-              }
+            <div className="boxTopContent ">
+              <div className="bg-white ">
+                {
+                  !this.props.isAuthenticated &&
+                  <span style={{ fontFamily: 'monospace', textAlign: 'center', display: 'flex' }}>Đăng nhập để để đăng bài và tương tác với nhau.</span>
+                }
+                <Link to="/NewPost">
+                  <button type="button " className="btnDangBai ">Đăng bài</button>
+                </Link>
+              </div>
+              <div className="bg-white ">
+                <span>BÀI VIẾT NỔI TRỘI</span>
+                <hr />
+                {!this.props.isBodyAdmin &&
+                  <PostFeatured />
+                }
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     );
 
@@ -537,8 +537,8 @@ class MainFeed extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  isBodyAdmin:state.user.isBodyAdmin,
-  isAuthenticatedAdmin:state.auth.isAuthenticatedAdmin,
+  isBodyAdmin: state.user.isBodyAdmin,
+  isAuthenticatedAdmin: state.auth.isAuthenticatedAdmin,
   avatar: state.user.avatar
 });
 export default connect(mapStateToProps, { logout })(MainFeed);

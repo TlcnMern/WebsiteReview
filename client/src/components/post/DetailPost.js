@@ -153,7 +153,7 @@ class DetailPost extends Component {
                                     <span style={{ padding: '10px' }}>{this.state.post.content}</span>
                                     <br /><br /><br />
                                     {this.state.youtubeId &&
-                                        <Youtube youtubeId={this.state.youtubeId} />
+                                        <Youtube key={this.state.post._id} youtubeId={this.state.youtubeId} />
                                     }
                                 </div>
                             </div>
