@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate =require('mongoose-paginate');
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -44,12 +45,21 @@ const PostSchema = new mongoose.Schema({
     type: String
   }],
 
+  totalLike:{
+    type:Number,
+    default:0
+  },
+
   comments: [{ type: mongoose.Schema.ObjectId, ref: 'Comment' }],
 
   ratings: [{
     point: Number,
     created: { type: Date, default: Date.now },
     postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
+  }],
+  
+  likes:[{
+    likeBy:{ type: mongoose.Schema.ObjectId, ref: 'User'}
   }],
 
   state: {
@@ -83,5 +93,5 @@ const PostSchema = new mongoose.Schema({
   },
 
 })
-
+PostSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('Post', PostSchema);

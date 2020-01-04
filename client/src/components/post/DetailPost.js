@@ -7,15 +7,15 @@ import { getDetailPost } from '../../action/postAction';
 import { calculateRaingtingEachPost, checkRatingAndShow } from '../../action/ratingAction';
 import { connect } from 'react-redux';
 import { getComment } from '../../action/commentAction';
-import Loading from '../template/Loading';
-import ProcessRating from '../rating/ProcesRating';
 import { API_URL } from '../../config/helper';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Youtube from './Youtube';
+import Loading from '../template/Loading';
+import ProcessRating from '../rating/ProcesRating';
+import Favorite from '../common/Favorite';
 const getVideoId = require('get-video-id');
-
 class DetailPost extends Component {
     constructor(props) {
         super(props);
@@ -25,32 +25,43 @@ class DetailPost extends Component {
             point: null,
             nav1: null,
             nav2: null,
-            youtubeId:null
+            youtubeId: null
         }
+        this.getInfodetailPost = this.getInfodetailPost.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const postId = nextProps.match.params.postId;
+        this.getInfodetailPost(postId)
     }
 
     componentDidMount() {
         const postId = this.props.match.params.postId;
+        this.getInfodetailPost(postId);
+    }
+
+    getInfodetailPost(postId) {
         calculateRaingtingEachPost();
         getDetailPost(postId).then((data) => {
             if (data.error) {
                 console.log(data);
             }
             else {
-                var youtubeId=null
-                if(data[0].linkYoutube){
-                    youtubeId=getVideoId(data[0].linkYoutube).id;
+                var youtubeId = null
+                if (data[0].linkYoutube) {
+                    youtubeId = getVideoId(data[0].linkYoutube).id;
                 }
                 this.setState({
                     post: data[0],
-                    youtubeId:youtubeId
+                    youtubeId: youtubeId
                 })
+                window.scrollTo(0, 0)
             }
         });
         if (this.props.isAuthenticated) {
             const jwt = auth.isAuthenticated();
-            const userID = jwt.user._id;
-            checkRatingAndShow(userID, { t: jwt.token }, postId).then((data) => {
+            const userId = jwt.user._id;
+            checkRatingAndShow(userId, { t: jwt.token }, postId).then((data) => {
                 if (data.error) {
                     this.setState({
                         isLoading: false,
@@ -87,7 +98,6 @@ class DetailPost extends Component {
         );
     }
     render() {
-        console.log('alo')
         if (this.state.post === null) {
             return (
                 <div className="row">
@@ -105,13 +115,10 @@ class DetailPost extends Component {
                                 <div className="col-sm-5 TLBV">
                                     {this.renderSliderImage()}
                                 </div>
-                                {/* <FeatureOfComment/> */}
                                 <div className="col-sm-7 TomTat">
                                     <div className="SPBV">
                                         <span>{this.state.post.productReview}</span>
                                         <span> <Rating rating={this.state.post.pointRating.point - 1} disabled={true} /></span>
-
-
                                         <span style={{ fontSize: '13px' }}>Thể loại: <Link to="">{this.state.post.kind}</Link></span><br />
                                     </div>
                                     <div className="clsTomtat">
@@ -144,8 +151,9 @@ class DetailPost extends Component {
                             <div className="row MainBV ">
                                 <div className="col-sm-12 ND-BaiViet">
                                     <span style={{ padding: '10px' }}>{this.state.post.content}</span>
+                                    <br /><br /><br />
                                     {this.state.youtubeId &&
-                                        <Youtube youtubeId={this.state.youtubeId}/>
+                                        <Youtube key={this.state.post._id} youtubeId={this.state.youtubeId} />
                                     }
                                 </div>
                             </div>
@@ -168,6 +176,7 @@ class DetailPost extends Component {
                                                 {
                                                     this.state.isLoading ? <Loading /> : <Rating rating={this.state.point} idPost={this.state.post._id} />
                                                 }
+                                                <Favorite postId={this.state.post._id} />
                                             </div>
                                         )}
                                 </div>

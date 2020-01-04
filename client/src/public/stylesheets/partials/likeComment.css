@@ -1,0 +1,33 @@
+.btn-primary {
+    background-color: #23aa4e;
+    border-color: #177d37;
+}
+
+#example {
+    margin: 3rem;
+}
+
+.clsLikecmt {
+    width: fit-content;
+    display: -webkit-box;
+    height: fit-content;
+}
+
+.clsLikecmt .btnLikecmt {
+    width: fit-content;
+    background: none;
+    border: none;
+    font-weight: 400;
+    color: #007bff;
+    margin-left: 10px;
+    font-size: 11px;
+    font-style: italic;
+}
+
+.clsLikecmt .txtLike {
+    font-size: 10px;
+    font-style: italic;
+    color: rgb(192, 194, 196);
+    margin-left: 50px;
+    margin-top: 6px;
+}

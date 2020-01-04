@@ -67,6 +67,80 @@ const getUserList = (req, res) => {
         })
 }
 
+
+//Cap nhap diem uy tin
+const updatePointUser = (req, res) => {
+    console.log('alo')
+    User.find()
+        .exec((err, users) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler.getErrorMessage(err)
+                })
+            }
+            users.forEach(user => {
+                var reputation = 0, contribute = 0, achievement = 0;
+                reputation = reputation + user.followers.length * 5;
+
+                Post.find({ postedBy: user._id, hiden: null, state: true })
+                    .exec((err, posts) => {
+                        if (err || !posts) {
+                            var pointTrust = {
+                                totalPoint: reputation + contribute + achievement,
+                                reputation: reputation,
+                                contribute: contribute,
+                                achievement: achievement
+                            }
+                            User.update({ _id: user._id }, { $set: { 'pointTrust': pointTrust } })
+                                .exec((err) => {
+                                    if (err) {
+                                        return res.status('400').json({
+                                            error: "err"
+                                        })
+                                    }
+                                })
+                            return res.status(400).json({
+                                error: errorHandler.getErrorMessage(err)
+                            })
+                        }
+                        posts.forEach(post => {
+                            contribute = contribute + 10;
+                            achievement = achievement + 10;
+                            if (post.totalLike > 50) {
+                                reputation = reputation + 10;
+                            }
+                            var fiveStar=0;
+                            if(post.pointRating.fiveStar){
+                                fiveStar=post.pointRating.fiveStar;
+                            }
+                            reputation = reputation + fiveStar;
+                            achievement = achievement + post.totalLike;
+                            if (post.ratings.length > 50) {
+                                achievement = achievement + 5;
+                            }
+                        })
+
+                        var pointTrust = {
+                            totalPoint: reputation + contribute + achievement,
+                            reputation: reputation,
+                            contribute: contribute,
+                            achievement: achievement
+                        }
+                        console.log(pointTrust)
+                        User.update({ _id: user._id }, { $set: { 'pointTrust': pointTrust } })
+                            .exec((err) => {
+                                if (err) {
+                                    return res.status('400').json({
+                                        error: "err"
+                                    })
+                                }
+                            })
+                    })
+
+            })
+        })
+}
+
 //quan ly thong ke
 
 //get top 5 post popular follow Month
@@ -153,7 +227,7 @@ const getQuantityUsersEachMonth = (req, res) => {
     User.aggregate([
         {
             $group: {
-                _id: {month: { $month: '$created' } },
+                _id: { month: { $month: '$created' } },
                 count: { $sum: 1 }
             }
         }
@@ -173,7 +247,7 @@ const getQuantityPostFollowThemeEachMonth = (req, res) => {
     Post.aggregate([
         {
             $group: {
-                _id: {month: { $month: '$created' },theme:'$theme',year: { $year: "$created" }},
+                _id: { month: { $month: '$created' }, theme: '$theme', year: { $year: "$created" } },
                 count: { $sum: 1 }
             }
         }
@@ -198,5 +272,7 @@ module.exports = {
     getPostHighRateFollowMonth: getPostHighRateFollowMonth,
     getUserRaking: getUserRaking,
     getQuantityUsersEachMonth: getQuantityUsersEachMonth,
-    getQuantityPostFollowThemeEachMonth:getQuantityPostFollowThemeEachMonth
+    getQuantityPostFollowThemeEachMonth: getQuantityPostFollowThemeEachMonth,
+
+    updatePointUser: updatePointUser
 }

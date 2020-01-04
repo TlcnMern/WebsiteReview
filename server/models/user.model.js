@@ -63,6 +63,23 @@ const userSchema = new Schema({
   avatar: {
     type:String
   },
+
+  pointTrust:{
+    totalPoint:Number,
+    reputation: {
+      type:Number,
+      default:0
+    },
+    contribute: {
+      type:Number,
+      default:0
+    },
+    achievement: {
+      type:Number,
+      default:0
+    }
+  },
+
   background: {
     type:String
   },

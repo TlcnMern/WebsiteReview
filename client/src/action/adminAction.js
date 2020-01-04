@@ -153,3 +153,20 @@ export const getQuantityPostFollowThemeEachMonth = () => {
             return error.response.data;
         });
 }
+
+export const updatePointUser = () => {
+    const config = {
+        headers: {
+            'Accept': 'application/json'
+        }
+    };
+
+    return axios.get(`${API_URL}/admin/updatePointUser`, config)
+        .then(res => {
+            console.log(res.data);
+            return res.data;
+        })
+        .catch(error => {
+            return error;
+        });
+}

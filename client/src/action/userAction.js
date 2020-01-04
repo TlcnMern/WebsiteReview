@@ -5,13 +5,19 @@ import { returnErrors } from './errorActions';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  FETCH_USER, ERROR_RESPONSE, FOLLOW, FOLLOWED,GET_AVATAR,DISPATCH_BODY
+  FETCH_USER, ERROR_RESPONSE, FOLLOW, FOLLOWED,GET_AVATAR,DISPATCH_BODY, CLEAN_BODYADMIN
 } from '../config/type';
 
 //update info user
 export const dispatchBodyAdmin = ()=> dispatch => {
   dispatch({
     type: DISPATCH_BODY
+  });
+}
+
+export const cleanBodyAdmin = ()=> dispatch => {
+  dispatch({
+    type: CLEAN_BODYADMIN
   });
 }
 
@@ -51,6 +57,7 @@ export const fetch = (uid) => {
   return function (dispatch) {
     axios.get(`${API_URL}/users/${uid}`, config)
       .then((response) => {
+        console.log(response.data)
         dispatch({
           type: FETCH_USER,
           payload: response.data.userInfo
@@ -69,7 +76,7 @@ export const update = (userID, credentials, user)=> dispatch => {
   const config = {
     headers: {
       'Accept': 'application/json',
-      'Authorization': 'bearer ' + credentials.t
+      'Authorization': 'Bearer ' + credentials.t
     }
   }
   const body = user;
@@ -92,6 +99,28 @@ export const update = (userID, credentials, user)=> dispatch => {
 //get posts of user
 export const getPostUser = (userId) => {
   return axios.get(`${API_URL}/users/getPostUser/` + userId)
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      return err;
+    });
+}
+
+//get posts of user
+export const getTopUser = () => {
+  return axios.get(`${API_URL}/users/getTopUser`)
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      return err;
+    });
+}
+
+//get posts of user
+export const getFavoritePostOfUser = (userId) => {
+  return axios.get(`${API_URL}/users/getFavoritePostOfUser/` + userId)
     .then(res => {
       return res.data;
     })

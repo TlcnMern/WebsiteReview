@@ -8,8 +8,8 @@ class FollowUser extends Component {
             return (
                 <List>
                     {this.props.users.map((user,i) => (
-                        <div className="row">
-                            <ViewUsersFollow key={i} user={user}/>
+                        <div className="row" key={user._id}>
+                            <ViewUsersFollow  user={user}/>
                         </div>
                     ))}
                 </List>

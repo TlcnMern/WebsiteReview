@@ -48,31 +48,40 @@ const create = (req, res) => {
 }
 
 const getNewFeeds = (req, res) => {
-  Post.find({hiden:null,state:true})
+  var query={
+    hiden:null,
+    state:true
+  }
+  if(req.profile){
+    query.postedBy= { $in : req.profile.following }
+  }
+  Post.find(query)
     .populate('postedBy', '_id name avatar')
-    // .populate({
-    //   path:'comments',
-    //   populate: { path: 'commentBy',select:'_id name' }
-    // })
-    // .populate({
-    //   path:'comments',
-    //   populate: { path: 'subComment.commentBy',select:'_id name'}
-    // })
     .sort({ 'created': -1 })
     .exec((err, posts) => {
-
       if (err) {
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
         })
       }
-      posts = posts.slice(0, 3);
+      posts = posts.slice(0, 5);
       res.json(posts);
     })
 }
 
-const getPostFeatured = (req, res) => {
+const getPostPaginate = (req, res) => {
+  const page = req.params.page;
+  Post.paginate({hiden:null,state:true}, {populate:{path:'postedBy',select:'_id name avatar'}, page: page, limit: 10 }, function(err, result){
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(result);
+  })
+};
 
+const getPostFeatured = (req, res) => {
   Post.find({hiden:null,state:true})
     .populate('postedBy', '_id name avatar')
     .sort({ 'pointRating.totalRate': -1 })
@@ -98,7 +107,7 @@ const getTopListPostFollowTheme = (req, res) => {
           error: errorHandler.getErrorMessage(err)
         })
       }
-      posts = posts.slice(0, 5);
+      posts = posts.slice(0, 8);
       res.json(posts);
     })
 }
@@ -179,6 +188,58 @@ const postByID = (req, res, next, id) => {
   })
 }
 
+const likePost = (req, res) => {
+  var like = {};
+  like.likeBy = req.params.userId;
+  Post.findByIdAndUpdate({ _id: req.body.postId },
+    { $push: { likes: like }, $inc: { totalLike: 1 } })
+    .exec((err, result) => {
+      if (err || !result) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      return res.status('200').json({
+        msg: "Added"
+      })
+    })
+}
+//check like
+const checkLikePost = (req, res) => {
+  const temp = req.query;
+  var userId = temp.userId;
+  var postId = temp.postId;
+  Post.find({ _id: postId },
+    { likes: { $elemMatch: { likeBy: userId } } }
+  )
+    .exec((err, result) => {
+      if (err || !result[0].likes[0]) {
+        return res.status(401).json({
+          error: "Dont have like"
+        })
+      }
+      res.json({ success: true });
+    })
+}
+
+//unlike
+const unLikePost = (req, res) => {
+  var like = {};
+  like.likeBy = req.params.userId;
+  Post.findByIdAndUpdate({ _id: req.body.postId },
+    { $pull: { likes: like }, $inc: { totalLike: -1 } })
+    .exec((err, result) => {
+      if (err || !result) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      return res.status('200').json({
+        msg: "unlike sucssess"
+      })
+    })
+}
+
 module.exports = {
   create: create,
   getNewFeeds: getNewFeeds,
@@ -187,5 +248,9 @@ module.exports = {
   getPostFeatured: getPostFeatured,
   getTopListPostFollowTheme: getTopListPostFollowTheme,
   searchPost: searchPost,
-  sortPost: sortPost
+  sortPost: sortPost,
+  getPostPaginate:getPostPaginate,
+  likePost:likePost,
+  checkLikePost:checkLikePost,
+  unLikePost:unLikePost
 }

@@ -51,8 +51,9 @@ const register = (req, res) => {
 };
 
 const getInfoUser = (req, res) => {
-  const userID = req.params.userID;
-  User.findById(userID)
+
+  const userId = req.params.userId;
+  User.findById(userId)
     .populate('followers', '_id name avatar')
     .populate('following', '_id name avatar')
     .exec((err, user) => {
@@ -63,14 +64,19 @@ const getInfoUser = (req, res) => {
       }
       const userInfo = {
         _id: user._id, name: user.name, email: user.local.email || user.google.email, gender: user.gender,
-        created: user.created, address: user.address, birthday: user.birthday, avatar: user.avatar, followers: user.followers, following: user.following
+        created: user.created, address: user.address, birthday: user.birthday, avatar: user.avatar, followers: user.followers, following: user.following,
+        pointTrust: user.pointTrust
       };
       return res.status(200).json({ userInfo });
     });
 }
 
-const UserById = (req, res, next, userID) => {
-  User.findById(userID)
+const UserById = (req, res, next, userId) => {
+  if (userId === 'null') {
+    next();
+    return;
+  }
+  User.findById(userId)
     .populate('following', '_id name')
     .populate('follower', '_id name')
     .exec((err, user) => {
@@ -196,6 +202,34 @@ const getPostUser = (req, res) => {
     })
 }
 
+const getTopUser = (req, res) => {
+  User.find({})
+    .sort({ 'pointTrust.totalPoint': -1 })
+    .exec((err, users) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      users = users.slice(0, 10);
+      res.json(users);
+    })
+}
+
+const getFavoritePostOfUser = (req, res) => {
+  const userId = req.params.userId;
+  Post.find({ likes: { $elemMatch: { likeBy: userId } } })
+    .sort({ 'created': -1 })
+    .exec((err, posts) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        })
+      }
+      res.json(posts);
+    })
+}
+
 const countIndex = (req, res) => {
   const userId = req.params.userId;
   Post.find({ postedBy: userId })
@@ -240,5 +274,7 @@ module.exports = {
   removeFollowing: removeFollowing,
   removeFollower: removeFollower,
   getPostUser: getPostUser,
-  countIndex: countIndex
+  countIndex: countIndex,
+  getFavoritePostOfUser: getFavoritePostOfUser,
+  getTopUser: getTopUser
 }

@@ -16,19 +16,19 @@ class BookFeed extends Component {
         super(props);
         this.state = {
             posts: [],
-            showKind:null,
-            showForm:null,
-            showRate:null,
-            titleKind:null,
-            titleForm:null,
-            titleRate:null,
+            showKind: null,
+            showForm: null,
+            showRate: null,
+            titleKind: null,
+            titleForm: null,
+            titleRate: null,
             anchorKind: null,
             anchorForm: null,
             anchorRate: null,
-            renderFilter:false
+            renderFilter: false
         };
         this.onClickFilter = this.onClickFilter.bind(this);
-        sortPost({theme:'book'}).then((data) => {
+        sortPost({ theme: 'book' }).then((data) => {
             if (data.error)
                 console.log(data.error);
             else {
@@ -37,13 +37,13 @@ class BookFeed extends Component {
         });
     }
     onClickFilter() {
-        if(this.state.renderFilter){
+        if (this.state.renderFilter) {
             this.setState({ renderFilter: false });
         }
-        else{
+        else {
             this.setState({ renderFilter: true });
         }
-        
+
     };
     handleToggleKind = event => {
         this.setState({ anchorKind: event.currentTarget });
@@ -57,50 +57,51 @@ class BookFeed extends Component {
         this.setState({ anchorRate: event.currentTarget });
     };
 
-    handleClose =(name,value) =>(e)=> {
-        this.setState({ 
+    handleClose = (name, value) => (e) => {
+        this.setState({
             anchorKind: null,
-            anchorForm:null,
-            anchorRate:null,
-            [name]:value
+            anchorForm: null,
+            anchorRate: null,
+            [name]: value
         });
 
 
-        if(name==='titleKind'){
+        if (name === 'titleKind') {
             this.setState({
-                showKind:e.nativeEvent.target.outerText||null
+                showKind: e.nativeEvent.target.outerText || null
             })
         }
-        if(name==='titleForm'){
+        if (name === 'titleForm') {
             this.setState({
-                showForm:e.nativeEvent.target.outerText||null
+                showForm: e.nativeEvent.target.outerText || null
             })
         }
-        if(name==='titleRate'){
+        if (name === 'titleRate') {
             this.setState({
-                showRate:e.nativeEvent.target.outerText||null
+                showRate: e.nativeEvent.target.outerText || null
             })
         }
-        
+
     };
 
-    onSort=()=>{
-        var temp=null;
-        if(this.state.titleRate){
-            if(this.state.titleRate==='highPointPating'){
-                temp=1;
-            }   
-            else{
-                temp=2
+    onSort = () => {
+        this.setState({ renderFilter: false });
+        var temp = null;
+        if (this.state.titleRate) {
+            if (this.state.titleRate === 'highPointPating') {
+                temp = 1;
+            }
+            else {
+                temp = 2
             }
         }
-        else{
-            temp=null;
+        else {
+            temp = null;
         }
-        var query={
-            theme:'book',
-            kind:this.state.titleKind,
-            formality:this.state.titleForm,
+        var query = {
+            theme: 'book',
+            kind: this.state.titleKind,
+            formality: this.state.titleForm,
             sortRate: temp
         }
         sortPost(query).then((data) => {
@@ -111,97 +112,93 @@ class BookFeed extends Component {
             }
         });
     }
-    renderFilter(){
-        const { anchorKind,anchorForm,anchorRate } = this.state;
+    renderFilter() {
+        const { anchorKind, anchorForm, anchorRate } = this.state;
         const openKind = Boolean(anchorKind);
         const openForm = Boolean(anchorForm);
         const openRate = Boolean(anchorRate);
-        if(this.state.renderFilter)
-        return(
-            <div className="clsFilter">
-    <div class="arrow"></div>
-    <div style={{ marginLeft: '0'}} className="row">
-        <div className="col-lg-4"><span style={{color: '#00afef',fontWeight: 'bold'}}>Thể loại</span></div>
-        <div className="col-lg-4"><span style={{color: '#00afef',fontWeight: 'bold'}}>Ngôn ngữ</span></div>
-        <div className="col-lg-4"><span style={{color: '#00afef',fontWeight: 'bold'}}>Đánh giá</span></div>
-    </div>
-    <div style={{ marginBottom: '40px'}} className="row">
+        if (this.state.renderFilter)
+            return (
+                <div className="clsFilter">
+                    <div class="arrow"></div>
+                    <div style={{ marginLeft: '0' }} className="row">
+                        <div className="col-lg-4"><span style={{ color: '#00afef', fontWeight: 'bold' }}>Thể loại</span></div>
+                        <div className="col-lg-4"><span style={{ color: '#00afef', fontWeight: 'bold' }}>Ngôn ngữ</span></div>
+                        <div className="col-lg-4"><span style={{ color: '#00afef', fontWeight: 'bold' }}>Đánh giá</span></div>
+                    </div>
+                    <div style={{ marginBottom: '40px' }} className="row">
 
-        <div className="col-lg-4">
-            <Button ref={anchorKind} aria-controls={openKind ? 'menu-list-grow' : undefined} aria-haspopup="true" onClick={this.handleToggleKind}>{this.state.showKind?this.state.showKind:<span>Tất cả</span>}
-                                        
-                                        
-                                        <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
+                        <div className="col-lg-4">
+                            <Button ref={anchorKind} aria-controls={openKind ? 'menu-list-grow' : undefined} aria-haspopup="true" onClick={this.handleToggleKind}>
+                                {this.state.showKind ? this.state.showKind : <span>Tất cả</span>}
+                                <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
+                            </Button>
+                            <Popper style={{ zIndex: '10' }} open={openKind} anchorEl={anchorKind} role={undefined} transition disablePortal>
+                                {({ TransitionProps, placement }) => (
+                                    <Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
+                                        <Paper>
+                                            <ClickAwayListener onClickAway={this.handleClose('')}>
+                                                <MenuList autoFocusItem={openKind} id="menu-list-grow">
+                                                    <MenuItem onClick={this.handleClose('titleKind', '')}>Tất cả</MenuItem>
+                                                    <MenuItem onClick={this.handleClose('titleKind', 'literary')}>Văn học</MenuItem>
+                                                    <MenuItem onClick={this.handleClose('titleKind', 'science')}>Khoa học kỹ thuật</MenuItem>
+                                                    <MenuItem onClick={this.handleClose('titleKind', 'novel')}>Truyện</MenuItem>
+                                                    <MenuItem onClick={this.handleClose('titleKind', 'story')}>Tiểu thuyết</MenuItem>
+                                                </MenuList>
+                                            </ClickAwayListener>
+                                        </Paper>
+                                    </Grow>
+                                )}
+                            </Popper>
+                        </div>
 
-                                        </Button>
-            <Popper style={{ zIndex: '10' }} open={openKind} anchorEl={anchorKind} role={undefined} transition disablePortal>
-                {({ TransitionProps, placement }) => (
-                <Grow {...TransitionProps} style={{ transformOrigin: placement==='bottom' ? 'center top' : 'center bottom' }}>
-                    <Paper>
-                        <ClickAwayListener onClickAway={this.handleClose( '')}>
-                            <MenuList autoFocusItem={openKind} id="menu-list-grow">
-                                <MenuItem onClick={this.handleClose( 'titleKind', '')}>Tất cả</MenuItem>
-                                <MenuItem onClick={this.handleClose( 'titleKind', 'literary')}>Văn học</MenuItem>
-                                <MenuItem onClick={this.handleClose( 'titleKind', 'science')}>Khoa học kỹ thuật</MenuItem>
-                                <MenuItem onClick={this.handleClose( 'titleKind', 'novel')}>Truyện</MenuItem>
-                                <MenuItem onClick={this.handleClose( 'titleKind', 'story')}>Tiểu thuyết</MenuItem>
-                            </MenuList>
-                        </ClickAwayListener>
-                    </Paper>
-                </Grow>
-                )}
-            </Popper>
-        </div>
+                        <div className="col-lg-4">
+                            <Button ref={anchorForm} aria-controls={openForm ? 'menu-list-grow' : undefined} aria-haspopup="true" onClick={this.handleToggleForm}>{this.state.showForm ? this.state.showForm : <span>Tất cả</span>}
 
-        <div className="col-lg-4">
-            <Button ref={anchorForm} aria-controls={openForm ? 'menu-list-grow' : undefined} aria-haspopup="true" onClick={this.handleToggleForm}>{this.state.showForm?this.state.showForm:<span>Tất cả</span>}
+                                <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
+                            </Button>
+                            <Popper style={{ zIndex: '10' }} open={openForm} anchorEl={anchorForm} role={undefined} transition disablePortal>
+                                {({ TransitionProps, placement }) => (
+                                    <Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
+                                        <Paper>
+                                            <ClickAwayListener onClickAway={this.handleClose('')}>
+                                                <MenuList autoFocusItem={openForm} id="menu-list-grow">
+                                                    <MenuItem onClick={this.handleClose('titleForm', '')}>Tất cả</MenuItem>
+                                                    <MenuItem onClick={this.handleClose('titleForm', 'Vietnamese')}>Sách tiếng việt</MenuItem>
+                                                    <MenuItem onClick={this.handleClose('titleForm', 'foreignLanguage')}>Sách nước ngoài</MenuItem>
+                                                </MenuList>
+                                            </ClickAwayListener>
+                                        </Paper>
+                                    </Grow>
+                                )}
+                            </Popper>
+                        </div>
 
-                                        <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
-                                        </Button>
-            <Popper style={{ zIndex: '10' }} open={openForm} anchorEl={anchorForm} role={undefined} transition disablePortal>
-                {({ TransitionProps, placement }) => (
-                <Grow {...TransitionProps} style={{ transformOrigin: placement==='bottom' ? 'center top' : 'center bottom' }}>
-                    <Paper>
-                        <ClickAwayListener onClickAway={this.handleClose( '')}>
-                            <MenuList autoFocusItem={openForm} id="menu-list-grow">
-                                <MenuItem onClick={this.handleClose( 'titleForm', '')}>Tất cả</MenuItem>
-                                <MenuItem onClick={this.handleClose( 'titleForm', 'Vietnamese')}>Sách tiếng việt</MenuItem>
-                                <MenuItem onClick={this.handleClose( 'titleForm', 'foreignLanguage')}>Sách nước ngoài</MenuItem>
-                            </MenuList>
-                        </ClickAwayListener>
-                    </Paper>
-                </Grow>
-                )}
-            </Popper>
-        </div>
+                        <div className="col-lg-4">
+                            <Button ref={anchorKind} aria-controls={openRate ? 'menu-list-grow' : undefined} aria-haspopup="true" onClick={this.handleToggleRate}>{this.state.showRate ? this.state.showRate : <span>Tất cả</span>}
+                                <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
 
-        <div className="col-lg-4">
-            <Button ref={anchorKind} aria-controls={openRate ? 'menu-list-grow' : undefined} aria-haspopup="true" onClick={this.handleToggleRate}>{this.state.showRate?this.state.showRate:<span>Tất cả</span>}
-                                        <i style={{ marginLeft: '5px' }} className="fa fa-caret-down" aria-hidden="true"></i>
-
-                                        </Button>
-            <Popper style={{ zIndex: '10' }} open={openRate} anchorEl={anchorRate} role={undefined} transition disablePortal>
-                {({ TransitionProps, placement }) => (
-                <Grow {...TransitionProps} style={{ transformOrigin: placement==='bottom' ? 'center top' : 'center bottom' }}>
-                    <Paper>
-                        <ClickAwayListener onClickAway={this.handleClose( '')}>
-                            <MenuList autoFocusItem={openRate} id="menu-list-grow">
-                                <MenuItem onClick={this.handleClose( 'titleRate', '')}>Tất cả</MenuItem>
-                                <MenuItem onClick={this.handleClose( 'titleRate', 'highPointPating')}>Đánh giá tốt nhất</MenuItem>
-                                <MenuItem onClick={this.handleClose( 'titleRate', 'highVote')}>Quan tâm nhiều nhất</MenuItem>
-                            </MenuList>
-                        </ClickAwayListener>
-                    </Paper>
-                </Grow>
-                )}
-            </Popper>
-        </div>
-
-        <button onClick={this.onSort} id="btnFilter">Lọc</button>
-    </div>
-
-</div>
-        );
+                            </Button>
+                            <Popper style={{ zIndex: '10' }} open={openRate} anchorEl={anchorRate} role={undefined} transition disablePortal>
+                                {({ TransitionProps, placement }) => (
+                                    <Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
+                                        <Paper>
+                                            <ClickAwayListener onClickAway={this.handleClose('')}>
+                                                <MenuList autoFocusItem={openRate} id="menu-list-grow">
+                                                    <MenuItem onClick={this.handleClose('titleRate', '')}>Tất cả</MenuItem>
+                                                    <MenuItem onClick={this.handleClose('titleRate', 'highPointPating')}>Đánh giá tốt nhất</MenuItem>
+                                                    <MenuItem onClick={this.handleClose('titleRate', 'highVote')}>Quan tâm nhiều nhất</MenuItem>
+                                                </MenuList>
+                                            </ClickAwayListener>
+                                        </Paper>
+                                    </Grow>
+                                )}
+                            </Popper>
+                        </div>
+                        <button onClick={this.onSort} id="btnFilter">Lọc</button>
+                    </div>
+                </div>
+            );
     }
 
     render() {
@@ -212,17 +209,16 @@ class BookFeed extends Component {
                         <div className="col-sm-12">
                             <div className="box-home">
                                 <div className="clsSort">
-                                    <span className="clsSort-title">Sách là nguồn kiến thức bất tận</span>
+                                <img style={{width:'103%',height:'250px'}} src='https://i.doanhnhansaigon.vn/2018/11/10/img7984-1541818235.jpg' alt="img" />
                                     <button className="clsSort-btnSort" onClick={this.onClickFilter}>
-                                        <i class="fa fa-sliders" aria-hidden="true" style={{marginRight:'10px'}}></i>Bộ lọc
+                                        <i class="fa fa-sliders" aria-hidden="true" style={{ marginRight: '10px' }}></i>Bộ lọc
                                     </button>
                                     {this.renderFilter()}
-                                    
                                 </div>
                                 <hr />
-                                {this.state.posts.length>0?
-                                <PostList posts={this.state.posts} />:
-                                <Loading ></Loading>
+                                {this.state.posts.length > 0 ?
+                                    <PostList posts={this.state.posts} /> :
+                                    <Loading ></Loading>
                                 }
                             </div>
                         </div>

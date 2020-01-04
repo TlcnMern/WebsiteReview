@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+//common
 import login from './components/auth/login';
-import HeaderAdmin from './components/template/HeaderAdmin';
 import Header from './components/template/Header';
 import Body from './components/template/Body';
-import post from './components/post/NewPost';
+//post
+import NewPost from './components/post/NewPost';
+import AllFeed from './components/HomeFeed/AllFeed';
 import HomeFeed from './components/HomeFeed/HomeFeed';
 import DetailPost from './components/post/DetailPost';
+//user
 import GuestViewProfile from './components/guest/GuestViewProfile';
 import ViewProfile from './components/user/ViewProfile';
 //sort-search
@@ -22,6 +25,7 @@ import BodyAdmin from './components/template/BodyAdmin';
 import PostList from './components/admin/post/PostList';
 import UserList from './components/admin/user/UserList';
 import Ana from './components/admin/analytics/Ana';
+import HeaderAdmin from './components/template/HeaderAdmin';
 
 import { connect } from 'react-redux';
 
@@ -34,14 +38,15 @@ class MainRouter extends Component {
         }
         <Switch>
           <Route exact path="/" component={HomeFeed} />
-          <Route exact path="/FilmFeed" component={FilmFeed} />
-          <Route exact path="/FoodFeed" component={FoodFeed} />
-          <Route exact path="/TravelFeed" component={TripFeed} />
-          <Route exact path="/BookFeed" component={BookFeed} />
+          <Route exact path="/AllFeed" component={AllFeed} />
+          <Route exact path="/Film" component={FilmFeed} />
+          <Route exact path="/Food" component={FoodFeed} />
+          <Route exact path="/Trip" component={TripFeed} />
+          <Route exact path="/Book" component={BookFeed} />
 
           <Route path="/Login" component={login} />
           <PrivateRoute path="/ViewProfile" component={ViewProfile} />
-          <PrivateRoute path="/NewPost" component={post} />
+          <PrivateRoute path="/NewPost" component={NewPost} />
           <Route path="/DetailPost/:postId" component={DetailPost} />
           <Route path="/GuestViewProfile/:userId" component={GuestViewProfile} />
           <Route exact path="/Search" component={SearchPage} />

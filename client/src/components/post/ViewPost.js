@@ -5,7 +5,7 @@ import Rating from '../rating/Rating';
 import { API_URL } from '../../config/helper';
 import man from '../../public/images/man.png';
 import Badge from '@material-ui/core/Badge';
-
+import Favorite from '../common/Favorite';
 
 class ViewPost extends Component {
     constructor(props) {
@@ -14,9 +14,7 @@ class ViewPost extends Component {
             isLoading: true,
             point: null
         };
-
     }
-
     onClickComment() {
         this.setState({ renderComment: true });
     };
@@ -38,13 +36,13 @@ class ViewPost extends Component {
 
         return (
             <div className="row clsNEWFEED fadeInDown">
-                <Link to="Theme" id="btnDetailTheme"><span style={{ textTransform: 'capitalize' }}>{this.props.post.theme}</span></Link>
+                <Link to={'/'+this.props.post.theme} id="btnDetailTheme"><span style={{ textTransform: 'capitalize' }}>{this.props.post.theme}</span></Link>
                 <div className="col-sm-3">
                     <div className="imgDD FadeIn-load">
                         <img id="imgSP" src={`${API_URL}/` + this.props.post.photo[0]} alt="imgDemo1" /><br />
                         <Link to="SearchSP">{this.props.post.productReview}</Link>
                         <span>
-                            <span> <Rating rating={this.props.post.pointRating.point - 1} disabled={true} /></span>
+                            <span> <Rating key={this.props.post._id} rating={this.props.post.pointRating.point - 1} disabled={true} /></span>
                         </span>
                     </div>
                 </div>
@@ -81,8 +79,11 @@ class ViewPost extends Component {
                     </div>
                     <p>{this.props.post.contentSummary}</p>
                     <div className="rateBar">
-                        <span className="rateBar-Like"><img src="https://img.icons8.com/ios/20/000000/like.png" alt="Like" /></span>
-
+                        {/* <span className="rateBar-Like"><img src="https://img.icons8.com/ios/20/000000/like.png" alt="Like" /></span> */}
+                        {this.props.isAuthenticated &&
+                        
+                        <Favorite postId={this.props.post._id}/>
+                        }
                         <Link to={
                             {
                                 pathname: `/DetailPost/${this.props.post._id}`

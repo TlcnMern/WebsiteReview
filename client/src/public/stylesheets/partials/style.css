@@ -986,7 +986,7 @@ main {
 }
 
 .nav li {
-    margin: 40px 30px 0 10px;
+    margin: 40px 20px 0 10px;
     cursor: pointer;
     font-size: 13pt;
     text-transform: uppercase;
@@ -998,9 +998,11 @@ main {
 .nav li:hover,
 .nav .actived {
     color: #42b1fa;
-    ;
     border-bottom: 2px solid #42b1fa;
-    ;
+}
+.pointTrust:hover {
+    color: #42b1fa;
+    border-bottom: 2px solid #42b1fa;
 }
 
 .ViewComment {
@@ -1114,6 +1116,7 @@ main {
 .clsTomtat {
     border-bottom: 1px solid #d1d1d1;
     padding: 10px;
+    white-space: pre-wrap;
 }
 
 .TLBV {
@@ -1149,6 +1152,7 @@ main {
     text-align: justify;
     font-size: 14px;
     padding: 30px;
+    white-space: pre-wrap;
 }
 
 .anh-BV {
@@ -2755,3 +2759,125 @@ For Reponesive */
 
 
 /* end */
+
+.clsToolCmt {
+    display: -webkit-inline-box;
+}
+
+.pointMember {
+    width: 85px;
+    background: none;
+    padding: 5px;
+    text-align: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 85px;
+    opacity: 0.8;
+}
+
+.pointMember .pointMember-c {
+    font-size: 9px;
+    color: #000000;
+}
+
+.pointMember .pointMember-p {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background: #00afef;
+    height: 40px;
+    width: 40px;
+    text-align: -webkit-center;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+}
+
+.pointMember .pointMember-e {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background: red;
+    height: 40px;
+    width: 40px;
+    text-align: -webkit-center;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+}
+
+.pointMember .pointMember-f {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background: yellow;
+    height: 40px;
+    width: 40px;
+    text-align: -webkit-center;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+}
+
+.btnDiemTinDung {
+    border: none;
+    height: fit-content;
+    font-size: 12px;
+    border-radius: 10px;
+}
+
+.btnDiemTinDung:hover {
+    border: none;
+    height: fit-content;
+    font-size: 12px;
+    border-radius: 10px;
+    background: #00afef;
+    color: #fff;
+    box-shadow: 0 0 2px 2px #fff;
+}
+
+.carditem_buser {
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 10px;
+}
+
+.carditem_buser img {
+    height: auto;
+    width: auto;
+    width: 160px;
+    height: 160px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carditem_buser:hover .carditem_buser img {
+    height: auto;
+    width: auto;
+    width: 160px;
+    height: 160px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carditem_buser .txtUserName {
+    visibility: hidden;
+    text-align: center;
+    color: #00afef;
+    font-weight: normal;
+}
+
+.carditem_buser:hover .txtUserName {
+    visibility: visible;
+}

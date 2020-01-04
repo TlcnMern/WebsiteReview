@@ -6,28 +6,28 @@ import { login } from '../../action/authAction';
 import { clearErrors } from '../../action/errorActions';
 import "../../public/stylesheets/partials/login.css"
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
 class Login extends Component {
-  
-  
-  constructor(props){
+
+
+  constructor(props) {
     super(props);
-    this.state={
-        renderLogin:true,
-        renderRegister:false
+    this.state = {
+      renderLogin: true,
+      renderRegister: false
     };
-    this.onClickLogin=this.onClickLogin.bind(this);
-    this.onClickRegister=this.onClickRegister.bind(this);
+    this.onClickLogin = this.onClickLogin.bind(this);
+    this.onClickRegister = this.onClickRegister.bind(this);
   }
-  onClickLogin(){
-    this.setState({renderLogin:true});
-    this.setState({renderRegister:false});
+  onClickLogin() {
+    this.setState({ renderLogin: true });
+    this.setState({ renderRegister: false });
   };
-  onClickRegister(){
-      this.setState({renderRegister:true});
-      this.setState({renderLogin:false});
+  onClickRegister() {
+    this.setState({ renderRegister: true });
+    this.setState({ renderLogin: false });
   };
   state = {
     modal: false,
@@ -56,98 +56,97 @@ class Login extends Component {
 
 
   renderAlert() {
-    if (this.props.error.msg.error) 
+    if (this.props.error.msg.error)
       return (
         <div>
-          <span style={{color:'red'}}>{this.props.error.msg.error}</span>
+          <span style={{ color: 'red' }}>{this.props.error.msg.error}</span>
         </div>);
   }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  renderleftContent(){
-    const {from} = this.props.location.state || {
+  renderleftContent() {
+    const { from } = this.props.location.state || {
       from: {
         pathname: '/'
       }
     };
     if (this.props.isAuthenticated) {
-      return (<Redirect to={from}/>);
+      return (<Redirect to={from} />);
     }
-    if(this.state.renderLogin)
+    if (this.state.renderLogin)
       return (
         <div className="loginleft" id="loginleft">
-        
-        <div className="Left-Content fadeIn second">
-          <h2>Đăng nhập</h2>
-          <p>Đăng nhập để theo dõi những bài viết hay, <br/>danh sách những độc giả nổi tiếng, <br/>đánh giá và bình luận cùng hàng triệu người dùng khác .</p>
-          <img src="https://frontend.tikicdn.com/_new-next/static/img/graphic-map.png" alt="vu"/>
-        </div>
-         </div>
-        
-      ) ;
-      if(this.state.renderRegister)
-      return (
-        <div className="loginleft" id="loginleft">
-        
-        <div className="Left-Content fadeIn second">
-          <h2>Tạo tài khoản</h2>
-          <p>Đăng nhập để theo dõi những bài viết hay, <br/>danh sách những độc giả nổi tiếng, <br/>đánh giá và bình luận cùng hàng triệu người dùng khác .</p>
-          <img src="https://frontend.tikicdn.com/_new-next/static/img/graphic-map.png" alt="vu"/>
+
+          <div className="Left-Content fadeIn second">
+            <h2>Đăng nhập</h2>
+            <p>Đăng nhập để theo dõi những bài viết hay, <br />danh sách những độc giả nổi tiếng, <br />đánh giá và bình luận cùng hàng triệu người dùng khác .</p>
+            <img src="https://frontend.tikicdn.com/_new-next/static/img/graphic-map.png" alt="vu" />
           </div>
-         </div>
-        
-      ) ;
+        </div>
+
+      );
+    if (this.state.renderRegister)
+      return (
+        <div className="loginleft" id="loginleft">
+
+          <div className="Left-Content fadeIn second">
+            <h2>Tạo tài khoản</h2>
+            <p>Đăng nhập để theo dõi những bài viết hay, <br />danh sách những độc giả nổi tiếng, <br />đánh giá và bình luận cùng hàng triệu người dùng khác .</p>
+            <img src="https://frontend.tikicdn.com/_new-next/static/img/graphic-map.png" alt="vu" />
+          </div>
+        </div>
+
+      );
   }
-  rendermyMenu(){
-    const {from} = this.props.location.state || {
+  rendermyMenu() {
+    const { from } = this.props.location.state || {
       from: {
         pathname: '/'
       }
     };
     if (this.props.isAuthenticated) {
-      return (<Redirect to={from}/>);
+      return (<Redirect to={from} />);
     }
-    if(this.state.renderLogin)
+    if (this.state.renderLogin)
       return (
         <div className="loginright">
-            <ul className="nav">
-                <li  className="actived"><span onClick={this.onClickLogin} >Login</span></li>
-                <li><span onClick={this.onClickRegister}>Register</span></li>
-            </ul>
-            <LoginScreen/>
+          <ul className="nav">
+            <li className="actived"><span onClick={this.onClickLogin} >Login</span></li>
+            <li><span onClick={this.onClickRegister}>Register</span></li>
+          </ul>
+          <LoginScreen />
         </div>
-      ) ;
-      if(this.state.renderRegister)
+      );
+    if (this.state.renderRegister)
       return (
         <div className="loginright">
-            <ul className="nav">
-                <li ><span onClick={this.onClickLogin}>Login</span></li>
-                <li className="actived"><span onClick={this.onClickRegister} >Register</span></li>
-            </ul>
-            <RegisterScreen/>
-          
+          <ul className="nav">
+            <li ><span onClick={this.onClickLogin}>Login</span></li>
+            <li className="actived"><span onClick={this.onClickRegister} >Register</span></li>
+          </ul>
+          <RegisterScreen />
+
         </div>
-      ) ;
+      );
   }
-  
+
   render() {
-    const {from} = this.props.location.state || {
+    const { from } = this.props.location.state || {
       from: {
         pathname: '/'
       }
     };
     if (this.props.isAuthenticated) {
-      return (<Redirect to={from}/>);
+      return (<Redirect to={from} />);
     }
     return (
       <div className="boxContent" >
         <div className="dialogLogin">
-        {this.renderleftContent()}  
-        {this.rendermyMenu()}  
+          {this.renderleftContent()}
+          {this.rendermyMenu()}
         </div>
-         
       </div>
     );
   }

@@ -5,18 +5,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.min.css';
 import "../../public/stylesheets/partials/style.css"
 import "../../public/stylesheets/partials/styleResponesive.css"
-import logo from '../../public/images/logo1.png';
+import logo from '../../public/images/rev.png';
 import BoxSearch from '../search/BoxSearch';
 
 class HeaderTemplate extends Component {
-
   render() {
     return (
       <div className="topnav">
         <div className="row">
           <div className="col-sm-2">
             <Link to="/">
-              <img src={logo} style={{marginLeft: '20px',maxWidth: '230px',maxHeight: '40px',width: 'auto',height: 'auto'}} alt="2R4U" />
+              <img src={logo} style={{marginLeft: '40px',maxWidth: '230px',maxHeight: '100px',width: '150px',height: '40px'}} alt="2R4U" />
             </Link>
             
           </div>

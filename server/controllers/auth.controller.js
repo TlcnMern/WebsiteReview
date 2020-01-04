@@ -1,6 +1,5 @@
 const User = require('../models/user.model');
 var jwt = require('jsonwebtoken');
-var expressJwt = require('express-jwt');
 const config = require('../config/config');
 const { aclStore } = require('../helpers/acl-store');
 
@@ -26,8 +25,7 @@ const signin = (req, res) => {
             const token = jwt.sign({
                 _id: user._id,
                 isAdmin: result
-            }, config.jwtSecret,
-            { expiresIn: '1h' });
+            }, config.jwtSecret);
 
             return res.json({
                 token,
@@ -49,9 +47,8 @@ const requireSignin = (req, res, next) => {
       // Remove Bearer from string
       token = token.slice(7, token.length);
     }
-  
     if (token) {
-      jwt.verify(token, config.secret, (err, decoded) => {
+      jwt.verify(token, config.jwtSecret, (err, decoded) => {
         if (err) {
           return res.json({
             success: false,

@@ -1,4 +1,4 @@
-import { FETCH_USER, ERROR_RESPONSE, FOLLOW, FOLLOWED, CLEAN_PROFILE,GET_AVATAR, DISPATCH_BODY } from '../config/type';
+import { FETCH_USER, ERROR_RESPONSE, FOLLOW, FOLLOWED, CLEAN_PROFILE,GET_AVATAR, DISPATCH_BODY, CLEAN_BODYADMIN } from '../config/type';
 import { auth } from '../config/helper';
 
 const INITIAL_STATE = { profile: {}, message: '', error: '', isFollow: false,avatar:'',isBodyAdmin:false };
@@ -20,6 +20,9 @@ export default function (state = INITIAL_STATE, action) {
     }
     case DISPATCH_BODY:{
       return {...state, isBodyAdmin:true};
+    }
+    case CLEAN_BODYADMIN:{
+      return {...state, isBodyAdmin:false};
     }
     default:
       return state;

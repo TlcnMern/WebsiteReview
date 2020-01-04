@@ -3,6 +3,9 @@ import "../../public/stylesheets/partials/style.css"
 import PostListUser from './PostListUser';
 import ViewDetailProfile from './ViewDetailProfile';
 import EditProfile from './EditProfile';
+import FavoritePost from './FavoritePost';
+import Tooltip from '@material-ui/core/Tooltip';
+
 import { connect } from 'react-redux';
 import { fetch, getPostUser, countIndex } from '../../action/userAction';
 import { logout } from '../../action/authAction';
@@ -15,7 +18,7 @@ import Loading from '../template/Loading';
 import jwt from 'jsonwebtoken';
 import ViewFollow from '../follow/ViewFollow';
 
-class viewProfile extends Component {
+class ViewProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,6 +28,7 @@ class viewProfile extends Component {
             renderFollow: false,
             renderPost: true,
             renderEdit: false,
+            renderFavorite: false,
             openUploadAvatar: false,
             countIndex: {}
         };
@@ -32,6 +36,8 @@ class viewProfile extends Component {
         this.onClickProfile = this.onClickProfile.bind(this);
         this.onClickFollow = this.onClickFollow.bind(this);
         this.onClickPost = this.onClickPost.bind(this);
+        this.onClickFavorite = this.onClickFavorite.bind(this);
+
         this.onClickButtonEdit = this.onClickButtonEdit.bind(this);
         this.onChangeRenderEdit = this.onChangeRenderEdit.bind(this);
         this.onClickAvatar = this.onClickAvatar.bind(this);
@@ -78,21 +84,39 @@ class viewProfile extends Component {
     }
 
     onClickProfile() {
-        this.setState({ renderProfile: true });
-        this.setState({ renderFollow: false });
-        this.setState({ renderPost: false });
+        this.setState({
+            renderProfile: true,
+            renderFollow: false,
+            renderPost: false,
+            renderFavorite: false
+        });
     };
 
     onClickFollow() {
-        this.setState({ renderFollow: true });
-        this.setState({ renderProfile: false });
-        this.setState({ renderPost: false });
+        this.setState({
+            renderProfile: false,
+            renderFollow: true,
+            renderPost: false,
+            renderFavorite: false
+        });
+    };
+
+    onClickFavorite() {
+        this.setState({
+            renderProfile: false,
+            renderFollow: false,
+            renderPost: false,
+            renderFavorite: true
+        });
     };
 
     onClickPost() {
-        this.setState({ renderPost: true });
-        this.setState({ renderFollow: false });
-        this.setState({ renderProfile: false });
+        this.setState({
+            renderProfile: false,
+            renderFollow: false,
+            renderPost: true,
+            renderFavorite: false
+        });
     };
 
     onClickButtonEdit() {
@@ -140,6 +164,7 @@ class viewProfile extends Component {
                         <li className="actived"><span onClick={this.onClickPost} >BÀI VIẾT</span></li>
                         <li><span onClick={this.onClickProfile}>About me</span></li>
                         <li><span onClick={this.onClickFollow}>Theo dõi</span></li>
+                        <li><span onClick={this.onClickFavorite}>yêu thích</span></li>
                     </ul>
                     {this.state.isLoading ?
                         <Loading /> :
@@ -154,6 +179,7 @@ class viewProfile extends Component {
                         <li ><span onClick={this.onClickPost}>BÀI VIẾT</span></li>
                         <li className="actived"><span onClick={this.onClickProfile} >About me</span></li>
                         <li><span onClick={this.onClickFollow}>Theo dõi</span></li>
+                        <li><span onClick={this.onClickFavorite}>yêu thích</span></li>
                     </ul>
                     {this.renderViewOrEdit()}
                 </div>
@@ -165,8 +191,21 @@ class viewProfile extends Component {
                         <li ><span onClick={this.onClickPost}>BÀI VIẾT</span></li>
                         <li><span onClick={this.onClickProfile} >About me</span></li>
                         <li className="actived"><span onClick={this.onClickFollow}>Theo dõi</span></li>
+                        <li><span onClick={this.onClickFavorite}>yêu thích</span></li>
                     </ul>
                     <ViewFollow />
+                </div>
+            );
+        if (this.state.renderFavorite)
+            return (
+                <div>
+                    <ul className="nav">
+                        <li><span onClick={this.onClickPost}>BÀI VIẾT</span></li>
+                        <li><span onClick={this.onClickProfile} >About me</span></li>
+                        <li><span onClick={this.onClickFollow}>Theo dõi</span></li>
+                        <li className="actived"><span onClick={this.onClickFavorite}>yêu thích</span></li>
+                    </ul>
+                    <FavoritePost />
                 </div>
             );
     }
@@ -216,7 +255,42 @@ class viewProfile extends Component {
                                             <p className="desc-stat">Uploads</p>
                                         </div>
                                     </div>
+                
+
+                                            <Tooltip title="=======> Điểm phân cấp người dùng:&#013; &#010;
+                                                        &#013; &#010;* Điểm tín nhiệm:&#013;
+                                                            - Bài viết được người dùng đánh giá 5 sao(+1đ)&#013; &#010;
+                                                            - Bài viết được trên 50 lượt yêu thích (+10)
+                                                            * Điểm đóng góp:
+                                                            - Đăng bài và được duyệt(+10đ)
+                                                            - Đánh giá bài viết bất kỳ(+1đ)
+                                                        * Điểm thành tích:
+                                                            - Đăng bài và được duyệt(+10đ)
+                                                            - Bài hát được vote yêu thích(+1đ)
+                                                            - Được trên 20 người dùng đánh giá 1 bài viết (và điểm đánh giá trung bình > 4) (+10đ)">
+                                                <span className="pointTrust"> Điểm uy tín </span>
+                                            </Tooltip>
+           
+            
+                                    <div className="row">
+                                        <div className="pointMember">
+                                            <span className="pointMember-c">Điểm uy tín </span><br />
+                                            <div className="pointMember-p">
+                                                {this.props.profile.pointTrust && this.props.profile.pointTrust.reputation}
+                                            </div>
+                                        </div>
+                                        <div className="pointMember">
+                                            <span className="pointMember-c">Điểm đóng góp </span><br />
+                                            <div className="pointMember-e">{this.props.profile.pointTrust && this.props.profile.pointTrust.contribute}</div>
+                                        </div>
+                                        <div className="pointMember">
+                                            <span className="pointMember-c">Điểm thành tích </span><br />
+                                            <div className="pointMember-f">{this.props.profile.pointTrust && this.props.profile.pointTrust.achievement}</div>
+                                        </div>
+                                    </div>
+
                                 </div>
+
                                 <div className="right col-lg-8">
                                     {this.rendermyMenu()}
                                 </div>
@@ -237,4 +311,4 @@ function mapStateToProp(state) {
     }
 }
 
-export default connect(mapStateToProp, { fetch, logout })(viewProfile);
+export default connect(mapStateToProp, { fetch, logout })(ViewProfile);
