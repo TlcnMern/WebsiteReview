@@ -66,7 +66,7 @@ class UserList extends Component {
                             <p>Quản lý người dùng</p>
                         </div>
                         <div className=" col-lg-5">
-                            <input style={{ padding: '0' }} name='name' type="text" onChange={this.onChangeSearch} placeholder="Tìm kiếm theo tên sản phẩm" spellCheck="false" />
+                            <input style={{ padding: '0' }} name='name' type="text" onChange={this.onChangeSearch} placeholder="Tìm kiếm tên người dùng" spellCheck="false" />
                             <button id="QLU-btnSearch" onClick={this.onSubmitSearch}><i className="fa fa-search"></i></button>
                         </div>
                     </div>
@@ -81,7 +81,8 @@ class UserList extends Component {
                             <th className="col1">Number</th>
                             <th className="col2">Full Name</th>
                             <th className="col3">Email</th>
-                            <th className="col4">Gender</th>
+                            <th className="col4">Điểm tín nhiệm</th>
+                            <th className="col5">Gender</th>
                         </tr>
                     </thead>
                     <tbody>

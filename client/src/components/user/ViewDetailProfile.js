@@ -26,16 +26,21 @@ class ViewDetailProfile extends Component {
                         <aside className="txtProfileCol"><label htmlFor="pepBD">Ngày sinh</label></aside>
                         <div className="inProfileCol">
                             <span className="getinFName" id="pepBD" >
-                            {this.props.profile.birthday? this.props.profile.birthday:<p style={{color:'red'}}>Chưa cập nhật</p>}
-                            {/* {this.props.profile.birthday} */}
-                        </span >
+                                {this.props.profile.birthday ? (
+                                    new Intl.DateTimeFormat('en-GB', {
+                                        month: '2-digit',
+                                        day: '2-digit',
+                                        year: 'numeric',
+                                    }).format(new Date(this.props.profile.birthday))
+                                ) : <p style={{ color: 'red' }}>Chưa cập nhật</p>}
+                            </span >
                         </div>
                     </div>
                     <div className="row rowProFile">
                         <aside className="txtProfileCol"><label htmlFor="pepAdd">Địa chỉ</label></aside>
                         <div className="inProfileCol" >
                             <span className="getinFName" id="pepAdd">
-                            {this.props.profile.address? this.props.profile.address:<p style={{color:'red'}}>Chưa cập nhật</p>}
+                                {this.props.profile.address ? this.props.profile.address : <p style={{ color: 'red' }}>Chưa cập nhật</p>}
                             </span >
                         </div>
                     </div>

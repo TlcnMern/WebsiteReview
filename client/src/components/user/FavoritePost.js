@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ViewPostUser from './ViewPostUser';
 import { getFavoritePostOfUser } from '../../action/userAction';
 import { auth } from '../../config/helper';
+import Loading from '../template/Loading';
 
 class FavoritePost extends Component {
     state = {
@@ -31,7 +32,7 @@ class FavoritePost extends Component {
             <div className="row" style={{ padding: '5px' }}>
                 {this.state.postFavorite ? this.state.postFavorite.map((item, i) => {
                     return <ViewPostUser post={item} key={i} />
-                }) : <div></div>
+                }) : <Loading/>
                 }
             </div>
         );

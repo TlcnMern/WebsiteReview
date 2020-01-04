@@ -42,7 +42,7 @@ class LineChart extends Component {
       return (
         
 
-        <div id="chart">
+        <div style={{marginTop:'30px'}} id="chart">
           <ReactApexChart options={this.state.options} series={this.state.series} type="line" height="350" />
         </div>
 

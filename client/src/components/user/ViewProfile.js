@@ -223,7 +223,6 @@ class ViewProfile extends Component {
         else {
             urlAvatar = man;
         }
-        console.log(this.props.profile.pointTrust)
         return (
             <div>
                 <div className="boxContent">
@@ -257,26 +256,23 @@ class ViewProfile extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="pointMember">
-                                            <p><span className="pointMember-c">Điểm uy tín: </span><br/>
+                                            <span className="pointMember-c">Điểm uy tín: </span><br />
                                             <div className="pointMember-p">
-                                                {this.props.profile.pointTrust &&this.props.profile.pointTrust.reputation}  
+                                                {this.props.profile.pointTrust && this.props.profile.pointTrust.reputation}
                                             </div>
-                                            
-                                            </p>
                                         </div>
                                         <div className="pointMember">
-                                            <p><span className="pointMember-c">Điểm đóng góp: </span>
-                                            <br/>
-                                            <div className="pointMember-p">{this.props.profile.pointTrust &&this.props.profile.pointTrust.contribute}</div></p>
+                                            <span className="pointMember-c">Điểm đóng góp: </span><br />
+                                            <div className="pointMember-e">{this.props.profile.pointTrust && this.props.profile.pointTrust.contribute}</div>
                                         </div>
                                         <div className="pointMember">
-                                            <p><span className="pointMember-c">Điểm thành tích: </span><br/>
-                                            <div className="pointMember-p">{this.props.profile.pointTrust &&this.props.profile.pointTrust.achievement}</div></p>
+                                            <span className="pointMember-c">Điểm thành tích: </span><br />
+                                            <div className="pointMember-f">{this.props.profile.pointTrust && this.props.profile.pointTrust.achievement}</div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
-                                
+
                                 <div className="right col-lg-8">
                                     {this.rendermyMenu()}
                                 </div>
