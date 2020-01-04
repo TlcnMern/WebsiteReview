@@ -142,6 +142,22 @@ class profile extends Component {
                                             <p className="desc-stat">Uploads</p>
                                         </div>
                                     </div>
+                                    <div className="row">
+                                        <div className="pointMember">
+                                            <span className="pointMember-c">Điểm uy tín: </span><br />
+                                            <div className="pointMember-p">
+                                                {this.props.profile.pointTrust && this.props.profile.pointTrust.reputation}
+                                            </div>
+                                        </div>
+                                        <div className="pointMember">
+                                            <span className="pointMember-c">Điểm đóng góp: </span><br />
+                                            <div className="pointMember-e">{this.props.profile.pointTrust && this.props.profile.pointTrust.contribute}</div>
+                                        </div>
+                                        <div className="pointMember">
+                                            <span className="pointMember-c">Điểm thành tích: </span><br />
+                                            <div className="pointMember-f">{this.props.profile.pointTrust && this.props.profile.pointTrust.achievement}</div>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div className="right col-lg-8">
